@@ -1,0 +1,1472 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,File Type," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="04-Linux文件类型和文件相关命令">
+<meta property="og:url" content="http://www.yulongjun.com/linux/20170522-04-linux-file-command/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/14975913908327.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/1495437389819.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/1495440447201.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/1495445024682.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/1495966915640.png">
+<meta property="og:updated_time" content="2017-10-14T08:24:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="04-Linux文件类型和文件相关命令">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/14975913908327.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/linux/20170522-04-linux-file-command/"/>
+
+
+
+
+
+  <title> 04-Linux文件类型和文件相关命令 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170522-04-linux-file-command/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                04-Linux文件类型和文件相关命令
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-22T20:00:00+08:00">
+                2017-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/linux/20170522-04-linux-file-command/" class="leancloud_visitors" data-flag-title="04-Linux文件类型和文件相关命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/14975913908327.jpg" alt=""></p>
+<a id="more"></a>
+<h2 id="文件类型"><a href="#文件类型" class="headerlink" title="文件类型"></a>文件类型</h2><p><strong><code>ll</code>后可以看到文件详情：</strong></p>
+<p><code>-</code>：常规文件（内部类型是什么，用<code>file</code>命令）</p>
+<p><code>d</code>：directory，目录文件</p>
+<p><code>b</code>：blobk device，块设备文件，支持以“block”为单位进行随机访问</p>
+<ul>
+<li><p>major number：主设备号，用来表示设备类型，进而确定要加载的驱动程序</p>
+</li>
+<li><p>minor number：次设备号，用于表示同一类型中的不同设备。</p>
+</li>
+</ul>
+<p>如下图的<code>1,3</code> 、<code>1,5</code></p>
+<p><img src="/images/1495437389819.png" alt=""></p>
+<p><code>c</code>：character device，字符设备文件，支持以”character”为单位进行线性访问</p>
+<p><code>l</code>：symbolic link，符号链接文件（软连接文件）</p>
+<p><code>p</code>：pipe，命名管道</p>
+<p><code>s</code>：socket，套接字文件</p>
+<hr>
+<h2 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h2><p><strong>绝对路径</strong>：以斜线开始的，从<code>/</code>开始的路径。</p>
+<ul>
+<li><code>/etc/syscofnig/network-scrpits</code><br>绝对路径分为两段，dirname和basename：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@centos7 app]# dirname /etc/sysconfig/network-scripts/ifcfg-ens192</div><div class="line">/etc/sysconfig/network-scripts</div><div class="line">[root@centos7 app]# basename /etc/sysconfig/network-scripts/ifcfg-ens192</div><div class="line">ifcfg-ens192</div></pre></td></tr></table></figure>
+<p><strong>相对路径</strong>：不以斜线开始的路径。</p>
+<ul>
+<li><code>xxx/yyy</code> ：当前目录下的xxx子目录的yyy子目录</li>
+<li><code>.</code>：当前目录</li>
+<li><code>..</code>：上级目录</li>
+<li><code>~</code>：用户的家目录</li>
+<li><code>-</code>：切换上次输入的目录，和命令配合使用</li>
+</ul>
+<blockquote>
+<p>tips:<code>-</code>原理，系统记住上一个工作目录，存储在环境变量<code>OLDPWD</code>，可以用<code>echo $OLDPWD</code>查看到。</p>
+</blockquote>
+<hr>
+<h2 id="常用命令："><a href="#常用命令：" class="headerlink" title="常用命令："></a>常用命令：</h2><h3 id="1-pwd：显示工作目录"><a href="#1-pwd：显示工作目录" class="headerlink" title="1. pwd：显示工作目录"></a>1. <code>pwd</code>：显示工作目录</h3><p><strong>printing working directory</strong></p>
+<h3 id="2-cd：切换目录"><a href="#2-cd：切换目录" class="headerlink" title="2. cd：切换目录"></a>2. <code>cd</code>：切换目录</h3><p><strong>change directory</strong></p>
+<ul>
+<li><p><code>cd</code>：切换到家目录</p>
+</li>
+<li><p><code>cd ~</code>：切换到家目录</p>
+</li>
+<li><p><code>cd ~USERNAME</code>：切换到用户USERNAME的家目录</p>
+</li>
+<li><p><code>cd -</code>：在上一次所在目录与当前目录来回切换（PWD to OLDPWD）</p>
+</li>
+<li><p><code>cd ..</code>：切换到上级目录</p>
+</li>
+<li><p><code>cd /path/to/directory</code> 切换到一个绝对目录</p>
+</li>
+<li><p><code>cd path/to/directory</code>：切换到一个相对目录</p>
+</li>
+</ul>
+<h3 id="3-ls：列出内容"><a href="#3-ls：列出内容" class="headerlink" title="3. ls：列出内容"></a>3. <code>ls</code>：列出内容</h3><p>list(用/var目录做例子)</p>
+<ul>
+<li><p><code>-a</code>， <code>--all</code>：列出所有文件包含隐藏文件</p>
+</li>
+<li><p><code>-A</code>，<code>--almost-all</code>：列出除<code>.</code>和<code>..</code>之蛙所有的文件</p>
+</li>
+<li><code>-F</code>：-F参数在目录名后加了正斜线（/），以方便用户在输出中分辨它们。类似地，它会在可执行 文件（比如上面的my_script文件）的后面加个星号，以便用户找出可在系统上运行的文件。</li>
+</ul>
+<p><img src="/images/1495440447201.png" alt=""></p>
+<ul>
+<li><p><code>l</code>，<code>--long</code>：长格式信息，列出文件的详细属性，命令可以简写为<code>ll</code>，<code>alias ll=&#39;ls -l --color=auto&#39;</code></p>
+</li>
+<li><p><code>-h</code>，<code>--human-readable</code>：size用人类可读的格式表示</p>
+</li>
+<li><p><code>-d</code>, <code>--directory</code>：查看目录本身而非内部的文件详情</p>
+</li>
+<li><p><code>-r</code>, <code>--reverse</code>：反转排序（降序）</p>
+</li>
+<li><code>-R</code>, <code>--recursive</code> 递归显示（基本不用这个，递归显示用<code>tree</code>命令更直观）</li>
+<li><code>-t</code>：按修改时间排序</li>
+</ul>
+<h3 id="4-cat：文本文件输出到终端"><a href="#4-cat：文本文件输出到终端" class="headerlink" title="4. cat：文本文件输出到终端"></a>4. <code>cat</code>：文本文件输出到终端</h3><p><code>concatenate</code> 拼接</p>
+<p>可以单独cat：<code>cat /etc/issue</code></p>
+<p>可以连接多个文件显示<code>cat /etc/issue /etc/redhat-release</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[root@CentOS6 app]# cat /etc/issue</div><div class="line">CentOS release 6.9 (Final)</div><div class="line">Kernel \r on an \m</div><div class="line"></div><div class="line">[root@CentOS6 app]# cat /etc/issue /etc/redhat-release</div><div class="line">CentOS release 6.9 (Final)</div><div class="line">Kernel \r on an \m</div><div class="line"></div><div class="line">CentOS release 6.9 (Final)</div></pre></td></tr></table></figure>
+<p>参数：</p>
+<ul>
+<li><code>cat -s file</code>：删除多余的空白行（多行空白行，删除到只剩一行空白行）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">$ cat multi_blanks.txt </div><div class="line">line 1</div><div class="line"></div><div class="line"></div><div class="line">line2</div><div class="line"></div><div class="line">line3</div><div class="line"></div><div class="line"></div><div class="line">line4</div><div class="line"></div><div class="line">$ cat -s multi_blanks.txt #压缩相邻的空白行 </div><div class="line">line 1</div><div class="line"></div><div class="line">line2</div><div class="line"></div><div class="line">line3</div><div class="line"></div><div class="line">line4</div></pre></td></tr></table></figure>
+<ul>
+<li><code>cat -T file</code>：将制表符显示为<code>^I</code></li>
+</ul>
+<p>用来看脚本里的制表符，通常我们写脚本要避免用制表符，而用多个空格。所以此命令通常用来查询哪里用了制表符。</p>
+<ul>
+<li><code>cat -n file</code>：显示行号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ cat lines.txt </div><div class="line">line </div><div class="line">line </div><div class="line">line</div><div class="line"></div><div class="line">$ cat -n lines.txt </div><div class="line">1 line </div><div class="line">2 line </div><div class="line">3 line</div></pre></td></tr></table></figure>
+<h3 id="5-tac：-跟cat相反，从后面行往前面行输出"><a href="#5-tac：-跟cat相反，从后面行往前面行输出" class="headerlink" title="5.   tac： 跟cat相反，从后面行往前面行输出"></a>5.   <code>tac</code>： 跟<code>cat</code>相反，从后面行往前面行输出</h3><h3 id="stat-查看文件状态"><a href="#stat-查看文件状态" class="headerlink" title="stat 查看文件状态"></a><code>stat</code> 查看文件状态</h3><p>可以看到<code>atime(Access)</code>、<code>mtime(Modify)</code>、<code>Ctime(Change)</code>，还有文件的权限，文件拥有者和拥有组，还有文件大小相关的内容。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[root@centos7 ~]# stat /etc/issue</div><div class="line">  File: ‘/etc/issue’</div><div class="line">  Size: 23        	Blocks: 8          IO Block: 4096   regular file</div><div class="line">Device: 802h/2050d	Inode: 134320235   Links: 1</div><div class="line">Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)</div><div class="line">Context: system_u:object_r:etc_t:s0</div><div class="line">Access: 2017-05-22 09:07:34.832999490 +0800</div><div class="line">Modify: 2016-11-30 02:12:59.000000000 +0800</div><div class="line">Change: 2017-05-17 16:53:20.670996867 +0800</div><div class="line"> Birth: -</div></pre></td></tr></table></figure></p>
+<h3 id="6-文件通配符（globbing）"><a href="#6-文件通配符（globbing）" class="headerlink" title="6. 文件通配符（globbing）"></a>6. 文件通配符（globbing）</h3><ul>
+<li><p><code>*</code> ：匹配零个或多个字符</p>
+</li>
+<li><p><code>?</code> ：匹配任何单个字符</p>
+</li>
+<li><p><code>~</code> ：当前用户家目录</p>
+</li>
+<li><p><code>~longdream</code> ：用户longdream的家目录</p>
+</li>
+<li><p><code>~+</code> ：当前工作目录</p>
+</li>
+<li><p><code>~-</code>：前一个工作目录</p>
+</li>
+<li><p><code>[0-9]</code>：匹配数字范围，匹配一个</p>
+</li>
+<li><p><code>[a-z]或[A-Z]</code>：字母，不区分大小写</p>
+<blockquote>
+<p>tips：因为不区分大小写，[a-d]代表的就是匹配<code>AaBbCcDd</code>中的一个</p>
+</blockquote>
+</li>
+<li><p><code>[a-z0-9]</code>：字母或数字</p>
+</li>
+<li><p><code>[wang]</code>：匹配列表中的任何的一个字符,匹配<code>w</code>或<code>a</code>或<code>n</code>或<code>g</code></p>
+</li>
+<li><p><code>[^wang]</code> 匹配列表中的所有字符以外的字符，除了<code>w</code>、<code>a</code>、<code>n</code>、<code>g</code></p>
+</li>
+</ul>
+<p><strong>只显示隐藏文件：</strong></p>
+<p><img src="/images/1495445024682.png" alt=""></p>
+<p><strong>预定义的字符类：<code>man 7 glob</code></strong></p>
+<p><code>[:digit:]</code>：任意数字，相当于0-9</p>
+<p><code>[:lower:]</code>：任意小写字母</p>
+<p><code>[:upper:]</code>: 任意大写字母</p>
+<p><code>[:alpha:]</code>: 任意大小写字母</p>
+<p><code>[:alnum:]</code>：任意数字或字母</p>
+<p><code>[:blank:]</code>：水平空白字符</p>
+<p><code>[:space:]</code>：水平或垂直空白字符</p>
+<p><code>[:punct:]</code>：标点符号</p>
+<p><code>[:print:]</code>：可打印字符</p>
+<p><code>[:cntrl:]</code>：控制（非打印）字符</p>
+<p><code>[:graph:]</code>：图形字符</p>
+<p><code>[:xdigit:]</code>：十六进制字符</p>
+<p><strong>练习</strong><br>练习1：显示<code>/var/log</code>目录下所有以<code>l</code>开头，以一个小写字母结尾，且中间出现一位任意字符的文件或目录。</p>
+<p>练习2：显示<code>/etc</code>目录下，以任意一位数字开头，且以非数字结尾的文件或目录。</p>
+<p>练习3：显示<code>/etc</code>目录下，以非字母开头，后面跟一个字母及其他任意长度任意字符的文件或目录。</p>
+<p>练习4：复制<code>/etc</code>目录下，所有以m开头，以非数字结尾的文件或目录到<code>/tmp/test</code>目录。</p>
+<p>练习5：复制<code>/usr/share/man</code>目录下，所有以man开头，后跟一个数字结尾的文件或目录至<code>/tmp/test/man</code>目录下。</p>
+<p>练习6：复制/etc目录下，所有以<code>.conf</code>结尾，且以m,n,r,p开头的文件或目录到/tmp/conf.d/目录下。</p>
+<p>答案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">ls -d /var/l?[[:lower:]]</div><div class="line"></div><div class="line">ls -d /etc/[0-9]*[^0-9]</div><div class="line"></div><div class="line">ls -d /etc/[^a-z][a-z]*</div><div class="line"></div><div class="line">mkdir /tmp/test</div><div class="line">cp -r /etc/m*[^0-9] /tmp/test/</div><div class="line"></div><div class="line">mkdir /tmp/test/man</div><div class="line">cp -r /usr/share/man/man[0-9] /tmp/test/man</div><div class="line"></div><div class="line"></div><div class="line">mkdir /tmp/conf.d</div><div class="line">cp -r /etc/[mnrp]*.conf /tmp/conf.d/</div></pre></td></tr></table></figure>
+<h3 id="7-touch"><a href="#7-touch" class="headerlink" title="7. touch"></a>7. touch</h3><p><strong><code>touch [OPTION]... FILE...</code></strong></p>
+<p><code>-a</code> ：仅改变 atime和ctime</p>
+<p><code>-m</code> ：仅改变 mtime和ctime</p>
+<p><code>-t [[CC]YY]MMDDhhmm[.ss]</code>：指定atime和mtime的时间戳</p>
+<p><code>-c</code> ：如果文件不存在，则不予创建</p>
+<h3 id="9-cp"><a href="#9-cp" class="headerlink" title="9. cp"></a>9. cp</h3><p><code>cp</code> ：copy</p>
+<p><img src="/images/1495966915640.png" alt=""></p>
+<p><code>cp /etc/fstab /app</code> ：复制单个文件到目录下面。<br><code>cp /etc/{fstab,issue} /app/dir/</code>，<code>cp /etc/fstab /etc/bashrc /app/dir/</code>：复制多个文件到某目录下。<br><code>cp /etc/fstab /app/1.txt</code> ：复制并覆盖目标文件（没有则创建）。</p>
+<p>参数</p>
+<ul>
+<li><strong><code>-f</code></strong> ，<code>--force</code>：强制覆盖目标文件。</li>
+<li><strong><code>-r</code></strong>，<code>-R</code>，<code>`--recursive</code>：递归复制目录 (<code>-r</code> == <code>-R</code>)。<code>cp -r /var/log /app/log</code> </li>
+<li><strong><code>-d</code></strong>：复制符号链接本身，而不是他指向的文件。<code>cp -d /etc/system-release /app</code> </li>
+<li><strong><code>-a</code></strong>，<code>--archive</code>：归档，等同于<code>-dr</code></li>
+<li><strong><code>-p</code></strong>：复制文件的原来属性，等同于下面的<code>--preserv=[mode,ownership,timestamp]</code></li>
+<li><strong><code>--preserv[=ATTR_LIST]</code></strong><ul>
+<li><code>mode</code>：权限</li>
+<li><code>ownership</code>：属主属组</li>
+<li><code>timestamp</code>：时间戳</li>
+<li><code>links</code>：复制链接的源文件</li>
+<li><code>xattr</code></li>
+<li><code>context</code></li>
+<li><code>all</code></li>
+</ul>
+</li>
+<li><strong><code>-v</code></strong>, <code>--verbose</code>：看到详细信息</li>
+</ul>
+<p><strong>练习：</strong></p>
+<p>1) 定义别名命令<code>baketc</code>，每天将<code>/etc/</code>目录下所有</p>
+<p>文件，备份到<code>/testdir</code>独立的子目录下，并要求子目 录格式为 <code>backupYYYY-mm-dd</code>，备份过程可见</p>
+<p>2) 创建<code>/testdir/rootdir</code>目录，并复制<code>/root</code>下所有 文件到该目录内，要求保留原有权限</p>
+<p><strong>解答：</strong></p>
+<p>1)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alias baketc=cp -av /etc/* /testdir/`date -u`</div></pre></td></tr></table></figure>
+<p>2)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp -ap /root/* /testdir/rootdir</div></pre></td></tr></table></figure>
+<blockquote>
+<p>tips: 小技巧 利用通配符来复制：<br><code>cp -a /etc/passwd{,.bak}</code><br>相当于 <code>cp -a /etc/passwd /etc/passwd.bak</code></p>
+</blockquote>
+<h3 id="10-mv"><a href="#10-mv" class="headerlink" title="10. mv"></a>10. mv</h3><p><code>mv</code>：move</p>
+<ul>
+<li><code>-f</code> 强制移动或覆盖</li>
+</ul>
+<p>移动文件（不在同一目录下），重命名文件（在同一目录下）<br>移动目录或重命名目录</p>
+<h3 id="11-rename"><a href="#11-rename" class="headerlink" title="11. rename"></a>11. rename</h3><p>重命名后缀</p>
+<p><code>rename [options] expression replacement file...</code></p>
+<p>选项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">EXAMPLES</div><div class="line">       Given the files foo1, ..., foo9, foo10, ..., foo278, the commands</div><div class="line"></div><div class="line">              rename foo foo0 foo?</div><div class="line">              rename foo foo0 foo??</div><div class="line"></div><div class="line">       will turn them into foo001, ..., foo009, foo010, ..., foo278.  And</div><div class="line"></div><div class="line">              rename .htm .html *.htm</div><div class="line"></div><div class="line">       will fix the extension of your html files.</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mkdir test</div><div class="line">cd text</div><div class="line">touch &#123;1,2,3,4,5&#125;.txt</div><div class="line">rename -v .txt .txt.bak *.txt</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a><code>rm</code></h3><p><code>rm</code>： remove</p>
+<p>删除文件<br><code>-i</code>：interactive，交互式<br><code>-r</code> 递归删除<br><code>-f</code> 强制删除</p>
+<p><code>rm -rf  /</code>(5是可以删除根的，6和7是不可以删除的)</p>
+<p>我们可以留一个习惯：<br>不用的文件，不要直接删除，可以用<code>mv</code> move到某个专用目录（比如都移动到/tmp下）</p>
+<h3 id="12-tree"><a href="#12-tree" class="headerlink" title="12. tree"></a>12. tree</h3><p>参数：</p>
+<ul>
+<li><p><code>-d</code>: 只显示目录</p>
+</li>
+<li><p><code>-L level</code>：指定显示的层级数目</p>
+</li>
+<li><p><code>-P pattern</code>: 只显示由指定pattern匹配到的路径</p>
+</li>
+</ul>
+<h3 id="13-mkdir、rmdir"><a href="#13-mkdir、rmdir" class="headerlink" title="13. mkdir、rmdir"></a>13. mkdir、rmdir</h3><p><code>mkdir</code>：make directory</p>
+<ul>
+<li><code>-p</code> 递归创建</li>
+<li><code>-v</code> ：verbose，创建目录的详情</li>
+<li><code>-m</code> mode，权限</li>
+</ul>
+<p><code>rmdir</code>:remove empty directory(只能删除空目录)</p>
+<p>练习1：创建<code>test1/x/y1</code>, <code>test1/x/y2</code>, <code>test1/x/y1/a</code>, <code>test1/x/y1/b</code></p>
+<p>练习2： test2目录下面创建<code>a_c</code>, <code>a_d</code>,<code>b_c</code>, <code>b_d</code></p>
+<p>练习3：在test3目录下创建以下目录结构：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">test</span>3</div><div class="line">├── bin</div><div class="line">├── etc</div><div class="line">│   └── sysconfig</div><div class="line">│       └── network-scripts</div><div class="line">├── sbin</div><div class="line">├── usr</div><div class="line">│   ├── bin</div><div class="line">│   ├── lib</div><div class="line">│   ├── lib64</div><div class="line">│   ├── <span class="built_in">local</span></div><div class="line">│   │   ├── bin</div><div class="line">│   │   ├── etc</div><div class="line">│   │   ├── lib</div><div class="line">│   │   └── sbin</div><div class="line">│   └── sbin</div><div class="line">└── var</div><div class="line">    ├── cache</div><div class="line">    ├── <span class="built_in">log</span></div><div class="line">    └── run</div></pre></td></tr></table></figure>
+<p>练习3：创建<code>/testdir/dir1/x</code>, <code>/testdir/dir1/y,</code> <code>/testdir/dir1/x/a</code>, <code>/testdir/dir1/x/b</code>, <code>/testdir/dir1/y/a</code>, <code>/testdir/dir1/y/b</code></p>
+<p>练习4：创建<code>/testdir/dir2/x</code>, <code>/testdir/dir2/y</code>, <code>/testdir/dir2/x/a</code>, <code>/testdir/dir2/x/b</code></p>
+<p>练习5：创建/<code>testdir/dir3</code>, <code>/testdir/dir4</code>, <code>/testdir/dir5</code>, <code>/testdir/dir5/dir6</code>, <code>/testdir/dir5/dir7</code></p>
+<p>答案：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">mkdir -pv <span class="built_in">test</span>1/x/&#123;y1/&#123;a,b&#125;,y2&#125;</div><div class="line"></div><div class="line">mkdir -pv <span class="built_in">test</span>2/&#123;a,b&#125;&#123;c,d&#125;</div><div class="line"></div><div class="line">mkdir -pv <span class="built_in">test</span>3/&#123;bin,sbin,etc/sysconfig/network-scripts,usr/&#123;bin,sbin,<span class="built_in">local</span>/&#123;bin,sbin,etc,lib&#125;,lib,lib64&#125;,var/&#123;cache,<span class="built_in">log</span>,run&#125;&#125;</div><div class="line"></div><div class="line">mkdir -pv /testdir/dir1/&#123;x,y&#125;/&#123;a,b&#125;</div><div class="line"></div><div class="line">mkdir -pv /testdir/dir2/&#123;x/&#123;a,b&#125;,y&#125;</div><div class="line"></div><div class="line">mkdir -pv /testdir/dir&#123;3,4,5/dir&#123;6,7&#125;&#125;</div></pre></td></tr></table></figure>
+<h3 id="14-延伸"><a href="#14-延伸" class="headerlink" title="14.  延伸"></a>14.  延伸</h3><p><strong>删除大文件的方法（没被释放删除，空间还占用的文件）：</strong></p>
+<p>实验：<br>在一个会话下，<code>dd if=/dev/zero of=bigfile bs=1M count=2048</code>，<code>vim bigfile</code>，在vim模式下不要退出。</p>
+<p>打开另外一个会话窗口，删除文件，结果发现，文件是删除了，但是空间没有释放，因为vim占用着文件。</p>
+<p>这时候我们就可以用<code>&gt;</code>来搞定：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; bigfile3</div><div class="line">rm -rf bigfile3</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>&gt;</code> 和<code>&gt;&gt;</code>开单章讲，在后面的IO和重定向部分。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/linux/20170522-04-linux-file-command/" title="04-Linux文件类型和文件相关命令">http://www.yulongjun.com/linux/20170522-04-linux-file-command/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/File-Type/" rel="tag"># File Type</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux/20170522-03-shotcuts/" rel="next" title="03-bash快捷键">
+                <i class="fa fa-chevron-left"></i> 03-bash快捷键
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux/20170522-05-inode-link/" rel="prev" title="05-inode、软硬链接">
+                05-inode、软硬链接 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件类型"><span class="nav-number">1.</span> <span class="nav-text">文件类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路径"><span class="nav-number">2.</span> <span class="nav-text">路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令："><span class="nav-number">3.</span> <span class="nav-text">常用命令：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-pwd：显示工作目录"><span class="nav-number">3.1.</span> <span class="nav-text">1. pwd：显示工作目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-cd：切换目录"><span class="nav-number">3.2.</span> <span class="nav-text">2. cd：切换目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-ls：列出内容"><span class="nav-number">3.3.</span> <span class="nav-text">3. ls：列出内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-cat：文本文件输出到终端"><span class="nav-number">3.4.</span> <span class="nav-text">4. cat：文本文件输出到终端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-tac：-跟cat相反，从后面行往前面行输出"><span class="nav-number">3.5.</span> <span class="nav-text">5.   tac： 跟cat相反，从后面行往前面行输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stat-查看文件状态"><span class="nav-number">3.6.</span> <span class="nav-text">stat 查看文件状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-文件通配符（globbing）"><span class="nav-number">3.7.</span> <span class="nav-text">6. 文件通配符（globbing）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-touch"><span class="nav-number">3.8.</span> <span class="nav-text">7. touch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-cp"><span class="nav-number">3.9.</span> <span class="nav-text">9. cp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-mv"><span class="nav-number">3.10.</span> <span class="nav-text">10. mv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-rename"><span class="nav-number">3.11.</span> <span class="nav-text">11. rename</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rm"><span class="nav-number">3.12.</span> <span class="nav-text">rm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-tree"><span class="nav-number">3.13.</span> <span class="nav-text">12. tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-mkdir、rmdir"><span class="nav-number">3.14.</span> <span class="nav-text">13. mkdir、rmdir</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-延伸"><span class="nav-number">3.15.</span> <span class="nav-text">14.  延伸</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

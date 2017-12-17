@@ -1,0 +1,1367 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CDN," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="第十一章：从外包到自建，小中企业CDN运维进阶指南">
+<meta property="og:url" content="http://www.yulongjun.com/under-the-ops/20170923-11-cdn/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/devops.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061670943381.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061671030986.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061671088754.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061671355022.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061672188096.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061672607102.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061672803169.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061673100155.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061673343983.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061673453134.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061674078124.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061674316470.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061674478156.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061674926580.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061675093401.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061675188772.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061675394735.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061675717991.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061676431936.jpg">
+<meta property="og:updated_time" content="2017-09-23T15:22:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第十一章：从外包到自建，小中企业CDN运维进阶指南">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/devops.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/under-the-ops/20170923-11-cdn/"/>
+
+
+
+
+
+  <title> 第十一章：从外包到自建，小中企业CDN运维进阶指南 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/under-the-ops/20170923-11-cdn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第十一章：从外包到自建，小中企业CDN运维进阶指南
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-23T17:18:11+08:00">
+                2017-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/under-the-ops/" itemprop="url" rel="index">
+                    <span itemprop="name">under-the-ops</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/under-the-ops/20170923-11-cdn/" class="leancloud_visitors" data-flag-title="第十一章：从外包到自建，小中企业CDN运维进阶指南">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/devops.png" alt="devops"><br><a id="more"></a></p>
+<h2 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h2><p>CDN是Content Delivery Network的缩写，直译为“内容分发网络”。工作思路是把用户需要访问的内容缓存在边缘节点，就近访问，进而绕开经互联网骨干传输数据的不稳定性和速度瓶颈，起到提升最终用户体验的效果。通过在网络各处放置节点服务器所构成的基于现有互联网基础的一层智能虚拟网络，CDN系统能够实时地根据网络流量和各节点的连接、负载状况，以及到用户的距离和响应时间等综合信息，将用户的请求重新导向离用户最近的服务节点上。其目的是使用户就近获取所需的内容，解决 Internet拥挤的状况，提高用户访问网站的响应速度。<br>CDN分为静态加速和动态加速两部分，分别介绍如下。</p>
+<h3 id="静态加速"><a href="#静态加速" class="headerlink" title="静态加速"></a>静态加速</h3><p>通过缓存静态资源到CDN节点，使用户可以就近访问CDN节点来获取资源，避免用户直接从源站获取数据，提升用户访问速度和质量。<br>如图11-1所示，相比用户直接访问源站，访问CDN节点可以带来以下收益：CDN节点更靠近用户，可以提供更小的网络延迟及更快的访问速度；CDN节点数量远大于源站，可以支撑更大的请求数量；CDN节点多地域部署，可以提供更好的容灾能力。<br>静态加速可以分为小文件类业务、下载类业务。两者之间的区别在于文件大小以及访问方式，以及由此带来的业务不同侧重点。</p>
+<p><img src="/images/15061670943381.jpg" alt=""></p>
+<p>图11-1  用户访问CDN节点和源站的路径</p>
+<p>小文件类业务：主要是通过浏览器访问的网页、图片、JS、CSS等内容尺寸比较小（无严格限制，一般为数KB至几百KB）的文件。特点是单次请求文件较小，请求总数较大，主要消耗CPU和带宽资源。一般都是直接在浏览器中展示，对访问成功率要求较高，要求RTT延时要尽量低，即节点要部署得离用户近。<br>下载类业务：相对于静态资源类业务，下载类业务的单文件尺寸要大很多，需要更多的磁盘空间和带宽资源，对CPU的消耗不如小文件类业务大。并且下载类业务的下载时间会比较长，相对于静态资源类业务更注重于吞吐量，而不是RTT延时。</p>
+<h3 id="动态加速"><a href="#动态加速" class="headerlink" title="动态加速"></a>动态加速</h3><p>静态加速业务是通过将文件缓存至CDN节点来提高用户的访问速度的，而动态加速是通过尽量减少用户到源站之间请求的网络耗时来提高用户体验的。可用的技术有TCP单边加速、多路TCP合并回源、回源压缩。</p>
+<p>TCP单边加速：主要原理就是在用户通过公网直接访问源站比较慢时，通过各种方式让用户请求绕过拥堵的网络环节。例如，在用户访问质量良好的区域建立CDN节点，用户访问先经过CDN节点，通过CDN节点中转至源站；或者在某些关键CDN节点使用专线和源站联通，以确保CDN节点到源站的回源质量（见图11-2）。</p>
+<p><img src="/images/15061671030986.jpg" alt=""></p>
+<p>图11-2  TCP单边加速示意图</p>
+<p>多路TCP合并回源：在CDN节点将多个用户的数据合并在一个TCP连接上回源至源站，以减少回源时新建TCP连接带来的额外时间消耗（见图11-3）。</p>
+<p><img src="/images/15061671088754.jpg" alt=""></p>
+<p>图11-3  多路TCP合并回源示意图</p>
+<p>回源压缩：将回源数据流进行压缩，减少在网络上传输的回源数据量。</p>
+<hr>
+<h2 id="自建CDN"><a href="#自建CDN" class="headerlink" title="自建CDN"></a>自建CDN</h2><p>初期公司更多的是使用第三方公司提供的CDN服务，随着业务量和业务需求的增加，第三方CDN在质量和运维效率上逐渐不能满足业务需求。为了提升CDN的质量，提高运维效率，自建CDN是一个不错的选择。在某案例中，使用自建CDN后，不仅业务质量有了明显提升，成本也有了大幅度降低，并且从侧面帮助公司在使用第三方CDN服务时提高了议价能力。</p>
+<p>该案例中，自建CDN支持静态加速和动态加速业务，带宽容量达数百Gbps，日常支撑了全公司90%以上的CDN流量，多次支撑了业务的大型发布推广活动（活动带宽相比日常带宽增长数倍）。自建CDN在设计之初就针对公司业务的特性，以及从节点选择、软硬件配置到参数优化都进行了有针对性的调整。</p>
+<p>在该案例中，针对公司业务的特点，我们首先开始了大文件静态加速的工作，随后逐步进行小文件静态加速和动态加速的工作。同时，CDN管理和调度系统也随着CDN的发展不断完善。CDN系统整体框图如图11-4所示。</p>
+<p><img src="/images/15061671355022.jpg" alt=""></p>
+<p>图11-4  CDN系统整体框图</p>
+<p>◎ CDN业务系统：对用户直接提供CDN加速的缓存服务器和代理服务器。<br>◎ 私有调度系统：公司的HTTP调度服务器和302调度服务器。<br>◎ GSLB系统：支持智能解析的DNS服务器。<br>◎ 流量收集系统：采集节点交换机、服务器和各业务的流量。<br>◎ 质量收集系统：对质量评测数据的采集、存储。<br>◎ 日志统计系统：统计CDN访问日志、调度系统日志。<br>◎ 质量分析系统：通过质量评测数据和日志统计数据，汇总统计出质量排序结果。<br>◎ CMDB系统：管理CDN节点的资产信息及状态跟踪。<br>◎ 调度决策系统：根据质量排序结果、流量数据以及CMDB系统的服务器状态，计算出一个最优化的调度方案，并生成相关调度系统的配置文件。<br>◎ 监控系统：对节点各类设备的基础监控及业务可用性监控。<br>◎ 告警系统：CDN告警系统会做两件事情，一是在告警发生时通知运维人员；二是会同时向调度决策系统发送信令，可以实现某些特定故障的自动化修改调度处理。<br>◎ 自动化接口：提供给CDN业务使用者的一些刷新、预加载等接口。<br>◎ Portal展示系统：展示CDN业务运行的各项数据。<br>◎ 配置变更系统：CDN运维人员进行各种日常运维操作的系统。</p>
+<hr>
+<h2 id="CDN硬件及节点选型"><a href="#CDN硬件及节点选型" class="headerlink" title="CDN硬件及节点选型"></a>CDN硬件及节点选型</h2><p>CDN的目的是在尽量低的成本下为用户提供尽可能高的服务质量，所以在硬件选型时成本是一个很重要的考虑因素。<br>针对静态资源类业务，在硬件选型上主要评估在节点出口带宽满载时，所使用的硬件总成本。例如，相同配置的1台万兆服务器和10台千兆服务器都可以跑满10Gbps带宽，这时肯定会选择万兆服务器。当然，在硬件选型时还要考虑实际业务对CPU、内存、磁盘的使用情况。</p>
+<h3 id="CDN服务器选型策略"><a href="#CDN服务器选型策略" class="headerlink" title="CDN服务器选型策略"></a>CDN服务器选型策略</h3><p>静态资源类业务使用的机型规格为E5-2620 <em>2 + 128GB RAM + 2TB SAS </em>4 + 480GB SSD *6。关键指标：万兆网卡+大内存+SSD存储。使用万兆网卡可以有效避免单机网络吞吐达到瓶颈；大内存可以将更多的数据缓存在内存中，降低磁盘IO的使用；SSD可以提供更好的随机IO读/写性能。总体目标就是避免出现木桶效应。</p>
+<p>动态加速类业务使用的机型规格为E5-2620 <em>2 + 64GB RAM + 600GB SAS </em>2。因为此类业务对带宽使用量较少，主要是大量TCP连接数对CPU的消耗，所以在硬件选型上主要侧重于CPU和内存，对于磁盘和网卡没有要求。</p>
+<p>在做硬件选型时，发现相对于Broadcom网卡，Intel网卡无论是在CPU使用率还是小包性能上都要优秀很多，所以无论是千兆还是万兆服务器，都推荐使用Intel网卡。</p>
+<h3 id="CDN节点建设策略"><a href="#CDN节点建设策略" class="headerlink" title="CDN节点建设策略"></a>CDN节点建设策略</h3><p>伴随着业务发展，会需要陆续新建CDN节点，以保证CDN的整体带宽使用率控制在一个合理的水平。显而易见，在带宽缺口最大的区域新建CDN节点是最优的节点建设策略。通过日志统计系统可以得出各个省份运营商的带宽使用量及使用比例（将日志中的客户端IP地址通过IP地址库映射为具体的省份运营商，再将每条请求响应的大小以5分钟为粒度做聚合，除以300秒后即得到各个省份运营商的带宽使用量），再和当前已有节点的分布做对比，即可得到各省份运营商带宽需求及当前带宽供应、当前带宽缺口一览表（见表11-1，非真实数据，仅做示例）。</p>
+<p><img src="/images/15061672188096.jpg" alt=""></p>
+<p>表11-1  各省份运营商带宽需求及当前带宽供应、当前带宽缺口一览表</p>
+<p>确定了在哪些区域新建CDN节点后，后续的工作就是实际的选点了。在选点过程中，主要考核候选节点的成本和质量，节点的成本可以用单位带宽成本来衡量，这个不是本文重点，暂且按下不表。</p>
+<p>这里主要介绍如何测量评估候选节点质量。为了使评测结果更接近用户真实体验及更具有横向可比性，我们使用JS测速来评测一个候选节点的质量。简单来讲，就是让部分真实用户去下载被评估的候选节点的一个固定大小的文件，然后记录每次用户下载的成功率及耗时，统计全部用户的平均下载成功率及耗时作为衡量节点质量的依据。从实践上看，此种方法效果良好。</p>
+<p>在节点建设方面，我们采用的是模块化方案，一个节点有多少交换机、多少服务器，交换机以及服务器的型号配置如何，网线怎么连、电源线怎么插，全部都是固定统一的。基本可以说，各个节点的区别就只有IP地址是不一样的。并且交换机和服务器都是预先配置好后才发往外地节点上架的。采用这样的模块化方案，不仅可以显著降低使用过程中的运维成本，而且在节点建设中的便利性也是很显著的——无须我们的工程师去现场施工，数据中心现场代维工程师只要参照我们提供的一份标准化上架文档，就可以快速地完成上架施工。并且配置和流程都是高度标准化的，可以最大程度地避免（以及快速发现）上架误操作或漏操作。</p>
+<h2 id="CDN缓存系统"><a href="#CDN缓存系统" class="headerlink" title="CDN缓存系统"></a>CDN缓存系统</h2><h3 id="常见缓存服务器的简要对比"><a href="#常见缓存服务器的简要对比" class="headerlink" title="常见缓存服务器的简要对比"></a>常见缓存服务器的简要对比</h3><p>◎ Squid：老牌的缓存服务器，但是性能较差，无法满足自建CDN对于高性能的需求。<br>◎ Nginx：性能好，插件丰富，支持广泛，但缓存功能偏弱，在某案例中，动态加速服务就是在Nginx的基础上修改而来的。<br>◎ Varnish：配置方便，性能好，但不支持持久化缓存是其一大缺陷。<br>◎ Apache Traffic Server（ATS）：性能好，对于缓存的支持很完善，但是插件不够丰富，很多业务需求需要自行开发插件来完成。<br>经过综合对比，自建CDN的静态加速服务使用了ATS。</p>
+<h3 id="ATS功能介绍"><a href="#ATS功能介绍" class="headerlink" title="ATS功能介绍"></a>ATS功能介绍</h3><p>◎ 具有完整的正向代理和反向代理功能，并且支持集群工作模式。<br>◎ 使用parent配置时可以自动屏蔽故障源站。<br>◎ 具有内存缓存和磁盘缓存自动淘汰功能，支持直接写裸磁盘。<br>◎ 拥有丰富的日志格式配置。<br>◎ 支持插件开发，可以定制业务专有需求。</p>
+<h3 id="ATS配置要点说明"><a href="#ATS配置要点说明" class="headerlink" title="ATS配置要点说明"></a>ATS配置要点说明</h3><p><strong>1．回源配置</strong><br>回源配置示意图如图11-5所示。</p>
+<p><img src="/images/15061672607102.jpg" alt=""></p>
+<p>图11-5  回源配置示意图</p>
+<p>使用parent配置有以下好处：<br>实现多个源站负载均衡；故障源站自动屏蔽；源站DNS解析和回源Host解耦合。<br>remap和parent配置的区别如下：<br>remap是将用户访问的域名映射成另一个域名（可以是其本身），映射后的域名将用作回源请求和用来生成缓存的key。即，如果两个不同的域名同时remap到同一个域名，则两个域名下的相同的URI指向同一份缓存。而parent则负责将回源请求发送到特定的parent域名（或IP地址），而不是去DNS查询remap后的域名。</p>
+<p>record.config文件配置如下：<br>CONFIG proxy.config.http.no_dns_just_forward_to_parent INT 1 #启用parent.config配置<br>CONFIG proxy.config.url_remap.remap_required INT 1  #启用remap.config配置<br>CONFIG proxy.config.url_remap.pristine_host_hdr INT 0 #这个配置项的意思是在remap后是否保留HTTP请求头中的Host项，务必配置成0（不保留）</p>
+<p>remap.config文件配置如下：<br><img src="/images/15061672803169.jpg" alt=""></p>
+<p>上面的三个remap配置都是很典型的配置，按字面意思理解即可。</p>
+<p>2．缓存配置<br>（1）内存缓存配置（record.config文件）<br>CONFIG proxy.config.cache.ram_cache.size INT 1G #配置内存缓存大小<br>CONFIG proxy.config.cache.ram_cache_cutoff INT 50M #配置内存缓存的最大单文件尺寸<br>CONFIG proxy.config.http.record_tcp_mem_hit INT 1 #记录内存缓存命中<br>CONFIG proxy.config.cache.ram_cache.algorithm INT 1 #内存淘汰方式，默认为1（LRU）即可</p>
+<p>（2）磁盘缓存配置（storage.config文件）<br>ATS支持两种磁盘缓存方式，一种是以文件的形式缓存在文件系统上，配置项是：/var/cache 500G（路径+存储大小）；另一种是直接写裸盘，配置项是：/dev/sdb（磁盘设备的路径），这时不需要指定存储大小。<br>需要注意的是，ATS使用裸盘时需要更改磁盘设备的权限。在CentOS环境中可以在/etc/udev/rules.d/下新建一个99-trafficserver.rules文件，并添加如下内容：<br>KERNEL==＂sd[c-z]*＂, MODE=＂0660＂,OWNER=＂root＂, GROUP=＂root＂</p>
+<p>（3）interim storage缓存配置（record.config文件）<br>为了解决SATA磁盘随机读/写差的问题，ATS支持内存——SSD（interim storage）——SATA磁盘三级缓存。将最常访问的内容放到SSD中，降低对SATA磁盘的随机读数量。相关配置项如下：<br>LOCAL proxy.config.cache.interim.storage STRING /dev/sdb<br>注意：interim storage机制默认是不开启的，请在编译时使用“–enable-interim-cache”参数开启。<br>更详细的资料请参见官方文档：<a href="http://trafficserver.readthedocs.org/en/latest/。" target="_blank" rel="external">http://trafficserver.readthedocs.org/en/latest/。</a></p>
+<hr>
+<h2 id="CDN调度系统"><a href="#CDN调度系统" class="headerlink" title="CDN调度系统"></a>CDN调度系统</h2><h3 id="DNS调度"><a href="#DNS调度" class="headerlink" title="DNS调度"></a>DNS调度</h3><p>DNS调度示意图如图11-6所示。</p>
+<p><img src="/images/15061673100155.jpg" alt=""></p>
+<p>图11-6  DNS调度示意图</p>
+<p>DNS调度是通过对不同的Local DNS服务器返回不同的解析结果来实现智能解析和就近调度的。比如，给黑龙江联通的Local DNS返回黑龙江联通CDN节点的IP地址，给广东电信Local DNS返回广东电信CDN节点的IP地址。</p>
+<p>CDN的DNS服务主要实现两个需求：智能解析以及edns-client-subnet支持。也有很多开源的DNS软件支持IP解析调度和edns-client-subnet，如PowerDNS。在某案例中，CDN主要使用DNSPod服务，小部分使用自建DNS服务（后续会逐步迁移到自建DNS服务）。自己研发DNS服务，主要考虑到一些特殊的业务场景和监控需求。</p>
+<p><strong>1．一个自建DNS服务实现简述——SmartDNS</strong><br>SmartDNS（智能DNS），根据配置，能够支持针对不同的DNS请求返回不同的解析结果。SmartDNS获取DNS请求的源IP地址或者客户端IP地址（支持EDNS协议的请求可以获取客户端IP地址），根据本地的静态IP地址库获取请求IP地址的特性，包括所在的国家、省份、城市、ISP等，然后根据调度配置返回解析结果。支持A、SOA、NS记录的查询，支持DNS forward功能。</p>
+<p>一个开源的Python版本SmartDNS，供大家参考：<a href="https://github.com/xiaomi-" target="_blank" rel="external">https://github.com/xiaomi-</a> sa/smartdns。接下来介绍它的部分细节实现。<br>SmartDNS响应DNS请求的处理流程如图11-7所示。<br>IPPool类的初始化和该类中的FindIP函数进行解析处理是SmartDNS中最关键的两个要素，这两个要素在下面详细介绍。IPPool类的初始化示意图如图11-8所示。</p>
+<p><img src="/images/15061673343983.jpg" alt=""></p>
+<p>图11-7  SmartDNS响应DNS请求的处理流程</p>
+<p><img src="/images/15061673453134.jpg" alt=""></p>
+<p> 图11-8  IPPool类的初始化示意图</p>
+<p>ip.csv为IP地址库文件，格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">200000001，200000010，中国，陕西，西安，电信</div></pre></td></tr></table></figure>
+<p>其中各个字段的含义分别为IP段起始地址，IP段截止地址，IP段所属国家，IP段所属省份，IP段所属城市，IP段所属ISP。</p>
+<p>a.yaml配置文件格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">test.test.com:</div><div class="line">ttl: 3600</div><div class="line">default: 5.5.5.5 2.2.2.2</div><div class="line">中国,广东,,联通: 1.1.1.1 3.3.3.1</div><div class="line">中国,广东,,电信: 1.1.1.2 3.3.3.2</div><div class="line">配置中地域信息的key包括4个字段，分别带有不同的权重——国家：8；省份：4；城市：2；运营商：1。</div><div class="line">在初始化阶段，会生成一个名为iphash的字典，结构如图11-9所示。</div></pre></td></tr></table></figure>
+<p>图11-9  名为iphash的字典结构</p>
+<p>其中，iphash的key为ip.csv每一条记录的起始IP地址，value为一个list，list长度为6，list的前5个字段分别为以该key为起始IP记录的IP段截止、IP段所属国家、IP段所属省份、IP段所属城市、IP段所属ISP，第6个字段是一个hash，key为a.yaml里面配置的域名，value为长度为2的list。iphash[IP段起始地址][6][域名1][0]为域名1在该IP段的最优解析，iphash[IP段起始地址][6][域名1][1]为该最优解析的总权值，该总权值暂时只做参考。</p>
+<p>在iphash初始化过程中最关键的是iphash[IP段起始地址][6][域名1]的最优解析的计算，最简单、直接的方式是直接遍历域名1的所有调度配置，挑选出满足条件且总权值最高的解析，即为最优解析。这种方式记录整个iphash的时间复杂度为O（xyz），x为ip.csv记录数，y为域名总数量，z为各个域名的调度配置数。为了优化启动速度，优化了寻找最优解析的方法：事先将每个域名调度配置生成一棵树，这棵树是用字典模拟出来的，这样需要最优解析的时候就不需要遍历所有的调度配置了，而是最多检索15次即可找到最优，即时间复杂度为O（15xy）。具体实现请参考IPPool的LoadRecord和JoinIP两个方法。</p>
+<p>有了初始化后的iphash数据结构之后，每次请求处理的时候，只需要定位请求IP地址处于哪个IP段，找到IP段起始IP地址，然后从iphash中取出最优解析即可。具体流程如图11-10所示。</p>
+<p><img src="/images/15061674078124.jpg" alt=""></p>
+<p>图11-10  计算最优解析的具体流程图</p>
+<p><strong>2．edns-client-subnet支持</strong></p>
+<p>CDN使用DNS获取查询IP地址，根据IP地址对用户进行地域调度。但这里获取的IP地址是DNS地址，而不是用户真实的IP地址。在大多数情况下，我们假设用户通常会使用离自己网络最近的Local DNS，CDN调度基本还是准确的。但也有很多Local DNS设置错误的情况，或者用户使用Google Public DNS（8.8.8.8/8.8.4.4）或openDNS。</p>
+<p>比如国内用户设置了Local DNS为8.8.8.8，我们得到的DNS Query IP地址是74.125.16.208，判断IP地址属于美国加利福尼亚州山景市谷歌公司，这个时候，我们的DNS会返回离美国加州最近的CDN节点IP地址给用户，于是国内用户错误地调度到美国CDN节点上。</p>
+<p>为了解决上述问题，Google提交了一份DNS扩展协议，允许Local DNS传递用户的IP地址给authoritative DNS Server。CDN的DNS支持该协议后，就可以获取用户真实的IP地址，进行准确的调度。<br>edns-client-subnet流程示意图如图11-11所示。</p>
+<p><img src="/images/15061674316470.jpg" alt=""></p>
+<p>图11-11  edns-client-subnet流程示意图</p>
+<p>DNS Query会包含header和RR两部分，这里只介绍我们关注的地方，在网上可以搜到很多关于DNS协议的介绍，在这里就不做过多描述了。header会描述本次请求中Questions、Answer RRs、Authority RRs和Additional RRs的数量，RR部分会详细描述每个资源的内容，所有的RR格式是相同的，如下所示：<br><img src="/images/15061674478156.jpg" alt=""></p>
+<p>edns-client-subnet是对EDNS协议的扩展，附加在一个DNS请求的Additional RRs区域，这里重点描述edns-client-subnet的结构。EDNS协议Extension mechanisms for DNS（EDNS0），请参考<a href="http://tools.ietf.org/html/draft-ietf-dnsind-edns0-01。" target="_blank" rel="external">http://tools.ietf.org/html/draft-ietf-dnsind-edns0-01。</a><br>EDNS0每个字段的结构和描述如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">Field Name   Field Type     Description</div><div class="line">------------------------------------------------------</div><div class="line">NAME         domain name    empty (root domain)</div><div class="line">TYPE         u_int16_t      OPT</div><div class="line">CLASS        u_int16_t      sender&apos;s UDP payload size</div><div class="line">TTL          u_int32_t      extended RCODE and flags</div><div class="line">RDLEN        u_int16_t      describes RDATA</div><div class="line">RDATA        octet stream   &#123;attribute,value&#125; pairs</div><div class="line">OPT的值为41，详细的协议值如下：</div><div class="line">(A, NS, MD, MF, CNAME, SOA, MB, MG, MR, NULL, WKS, PTR, HINFO, MINFO, MX, TXT,RP, AFSDB) = range(1, 19)</div><div class="line">AAAA = 28</div><div class="line">SRV = 33</div><div class="line">NAPTR = 35</div><div class="line">A6 = 38</div><div class="line">DNAME = 39</div><div class="line">SPF = 99</div><div class="line">OPT = 41</div></pre></td></tr></table></figure>
+<p>RDLENGTH描述RDATAD的长度，edns-client-subnet的详细格式存在RDATA中，如下所示：       </p>
+<p><img src="/images/15061674926580.jpg" alt=""></p>
+<p>OPTION-CODE：两个字节。<br>OPTION-LENGTH：两个字节，描述它之后的内容长度（byte）。<br>FAMILY：两个字节，1表示IPv4，2表示IPv6。<br>ADDRESS：实际存放IP地址的地方，IPv4长度为4，Google发送过来的长度一般为3，隐藏了IP地址最后一位。<br>理解了以上协议，就可以动手实现了。判断DNS Query是否包含Additional RRs，如果包含，则按照EDNS协议描述获取地址。用获取到的地址进行来源IP地址判断调度，封装结果返回。<br>BIND 9.10版本后自带的dig工具可以支持生成带EDNS扩展的请求来验证EDNS功能是否生效。命令示例：<br>./dig test.com @127.0.0.1 +subnet=1.1.1.1<br>使用WireShark抓取的支持edns-clinet-subnet的DNS请求截图如下。<br>发包：<br><img src="/images/15061675093401.jpg" alt=""></p>
+<p>回包：</p>
+<p><img src="/images/15061675188772.jpg" alt=""></p>
+<h3 id="私有调度"><a href="#私有调度" class="headerlink" title="私有调度"></a>私有调度</h3><p><strong>1．HTTP调度</strong></p>
+<p>用户通过访问一个HTTP接口，HTTP接口会判断用户的来源IP地址及其他诸如业务类型等信息，然后返回给用户一个JSON字符串，JSON字符串中包含相关的调度结果。客户端通过解析JSON字符串可以得到所需要访问的服务器IP地址列表。</p>
+<p>HTTP调度相比DNS调度有以下优势：<br>可以识别用户来源IP地址，调度结果更精确；可以在URL中包含更多的业务信息，功能更强大；可以支持一次返回多个查询的结果。<br>HTTP调度的不便之处就是要依赖客户端支持。</p>
+<p><img src="/images/15061675394735.jpg" alt=""></p>
+<p><strong>2．302调度</strong></p>
+<p>当Web Server收到一个用户请求时，通过识别用户来源IP地址和其URL，返回一个302响应将用户的请求重定向至一个新的URL，用户使用新的URL再去下载真实的资源。<br>302调度可以做到针对单次请求动态调度，比DNS调度粒度更细，变更生效也更迅速，并且可以在URL上添加防盗链等信息。</p>
+<p>302调度的缺点是增加了一次HTTP访问的时间，只适用于下载及流媒体等下载耗时较长的业务，静态小文件不适用于302调度。<br>302调度既可以独立使用，也可以作为DNS调度的补充。自建CDN当前就是在混合部署DNS调度和302调度，将访问国外CDN节点的中国大陆用户再重定向至国内CDN节点。</p>
+<h3 id="全局调度逻辑"><a href="#全局调度逻辑" class="headerlink" title="全局调度逻辑"></a>全局调度逻辑</h3><p>为了实现更好的业务容灾，当前公司业务都是在多CDN供应商同时部署的。在需要时可以通过DNS View功能实现区域用户的导向；同一区域用户可以通过第三方和自建互备，提高了业务的容灾能力（见图11-12）。</p>
+<p><img src="/images/15061675717991.jpg" alt=""></p>
+<p>图11-12  全局调度逻辑示意图</p>
+<h3 id="IP地址库维护"><a href="#IP地址库维护" class="headerlink" title="IP地址库维护"></a>IP地址库维护</h3><p>不管使用什么样的调度方式，一个准确的IP地址库都是调度系统中重中之重的部分，并且IP地址库在诸如日志分析等方面也有着重要的用途。所以维护一份可靠的、高准确度的IP地址库的工作具有重要意义。<br>我们的IP地址库最开始是直接使用网上的纯真IP地址库，这个地址库现在来看是一团糟，地理位置标记很不规范。后来陆续使用业内的收费IP地址库及友商的IP地址接口对此地址库进行了矫正规范，最终得出了一个格式规范、可信度比较高的地址库。</p>
+<p><strong>首先</strong>，我们将IP地址库的格式及地理位置命名进行了规范，纯真IP地址库大量存在某某学校、某某网吧的地理位置。规范后IP地址库格式为：起始IP地址，结束IP地址，国家，省份，城市，运营商。规范化格式带来的好处就是后期使用及合并裁剪都变得轻而易举。</p>
+<p><strong>其次</strong>，我们通过收集和购买基础库，采用投票方法进行整合，对IP地址库进行了矫正，得到自己的基础库。矫正的流程是，我们将整个IP地址库拆成以C段为单位，分别和其他的IP地址库进行比对，按照多数服从少数的原则对每个条目的信息做聚合，最后得出一个集各家之长的IP地址库。</p>
+<p>在得到集各家之长的IP地址库后，我们和公司业务团队合作，拿到了几千万条IP地址和GPS地理坐标的关系数据（这些数据是通过天气App获取的，可信度很高），通过这些数据校验和进一步修正我们的IP地址库。经过上述一系列校验、矫正后，针对个别仍不能确认的IP地址，我们通过多节点traceroute，拿到各地到此IP地址的路由路径，以此来反推IP地址的归属。</p>
+<h2 id="海外CDN建设"><a href="#海外CDN建设" class="headerlink" title="海外CDN建设"></a>海外CDN建设</h2><h3 id="自建还是第三方"><a href="#自建还是第三方" class="headerlink" title="自建还是第三方"></a>自建还是第三方</h3><p>当我们考虑海外自建CDN时，有很多现实的问题摆在眼前：服务器使用物理机还是虚拟机？服务器购买还是租赁？数据中心托管怎么解决？现场代维如何做？困难重重。反向比较的话，海外自建CDN相比海外现成的第三方CDN服务有什么优势？访问质量更好，还是成本更低？仔细评估下来，出于快速部署和扩展的考虑，主要采用了成熟的产品。海外是按照流量计费的，所以在数量小的规模下，自建优势不大。后续随着量的增长，我们会在合适的阶段评估自建。</p>
+<p>具体到海外自建CDN节点，针对某些用户量大、我们自身掌控力也强的地区（例如中国香港地区），我们采用部署物理服务器的方式将节点直接建设到本地；针对其他用户量大的地区，则使用第三方云服务虚拟机进行节点部署。</p>
+<h3 id="海外源站部署"><a href="#海外源站部署" class="headerlink" title="海外源站部署"></a>海外源站部署</h3><p>在CDN海外部署的过程中，我们遇到最多的问题就是海外回源：海外CDN节点回源到国内质量差，还会由于各种原因导致回源连接被墙。针对上述问题，我们在海外CDN回源上也做了很多优化。<br>针对一些文件总量较小的业务（官网静态页面等），我们将海外源站直接部署到了海外虚拟机上，这样就完全规避了回源的问题。</p>
+<p>针对一些文件总量较大或者发布时效性要求比较高的业务，我们在海外源站新增了一个Proxy层，Proxy层会优先将回源请求代理到海外源站，针对暂时没有发步到海外源站的资源会代理到国内源站。<br>针对一些不便进行海外源站部署的业务，我们在中国香港地区做了一组中间层缓存服务器，通过香港地区的缓存服务器再统一回源至国内。<br>总而言之，尽可能地降低海外CDN回源到国内源站的次数，提升回源速度，降低被墙的风险。这是海外源站部署的主体思路。</p>
+<hr>
+<h2 id="质量评测系统"><a href="#质量评测系统" class="headerlink" title="质量评测系统"></a>质量评测系统</h2><p>质量评测的目的是评估CDN服务质量的好坏，而监控系统则是为了及时发现服务中的问题并告警、处理。质量评测关注大层面的服务质量，监控系统关注细节的服务质量，这两个系统的主要目的还是有区别的。当然，质量评测的数据发生异常波动时，也会发送告警、处理。</p>
+<h3 id="客户端测试"><a href="#客户端测试" class="headerlink" title="客户端测试"></a>客户端测试</h3><p>从客户端角度去评测一个服务的质量情况，大体上可以分成以下几种方式。<br>（1）类似于博睿所提供的服务，通过部署在全国各地的测试节点去定期访问我们的被测试业务，统计相应的成功率和访问耗时。此种方式由于可以拿到详细的访问数据，所以在发现问题时更容易定位问题的原因。但是劣势也很明显，需要在全国各地部署节点或者使用第三方的付费服务，并且测试样本偏少，不能有效地代表真实用户，所以此种方式在我们的质量评测中已经很少使用了。</p>
+<p>（2）对于有客户端的业务，我们联合业务开发，对一些关键的网络交互环节进行打点，统计访问成功率及访问耗时，这样得出来的结果是业务真实的质量数据，可信度及数据的丰富程度都很高。缺点是需要有客户端支持，不是所有的业务都有此条件。</p>
+<p>（3）对于HTTP类的业务，通过在Web页面中嵌入一个JS脚本，使用JS脚本去下载业务的一个资源，统计访问的成功率及访问耗时。相比客户端打点，此种方式具有更广泛的适用性，只要被测试的业务是HTTP类型即可（CDN绝大部分业务都符合此条件）。当前我们大量使用的是此种测试方式。</p>
+<h3 id="服务器抓包分析"><a href="#服务器抓包分析" class="headerlink" title="服务器抓包分析"></a>服务器抓包分析</h3><p>我们开发了一个工具，可以抓取用户访问的TCP流，通过服务器端全流量分析，可以对访问请求分析TCP流各个过程耗时情况（例如三次握手完成后，服务器返回了某个特定信息，累积下载了1MB的文件等）。通过大数据分析，可以得到各用户单元到不同节点的整体图表，对调度表格进行循环优化。下面就简单介绍一下这个抓包工具的实现。Tcpxm已经开源：<a href="https://github.com/xiaomi-sa/tcpxm。" target="_blank" rel="external">https://github.com/xiaomi-sa/tcpxm。</a></p>
+<p>Tcpxm是使用Python开发的，调用Pylibcap进行抓包的工具。它共有3个线程：一个负责抓包并分析内容；一个负责写日志；一个用来清除过期数据。Tcpxm可以很方便地抓取和分析TCP请求，打印成所需要的日志形式。</p>
+<p>最初我们用它来抓取和分析某个App的登录时间，稍加改造就可以抓取网站访问等时间，计算用户建立TCP连接的时间、第一次发包的时间等。如下是我们之前抓取App登录时间的日志格式和每个字段说明。<br>2012-09-13 21:25:25 tcpxm.py [line:229] [INFO]  221.179.36.189:3103-&gt;xxx. xxx.xxx.xx:2424 [usr:54298295] [login(t6-t0+rtt):2760]  [t1:0] [rtt:217] [t3:137] [t4:0] [t5:118] [t6:2069] [t7:193]<br>在此用户的登录时间= t6（发送<success>的时间）– t0（收到SYN的时间）+ rtt（估算出的收到SYN包和发送ACK包的路径时间）。<br>具体每个t代表的时间含义如图11-13所示。日志中的t3=T3-T2，t4=T4-T3，rrt（t2）=T2-T1，……</success></p>
+<p><img src="/images/15061676431936.jpg" alt=""></p>
+<p>图11-13  某个App登录过程时序图</p>
+<h3 id="CDN故障处理预案"><a href="#CDN故障处理预案" class="headerlink" title="CDN故障处理预案"></a>CDN故障处理预案</h3><p>在CDN系统运行过程中，各种大大小小的故障或者突发情况是不可避免的。因此，针对各种已知故障进行归纳总结，整理成故障处理预案，并逐步沉淀成自动化的处理过程。通过这样的不断迭代，可以不断提高服务能力，降低故障发生的概率；在故障发生时可以快速有效地介入处理，减少故障影响的范围及时间。<br>在CDN服务中，某业务突发增长数倍甚至十几倍的情况还是时有发生的。针对这种情况，我们建立了详细的应对预案。</p>
+<p>故障场景：业务突发（未提前通知）导致CDN整体带宽利用率超过80%，且有进一步上涨的趋势。<br>关键动作：联系业务同事，确认业务突发原因（推广活动还是受攻击，抑或是其他）；通盘评估，确定对此次突发是进行资源保障还是资源打压，并和业务同事达成一致；发出通告，通知可能受此影响的第三方业务。</p>
+<p><strong>CDN故障处理预案：</strong><br>（1）我们的所有CDN业务都是多厂商部署的，并且平时对热门的资源在各厂商都有做预加载，当某一家资源不能满足业务需求时，可以快速灵活地将部分流量调度到其他厂商。<br>（2）我们在CDN交换机上预配置了高、中、低等不同的QoS策略，通过切换业务使用的CDN域名，让突发业务匹配高优先级的QoS策略，可以重点保证此业务的质量。如果需要打压突发业务的流量，则让突发业务匹配低优先级的QoS策略。<br>（3）在极端情况下，会损失突发业务的部分可用性，隔离突发业务。修改调度，将突发业务的流量调度到预配置的有限个节点，将其流量和正常业务从物理上隔离（类似数据中心将受攻击的IP流量牵引到黑洞），只提供有限的服务能力。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/under-the-ops/20170923-11-cdn/" title="第十一章：从外包到自建，小中企业CDN运维进阶指南">http://www.yulongjun.com/under-the-ops/20170923-11-cdn/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CDN/" rel="tag"># CDN</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/under-the-ops/20170923-10-the-construction-of-transmission-network/" rel="next" title="第十章：传输网建设">
+                <i class="fa fa-chevron-left"></i> 第十章：传输网建设
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/under-the-ops/20170923-12-domain-and-access/" rel="prev" title="第十二章：域名和接入">
+                第十二章：域名和接入 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN"><span class="nav-number">1.</span> <span class="nav-text">CDN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态加速"><span class="nav-number">1.1.</span> <span class="nav-text">静态加速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态加速"><span class="nav-number">1.2.</span> <span class="nav-text">动态加速</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自建CDN"><span class="nav-number">2.</span> <span class="nav-text">自建CDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN硬件及节点选型"><span class="nav-number">3.</span> <span class="nav-text">CDN硬件及节点选型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CDN服务器选型策略"><span class="nav-number">3.1.</span> <span class="nav-text">CDN服务器选型策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CDN节点建设策略"><span class="nav-number">3.2.</span> <span class="nav-text">CDN节点建设策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN缓存系统"><span class="nav-number">4.</span> <span class="nav-text">CDN缓存系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见缓存服务器的简要对比"><span class="nav-number">4.1.</span> <span class="nav-text">常见缓存服务器的简要对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ATS功能介绍"><span class="nav-number">4.2.</span> <span class="nav-text">ATS功能介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ATS配置要点说明"><span class="nav-number">4.3.</span> <span class="nav-text">ATS配置要点说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDN调度系统"><span class="nav-number">5.</span> <span class="nav-text">CDN调度系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS调度"><span class="nav-number">5.1.</span> <span class="nav-text">DNS调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有调度"><span class="nav-number">5.2.</span> <span class="nav-text">私有调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局调度逻辑"><span class="nav-number">5.3.</span> <span class="nav-text">全局调度逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP地址库维护"><span class="nav-number">5.4.</span> <span class="nav-text">IP地址库维护</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#海外CDN建设"><span class="nav-number">6.</span> <span class="nav-text">海外CDN建设</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自建还是第三方"><span class="nav-number">6.1.</span> <span class="nav-text">自建还是第三方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#海外源站部署"><span class="nav-number">6.2.</span> <span class="nav-text">海外源站部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#质量评测系统"><span class="nav-number">7.</span> <span class="nav-text">质量评测系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端测试"><span class="nav-number">7.1.</span> <span class="nav-text">客户端测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器抓包分析"><span class="nav-number">7.2.</span> <span class="nav-text">服务器抓包分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CDN故障处理预案"><span class="nav-number">7.3.</span> <span class="nav-text">CDN故障处理预案</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

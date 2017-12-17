@@ -1,0 +1,1496 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python,OOP,Encapsulate,Inheritance,Polymorphism," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="02-OOP的三大特征：封装、继承、多态">
+<meta property="og:url" content="http://www.yulongjun.com/python/20170512-02-oop-three-principles/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/14987010225532.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458396107768.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458396136514.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458396171470.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458470472712.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458470507678.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458398138439.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458400823618.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458452739839.png">
+<meta property="og:updated_time" content="2017-06-30T13:13:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="02-OOP的三大特征：封装、继承、多态">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/14987010225532.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/python/20170512-02-oop-three-principles/"/>
+
+
+
+
+
+  <title> 02-OOP的三大特征：封装、继承、多态 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170512-02-oop-three-principles/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                02-OOP的三大特征：封装、继承、多态
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-12T09:51:26+08:00">
+                2017-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170512-02-oop-three-principles/" class="leancloud_visitors" data-flag-title="02-OOP的三大特征：封装、继承、多态">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/14987010225532.jpg" alt=""></p>
+<a id="more"></a>
+<p>oop的三大特性：</p>
+<ol>
+<li><p><strong>封装（Encapsulate）</strong></p>
+</li>
+<li><p><strong>继承（Inheritance）</strong></p>
+</li>
+<li><p><strong>多态（Polymorphism）</strong></p>
+</li>
+</ol>
+<p>下面三个小节详细说明了这三个特性。</p>
+<h2 id="封装（Encapsulate）"><a href="#封装（Encapsulate）" class="headerlink" title="封装（Encapsulate）"></a>封装（Encapsulate）</h2><p>封装有两种划分方法：</p>
+<p><strong><code>按可见范围分类划分</code></strong>：</p>
+<ul>
+<li><strong>类级（class level）</strong>：（类和实例都可以访问，所有实例共享）</li>
+</ul>
+<ol>
+<li><strong>类变量（class variable）</strong> ：类定义时确定的，没在<code>__init__</code>初始化实例方法里面的</li>
+<li><strong>类方法 （class method）</strong></li>
+</ol>
+<ul>
+<li><strong>实例级（instance level）</strong>： （只有实例可以访问）</li>
+</ul>
+<ol>
+<li><strong>实例变量（instance variable）</strong>：被定义在<code>__init__</code>初始化实例方法里面的，实例初始化的后的变量</li>
+<li><strong>实例方法（instance method）</strong></li>
+</ol>
+<p><strong><code>按私有与公有划分</code></strong>：</p>
+<ul>
+<li><strong>私有（private）</strong>：只有类内部可以访问。</li>
+</ul>
+<ol>
+<li>私有类变量（private class variable）</li>
+<li>私有类方法（private class method）</li>
+<li>私有实例变量（private instance variable）</li>
+<li>私有实例方法（private instance method）</li>
+</ol>
+<ul>
+<li><strong>公有（public）</strong>：类外可以访问。</li>
+</ul>
+<ol>
+<li>公有类变量（public class variable）</li>
+<li>公有类方法（public class method）</li>
+<li>公有实例变量（public instance variable）</li>
+<li>公有实例方法（ public instance method）</li>
+</ol>
+<p><strong>定义规则：</strong></p>
+<ol>
+<li><strong>私有</strong>（private）的变量和方法，通常在变量和方法前面加<code>__</code>。</li>
+<li><strong>类变量</strong>（class variable）通常在定义类后定义类变量；<strong>实例变量</strong>（instance variable）是定义在<code>__init__</code>方法里面的。</li>
+<li><strong>实例方法</strong>是直接<code>def(self)</code>创建；<strong>类方法</strong>通常使用装饰器<code>@classmethod</code>后，再<code>def ClassMethod(cls)</code>创建。</li>
+</ol>
+<p><strong>下面让我们用代码来理解下以上概念：</strong>（代码有点多，可以看后面注释一步步理解，看懂这一波代码你就就能懂封装了,后面继承也能用到这段代码）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span>                                       <span class="comment"># 定义类名后定义类变量</span></div><div class="line"> __private_class_var = <span class="string">'private class var'</span>                 <span class="comment"># 定义私有类变量</span></div><div class="line"> public_class_var = <span class="string">'public class var'</span>                     <span class="comment"># 定义公有类变量</span></div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span>                        <span class="comment"># 用__init__定义实例变量</span></div><div class="line"> self.__private_instance_var = <span class="string">'private instance var'</span>  <span class="comment"># 定义私有实例变量</span></div><div class="line"> self.public_instance_var  = <span class="string">'public instance var'</span>     <span class="comment"># 定义公有实例变量</span></div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">__private_instance_method</span><span class="params">(self)</span>:</span>       <span class="comment"># 定义私有实例方法，尝试打印出所有的变量</span></div><div class="line"> <span class="keyword">try</span>:</div><div class="line"> print(self.__private_class_var)                   <span class="comment"># 尝试打印私有类变量</span></div><div class="line"> <span class="keyword">except</span>:</div><div class="line"> <span class="keyword">pass</span></div><div class="line"> <span class="keyword">try</span>:</div><div class="line"> print(self.public_class_var)                      <span class="comment"># 尝试打印公有类变量</span></div><div class="line"> <span class="keyword">except</span>:</div><div class="line"> <span class="keyword">pass</span></div><div class="line"> <span class="keyword">try</span>:</div><div class="line"> print(self.__private_instance_var)                <span class="comment"># 尝试打印私有实例变量</span></div><div class="line"> <span class="keyword">except</span>:</div><div class="line"> <span class="keyword">pass</span></div><div class="line"> <span class="keyword">try</span>:</div><div class="line"> print(self.public_instance_var)                   <span class="comment"># 尝试打印私有实例变量</span></div><div class="line"> <span class="keyword">except</span>:</div><div class="line"> <span class="keyword">pass</span></div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">public_instance_method</span><span class="params">(self)</span>:</span>           <span class="comment"># 定义公有实例方法，尝试打印所有的变量</span></div><div class="line"> <span class="keyword">try</span>:</div><div class="line"> print(self.__private_class_var)                   <span class="comment"># 尝试打印私有类变量</span></div><div class="line"> <span class="keyword">except</span>:</div><div class="line"> <span class="keyword">pass</span></div><div class="line"> <span class="keyword">try</span>:</div><div class="line"> print(self.public_class_var)                      <span class="comment"># 尝试打印公有类变量</span></div><div class="line"> <span class="keyword">except</span>:</div><div class="line"> <span class="keyword">pass</span></div><div class="line"> <span class="keyword">try</span>:</div><div class="line"> print(self.__private_instance_var)                <span class="comment"># 尝试打印私有实例变量</span></div><div class="line"> <span class="keyword">except</span>:</div><div class="line"> <span class="keyword">pass</span></div><div class="line"> <span class="keyword">try</span>:</div><div class="line"> print(self.public_instance_var)                   <span class="comment"># 尝试打印私有实例变量</span></div><div class="line"> <span class="keyword">except</span>:</div><div class="line"> <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="meta"> @classmethod </span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">__private_class_method</span><span class="params">(cls)</span>:</span>           <span class="comment"># 使用@classmethod创建私有类方法</span></div><div class="line"> <span class="keyword">try</span>:</div><div class="line"> print(cls.__private_class_var)                    <span class="comment"># 尝试打印私有类变量</span></div><div class="line"> <span class="keyword">except</span>:</div><div class="line"> <span class="keyword">pass</span></div><div class="line"> <span class="keyword">try</span>:</div><div class="line"> print(cls.public_class_var)                       <span class="comment"># 尝试打印公有类变量</span></div><div class="line"> <span class="keyword">except</span>:</div><div class="line"> <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="meta"> @classmethod</span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">public_class_method</span><span class="params">(cls)</span>:</span>              <span class="comment"># 使用@classmethod创建公有类方法</span></div><div class="line"> <span class="keyword">try</span>:</div><div class="line"> print(cls.__private_class_var)                    <span class="comment"># 尝试打印私有类变量</span></div><div class="line"> <span class="keyword">except</span>:</div><div class="line"> <span class="keyword">pass</span></div><div class="line"> <span class="keyword">try</span>:</div><div class="line"> print(cls.public_class_var)                       <span class="comment"># 尝试打印公有类变量</span></div><div class="line"> <span class="keyword">except</span>:</div><div class="line"> <span class="keyword">pass</span></div></pre></td></tr></table></figure>
+<p> 上面代码：</p>
+<table>
+<thead>
+<tr>
+<th>行号</th>
+<th>定义类型</th>
+<th>英文</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>定义类名</td>
+<td>class name</td>
+</tr>
+<tr>
+<td>2-3</td>
+<td>定义类变量</td>
+<td>class variable(private &amp; public)</td>
+</tr>
+<tr>
+<td>5-7</td>
+<td>定义实例变量</td>
+<td>instance variable(private &amp; public)</td>
+</tr>
+<tr>
+<td>9-25</td>
+<td>定义私有实例方法</td>
+<td>private instance method</td>
+</tr>
+<tr>
+<td>27-43</td>
+<td>定义公有实例方法</td>
+<td>public instance method</td>
+</tr>
+<tr>
+<td>45-54</td>
+<td>定义私有类方法</td>
+<td>private class method</td>
+</tr>
+<tr>
+<td>56-65</td>
+<td>定义公有类方法</td>
+<td>public class method</td>
+</tr>
+</tbody>
+</table>
+<p>下面我们验证下类和实例的变量和方法的互访情况：<br>(<code>a=A()</code>，<code>a</code>是类<code>A</code>的实例)</p>
+<p><img src="/images/oop-class/1458396107768.png" alt=""></p>
+<p><img src="/images/oop-class/1458396136514.png" alt=""></p>
+<p><img src="/images/oop-class/1458396171470.png" alt=""></p>
+<p><strong>由上图可以得出结论：</strong></p>
+<ol>
+<li><strong>类私有变量</strong>、<strong>类私有方法</strong>、<strong>实例私有变量</strong>和<strong>实例私有方法</strong>，<strong>类</strong>和<strong>实例</strong>都<strong>不能</strong>直接访问。</li>
+<li><strong>类</strong>可以访问<strong>类级</strong>的<strong>公有类变量</strong>和<strong>公有类方法</strong>，但是<strong>不能</strong>访问<strong>实例级</strong>的的<strong>公有实例变量</strong>和<strong>公有实例方法</strong>。</li>
+<li><strong>实例</strong>可以访问<strong>类级</strong>的<strong>公有类变量</strong>和<strong>公有类方法</strong>，也<strong>能</strong>访问<strong>实例级</strong>的的<strong>公有实例变量</strong>和<strong>公有实例方法</strong>。</li>
+<li><strong>类</strong>可以用<strong>公有类方法</strong>调用<strong>私有类变量</strong>和<strong>公有类变量</strong>，但是<strong>不能</strong>调用<strong>私有实例变量</strong>和<strong>公有实例变量</strong>。</li>
+<li><strong>实例</strong>可以用<strong>公有实例方法</strong>调用<strong>私有类变量</strong>和<strong>公有类变量</strong>，也<strong>能</strong>调用<strong>私有实例变量</strong>和<strong>公有实例变量</strong>。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>—-</th>
+<th>类能否访问</th>
+<th>实例能否访问</th>
+<th>类是否能够通过公有类方法调用私有变量</th>
+<th>实例是否能够通过公有实例方法调用私有变量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>私有类变量</td>
+<td>×</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>私有类方法</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>私有实例变量</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>√</td>
+</tr>
+<tr>
+<td>私有实例方法</td>
+<td>×</td>
+<td>×</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>公有类变量</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>公有类方法</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>公有实例变量</td>
+<td>×</td>
+<td>√</td>
+<td>×</td>
+<td>√</td>
+</tr>
+<tr>
+<td>公有实例方法</td>
+<td>×</td>
+<td>√</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><strong>property函数、 getter、setter、deleter方法</strong><br>让我们看一段代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, input_x)</span>:</span></div><div class="line"> self.__x = input_x</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">getx</span><span class="params">(self)</span>:</span></div><div class="line"> print(<span class="string">'inside the getter'</span>)</div><div class="line"> <span class="keyword">return</span> self.__x</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">setx</span><span class="params">(self, input_x)</span>:</span></div><div class="line"> print(<span class="string">'inside the setter'</span>)</div><div class="line"> self.__x = input_x</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">delx</span><span class="params">(self)</span>:</span></div><div class="line"> print(<span class="string">'inside the deleter'</span>)</div><div class="line"> <span class="keyword">del</span> self.__x</div><div class="line"></div><div class="line"> x = property(getx, setx, delx, <span class="string">"I'm the 'x' property"</span>)</div></pre></td></tr></table></figure>
+<p>上面代码中：</p>
+<ol>
+<li><code>__x</code>是一个隐藏的变量，我们通常不会直接去调用隐藏的变量，而是用<strong>getter</strong>方法<code>getx</code>，相应的，我们改变隐藏的变量，也用相应的<strong>setter</strong>方法<code>setx</code>，还有删除隐藏变量的<strong>deleter</strong>方法<code>delx</code>。</li>
+<li><p>property函数调用了上述三种方法，property函数的用法是：<code>property(fget=None, fset=None, fdel=None, doc=None)</code>，这里的<strong>fget</strong>是<code>getx</code>，<strong>fset</strong>是<code>setx</code>，<strong>fdel</strong>是<code>delx</code>，<strong>doc</strong>是<code>&quot;I&#39;m the &#39;x&#39; property.&quot;</code>。<br>下面是使用的代码：</p>
+<p><img src="/images/oop-class/1458470472712.png" alt=""></p>
+<p>当然也可以有更简便的方法：</p>
+<p><img src="/images/oop-class/1458470507678.png" alt=""></p>
+</li>
+</ol>
+<p>property函数的代码还可以装饰器来写，更加简洁,和上面实现的功能是一样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, input_x)</span>:</span></div><div class="line"> self.__x = input_x</div><div class="line"></div><div class="line"><span class="meta"> @property</span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">x</span><span class="params">(self)</span>:</span></div><div class="line"> <span class="string">"I am the 'x' property."</span></div><div class="line"> print(<span class="string">"inside the getter"</span>)</div><div class="line"> <span class="keyword">return</span> self.__x</div><div class="line"></div><div class="line"><span class="meta"> @x.setter</span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">x</span><span class="params">(self, value)</span>:</span></div><div class="line"> print(<span class="string">"inside the setter"</span>)</div><div class="line"> self.__x = value</div><div class="line"></div><div class="line"><span class="meta"> @x.deleter</span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">x</span><span class="params">(self)</span>:</span></div><div class="line"> print(<span class="string">"inside the deleter"</span>)</div><div class="line"> <span class="keyword">del</span> self.__x</div></pre></td></tr></table></figure>
+<h2 id="继承（Inheritance）"><a href="#继承（Inheritance）" class="headerlink" title="继承（Inheritance）"></a>继承（Inheritance）</h2><h3 id="继承的多种方法"><a href="#继承的多种方法" class="headerlink" title="继承的多种方法"></a>继承的多种方法</h3><ul>
+<li>继承（inheritance）是一种实现代码复用的一个好方法。</li>
+<li>当我们定义的新类用到之前定义过的旧类的一些属性和方法的时候，我们可以重写一个新类（比较笨拙的方法），也可以用继承的方法，来获得旧类的变量和方法。</li>
+<li>新类可以保留部分旧类变量和方法（使用super()函数），可以重写（也说覆盖，override）旧类的部分变量和方法，可以新增（add）变量和方法。</li>
+<li>在继承中，原始的旧类叫做父类（parent class）、超类（super class）、基类（base class），继承得到的新类叫做孩子类（child class），子类（sub class），衍生类（derived class）。</li>
+</ul>
+<p><strong>用代码来说明</strong></p>
+<p>前面有定义过一个<code>Door</code>的类，下面是类<code>Door</code>的定义：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Door</span>:</span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,number,status)</span>:</span></div><div class="line"> self.number=number</div><div class="line"> self.status=status</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">open</span><span class="params">(self)</span>:</span></div><div class="line"> self.status=<span class="string">'openning'</span></div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">close</span><span class="params">(self)</span>:</span></div><div class="line"> self.status=<span class="string">'closed'</span></div></pre></td></tr></table></figure>
+<p>我们重新定义一个新类叫<code>LockableDoor</code>（可锁的门）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LockableDoor</span>:</span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,number,status,is_lockked)</span>:</span></div><div class="line"> self.number = number</div><div class="line"> self.status = status</div><div class="line"> self.is_locked = is_locked</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">open</span><span class="params">(self)</span>:</span></div><div class="line"> <span class="keyword">if</span> <span class="keyword">not</span> self.is_locked:</div><div class="line"> self.status = <span class="string">'openning'</span></div><div class="line"> <span class="keyword">else</span>:</div><div class="line"> print(<span class="string">'is locked'</span>)</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">close</span><span class="params">(self)</span>:</span></div><div class="line"> self.status = <span class="string">'closed'</span></div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">lock</span><span class="params">(self)</span>:</span></div><div class="line"> <span class="keyword">if</span> self.status == <span class="string">'closed'</span>:</div><div class="line"> self.is_locked = <span class="keyword">True</span></div><div class="line"> <span class="keyword">else</span>:</div><div class="line"> print(<span class="string">'is openning'</span>)</div></pre></td></tr></table></figure>
+<p>定义新类是笨方法，尤其是当旧类的属性和方法很多的时候，不能全部去重写一遍吧！</p>
+<p>我们看到这两个类有很多相似的部分，所以可以用<code>Door</code>当做父类，用<code>LockableDoo</code>r当做<code>Door</code>的子类，继承<code>Door</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">LockableDoor</span><span class="params">(Door)</span>:</span>     <span class="comment"># 定义Door的子类LockableDoor</span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,number,status,is_locked)</span>:</span><span class="comment"># 新增了一个is_locked属性（attritube）</span></div><div class="line"> super(LockableDoor,self).__init__(number,status) <span class="comment"># number，status可以直接继承Door的这两个属性，是相同的，用super（）函数来继承</span></div><div class="line"> self.is_locked = is_locked <span class="comment"># 新加的is_locked属性的定义，新的属性</span></div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">open</span><span class="params">(self)</span>:</span> <span class="comment"># 覆盖（override）open方法</span></div><div class="line"> <span class="keyword">if</span> <span class="keyword">not</span> self.is_locked: <span class="comment"># 如果门没锁，LockableDoor的门可以像Door一样调用open方法</span></div><div class="line"> super(LockableDoor,self).open() <span class="comment">#此处为像超类Door一样调用open方法</span></div><div class="line"> <span class="keyword">else</span>: <span class="comment"># 如果们锁了，门就打不开了</span></div><div class="line"> print(<span class="string">"It is locked, can't open."</span>)<span class="comment"># 只能输出“它锁住了，不能打开”</span></div><div class="line"></div><div class="line"> <span class="comment">#LockableDoor和Door的close方法都一样，没必要重写close方法，就可以省略了，直接继承</span></div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">lock</span><span class="params">(self)</span>:</span><span class="comment"># 新增一个lock方法，这个超类中完全没有，下面是lock方法的定义</span></div><div class="line"> <span class="keyword">if</span> self.status == <span class="string">'closed'</span>:<span class="comment"># 如果门关了</span></div><div class="line"> self.is_locked = <span class="keyword">True</span> <span class="comment"># is_locked属性就是真值</span></div><div class="line"> <span class="keyword">else</span>: <span class="comment"># 如果门开着</span></div><div class="line"> print(<span class="string">'It is openning'</span>)<span class="comment"># 就输出“它开着"</span></div></pre></td></tr></table></figure>
+<p>上面代码用到了继承的很多方法：</p>
+<ol>
+<li><strong>单继承</strong>：<code>close</code>方法都一样，是直接继承的，所以不用写，省略就可以，直接继承过来。</li>
+<li><strong>重写</strong>（override）：<code>LockableDoor</code>的<code>open</code>方法是属于重写了原来的<code>Door</code>的<code>open</code>方法。</li>
+<li><strong>新增</strong>（add）：<code>is_lock</code>属于新增的变量，<code>lock</code>方法属于新增的方法。</li>
+<li><strong>调用父类</strong>（<code>super()</code>）：<code>super(LockableDoor,self).__init__(number,status)</code>调用了父类的<code>number</code>和<code>status</code>变量，<code>super(LockableDoor,self).open()</code>调用了父类的<code>open</code>方法。</li>
+</ol>
+<h3 id="继承与可见性"><a href="#继承与可见性" class="headerlink" title="继承与可见性"></a>继承与可见性</h3><p>继承可以继承父类的那些东西呢?这里与之前的封装有关系，我们可以封装那一节里定义的那个特别长的函数A来说明:<br>之前的那个类是<code>A</code>，太长就不复制黏贴了。<br>我们定义一个新类<code>B</code>，继承自父类<code>A</code>，<code>b</code>是类<code>B</code>的实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">69</span>]: <span class="function"><span class="keyword">def</span> <span class="title">B</span><span class="params">(ClassName)</span>:</span></div><div class="line"> <span class="keyword">pass</span></div><div class="line"></div><div class="line">In [<span class="number">70</span>]: b=B()</div><div class="line"></div><div class="line">In [<span class="number">71</span>]: dir(b)</div><div class="line">out[<span class="number">71</span>]:</div><div class="line">[<span class="string">'_A__private_class_method'</span>,</div><div class="line"> <span class="string">'_A__private_class_var'</span>,</div><div class="line"> <span class="string">'_A__private_instance_method'</span>,</div><div class="line"> <span class="string">'_A__private_instance_var'</span>,</div><div class="line"> <span class="string">'__class__'</span>,</div><div class="line"> <span class="string">'__delattr__'</span>,</div><div class="line"> <span class="string">'__dict__'</span>,</div><div class="line"> <span class="string">'__dir__'</span>,</div><div class="line"> <span class="string">'__doc__'</span>,</div><div class="line"> <span class="string">'__eq__'</span>,</div><div class="line"> <span class="string">'__format__'</span>,</div><div class="line"> <span class="string">'__ge__'</span>,</div><div class="line"> <span class="string">'__getattribute__'</span>,</div><div class="line"> <span class="string">'__gt__'</span>,</div><div class="line"> <span class="string">'__hash__'</span>,</div><div class="line"> <span class="string">'__init__'</span>,</div><div class="line"> <span class="string">'__le__'</span>,</div><div class="line"> <span class="string">'__lt__'</span>,</div><div class="line"> <span class="string">'__module__'</span>,</div><div class="line"> <span class="string">'__ne__'</span>,</div><div class="line"> <span class="string">'__new__'</span>,</div><div class="line"> <span class="string">'__reduce__'</span>,</div><div class="line"> <span class="string">'__reduce_ex__'</span>,</div><div class="line"> <span class="string">'__repr__'</span>,</div><div class="line"> <span class="string">'__setattr__'</span>,</div><div class="line"> <span class="string">'__sizeof__'</span>,</div><div class="line"> <span class="string">'__str__'</span>,</div><div class="line"> <span class="string">'__subclasshook__'</span>,</div><div class="line"> <span class="string">'__weakref__'</span>,</div><div class="line"> <span class="string">'public_class_method'</span>,</div><div class="line"> <span class="string">'public_class_var'</span>,</div><div class="line"> <span class="string">'public_instance_method'</span>,</div><div class="line"> <span class="string">'public_instance_var'</span>]</div></pre></td></tr></table></figure>
+<p>dir(b)可以查看b的属性和方法，中间那些我们都用不上，我们可以切片精简下：</p>
+<pre><code class="python">In [<span class="number">72</span>]: dir(b)[:<span class="number">4</span>]+dir(b)[:<span class="number">-5</span>:<span class="number">-1</span>]
+Out[<span class="number">72</span>]:
+[<span class="string">'_A__private_class_method'</span>,
+ <span class="string">'_A__private_class_var'</span>,
+ <span class="string">'_A__private_instance_method'</span>,
+ <span class="string">'_A__private_instance_var'</span>,
+ <span class="string">'public_instance_var'</span>,
+ <span class="string">'public_instance_method'</span>,
+ <span class="string">'public_class_var'</span>,
+ <span class="string">'public_class_method'</span>]
+</code></pre>
+<p>我们运行下面代码：</p>
+<p><img src="/images/oop-class/1458398138439.png" alt=""></p>
+<p>以上代码说明：<br>1. 私有的方法、变量（无论类还是实例的）是不可继承的<br>2. 公有的方法、变量（无论类还是实例）是可以继承的<br>3. 子类的公有的方法（包括类和实例）是可以访问父类的私有变量的</p>
+<p><strong>继承后重写私有变量和公有变量，私有变量不变，公有变量变为重写后的变量</strong></p>
+<p>看一段代码：</p>
+<p><img src="/images/oop-class/1458400823618.png" alt=""></p>
+<p>类C我们继承A并重写（override）私有变量和公有变量<br>我们发现私有变量没有变化，而公有变量变了，说明重写（override）只能重写公有变量，不能重写私有变量，私有变量还是父类A的私有变量。（<code>dir(c)</code>后我们看到，私有变量有<code>_A</code>前缀，也有<code>_C</code>前缀，默认会先使用父类的<code>_A</code>前缀的私有变量。）</p>
+<p> <strong>继承后重写公有方法和私有方法，公有方法改变，私有方法也改变</strong></p>
+<p>看一段代码理解：</p>
+<p> <img src="/images/oop-class/1458452739839.png" alt=""></p>
+<p> 重写公有方法后，公有方法改变（变为调用两次<code>__method()</code>)；重写私有方法后，公有方法调用的私有方法也改变（改变为输出<code>method of B</code>)</p>
+<h2 id="多态（Polymorphism）"><a href="#多态（Polymorphism）" class="headerlink" title="多态（Polymorphism）"></a>多态（Polymorphism）</h2><p>不同的操作对不同的对象有多种表现形式。重写（override）就是多态的一种表现形式。</p>
+<p>在讲继承的时候，已经把多态讲过了，这里就略过了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/python/20170512-02-oop-three-principles/" title="02-OOP的三大特征：封装、继承、多态">http://www.yulongjun.com/python/20170512-02-oop-three-principles/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/OOP/" rel="tag"># OOP</a>
+          
+            <a href="/tags/Encapsulate/" rel="tag"># Encapsulate</a>
+          
+            <a href="/tags/Inheritance/" rel="tag"># Inheritance</a>
+          
+            <a href="/tags/Polymorphism/" rel="tag"># Polymorphism</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/python/20170512-01-define-class/" rel="next" title="01-类（Class）的定义">
+                <i class="fa fa-chevron-left"></i> 01-类（Class）的定义
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/python/20170512-03-multi-inheritance-mro/" rel="prev" title="03-多继承、MRO算法">
+                03-多继承、MRO算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#封装（Encapsulate）"><span class="nav-number">1.</span> <span class="nav-text">封装（Encapsulate）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承（Inheritance）"><span class="nav-number">2.</span> <span class="nav-text">继承（Inheritance）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承的多种方法"><span class="nav-number">2.1.</span> <span class="nav-text">继承的多种方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承与可见性"><span class="nav-number">2.2.</span> <span class="nav-text">继承与可见性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多态（Polymorphism）"><span class="nav-number">3.</span> <span class="nav-text">多态（Polymorphism）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

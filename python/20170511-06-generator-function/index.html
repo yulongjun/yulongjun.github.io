@@ -1,0 +1,1276 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="function,generator," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="生成器函数">
+<meta property="og:url" content="http://www.yulongjun.com/python/20170511-06-generator-function/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/14977054081920.jpg">
+<meta property="og:updated_time" content="2017-06-17T14:54:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="生成器函数">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/14977054081920.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/python/20170511-06-generator-function/"/>
+
+
+
+
+
+  <title> 生成器函数 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170511-06-generator-function/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                生成器函数
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-11T15:30:00+08:00">
+                2017-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170511-06-generator-function/" class="leancloud_visitors" data-flag-title="生成器函数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/14977054081920.jpg" alt=""></p>
+<a id="more"></a>
+<h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1 定义"></a>1 定义</h2><p>之前有说过生成器解析式。这里我们来写一下生成器的函数，生成器函数就是在函数体里写yield</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">In [85]: def gen():</div><div class="line">    ...:     yield 0</div><div class="line">    ...:     </div><div class="line"></div><div class="line">In [86]: g = gen()</div><div class="line"></div><div class="line">In [87]: type(g)</div><div class="line">Out[87]: generator</div><div class="line"></div><div class="line">In [89]: next(g)</div><div class="line">Out[89]: 0</div><div class="line"></div><div class="line">In [90]: next(g)</div><div class="line">------------------------------------------------------------</div><div class="line">StopIteration              Traceback (most recent call last)</div><div class="line">&lt;ipython-input-90-5f315c5de15b&gt; in &lt;module&gt;()</div><div class="line">----&gt; 1 next(g)</div><div class="line"></div><div class="line">StopIteration:</div></pre></td></tr></table></figure>
+<p>我们写一个复杂点的：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">91</span>]: <span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">()</span>:</span></div><div class="line">    ...:     <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">    ...:         <span class="keyword">yield</span> <span class="number">0</span></div><div class="line">    ...:         print(<span class="string">'.....'</span>)</div><div class="line">    ...:         </div><div class="line"></div><div class="line"></div><div class="line">In [<span class="number">98</span>]: g = gen()</div><div class="line"></div><div class="line">In [<span class="number">99</span>]: next(g)</div><div class="line">Out[<span class="number">99</span>]: <span class="number">0</span></div><div class="line"></div><div class="line">In [<span class="number">100</span>]: next(g)</div><div class="line">.....</div><div class="line">Out[<span class="number">100</span>]: <span class="number">0</span></div><div class="line"></div><div class="line">In [<span class="number">101</span>]: next(g)</div><div class="line">.....</div><div class="line">Out[<span class="number">101</span>]: <span class="number">0</span></div></pre></td></tr></table></figure></p>
+<p>我们可以看出，一执行next，就到yield那条语句执行完返回后面的值，然后暂停，等待下一次next，下一次再next就先执行剩下的部分，然后执行到下一次循环，到yield那条语句，返回yield后面的值，然后又暂停。</p>
+<ul>
+<li>生成器的定义和函数类似，但是有yield语句。</li>
+<li>生成器执行到yield的时候会暂停，再次的时候，next会从暂停的地方继续执行到下一次yield。</li>
+</ul>
+<p>我们再写一个：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">107</span>]: <span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">(x)</span>:</span></div><div class="line">     ...:     <span class="keyword">for</span> i <span class="keyword">in</span> range(x):</div><div class="line">     ...:         <span class="keyword">yield</span> i</div><div class="line">     ...:         </div><div class="line"></div><div class="line">In [<span class="number">108</span>]: g = gen(<span class="number">10</span>)</div><div class="line"></div><div class="line">In [<span class="number">109</span>]: <span class="keyword">for</span> x <span class="keyword">in</span> g:</div><div class="line">     ...:     print(x)</div><div class="line">     ...:     </div><div class="line"><span class="number">0</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">2</span></div><div class="line"><span class="number">3</span></div><div class="line"><span class="number">4</span></div><div class="line"><span class="number">5</span></div><div class="line"><span class="number">6</span></div><div class="line"><span class="number">7</span></div><div class="line"><span class="number">8</span></div><div class="line"><span class="number">9</span></div></pre></td></tr></table></figure>
+<hr>
+<h2 id="2-yield和return"><a href="#2-yield和return" class="headerlink" title="2  yield和return"></a>2  yield和return</h2><p>yield 弹出值，暂停函数<br>return返回值，并结束函数</p>
+<p>yied可以和return并用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">111</span>]: <span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">(x)</span>:</span></div><div class="line">     ...:     <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</div><div class="line">     ...:         <span class="keyword">yield</span> i</div><div class="line">     ...:     <span class="keyword">return</span> <span class="string">'ok'</span></div><div class="line"></div><div class="line">In [<span class="number">112</span>]: g = gen(<span class="number">10</span>)</div><div class="line"></div><div class="line">In [<span class="number">113</span>]: <span class="keyword">for</span> x <span class="keyword">in</span> g:</div><div class="line">     ...:     print(x)</div><div class="line">     ...:     </div><div class="line"><span class="number">0</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">2</span></div><div class="line"><span class="number">4</span></div><div class="line"><span class="number">5</span></div><div class="line"><span class="number">6</span></div><div class="line"><span class="number">7</span></div><div class="line"><span class="number">8</span></div><div class="line"><span class="number">9</span></div></pre></td></tr></table></figure>
+<p>从上我们可以看出，当yield和return同时存在的时候，return的返回值会被忽略，但是return依然可以中断生成器。</p>
+<hr>
+<h2 id="3-协程"><a href="#3-协程" class="headerlink" title="3  协程"></a>3  协程</h2><p>协程是用户空间的轻量线程，泡在一个线程内，由用户空间调度。</p>
+<p>生成器就可以实现协程。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">118</span>]: <span class="function"><span class="keyword">def</span> <span class="title">gen1</span><span class="params">()</span>:</span></div><div class="line">     ...:     <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">     ...:         <span class="keyword">yield</span> <span class="string">'gen 1'</span></div><div class="line">     ...:         </div><div class="line"></div><div class="line">In [<span class="number">121</span>]: <span class="function"><span class="keyword">def</span> <span class="title">gen2</span><span class="params">(g)</span>:</span></div><div class="line">     ...:     <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">     ...:         <span class="keyword">yield</span> <span class="string">'gen 2'</span></div><div class="line">     ...:         print(next(g))</div><div class="line">     ...:         </div><div class="line"></div><div class="line">In [<span class="number">122</span>]: g = gen2(gen1())</div><div class="line"></div><div class="line">In [<span class="number">123</span>]: next(g)</div><div class="line">Out[<span class="number">123</span>]: <span class="string">'gen 2'</span></div><div class="line"></div><div class="line">In [<span class="number">124</span>]: next(g)</div><div class="line">gen <span class="number">1</span></div><div class="line">Out[<span class="number">124</span>]: <span class="string">'gen 2'</span></div><div class="line"></div><div class="line">In [<span class="number">125</span>]: next(g)</div><div class="line">gen <span class="number">1</span></div><div class="line">Out[<span class="number">125</span>]: <span class="string">'gen 2'</span></div></pre></td></tr></table></figure>
+<hr>
+<h2 id="4-生成器的应用"><a href="#4-生成器的应用" class="headerlink" title="4 生成器的应用"></a>4 生成器的应用</h2><ol>
+<li><p>下面是一个计数器（counter），如果在单线程环境下，没有意义，可视用在多线程下，就有意义了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">134</span>]: <span class="function"><span class="keyword">def</span> <span class="title">counter</span><span class="params">(init)</span>:</span></div><div class="line">     ...:     c = init</div><div class="line">     ...:     <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">     ...:         <span class="keyword">yield</span> c</div><div class="line">     ...:         c +=<span class="number">1</span></div><div class="line">     ...:         </div><div class="line"></div><div class="line">In [<span class="number">135</span>]: c = counter(<span class="number">0</span>)</div><div class="line"></div><div class="line">In [<span class="number">136</span>]: next(c)</div><div class="line">Out[<span class="number">136</span>]: <span class="number">0</span></div><div class="line"></div><div class="line">In [<span class="number">137</span>]: next(c)</div><div class="line">Out[<span class="number">137</span>]: <span class="number">1</span></div><div class="line"></div><div class="line">In [<span class="number">138</span>]: next(c)</div><div class="line">Out[<span class="number">138</span>]: <span class="number">2</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>惰性求值(由于函数是在yield处暂停的，所以，可以用到时，才去计算)</p>
+</li>
+</ol>
+<p>比如下面的阶乘函数：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">147</span>]: <span class="function"><span class="keyword">def</span> <span class="title">factorial</span><span class="params">()</span>:</span></div><div class="line">     ...:     ret = <span class="number">1</span></div><div class="line">     ...:     idx =<span class="number">0</span></div><div class="line">     ...:     <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">     ...:         <span class="keyword">yield</span> ret</div><div class="line">     ...:         idx +=<span class="number">1</span></div><div class="line">     ...:         ret *= idx</div><div class="line">     ...:         </div><div class="line"></div><div class="line">In [<span class="number">148</span>]: g = factorial()</div><div class="line"></div><div class="line">In [<span class="number">149</span>]: next(g)</div><div class="line">Out[<span class="number">149</span>]: <span class="number">1</span></div><div class="line"></div><div class="line">In [<span class="number">150</span>]: next(g)</div><div class="line">Out[<span class="number">150</span>]: <span class="number">1</span></div><div class="line"></div><div class="line">In [<span class="number">151</span>]: next(g)</div><div class="line">Out[<span class="number">151</span>]: <span class="number">2</span></div><div class="line"></div><div class="line">In [<span class="number">152</span>]: next(g)</div><div class="line">Out[<span class="number">152</span>]: <span class="number">6</span></div><div class="line"></div><div class="line">In [<span class="number">153</span>]: next(g)</div><div class="line">Out[<span class="number">153</span>]: <span class="number">24</span></div><div class="line"></div><div class="line">In [<span class="number">154</span>]: next(g)</div><div class="line">Out[<span class="number">154</span>]: <span class="number">120</span></div></pre></td></tr></table></figure></p>
+<p>我们可以使用生成器来替换递归。</p>
+<p>所有的递归，都可以用生成器来替换。(这样就没有深度限制了)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">159</span>]: <span class="function"><span class="keyword">def</span> <span class="title">g</span><span class="params">(n)</span>:</span></div><div class="line">     ...:     <span class="function"><span class="keyword">def</span> <span class="title">fact</span><span class="params">()</span>:</span></div><div class="line">     ...:         ret = <span class="number">1</span></div><div class="line">     ...:         idx = <span class="number">0</span></div><div class="line">     ...:         <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">     ...:             <span class="keyword">yield</span> ret</div><div class="line">     ...:             idx += <span class="number">1</span></div><div class="line">     ...:             ret += idx</div><div class="line">     ...:     gen = factorial()</div><div class="line">     ...:     <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</div><div class="line">     ...:         next(gen)</div><div class="line">     ...:     <span class="keyword">return</span> next(gen)</div><div class="line">     ...: </div><div class="line"></div><div class="line">In [<span class="number">160</span>]: g(<span class="number">10</span>)</div><div class="line">Out[<span class="number">160</span>]: <span class="number">3628800</span></div></pre></td></tr></table></figure>
+<hr>
+<h2 id="5-yield-from用法"><a href="#5-yield-from用法" class="headerlink" title="5 yield from用法"></a>5 <code>yield from</code>用法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">161</span>]: <span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">(lst)</span>:</span></div><div class="line">     ...:     <span class="keyword">for</span> x <span class="keyword">in</span> lst:</div><div class="line">     ...:         <span class="keyword">yield</span> x</div><div class="line">     ...:</div></pre></td></tr></table></figure>
+<p>上面的我们迭代一个列表，用循环来yield，其实可以用<code>yield from 可迭代对象</code>的简写方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">163</span>]: <span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">(lst)</span>:</span></div><div class="line">     ...:     <span class="keyword">yield</span> <span class="keyword">from</span> lst</div><div class="line">     ...:</div></pre></td></tr></table></figure>
+<p>yield from我们也可用在元组、字符串、文件对象等可迭代对象。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/python/20170511-06-generator-function/" title="生成器函数">http://www.yulongjun.com/python/20170511-06-generator-function/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/function/" rel="tag"># function</a>
+          
+            <a href="/tags/generator/" rel="tag"># generator</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/python/20170511-05-recursive-function/" rel="next" title="递归函数">
+                <i class="fa fa-chevron-left"></i> 递归函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/python/20170511-07-higher-order-function/" rel="prev" title="高阶函数、闭包、偏函数、柯里化、匿名函数">
+                高阶函数、闭包、偏函数、柯里化、匿名函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-定义"><span class="nav-number">1.</span> <span class="nav-text">1 定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-yield和return"><span class="nav-number">2.</span> <span class="nav-text">2  yield和return</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-协程"><span class="nav-number">3.</span> <span class="nav-text">3  协程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-生成器的应用"><span class="nav-number">4.</span> <span class="nav-text">4 生成器的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-yield-from用法"><span class="nav-number">5.</span> <span class="nav-text">5 yield from用法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

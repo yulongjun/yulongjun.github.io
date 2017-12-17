@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 778 349" width="778pt" height="349pt" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata> Produced by OmniGraffle 7.3.1 
+    <dc:date>2017-08-20 03:04:58 +0000</dc:date>
+  </metadata>
+  <defs>
+    <font-face font-family="Helvetica" font-size="10" units-per-em="1000" underline-position="-75.68359" underline-thickness="49.316406" slope="0" x-height="532.22656" cap-height="719.7266" ascent="770.0195" descent="-229.98047" font-weight="bold">
+      <font-face-src>
+        <font-face-name name="Helvetica-Bold"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Helvetica Neue" font-size="14" panose-1="2 0 8 3 0 0 0 9 0 4" units-per-em="1000" underline-position="-100" underline-thickness="50" slope="0" x-height="517" cap-height="714" ascent="975.0061" descent="-216.99524" font-weight="bold">
+      <font-face-src>
+        <font-face-name name="HelveticaNeue-Bold"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Helvetica Neue" font-size="12" panose-1="2 0 8 3 0 0 0 9 0 4" units-per-em="1000" underline-position="-100" underline-thickness="50" slope="0" x-height="517" cap-height="714" ascent="975.0061" descent="-216.99524" font-weight="bold">
+      <font-face-src>
+        <font-face-name name="HelveticaNeue-Bold"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Helvetica Neue" font-size="12" panose-1="2 0 5 3 0 0 0 2 0 4" units-per-em="1000" underline-position="-100" underline-thickness="50" slope="0" x-height="517" cap-height="714" ascent="951.9958" descent="-212.99744" font-weight="500">
+      <font-face-src>
+        <font-face-name name="HelveticaNeue"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="PingFang SC" font-size="12" panose-1="2 11 4 0 0 0 0 0 0 0" units-per-em="1000" underline-position="-150" underline-thickness="58" slope="0" x-height="600" cap-height="860" ascent="1060.0021" descent="-340.0007" font-weight="500">
+      <font-face-src>
+        <font-face-name name="PingFangSC-Regular"/>
+      </font-face-src>
+    </font-face>
+  </defs>
+  <g stroke="none" stroke-opacity="1" stroke-dasharray="none" fill="none" fill-opacity="1">
+    <title>版面 1</title>
+    <g>
+      <title>图层 1</title>
+      <path d="M 217.48244 212.57533 C 219.59248 213.6522 222.17539 214.29727 225.01525 214.29727 C 229.36292 214.29727 233.23683 212.7502 235.51728 210.42336 C 241.50124 209.6061 246.06482 205.60372 246.06482 200.73857 C 246.06482 195.35774 240.5109 191.01007 233.58122 190.92442 C 231.85928 187.9552 227.16722 185.80322 221.6151 185.80322 C 216.06296 185.80322 211.3709 187.9552 209.60524 190.8825 C 202.7166 191.01007 197.16536 194.9286 197.16536 199.79195 C 197.16536 203.15018 199.83302 206.07569 203.75066 207.5826 C 204.26813 210.1218 206.67795 212.18812 209.9068 212.8769 C 209.9077 212.8769 214.03946 213.73786 217.48244 212.57533 Z" fill="#00aeef"/>
+      <text transform="translate(200 194.18704)" fill="white">
+        <tspan font-family="Helvetica" font-size="10" font-weight="bold" fill="white" x="3.617794" y="10" textLength="36.66992">Internet</tspan>
+      </text>
+      <path d="M 89.83465 184.4597 L 143.69291 184.4597 C 145.25844 184.4597 146.52756 185.7288 146.52756 187.29435 L 146.52756 219.07386 C 146.52756 220.6394 145.25844 221.90851 143.69291 221.90851 L 89.83465 221.90851 C 88.26912 221.90851 87 220.6394 87 219.07386 L 87 187.29435 C 87 185.7288 88.26912 184.4597 89.83465 184.4597 Z" fill="#00aeef"/>
+      <path d="M 92.31497 187.59355 L 141.2126 187.59355 C 142.77813 187.59355 144.04725 188.86267 144.04725 190.4282 L 144.04725 215.1211 C 144.04725 216.68664 142.77813 217.95576 141.2126 217.95576 L 92.31497 217.95576 C 90.74944 217.95576 89.48032 216.68664 89.48032 215.1211 L 89.48032 190.4282 C 89.48032 188.86267 90.74944 187.59355 92.31497 187.59355 Z" fill="white"/>
+      <rect x="113.45748" y="221.04236" width="4.72362" height="6.23622" fill="#00aeef"/>
+      <ellipse cx="115.7224" cy="227.27858" rx="10.297216" ry="3.3661454" fill="#00aeef"/>
+      <path d="M 152.20019 231.56018 Z M 156.21035 226.61024 Z M 157.26335 220.77024 Z M 156.93991 210.13646 Z M 156.93991 214.41183 Z M 154.30619 210.13646 Z M 154.30619 214.41183 Z M 151.67248 210.13646 Z M 151.67248 214.41183 Z M 151.3077 218.73718 Z" fill="#00aeef"/>
+      <path d="M 405.2274 203.18337 C 405.2274 205.10412 403.6734 206.65812 401.75416 206.65812 L 332.61616 206.65812 C 330.69616 206.65812 329.14216 205.10412 329.14216 203.18337 L 329.14216 196.91712 C 329.14216 194.99637 330.6969 193.44237 332.61616 193.44237 L 401.75416 193.44237 C 403.6734 193.44237 405.2274 194.99637 405.2274 196.91712 L 405.2274 203.18337 L 405.2274 203.18337 Z" fill="#00aeef"/>
+      <rect x="334.13116" y="196.1416" width="16.074" height="2.85225" fill="white"/>
+      <path d="M 342.1674 202.24737 C 342.1674 202.89162 341.64616 203.41512 341.00116 203.41512 L 339.44566 203.41512 C 338.80216 203.41512 338.27866 202.89237 338.27866 202.24737 L 338.27866 202.24737 C 338.27866 201.60312 338.8014 201.07962 339.44566 201.07962 L 341.00116 201.07962 C 341.64616 201.07962 342.1674 201.60312 342.1674 202.24737 L 342.1674 202.24737 L 342.1674 202.24737 Z" fill="white"/>
+      <path d="M 383.94916 202.24737 C 383.94916 202.89162 383.4264 203.41512 382.7814 203.41512 L 381.2274 203.41512 C 380.58316 203.41512 380.06116 202.89237 380.06116 202.24737 L 380.06116 202.24737 C 380.06116 201.60312 380.5824 201.07962 381.2274 201.07962 L 382.7814 201.07962 C 383.4264 201.07962 383.94916 201.60312 383.94916 202.24737 L 383.94916 202.24737 L 383.94916 202.24737 Z" fill="white"/>
+      <path d="M 372.01965 202.81137 C 372.01965 203.29062 371.62965 203.67987 371.14965 203.67987 L 353.4459 203.67987 C 352.96515 203.67987 352.5774 203.28987 352.5774 202.81137 L 352.5774 197.28912 C 352.5774 196.80987 352.9659 196.42062 353.4459 196.42062 L 371.14965 196.42062 C 371.6304 196.42062 372.01965 196.81062 372.01965 197.28912 L 372.01965 202.81137 L 372.01965 202.81137 Z" fill="white"/>
+      <path d="M 370.2819 201.12387 C 370.2819 201.51762 369.9624 201.83862 369.56865 201.83862 L 355.0254 201.83862 C 354.63165 201.83862 354.31215 201.51762 354.31215 201.12387 L 354.31215 198.97512 C 354.31215 198.58287 354.63165 198.26187 355.0254 198.26187 L 369.56865 198.26187 C 369.9624 198.26187 370.2819 198.58287 370.2819 198.97512 L 370.2819 201.12387 L 370.2819 201.12387 Z" fill="#00aeef"/>
+      <ellipse cx="510.55855" cy="200.05025" rx="24.094529" ry="15.590575" fill="#00aeef"/>
+      <path d="M 517.4463 201.30902 C 516.3333 201.30977 515.437 200.40451 515.44 199.29377 L 515.44 199.29377 L 515.4535 195.75602 L 517.1238 195.75527 L 517.108 199.29677 C 517.1058 199.48801 517.2625 199.64177 517.453 199.64402 L 517.453 199.64402 L 522.7998 199.64177 L 522.7893 201.30977 L 517.4463 201.30902 L 517.4463 201.30902 L 517.4463 201.30902 Z" fill="white"/>
+      <path d="M 518.464 204.43127 L 522.3753 200.53202 L 518.4955 196.63727 L 519.679 195.45827 L 524.7318 200.53202 L 519.637 205.60502 L 518.464 204.43127 Z" fill="white"/>
+      <path d="M 503.0455 205.278 L 503.0575 201.7425 C 503.05903 201.5505 502.90453 201.3915 502.7118 201.39376 L 502.7118 201.39376 L 497.36653 201.39226 L 497.37553 199.72876 L 502.7185 199.73026 C 503.8315 199.728 504.7285 200.62875 504.7248 201.744 L 504.7248 201.744 L 504.7098 205.28026 L 503.0455 205.278 L 503.0455 205.278 L 503.0455 205.278 Z M 497.36653 201.39226 L 497.36803 201.39676 L 497.36653 201.39226 L 497.36653 201.39226 L 497.36653 201.39226 Z" fill="white"/>
+      <path d="M 495.43153 200.50202 L 500.5293 195.42902 L 501.70153 196.60877 L 497.7888 200.50652 L 501.66853 204.39902 L 500.48803 205.57652 L 495.43153 200.50202 Z" fill="white"/>
+      <path d="M 505.3233 193.50452 L 508.8633 193.50602 C 509.0568 193.50302 509.2128 193.34777 509.2143 193.15577 L 509.2143 193.15577 L 509.2353 187.81277 L 510.9003 187.81502 L 510.8793 193.15802 C 510.8733 194.26727 509.9695 195.17176 508.8573 195.16877 L 508.8573 195.16877 L 505.3188 195.16802 L 505.3233 193.50452 L 505.3233 193.50452 L 505.3233 193.50452 Z" fill="white"/>
+      <path d="M 510.1255 188.22826 L 506.212 192.12602 L 505.0413 190.94702 L 510.133 185.87702 L 515.1903 190.94552 L 514.0068 192.12676 L 510.1255 188.22826 Z" fill="white"/>
+      <path d="M 509.263 213.22577 L 509.2855 207.87752 C 509.2878 206.77276 510.1923 205.86826 511.309 205.86602 L 511.309 205.86602 L 514.8445 205.86677 L 514.8393 207.53627 L 511.3 207.53702 C 511.1065 207.53177 510.949 207.69151 510.9513 207.88052 L 510.9513 207.88052 L 510.928 213.22277 L 509.263 213.22577 L 509.263 213.22577 L 509.263 213.22577 Z" fill="white"/>
+      <path d="M 504.973 210.08852 L 506.155 208.91402 L 510.037 212.80577 L 513.9505 208.90727 L 513.9528 208.90877 L 515.1265 210.08477 L 510.028 215.15702 L 504.973 210.08852 Z" fill="white"/>
+      <path d="M 692 139.241 C 692 141.16175 690.446 142.71575 688.52675 142.71575 L 619.38875 142.71575 C 617.46875 142.71575 615.91475 141.16175 615.91475 139.241 L 615.91475 132.97475 C 615.91475 131.054 617.4695 129.5 619.38875 129.5 L 688.52675 129.5 C 690.446 129.5 692 131.054 692 132.97475 L 692 139.241 L 692 139.241 Z" fill="#00aeef"/>
+      <rect x="620.90375" y="132.19924" width="16.074" height="2.85225" fill="white"/>
+      <path d="M 628.94 138.305 C 628.94 138.94925 628.41875 139.47275 627.77375 139.47275 L 626.21825 139.47275 C 625.57475 139.47275 625.05125 138.95 625.05125 138.305 L 625.05125 138.305 C 625.05125 137.66075 625.574 137.13725 626.21825 137.13725 L 627.77375 137.13725 C 628.41875 137.13725 628.94 137.66075 628.94 138.305 L 628.94 138.305 L 628.94 138.305 Z" fill="white"/>
+      <path d="M 670.72175 138.305 C 670.72175 138.94925 670.199 139.47275 669.554 139.47275 L 668 139.47275 C 667.35575 139.47275 666.83375 138.95 666.83375 138.305 L 666.83375 138.305 C 666.83375 137.66075 667.355 137.13725 668 137.13725 L 669.554 137.13725 C 670.199 137.13725 670.72175 137.66075 670.72175 138.305 L 670.72175 138.305 L 670.72175 138.305 Z" fill="white"/>
+      <path d="M 658.79224 138.869 C 658.7922 139.34825 658.40224 139.7375 657.92224 139.7375 L 640.2185 139.7375 C 639.73774 139.7375 639.35 139.3475 639.35 138.869 L 639.35 133.34675 C 639.35 132.8675 639.7385 132.47825 640.2185 132.47825 L 657.92224 132.47825 C 658.403 132.47825 658.7922 132.86825 658.79224 133.34675 L 658.79224 138.869 L 658.79224 138.869 Z" fill="white"/>
+      <path d="M 657.0545 137.1815 C 657.0545 137.57525 656.735 137.89625 656.34124 137.89625 L 641.798 137.89625 C 641.40424 137.89625 641.08474 137.57525 641.08474 137.1815 L 641.08474 135.03275 C 641.08474 134.6405 641.40424 134.3195 641.798 134.3195 L 656.34124 134.3195 C 656.735 134.3195 657.0545 134.6405 657.0545 135.03275 L 657.0545 137.1815 L 657.0545 137.1815 Z" fill="#00aeef"/>
+      <rect x="59.131675" y="243" width="126" height="59" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <text transform="translate(64.131675 248.44887)" fill="#0432ff">
+        <tspan font-family="Helvetica Neue" font-size="14" font-weight="bold" fill="#0432ff" x="38.568" y="14" textLength="38.864">Client</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="0" y="29.406097" textLength="9.392">C</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="9.392" y="29.406097" textLength="4.04">I</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="13.432" y="29.406097" textLength="8.004">P</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="500" fill="black" x="21.436" y="29.406097" textLength="94.068">: 172.16.0.123/24</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="0" y="44.75418" textLength="9.608">G</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="9.608" y="44.75418" textLength="11.328">W</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="500" fill="black" x="20.936" y="44.75418" textLength="76.728">: 172.16.0.100</tspan>
+      </text>
+      <rect x="299" y="243" width="126" height="59" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <text transform="translate(304 248.44887)" fill="#0432ff">
+        <tspan font-family="Helvetica Neue" font-size="14" font-weight="bold" fill="#0432ff" x="49.047" y="14" textLength="17.906">VS</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="0" y="29.406097" textLength="8.06">V</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="8.06" y="29.406097" textLength="4.04">I</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="12.1" y="29.406097" textLength="8.004">P</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="500" fill="black" x="20.104" y="29.406097" textLength="94.068">: 172.16.0.100/24</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="0" y="44.75418" textLength="9.392">D</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="9.392" y="44.75418" textLength="4.04">I</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="13.432" y="44.75418" textLength="8.004">P</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="500" fill="black" x="21.436" y="44.75418" textLength="94.068">: 10.0.111.100/24</tspan>
+      </text>
+      <rect x="428.05855" y="243" width="165" height="59" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <text transform="translate(433.05855 248.44887)" fill="#0432ff">
+        <tspan font-family="Helvetica Neue" font-size="14" font-weight="bold" fill="#0432ff" x="54.813" y="14" textLength="45.374">Router</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="0" y="29.406097" textLength="9.608">G</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="9.608" y="29.406097" textLength="11.828">W</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="21.436" y="29.406097" textLength="4.04">I</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="25.476" y="29.406097" textLength="8.504">P</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="33.98" y="29.406097" textLength="6.672">1</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="500" fill="black" x="40.652" y="29.406097" textLength="94.068">: 10.0.111.200/24</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="0" y="44.75418" textLength="9.608">G</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="9.608" y="44.75418" textLength="11.828">W</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="21.436" y="44.75418" textLength="4.04">I</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="25.476" y="44.75418" textLength="8.504">P</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="33.98" y="44.75418" textLength="6.672">2</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="500" fill="black" x="40.652" y="44.75418" textLength="114.084">: 192.168.111.200/24</tspan>
+      </text>
+      <path d="M 693 267.12574 C 693 269.0465 691.446 270.6005 689.52675 270.6005 L 620.38875 270.6005 C 618.46875 270.6005 616.91475 269.0465 616.91475 267.12574 L 616.91475 260.8595 C 616.91475 258.93874 618.4695 257.38474 620.38875 257.38474 L 689.52675 257.38474 C 691.446 257.38474 693 258.93874 693 260.8595 L 693 267.12574 L 693 267.12574 Z" fill="#00aeef"/>
+      <rect x="621.90375" y="260.08398" width="16.074" height="2.85225" fill="white"/>
+      <path d="M 629.94 266.18974 C 629.94 266.834 629.41875 267.3575 628.77375 267.3575 L 627.21825 267.3575 C 626.57475 267.3575 626.05125 266.83474 626.05125 266.18974 L 626.05125 266.18974 C 626.05125 265.5455 626.574 265.022 627.21825 265.022 L 628.77375 265.022 C 629.41875 265.022 629.94 265.5455 629.94 266.18974 L 629.94 266.18974 L 629.94 266.18974 Z" fill="white"/>
+      <path d="M 671.72175 266.18974 C 671.72175 266.834 671.199 267.3575 670.554 267.3575 L 669 267.3575 C 668.35575 267.3575 667.83375 266.83474 667.83375 266.18974 L 667.83375 266.18974 C 667.83375 265.5455 668.355 265.022 669 265.022 L 670.554 265.022 C 671.199 265.022 671.72175 265.5455 671.72175 266.18974 L 671.72175 266.18974 L 671.72175 266.18974 Z" fill="white"/>
+      <path d="M 659.79224 266.75374 C 659.7922 267.233 659.40224 267.62224 658.92224 267.62224 L 641.2185 267.62224 C 640.73774 267.62224 640.35 267.23224 640.35 266.75374 L 640.35 261.2315 C 640.35 260.75224 640.7385 260.363 641.2185 260.363 L 658.92224 260.363 C 659.403 260.363 659.7922 260.753 659.79224 261.2315 L 659.79224 266.75374 L 659.79224 266.75374 Z" fill="white"/>
+      <path d="M 658.0545 265.06624 C 658.0545 265.46 657.735 265.781 657.34124 265.781 L 642.798 265.781 C 642.40424 265.781 642.08474 265.46 642.08474 265.06624 L 642.08474 262.9175 C 642.08474 262.52524 642.40424 262.20424 642.798 262.20424 L 657.34124 262.20424 C 657.735 262.20424 658.0545 262.52524 658.0545 262.9175 L 658.0545 265.06624 L 658.0545 265.06624 Z" fill="#00aeef"/>
+      <rect x="624.5" y="156.6408" width="153" height="59" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <text transform="translate(629.5 162.08966)" fill="#0432ff">
+        <tspan font-family="Helvetica Neue" font-size="14" font-weight="bold" fill="#0432ff" x="62.547" y="14" textLength="17.906">VS</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="0" y="29.406097" textLength="9.164">R</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="9.164" y="29.406097" textLength="4.04">I</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="13.204" y="29.406097" textLength="8.504">P</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="21.708" y="29.406097" textLength="6.672">1</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="500" fill="black" x="28.38" y="29.406097" textLength="114.084">: 192.168.111.101/24</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="0" y="44.75418" textLength="9.608">G</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="9.608" y="44.75418" textLength="11.828">W</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="21.436" y="44.75418" textLength="4.04">I</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="25.476" y="44.75418" textLength="8.504">P</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="33.98" y="44.75418" textLength="6.672">2</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="500" fill="black" x="40.652" y="44.75418" textLength="96.744">: 192.168.111.200</tspan>
+      </text>
+      <rect x="624.5" y="289" width="153" height="59" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <text transform="translate(629.5 294.44887)" fill="#0432ff">
+        <tspan font-family="Helvetica Neue" font-size="14" font-weight="bold" fill="#0432ff" x="62.547" y="14" textLength="17.906">VS</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="0" y="29.406097" textLength="9.164">R</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="9.164" y="29.406097" textLength="4.04">I</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="13.204" y="29.406097" textLength="8.504">P</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="21.708" y="29.406097" textLength="6.672">2</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="500" fill="black" x="28.38" y="29.406097" textLength="114.084">: 192.168.111.102/24</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="0" y="44.75418" textLength="9.608">G</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="9.608" y="44.75418" textLength="11.828">W</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="21.436" y="44.75418" textLength="4.04">I</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="25.476" y="44.75418" textLength="8.504">P</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="black" x="33.98" y="44.75418" textLength="6.672">2</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="500" fill="black" x="40.652" y="44.75418" textLength="96.744">: 192.168.111.200</tspan>
+      </text>
+      <line x1="247.9055" y1="200.1626" x2="329.14216" y2="200.08608" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line x1="144.04725" y1="202.1035" x2="196" y2="200.82547" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line x1="405.2274" y1="200.05024" x2="486.46405" y2="200.05024" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line x1="539.46534" y1="197.72868" x2="641.6799" y2="142.71575" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <line x1="539.4747" y1="202.42937" x2="642.5621" y2="257.38474" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      <text transform="translate(36.631675 310)" fill="#797979">
+        <tspan font-family="PingFang SC" font-size="12" font-weight="500" fill="#797979" x=".432" y="13" textLength="60">精简一下，</tspan>
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="500" fill="#797979" x="60.432" y="13" textLength="10.884">IP</tspan>
+        <tspan font-family="PingFang SC" font-size="12" font-weight="500" fill="#797979" x="71.316" y="13" textLength="99.252">直接和VS一个网段</tspan>
+      </text>
+      <text transform="translate(146 169.82596)" fill="#941100">
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="#941100" x=".282" y="12" textLength="20.436">CIP</tspan>
+      </text>
+      <text transform="translate(314.00178 169.82596)" fill="#941100">
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="#941100" x=".448" y="12" textLength="19.104">VIP</tspan>
+      </text>
+      <text transform="translate(405.09804 169.82596)" fill="#941100">
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="#941100" x=".282" y="12" textLength="20.436">DIP</tspan>
+      </text>
+      <text transform="translate(460 169.82596)" fill="#941100">
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="#941100" x=".174" y="12" textLength="38.652">GWIP1</tspan>
+      </text>
+      <text transform="translate(545.05855 191.12918)" fill="#941100">
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="#941100" x=".174" y="12" textLength="38.652">GWIP2</tspan>
+      </text>
+      <text transform="translate(640.4574 108.82596)" fill="#941100">
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="#941100" x=".06" y="12" textLength="26.88">RIP1</tspan>
+      </text>
+      <text transform="translate(640.4574 236.7107)" fill="#941100">
+        <tspan font-family="Helvetica Neue" font-size="12" font-weight="bold" fill="#941100" x=".06" y="12" textLength="26.88">RIP2</tspan>
+      </text>
+      <circle cx="645.4764" cy="258.47638" r="4.9763855" fill="#941100"/>
+      <circle cx="146.85542" cy="202.0344" r="4.9763855" fill="#941100"/>
+      <circle cx="327.37163" cy="200.08775" r="4.9763855" fill="#941100"/>
+      <circle cx="405.3166" cy="200.05024" r="4.9763855" fill="#941100"/>
+      <circle cx="485.2373" cy="200.05024" r="4.9763855" fill="#941100"/>
+      <circle cx="535.0822" cy="200.08775" r="4.9763855" fill="#941100"/>
+      <circle cx="642.4764" cy="142.0704" r="4.9763855" fill="#941100"/>
+    </g>
+  </g>
+</svg>

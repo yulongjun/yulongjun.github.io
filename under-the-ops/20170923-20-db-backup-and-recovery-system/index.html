@@ -1,0 +1,1288 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Database,Backup,Recovery," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二十章：数据库备份还原系统">
+<meta property="og:url" content="http://www.yulongjun.com/under-the-ops/20170923-20-db-backup-and-recovery-system/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/devops.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061723260358.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061723382672.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061723446399.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061723680182.jpg">
+<meta property="og:updated_time" content="2017-09-23T15:23:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第二十章：数据库备份还原系统">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/devops.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/under-the-ops/20170923-20-db-backup-and-recovery-system/"/>
+
+
+
+
+
+  <title> 第二十章：数据库备份还原系统 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/under-the-ops/20170923-20-db-backup-and-recovery-system/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第二十章：数据库备份还原系统
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-23T17:20:49+08:00">
+                2017-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/under-the-ops/" itemprop="url" rel="index">
+                    <span itemprop="name">under-the-ops</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/under-the-ops/20170923-20-db-backup-and-recovery-system/" class="leancloud_visitors" data-flag-title="第二十章：数据库备份还原系统">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/devops.png" alt="devops"><br><a id="more"></a></p>
+<p>数据是出于用户对公司产品的喜欢和信任，不断创造和提交的。对于公司来说，这是无比珍贵的资产。如果不幸把数据损坏或者弄丢了，会严重地损害用户的权益，有可能导致严重的用户流失。读者可以想象一下，如果facebook的用户数据一夜之间消失了，用户会有什么反应呢？如果说对facebook的体验还不强烈，可以再想象一下，若此时存放着你所有存款的银行突然告诉你，他们把数据弄丢了，而且没法复原，你的银行存款都只能清零，你还能继续淡定地看下面的文字吗？</p>
+<p>相信通过上面的两个例子你已经理解了数据的重要性，那也就能明白对于整天和数据打交道的DBA来说，数据备份在日常工作中占据了多么重要的位置。对于DBA来说，不怕操作出问题，就怕出问题后没有备份数据进行修复。对数据的任何操作都有风险，一旦出现误操作、数据损坏等意料之外的情况，就可以随时用备份数据把数据恢复到操作前的状态。而如果需要进行数据修复时，却无法找到备份数据进行恢复，这种抓狂和绝望，相信大家或多或少都体验过。<br>为了避免这种虐心的体验，我们把数据库备份还原系统的开发工作放到了第一优先级的位置。经过三个主要的版本开发，备份还原系统已经在生产环境中提供自动创建备份任务、定期进行备份、自动数据恢复测试的功能，保障了业务数据100%的备份成功率和备份数据有效性。本章我们就来介绍数据库备份还原系统的发展过程。</p>
+<p>为了避免这种虐心的体验，我们把数据库备份还原系统的开发工作放到了第一优先级的位置。经过三个主要的版本开发，备份还原系统已经在生产环境中提供自动创建备份任务、定期进行备份、自动数据恢复测试的功能，保障了业务数据100%的备份成功率和备份数据有效性。本章我们就来介绍数据库备份还原系统的发展过程。</p>
+<h2 id="单机备份工具"><a href="#单机备份工具" class="headerlink" title="单机备份工具"></a>单机备份工具</h2><p>我们的第一套备份系统是在每台服务器上单独运行一个备份任务，任务管理都是靠DBA手工进行的，或许这个阶段称之为备份工具会更合适。</p>
+<p>简单来说，单机备份就是在需要进行数据备份的服务器上安装一个备份工具，比如MySQL官方自带的Mysqldump工具，或者第三方开源的产品Mydumper或Xtrabackup，通过crontab等方式调度，备份数据存储在本地服务器上；需要进行数据恢复时，从存有备份数据的服务器上拷贝一份数据到需要进行恢复的服务器上。</p>
+<p>单机备份是最简单的一种方式，靠人工来管理备份任务，并需要定期检查备份任务运行是否正常。这种方式上手快，门槛低，所需的开发工作量也很少，适合用在数据库实例比较少、每个实例体量不大的场景下。</p>
+<p>数据库集群数量少的时候，单机备份方式还能满足日常备份需求，但随着数据规模的扩大，问题就凸现出来了。</p>
+<p>◎    备份数据存储周期不长：毕竟是存储在本地数据库服务器上，一般情况下，为了保证数据库服务的IO能力，磁盘都选用高IO能力、低存储空间的高转速SAS盘或者SSD盘，再加上做了RAID，实际可用的存储空间本来就没有多少，如果还要存储几个周期的备份数据，空间资源捉襟见肘。</p>
+<p>◎    容易影响数据库运行：因为任务运行和数据存储都与数据库服务在同一台服务器上，每次运行备份任务时，都会同时出现大量的磁盘读/写操作，容易和数据库服务争抢IO资源，影响服务的响应效率；进行数据还原时，拷贝备份数据也会有大量的磁盘读操作，同样也会影响到正在运行的数据库。有的读者也许会说，可以部署一台数据库服务器，专门用来做备份。这样当然可以，不过本着节约的原则，我们还是不推荐这种方式。想想：当你有几百上千个集群时，会有几百上千台服务器专门用作备份，你说这事怎么给老板解释？</p>
+<p>◎    维护代价高：靠人工维护，不仅容易出错，而且每次变更调整效率也会有所折扣。另外，由于备份任务零散地分布在多台服务器上，只能靠人工记录任务和服务器的对应关系，正确性难以保证，时间一长，容易出现遗漏或错误。</p>
+<p>提高备份系统的自动化程度，加强对备份任务的管理，减少DBA在备份管理上的时间投入，这是我们开发第二版备份管理系统的出发点。</p>
+<h2 id="集中管理备份系统"><a href="#集中管理备份系统" class="headerlink" title="集中管理备份系统"></a>集中管理备份系统</h2><p>为了便于统一管理和调度备份任务，我们设计了任务管理模块，把所有备份任务的信息都进行集中记录和维护。管理模块主要有三个功能。</p>
+<p>◎    任务管理：所有的备份任务管理都由任务管理模块负责，可以添加、删除、修改备份任务，或者激活、停止某个任务的运行，并记录每一次任务运行的状态，比如什么时候在哪台数据库上启动了备份程序，备份过程运行了多长时间，备份策略是全量还是增量，运行结果是否正常，如果正常，备份数据占用了多少空间等，所有信息一目了然，便于DBA每天对备份任务进行常规检查。</p>
+<p>◎    任务调度：通过时间事件来调度备份任务。当时间事件触发某个备份任务开始运行以后，管理程序先在本机开启一个TCP端口，用于接收客户端发回的备份数据；然后远程调用部署在MySQL服务器上的备份执行程序，执行程序通过Xtrabackup开始数据拷贝，并将备份数据通过流式（stream）发回到备份服务器集中存储。在备份过程中，只有一次数据读取操作，不在MySQL服务器上再次写入数据，减少了对IO的影响。</p>
+<p>◎    数据存储：所有的备份数据都通过网络传回管理模块所在的服务器统一存储，便于进行查找和管理。</p>
+<p>同时我们设计了任务执行模块，主要负责实施备份操作，完成管理模块发送过来的备份任务，并将备份出来的数据发送给管理模块。如果在执行过程中出现任何错误，执行模块还会将错误信息的上下文反馈给管理模块，并停止任务运行。对现有开源的备份工具进行比对并结合生产环境情况综合评估以后，我们选择了Percona Xtrabackup作为基础备份工具。Xtrabackup可以实现InnoDB表的无锁在线备份，降低了备份任务对数据库正常运行的影响。Xtrabackup是执行模块的重要组成部分。</p>
+<p><img src="/images/15061723260358.jpg" alt=""></p>
+<p>集中管理备份系统的结构示意图</p>
+<p>集中化管理可以有效地提高DBA的工作效率，对备份任务的管理（增、删、改、查）只需要在页面上用鼠标点击几下就可以完成，每天的备份任务运行情况也一目了然。这种方式具有开发量小、管理直观快捷的优点，特别适合用在中等规模的数据库集群中。用户可以通过Web管理页面查看和管理所有的备份任务，如图所示。</p>
+<p><img src="/images/15061723382672.jpg" alt=""></p>
+<p>备份任务管理</p>
+<p><img src="/images/15061723446399.jpg" alt=""></p>
+<p>备份任务运行报表</p>
+<p>随着数据规模的继续增长，这套系统也逐渐难以满足需求，下面是暴露出来的主要问题。</p>
+<p>◎    存储空间饱和：由于所有的备份数据都要传回存储模块进行存储，在备份任务数量增多的同时，存储空间的争抢问题变得愈加严重。</p>
+<p>◎    并发控制不便：由于备份任务是通过时间事件进行触发的，有可能出现在部分时间区间大量的备份任务一起运行，备份存储服务器的IO压力非常大；而有些时段又没有备份任务运行，资源白白浪费掉了。</p>
+<p>◎    无法进行水平扩展：为了便于在备份过程中就将备份数据传回存储模块进行存储，任务管理模块和存储模块是整合在一起的，导致了严重的中心化，要扩展存储模块非常麻烦。</p>
+<p>细心的读者可能会发现，由于任务管理模块和调度模块是整合在一起的，而调度模块和存储模块又相互依赖，管理模块的中心化导致了后面两个模块无法做到水平扩展，而出现瓶颈的主要是调度模块和存储模块。如果能把任务管理模块解耦，设计成独立的一个部分，就可以对后两个模块进行扩容了。基于这个思路，我们对第二版备份系统进行了改版，把任务管理模块和调度模块分拆为两个独立部分，并引入了优先级队列，去除了时间事件驱动的方式，形成了第三版备份管理系统——分布调度备份系统。</p>
+<h2 id="分布调度备份系统"><a href="#分布调度备份系统" class="headerlink" title="分布调度备份系统"></a>分布调度备份系统</h2><p>第三版备份系统由三层逻辑组成，第一层是任务管理模块（Task Manager），和第二版的任务管理模块功能类似，用于管理所有的备份任务和记录元信息；主要的改变就是增加了一个优先级队列。每个备份周期开始时（如每天零时），管理模块会根据现有的所有处于激活状态的任务的重要程度，生成一个备份任务优先级队列，然后等待处于第二层的调度模块来请求任务。</p>
+<p>调度模块（Scheduler）的调度策略和第二版不同，放弃了时间事件触发的方式，而是采用了自发请求任务的方式。如果调度模块发现当前自己正在运行的任务数N，小于允许运行的最大任务数M，即N&lt;M，就会向任务管理模块发起一个备份任务申领请求，如果管理模块的任务队列中还有待执行的任务，就会将处于队首的一个任务下发给调度模块，调度模块成功接收到新任务后，根据任务信息开始执行一个新的备份操作；如果任务队列中已经没有需要执行的备份任务，调度模块会进入休眠期，休眠结束后，再重新询问管理模块。</p>
+<p>执行模块的功能和第二版相同，只负责执行具体的备份操作，没有任何变化。</p>
+<p>分布调度备份系统的三层结构示意图如图21-4所示。用户可以继续通过Web页面管理和查看备份任务，也可以通过API的方式和管理模块进行交互。</p>
+<p><img src="/images/15061723680182.jpg" alt=""></p>
+<p>分布调度备份系统的三层结构示意图</p>
+<p><strong>第三版备份系统的主要特点如下：</strong></p>
+<p>◎    任务管理集中化：所有的任务依然是集中管理，通过Web页面或者API的方式，可以管理和查询所有任务的信息和历史运行状态。</p>
+<p>◎    有效的并发控制：每个调度模块都可以根据服务器的配置，调配允许同时运行的任务数，使备份服务器的压力可控。</p>
+<p>◎    方便水平扩展：如果磁盘存储空间不足，则可以通过增加服务器的方式快速扩容，新增加的服务器可以自动注册到任务管理模块中，并申请任务运行，管理代价很小。</p>
+<p>◎    数据分布存储：备份任务是随机在不同的调度模块（存储服务器）上运行的，每个备份任务的备份数据都会分布在多台服务器上，如果其中一台存储服务器挂掉了，损失的也只是一部分备份任务的某几次备份数据，不会出现某个任务的全部备份数据丢失的情况。</p>
+<p>◎    binlog备份：前面介绍的备份都是某个时间点的数据镜像，如果需要恢复到任意时间点，就需要使用binlog。在第三版备份系统中，支持binlog备份的需求。当用户添加了一个日常备份任务以后，备份系统通过获取数据库实例的复制信息（Slave status），找到当前实例的上级主库（或者主库就是该实例自身），然后在备份服务器上启动一个程序，模拟成数据库从库，向主库实时同步binlog任务，达到更新数据实时备份的目的。</p>
+<p>◎    自动数据还原：由于任务管理模块记录了所有备份数据的信息，这些信息就可以用来实现自动还原。自动还原过程类似于备份过程，只不过数据传输方向是相反的。当用户发起一次数据还原请求时，备份系统会找到一份符合条件的备份数据，并将数据发送给需要恢复的目标服务器，进行恢复操作，如果有需要，还可以自动建立新实例和主库的复制关系，完成数据恢复过程。另外，结合binlog备份，可以恢复数据到任意时间点，供DBA或者研发人员分析、测试使用。</p>
+<p>◎    自动恢复测试：备份系统会周期性地对备份数据进行恢复测试，检验备份数据的可用性和正确性，如果发现异常，会及时通知相关的负责人员。对备份数据定期进行恢复测试，可以有效地保证备份数据的正确性和有效性，确保在需要的时候能有一份可用的数据副本。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本章介绍了数据库备份还原系统发展的主要历程和现状。备份还原系统共经历了三个大版本的发展，从最初的单机备份，发展到目前在役的分布调度备份还原系统，实现了备份管理自动化、任务调度自动化和可扩展、数据恢复测试自动化等重要功能。在保证数据备份覆盖率和成功率的同时，有效地提高了DBA的工作效率，减少了人工操作的时间投入和误（漏）操作的数量。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/under-the-ops/20170923-20-db-backup-and-recovery-system/" title="第二十章：数据库备份还原系统">http://www.yulongjun.com/under-the-ops/20170923-20-db-backup-and-recovery-system/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Database/" rel="tag"># Database</a>
+          
+            <a href="/tags/Backup/" rel="tag"># Backup</a>
+          
+            <a href="/tags/Recovery/" rel="tag"># Recovery</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/under-the-ops/20170923-19-db-automatic-ops-system/" rel="next" title="第十九章：数据库自动运维系统">
+                <i class="fa fa-chevron-left"></i> 第十九章：数据库自动运维系统
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/under-the-ops/20170923-22-selection-of-opensource-monitor-system/" rel="prev" title="第二十二章：开源监控系统的选择">
+                第二十二章：开源监控系统的选择 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单机备份工具"><span class="nav-number">1.</span> <span class="nav-text">单机备份工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集中管理备份系统"><span class="nav-number">2.</span> <span class="nav-text">集中管理备份系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布调度备份系统"><span class="nav-number">3.</span> <span class="nav-text">分布调度备份系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

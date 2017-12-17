@@ -1,0 +1,1286 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Asset Management," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="第七章：资产管理">
+<meta property="og:url" content="http://www.yulongjun.com/under-the-ops/20170923-07-asset-management/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/devops.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061654020722.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061655032924.jpg">
+<meta property="og:updated_time" content="2017-09-23T15:23:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第七章：资产管理">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/devops.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/under-the-ops/20170923-07-asset-management/"/>
+
+
+
+
+
+  <title> 第七章：资产管理 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/under-the-ops/20170923-07-asset-management/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第七章：资产管理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-23T17:17:06+08:00">
+                2017-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/under-the-ops/" itemprop="url" rel="index">
+                    <span itemprop="name">under-the-ops</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/under-the-ops/20170923-07-asset-management/" class="leancloud_visitors" data-flag-title="第七章：资产管理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/devops.png" alt="devops"><br><a id="more"></a></p>
+<p>资产管理平台是记录和管理企业IT架构中各种设备配置的信息平台。</p>
+<p>在系统工作中，它与所有服务支持和服务交付流程都紧密相关，最大价值是支撑流程的运转。<br>同时又依靠流程关联来保证数据的准确性。对上层服务管理平台，能通过API提供数据查询能力，如设备的硬件配置、机架位等信息；<br>同时也提供服务器的重启、报修和系统重装等接口。</p>
+<p>系统运维的早期阶段，主要是用Excel记录各种信息，用邮件来做各种流程审批。</p>
+<p>随着业务的快速发展，设备数量爆发式增长，系统工作中的配置变更越来越频繁，信息遗漏变得非常严重，不断产生脏数据，已经不具备准确性和可用性。<br>同时对上层系统的查询需求也无法响应，这种靠Excel维护信息的方式已经不再适用。</p>
+<p>我们开始在资产管理平台研发上投入专门的人力，并和工作流程强关联起来，通过流程保证资产平台数据的准确性。资产管理数据的准确性和功能完备性决定了整个系统运维的自动化程度。因此，要支撑公司不断增长的服务器运营，首先需要建立和维护一套基础架构的资产管理平台。</p>
+<p>资产管理平台主要规划了配置管理、预算系统、故障管理和自助系统四大部分，如图7-1所示。</p>
+<p><img src="/images/15061654020722.jpg" alt=""></p>
+<p>图7-1  资产管理平台规划的四大部分</p>
+<p>业务通过预算系统提交服务器申请，系统工程师通过配置管理平台录入服务器信息，再通过API的形式将服务器信息同步给服务管理平台。</p>
+<p>业务运维工程师可以通过调用自助系统对服务器进行重启、重装等操作。当服务器发生故障时，服务管理平台将服务器标记为故障节点，通过API的形式将服务器故障信息同步到故障管理平台进行维修，维修完成后故障管理平台也通过API将信息同步给服务管理平台。</p>
+<p>当服务器要归还时，服务管理平台清除相关信息，通过API的形式将服务器同步给资产管理平台。</p>
+<h2 id="配置管理"><a href="#配置管理" class="headerlink" title="配置管理"></a>配置管理</h2><p>配置管理一直被认为是ITIL服务管理的核心，因此在系统运维中也是核心部分，它在结构上处于最底层。</p>
+<p>为什么说配置管理的作用是核心的？举个例子。<br>某服务器已经到了报废期，我们需要下架这台服务器，需要有系统记录这台服务器的数据中心、机架等属性，也需要记录这台服务器的硬件信息，依靠这些信息才能找到这台服务器。</p>
+<p>但仅有这些信息还不够，仍需要知道这台服务器的使用者（即业务归属），通知其业务方将业务下线，确认下线后，需要再通知数据中心现场人员下架服务器，同时还需要释放服务器相关的其他资源，比如IP地址、ACL配置、LVS配置等，这一系列信息都需要由配置管理系统来维护和保存。因此可以看到，配置管理是一项非常重要又多信息关联的系统工作。</p>
+<p>早期我们同样是用Excel记录数据中心、服务器（资产编号、参数、采购时间、供应商）、配件、网络设备、IP地址、ACL等信息。</p>
+<p>随着设备数量的增加，配置变更频繁，又没有统一上线和变更流程，经常出现记录和实际有差别。比如服务器机架信息核对不上，设备实际用途和记录不符，甚至服务器下架了IP地址却没有释放，导致IP地址占用和冲突等问题。</p>
+<p>通过配置管理系统的研发，强化了这些资产和配置信息的管理，准确度有显著提高，系统工作以及与外部系统的自动化联动开始向前发展。</p>
+<p>在配置管理系统中，我们将各类信息管理定义成小的功能模块，通过API接口串联起来，实现灵活有序的方式管理各类资源。在机柜管理上开发机柜视图功能，把服务器的机架信息、位置占用等录入系统，在系统中可以非常直观地了解服务器的摆放情况、整体机柜使用率。</p>
+<p>设备上线前由系统自动分配摆放位置，设备下线后自动释放资源，从而减少了手动分配的工作量。机柜管理还有一些高级功能，在网络规划中按照安全级别划分出了基础服务、普通业务和安全隔离三个区域，系统会按照设定的分配规则给不同的服务器分配不同区域的机柜。</p>
+<p>比如，Hadoop等分布式业务对机架摆放有特殊要求，太分散不利于数据节点间的数据同步，太集中冗余度又不够，这些特别的需求都有特殊的分配策略。</p>
+<p>通过定期扫描机柜使用率，可以及时调整和关闭空闲机柜，从而避免浪费。开发的iHealth具有运行功率实时监控功能，可以从服务器监控中采集电流信息，能统计出整个机柜的电量使用，进行机柜的超电预警。</p>
+<p>在IP管理系统中，把内网、公网、VIP、管理卡都分别设定了不同的IP池，根据类型、机柜、业务的不同，通过管理接口分配和回收IP地址，从而减少了工程师手动分配和回收IP资源的烦琐工作，进一步保证了IP资源管理的准确性。IP管理和ACL管理等模块都有关联功能，在IP地址释放前都会查询并释放相应的ACL记录。</p>
+<p>为每台设备设定一个唯一序号，作为主键使用，确保设备的唯一性标识。服务器在记录中的占比最大，网络设备其次。在虚拟化部分中虚拟机也有唯一性标识，并和底层的物理服务器有关联记录，可以快速地查询物理服务器上承载了哪些虚拟机。和虚拟化部分有API关联，虚拟机的飘移会实时地更新记录。</p>
+<p>为每台设备粘贴了对应的序号二维码标签。在收货、上下架、资产管理、设备报修等环节，通过扫描二维码的方式进行信息的变更和查询，极大地提高了设备管理的效率和准确性。二维码系统设有权限管理，比如现场的维修人员和系统管理员获取的信息量是不同的，主要是出于安全考虑。</p>
+<p>经常会遇到IP地址随着服务器下线释放，但ACL没有及时清理的问题，久而久之，积累的ACL记录很容易达到设备的上限，存在一定的安全隐患。</p>
+<p>我们遇到过一个真实的安全案例，两个区域隔离的交换机由于设备BUG的问题，在ACL条目达到上限后并没有任何错误提示，还可以添加ACL记录，但原有的ACL记录完全失效，导致两个区域的隔离失效，带来了安全问题。<br>随后我们上线了ACL管理功能，业务通过系统发起ACL申请，完成审批后由工程师进行变更操作；ACL和IP资源联动，及时清理无效的ACL记录；对ACL记录匹配次数进行监控，对于长期未使用的记录进行人工检查和清理。同时，我们提供API接口，安全人员通过接口获取ACL记录信息，扫描验证ACL记录的有效性。</p>
+<h2 id="预算系统"><a href="#预算系统" class="headerlink" title="预算系统"></a>预算系统</h2><p>在早期运维中，设备采购数量少，申请采购主要依赖邮件审批的模式。系统组负责整理汇总各个需求邮件，再进行统一采购上架，流程非常烦琐，而且容易有遗漏的地方。采购的进度也不透明，业务线无法及时获知进度。</p>
+<p>为了简化和规范设备采购的方式，我们上线了预算系统，该系统作为设备资源的唯一入口，包括服务器、网络设备、配件等。</p>
+<p>对于服务器资源，支持实体机、基于OpenStack的私有云、公有云以及整机租赁等多种资源的申请。私有云和公有云等通过调用API创建虚拟机，同步录入管理系统；对于租赁的实体服务器通过API下单；自购的服务器先从资产管理系统查询是否有满足需求的备机资源，如果没有再发起采购。</p>
+<p>预算系统和监控系统的资源利用率对接，为业务申请采购服务器提供数据说明。当业务运维在采购管理系统发申请之后，审批人根据已有的资源使用情况来审核申请的合理性。</p>
+<h2 id="故障管理系统"><a href="#故障管理系统" class="headerlink" title="故障管理系统"></a>故障管理系统</h2><p>随着服务器数量的增多，每天发生故障的服务器的数量也呈线性增长。早期系统工程师需要逐台定位服务器故障原因，和业务部门沟通停机时间以及跟进供应商的报修，效率非常低下，业务部门也常常因为故障服务器维修周期长而增加烦恼。为了改善故障持续增长造成的维修效率低下，开发了故障管理系统。</p>
+<p>通过监控插件来上报故障信息，并完善插件使输出的故障信息详细、准确，能直接将信息发给数据中心现场或供应商来解决，比如磁盘故障会定位到槽位等。</p>
+<p>通过服务管理平台将收集到的监控插件上报的数据信息展示在页面中，相应的负责人可以查询到自己的服务器故障信息，在负责人确认服务停止之后直接点报修。</p>
+<p>故障管理系统通过API和服务管理平台同步故障信息，系统汇总整理后通过邮件或对接的API分别发送给供应商和数据中心现场。由于邮件中有供应商和数据中心维修需要的各类信息，所以基本上普通故障在两个工作日内就能修复，修复好后也无须人工确认，监控上报信息中自然会消除相应的故障信息。</p>
+<p>如有需要手工干预的操作，也会通过监控系统体现出来，比如磁盘需要重新挂载和格式化等。故障都消失后，更改设备状态，即可交付给业务。故障管理系统大大提高了报修的效率，也提高了硬件监控的准确性和有效性，为线上服务的稳定运行提供了底层支持。</p>
+<p>故障管理系统建设的上下游是应用运维和供应商，需要大家一起来协调工作，为了配合默契，一起约定梳理了一些标准。</p>
+<p><strong>① 故障信息的描述</strong><br>早期报障需要应用运维人员填写描述信息，不统一、不标准，对诊断和定位故障影响较大。后来约定的方案是先将常见故障分类，实现自动化采集并分类。开发了监控和识别的程序，自动发现和告警给应用运维，由他们判断是否需要报障维修。针对常见故障以外的案例，通过人工分析和识别重新定义到故障类型中。</p>
+<p><strong>② 维修前是否要和应用运维确认</strong><br>早期在维修服务器前要和业务沟通好时间，业务停止服务后再修，花在沟通和跟进进度上的时间非常多。维修前需要确认停服的根本原因是维修的周期较长，很多时候故障服务器仅仅是在排队维修，而这类服务器依然可以正常工作，所以业务方希望仅仅是在维修的时候再暂停服务。</p>
+<p>后来达成共识，应用运维要停完服务后提交报障，系统组承诺在一定时间内修复完毕，若是无法完成，需要提供备机。当然，由于承诺了对不同故障类型的响应和维修时间，也就无须反馈维修进度，应用运维也不会再询问，大大减少了沟通时间。</p>
+<p><strong>③ 和供应商定义诊断方式和处理机制</strong><br>早期对于服务器故障定位都是系统组人员和供应商的工程师一起完成的，无法自动化，后来和供应商沟通，让其提供各类故障定位工具，并将相应的日志作为更换配件的标准，也和供应商对不同级别的故障响应和处理时间达成一致，方便批量报修。</p>
+<h2 id="自助系统"><a href="#自助系统" class="headerlink" title="自助系统"></a>自助系统</h2><p>为了更方便地对服务器进行操作，开发建设了一些自助系统，主要有以下功能。</p>
+<p><strong>① 自助查询功能</strong><br>当交换机发生故障或有计划割接时，可以通过交换机维度查询到同一接入交换机的所有服务器列表，从而达到快速的通告效果。业务线可以通过自助查询页面批量输入主机名查询服务器在数据中心中的分布情况，为业务的冗余性部署做准备。还可以通过源IP地址和目的IP地址查询ACL规则等。</p>
+<p><strong>② 自助重装、重启功能</strong><br>在系统运维平台中开发了自动重装和重启功能，逐步地开放给了应用运维，应用运维在工作平台中可以直接调用API完成OS重装工作。发生故障时可以自助地重启、停机，提高了应用运维对故障的响应时间，也避免了系统工程师的重复性机械工作。</p>
+<p><strong>③ 屏幕截图功能</strong><br>程序异常时可能导致kernel panic，在这种情况下一般需要系统运维登录管理卡查看服务器屏幕状态并截图给业务定位故障。后来开发了屏幕截图功能，并通过API给服务管理平台使用，业务运维只要在网页中点击按钮就能看到服务器的屏幕截图，如图7-2所示。</p>
+<p><img src="/images/15061655032924.jpg" alt=""></p>
+<p>图7-2  自助服务器屏幕截图功能</p>
+<p>通过资产管理系统的建设，资产和配置的准确性得到了有效保障，系统运维的效率大幅提升，系统日常运维走出了依靠人工信息维护的初级阶段。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/under-the-ops/20170923-07-asset-management/" title="第七章：资产管理">http://www.yulongjun.com/under-the-ops/20170923-07-asset-management/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Asset-Management/" rel="tag"># Asset Management</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/under-the-ops/20170923-06-sys-ops-introduction/" rel="next" title="第六章：系统运维概述">
+                <i class="fa fa-chevron-left"></i> 第六章：系统运维概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/under-the-ops/20170923-08-test-type-selection-of-server-hardware/" rel="prev" title="第八章：服务器硬件测试选型">
+                第八章：服务器硬件测试选型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置管理"><span class="nav-number">1.</span> <span class="nav-text">配置管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预算系统"><span class="nav-number">2.</span> <span class="nav-text">预算系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#故障管理系统"><span class="nav-number">3.</span> <span class="nav-text">故障管理系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自助系统"><span class="nav-number">4.</span> <span class="nav-text">自助系统</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

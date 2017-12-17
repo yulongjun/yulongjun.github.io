@@ -1,0 +1,1367 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hardware," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="第八章：服务器硬件测试选型">
+<meta property="og:url" content="http://www.yulongjun.com/under-the-ops/20170923-08-test-type-selection-of-server-hardware/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/devops.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061656289245.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061656470412.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061656715297.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061657662585.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061657792683.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061657905081.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061658643778.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061658707601.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061658785934.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061658875016.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061658943320.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061659025632.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061659316693.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061659759772.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061660069239.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061660267297.jpg">
+<meta property="og:updated_time" content="2017-09-23T15:23:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第八章：服务器硬件测试选型">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/devops.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/under-the-ops/20170923-08-test-type-selection-of-server-hardware/"/>
+
+
+
+
+
+  <title> 第八章：服务器硬件测试选型 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/under-the-ops/20170923-08-test-type-selection-of-server-hardware/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第八章：服务器硬件测试选型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-23T17:17:23+08:00">
+                2017-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/under-the-ops/" itemprop="url" rel="index">
+                    <span itemprop="name">under-the-ops</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/under-the-ops/20170923-08-test-type-selection-of-server-hardware/" class="leancloud_visitors" data-flag-title="第八章：服务器硬件测试选型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/devops.png" alt="devops"><br><a id="more"></a></p>
+<p>面对琳琅满目的服务器硬件品牌和五花八门的硬件型号规格，如何选择高性价比的硬件配置，是系统运维的一项重要工作。系统工程师需要根据产品线的不同需求，测试服务器的各项性能以及功耗，同时结合成本确定出性价比最高的服务器配置。因此，硬件测试便成为了服务器硬件选型的必要依据。</p>
+<p>此外，处理器、内存、磁盘、SSD、磁盘阵列、网卡等配件的不同型号或规格，搭配起来存在无数种配置方案。面对产品线提出的各种配置需求，是否存在一种方法既能够满足业务需求，同时又能让系统工程师轻松、高效地预算和管理服务器？在服务器规模达到千台的时候，我们开始了服务器配置套餐化的工作。</p>
+<p>随后为了能够持续地优化成本，我们又开始了多品牌服务器、配件选型、硬件性能和功耗优化的工作。随着服务器数量开始呈现出指数级增长，硬件故障处理的工作量也变得十分庞大。为了能够实现自动化检测和管理硬件故障，我们又开始了服务器硬件领域新的探索和实践。</p>
+<hr>
+<h2 id="服务器硬件测试"><a href="#服务器硬件测试" class="headerlink" title="服务器硬件测试"></a>服务器硬件测试</h2><h3 id="引入硬件性能评测，提供选型依据"><a href="#引入硬件性能评测，提供选型依据" class="headerlink" title="引入硬件性能评测，提供选型依据"></a>引入硬件性能评测，提供选型依据</h3><p>如何将不同硬件之间的差别更加具体化描述呢？比如，如何描述两款不同型号处理器之间的性能差异呢？可视化的性能数据是最直观的。这里就要引入硬件性能评测机制，通过运行权威的性能评测软件将不同硬件之间的差异数据化，为选型提供更强的理性依据。比如E5-2630v2处理器性能评测得分是10000分，而E5-2640v2处理器得分是12000分，那么就能得到后者性能是前者1.2倍的数据性结论。</p>
+<p>常用的硬件评测软件有GeekBench、Stream、fio、netperf等。<br>（1）GeekBench主要针对处理器的计算性能进行测试评分，能够分别评估整数计算和浮点数计算能力。<br>（2）Stream单独针对内存提供较详尽的性能测试，比如针对单线程和多线程的内存操作有不同的测试项目。<br>（3）fio是一个灵活性很大的IO评测工具，可以用来评估SAS、SATA磁盘、SATA SSD以及PCIe SSD等各种IO硬件设备的性能。<br>（4）netperf是一个常用的网络性能评测工具，可以用来模拟各种网络流量场景，可以评估网卡在不同场景下的包处理和数据吞吐能力。</p>
+<p>如图8-1所示是通过GeekBench和Stream工具对两款处理器（E5-2620v2和E5-2630v2）做计算和内存性能评估收集到的原始数据。</p>
+<p>图8-1  通过GeekBench、Stream工具获取到的测试数据</p>
+<p>通过测试数据可以发现E5-2620v2的计算能力整体要比E5-2630v2低一些，而且两者之间的性能差异也可以数据化。<br>（1）整数计算性能（Integer Score项目）后者比前者高18%，意味着数据处理能力强18%。<br>（2）单线程混合内存操作（Single_Triad项目）后者比前者高8%，意味着单线程下内存处理效率高8%。<br>（3）多线程混合内存操作（Mutil_Triad项目）则高45%，意味着多线程下内存处理效率高45%，后者更适合多任务环境使用。</p>
+<p>如图8-2所示是通过fio工具对不同阵列模式下的SAS磁盘做性能测试后收集到的原始数据。</p>
+<p><img src="/images/15061656289245.jpg" alt=""></p>
+<p>图8-2  通过fio工具获取到的不同阵列模式下SAS磁盘的原始性能数据</p>
+<p>通过数据可以更理性对比不同IO设备在随机读/写、顺序读/写方面的差异，为选型提供理性依据。</p>
+<h3 id="同类硬件只考虑一种规格"><a href="#同类硬件只考虑一种规格" class="headerlink" title="同类硬件只考虑一种规格"></a>同类硬件只考虑一种规格</h3><p>通过硬件性能评测能够准确地评估出处理器、磁盘、SSD等各种硬件的极限性能，便于我们将服务器按照计算、I/O、存储为单元进行拆分并单独评估性价比。在套餐精简的基础上，为了能够形成更强的规模效应，应该从统一配件规格上着手优化。因此，硬件性能便成为了评估性价比的重要指标。</p>
+<p>比如，通过评测工具得到候选处理器的性能评分，同时结合处理器的价格来评估性价比。假设处理器A的单价为4000元，性能得分是13000点；处理器B的价格仅为2000元，性能得分是10000点。虽然处理器A的性能是B的1.3倍，但是A的价格比B高一倍。通过性价比计算公式：性价比（点/元）=计算性能（点）/单颗价格（元），得到处理器A的性价比是3.25点/元，处理器B是5点/元，那么处理器B的性价比是处理器A的1.53倍。<br>请参考图8-3。</p>
+<p><img src="/images/15061656470412.jpg" alt=""></p>
+<p>图8-3  处理器A和处理器B性价比评估</p>
+<p>在满足业务性能的前提下，优先选择处理器B，那么就不必考虑在套餐中同时存在两种型号规格的处理器了。此外，同种规格的处理器采购量越大，成本的规模效应越明显，也更容易通过部件进行议价。其他配件也同样适用这个原则。</p>
+<h3 id="追求单机性价比"><a href="#追求单机性价比" class="headerlink" title="追求单机性价比"></a>追求单机性价比</h3><p>在前面的例子中，虽然处理器的性价比是很重要的一项指标，但偶尔也会有意外的情况发生，比如某些注重单机计算能力的业务应用。这时单纯考量单个处理器的性价比就不适用了，应该转向考量整机的计算性价比。</p>
+<p>比如，处理器C售价是6000元，是处理器B的3倍，但是C的计算评分是25000点，是B的2.5倍。C的整机成本是25000元，而B的整机成本为20000元。虽然处理器C在单个处理器的性价比上不如B，但如果从单机成本对比来看，C整机成本为B整机成本的1.25倍，因此处理器C的单机性价比是处理器B的2倍。请参考图8-4。</p>
+<p><img src="/images/15061656715297.jpg" alt=""></p>
+<p>图8-4  处理器C和处理器B性价比评估</p>
+<p>因此，选择处理器C来提高业务的单机计算能力，节省成本。对于其他硬件也同样适用该原则。</p>
+<hr>
+<h2 id="服务器套餐化"><a href="#服务器套餐化" class="headerlink" title="服务器套餐化"></a>服务器套餐化</h2><p>在大部分情况下产品线并不知道自己的真实需求：用什么处理器、多大的内存、多少块磁盘。通常都是凭以往的使用经验拍脑袋决定的：今天多加几条内存，明天多加几块磁盘。这样给系统工作带来了极高的服务器配置管理成本。</p>
+<p>例如，某公司每个月都会采购新的服务器，某个月产品线提出了共70个配置需求，服务器供应商总共有4家，那么系统工程师等同于要面对和管理共280个服务器配置。从需求收集到落实采购，这期间和产品线、供应商的沟通、确认将耗费大量的精力，时间几乎都要耗在预算采购这一件事情上，而且还容易出错。同时，如此众多的服务器配置也无法形成相同配置的规模效应，无形之中增加了公司的运营成本。因此，服务器配置套餐化十分有必要。</p>
+<p>###什么是套餐化</p>
+<p>现在有两家菜馆：A餐馆有100道菜，B餐馆有10个套餐。那么，用户去哪家餐馆点餐最快？显然是B餐馆，而B餐馆就是现在大家熟知的快餐店。在大部分情况下用户并不清楚想吃什么，怎么搭配菜品更合理等。而套餐的存在能够快速将餐品按一定原则分类搭配，给客户提供了预选的方案，同时还精简了菜品数量。</p>
+<p>服务器配置套餐化也是同样的道理，按照业务方需求提供预先设置好的配置，能够让业务更容易做出选择，而且套餐数量精简后更容易形成规模效应，增加采购议价能力。</p>
+<h3 id="对服务器套餐进行分类"><a href="#对服务器套餐进行分类" class="headerlink" title="对服务器套餐进行分类"></a>对服务器套餐进行分类</h3><p>建立服务器配置套餐以后，为了方便管理就需要将套餐进行分类。根据业务需求，我们将服务器配置抽象分类成以下几类。<br>（1）计算型：We前端、缓存类业务等；这类配置一般处理器主频规格和内存配置较高，对数据存储的要求较低。<br>（2）计算IO均衡型：业务中间件、数据库等；这类配置通常处理器性价比较高，内存和磁盘配置适中。<br>（3）重IO型：数据库等；这类配置在均衡型的基础上往往会将磁盘更换成SSD，以满足高IO负载的需求。<br>（4）存储型：分布式存储等；这类配置注重单GB成本，通常会使用廉价高容量的SATA磁盘，对处理器和内存的要求并不高。<br>分类后，同一类套餐可能存在多种配置，接下来就是配置近似套餐的抽象合并过程。</p>
+<h3 id="精简套餐数量，实现规模效应"><a href="#精简套餐数量，实现规模效应" class="headerlink" title="精简套餐数量，实现规模效应"></a>精简套餐数量，实现规模效应</h3><p>比如，另外一家公司总共拥有4个套餐配置，也面对4家服务器供应商，每次采购只需要管理和维护共16个配置。这样一来，无论是采购还是资源管理都变得简单、高效起来。同时，套餐数量越少也就意味着规模效应越明显，采购议价能力越强。这就是为什么连锁快餐店总是能把套餐价格做得很低，同时还能保证高效的供应，并且还能拥有较高的利润的原因，一切都归功于规模效应。</p>
+<p>套餐配置分类以后总是能够出现配置接近的套餐，尽可能地合并这些配置，将相似的配置抽象成一种套餐，不断地精简套餐数量。比如，X和Y套餐仅仅在内存配置上存在差异：X内存128GB，Y内存64GB，而X需求量是Y的10倍，那么就应该考虑将Y套餐合并成X套餐，因为X套餐的采购价格很可能低于Y套餐。</p>
+<hr>
+<h2 id="成本的持续优化"><a href="#成本的持续优化" class="headerlink" title="成本的持续优化"></a>成本的持续优化</h2><p>服务器套餐化带来了成本的大量节省，但追求成本的持续优化只能另辟蹊径。我们在如下几个方面尝试了一些探索。</p>
+<h3 id="多品牌服务器的引入"><a href="#多品牌服务器的引入" class="headerlink" title="多品牌服务器的引入"></a>多品牌服务器的引入</h3><p>通过多品牌差异化的竞争增加议价能力，降低成本。当然，引入多品牌服务器后很快出现了各种新问题，比如某些品牌服务器不支持共享口，BIOS配置标准各家有差异，管理口对运维支持情况各异等一系列运维可用性问题。很快，运维可用性测试便成为了多品牌服务器引入后的一项重要的测试指标。</p>
+<p>通过可用性测试提前发现各种服务器机型的基础运维问题，以便后续要求厂商按照用户的运维习惯进行定制化。入围的品牌我们会按季度来总结故障率，对故障率不达标又没有完成可规避方案的品牌后续减少采购量，甚至不采购。</p>
+<h3 id="配件选型减少服务器规模"><a href="#配件选型减少服务器规模" class="headerlink" title="配件选型减少服务器规模"></a>配件选型减少服务器规模</h3><p>前面提到了同类硬件尽可能要考虑一种规格，而且单机性价比才是最重要的，因此配件的测试选型也就显得格外重要。</p>
+<p>同一类配件如SSD，也存在PCIe和SATA两种规格。假设某业务对存储设备的IO需求较高，而使用SATA SSD的方案单机最多能够提供的IOPs能力为20000，现在有一款PCIe SSD能够提供的单机IOPs能力为60000。</p>
+<p>虽然同容量PCIe SSD的成本是SATA SSD的2倍，但从整机价格来看，PCIe SSD却只有SATA SSD的1.2倍，那么使用PCIe SSD可以有效减少2/3的服务器采购量，而单机成本仅提高了20%。因此，业务方全面使用PCIe SSD来缩小服务器投入规模，在降低成本的同时还减少了运维的开销。</p>
+<h3 id="硬件性能调优"><a href="#硬件性能调优" class="headerlink" title="硬件性能调优"></a>硬件性能调优</h3><p>以往提升单机性能的方法就是升级硬件，如何在不增加成本的前提下提升硬件的性能呢？通常的做法是软件层面的优化，比如修改BIOS参数、修改内核、升级固件、修改操作系统参数等做法均能达到预期收益。</p>
+<p>比如修改BIOS参数，打开处理器的Turbo（睿频）功能能够瞬间提升处理器的运行频率，提升处理器的性能（如图8-5所示是E5-2630v2处理器在开启Turbo前后的性能测试数据，可以看到打开Turbo后整数计算性能得到了15%的提升）。</p>
+<p><img src="/images/15061657662585.jpg" alt=""><br>图8-5  E5-2630v2处理器在打开Turbo设置前后的性能测试数据对比</p>
+<p>再比如操作系统参数调优，举的一个例子是在SATA SSD加直连卡的硬件环境下使用中断多核绑定来优化IO性能。业务使用8块SATA SSD加一块直连卡的硬件方案，分别将数据保存在8块SSD中进行读/写。</p>
+<p>在优化前业务的QPS仅能够达到27K，SSD的使用率为60%～70%，8块SSD的IOPs总和达到了80K。通过mpstat命令可以发现直连卡产生的IRQ中断全部压在了处理器的第一个核心上（如图8-6所示），产生了82K个中断，这和前面提到的IOPs数量吻合。<br><img src="/images/15061657792683.jpg" alt=""></p>
+<p>图8-6  优化前mpstat情况</p>
+<p>这已经达到了单核的处理极限，而SSD的使用率却还有盈余。因此，考虑对直连卡做多核的中断绑定来优化I/O性能。通过/proc/interrupt可以发现直连卡中断号为107～118，因此执行以下命令对中断做多核绑定（如图8-7所示），将不同的IRQ分别绑定到不同的处理器核心上。</p>
+<p><img src="/images/15061657905081.jpg" alt=""></p>
+<p>图8-7  执行多核中断绑定</p>
+<p>优化后业务QPS达到了39K，SSD的使用率也提升至80%～90%，性能提升达到40%之多。<br>硬件性能调优是最理想的成本优化方案，它在不产生任何直接成本的前提下就可得到单机性能提升的收益。</p>
+<h2 id="机柜高密度部署的探索"><a href="#机柜高密度部署的探索" class="headerlink" title="机柜高密度部署的探索"></a>机柜高密度部署的探索</h2><p>业务对服务器的需求规模从几百台一下子增长到了几千台，服务器规模的突增给运维带来了很大的冲击。很快，公司原先的机架资源便面临枯竭。由于原先公司体量不大，在和各数据中心谈合作时很难及时获取到机柜资源，而业务却等着要上线服务。这个时候为了能够缓解机架资源的紧张程度，我们便开始探索机柜高密度部署，很快高密度服务器便进入了我们的视线中。</p>
+<h3 id="降低服务器运行功率"><a href="#降低服务器运行功率" class="headerlink" title="降低服务器运行功率"></a>降低服务器运行功率</h3><p>通过BMC（BMC即服务器带内管理控制卡，它可以获取服务器状态和故障信息，以及控制服务器的停机、开机等电源操作）获取服务器实时运行功率，是另外一种实际且有效地掌握服务器用电情况的方法。结合大数据还能够分析出同配置服务器的功耗运行规律，为单机柜实现更高密度的部署提供真实的数据。</p>
+<p>此外，还可以结合各种服务器功耗优化方案来实现单机柜更高密度的服务器部署。服务器功耗优化的方式有很多种，例如：<br>（1）使用高标号电源（比如白金、黄金电源）提高电源转换效率，减少电源谐波干扰；<br>（2）使用低功率电源提高电源负载率，减少转换损耗；<br>（3）使用低功耗硬件设备，比如低电压内存和低功耗处理器等；<br>（4）优化服务器风扇散热策略，在保证散热的同时降低转速，优化功耗。</p>
+<hr>
+<h2 id="硬件状态扫描和故障预警"><a href="#硬件状态扫描和故障预警" class="headerlink" title="硬件状态扫描和故障预警"></a>硬件状态扫描和故障预警</h2><p>服务器达到规模后，故障维护也相应变得困难起来，主要体现在：<br>（1）硬件故障无法提前预见。<br>（2）硬件故障分类判断不精准。<br>（3）硬件故障无法被及时感知。</p>
+<p>人工干预的故障排查不切实际，这些棘手问题都给系统运维工作带来困扰。比如，某个服务器阵列类型是RAID 5，一块盘出现故障后，业务仍旧能继续正常运行。但是由于该故障无法被业务应用或运维人员及时感知，因此没有及时更换磁盘。随着时间的推移，继而出现了第二块磁盘的故障，最后导致整个阵列丢失了数据。在实际线上生产环境中，这类问题屡见不鲜。</p>
+<h3 id="大部分故障都是显性的"><a href="#大部分故障都是显性的" class="headerlink" title="大部分故障都是显性的"></a>大部分故障都是显性的</h3><p>在积累了大量服务器硬件故障维护经验后，我们发现大部分故障都是可预见的。可以通过系统、BMC（带内管理卡）日志或者硬件本身记录的日志，以及各种硬件状态检测工具进行故障定位。比如阵列卡本身带有对磁盘设备的管理功能，可以通过专门的工具获取到当前阵列卡、磁盘的状态信息（如图8-8、图8-9所示），并且阵列卡本身也记录了各类日志，可以方便地通过日志判断故障（如图8-10所示）。</p>
+<p><img src="/images/15061658643778.jpg" alt=""></p>
+<p>图8-8 通过MegaCli工具获取到的阵列卡虚拟盘的状态信息</p>
+<p><img src="/images/15061658707601.jpg" alt=""></p>
+<p>图8-9  通过MegaCli工具获取到的阵列卡下磁盘或SSD的状态信息</p>
+<p><img src="/images/15061658785934.jpg" alt=""></p>
+<p>图8-10  通过MegaCli工具获取到的阵列卡终端日志</p>
+<p>磁盘的SMART信息也能给诊断磁盘故障带来帮助（如图8-11所示）。此外，处理器、内存等故障也可以通过BMC的SEL日志获取到（如图8-12所示）。很快，我们就可以将故障按照部件进行分类，不同部件的故障定位使用不同的方法应对，工具和日志相结合，综合分析。这便给自动化硬件故障监控提供了技术基础。</p>
+<p><img src="/images/15061658875016.jpg" alt=""></p>
+<p>图8-11  通过smartctl工具获取到的磁盘SMART信息</p>
+<p><img src="/images/15061658943320.jpg" alt=""></p>
+<p>图8-12  通过ipmitool工具获取到BMC的SEL日志信息</p>
+<p> 统一硬件健康检查工具<br>为了能够更加高效地管理监控服务器故障，统一硬件健康监控检查工具的设想很快便被提出来。前面提到大部分故障都是显性且可以分类的，因此如果能够编写一个对服务器不同硬件分别做状态检查的软件工具，就可以及时了解到服务器当前是否存在异常或者故障。</p>
+<p>前面提到过不同服务器硬件的状态信息可以用不同的方法查看，而统一硬件健康检查工具可以通过调用相关的硬件检查工具，按照一定的方法逻辑检查硬件状态并分析日志，对服务器硬件整体健康状态做一一检查。其结果就是，工具在任何型号服务器上运行后便能输出当前服务器的健康状态信息：没有问题就不输出任何结果，而存在问题便输出对应的故障分类和具体的故障信息（如图8-13所示）。</p>
+<p><img src="/images/15061659025632.jpg" alt=""></p>
+<p>图8-13  通过统一硬件健康检查工具输出硬件状态检查信息</p>
+<p>常用的检查硬件状态的工具和方法如下。<br>（1）磁盘类：MegaCli、hpacucli、smartctl等。<br>（2）处理器、内存类：mcelog以及通过ipmitool工具查看SEL日志。<br>（3）电源、风扇类：通过ipmitool工具查看SDR（传感器）状态。<br>（4）其他类：通过ipmitool工具查看SEL日志。</p>
+<p>再进一步，我们可以将工具与现有的监控系统结合，通过监控代理程序定期运行工具便能准确及时地获取到服务器的硬件故障信息。甚至还可以对故障的严重程度进行分级，以便运维人员在获取到报警信息后快速判断故障的严重程度。</p>
+<hr>
+<h2 id="磁盘健康检查工具"><a href="#磁盘健康检查工具" class="headerlink" title="磁盘健康检查工具"></a>磁盘健康检查工具</h2><p>在所有服务器故障中磁盘故障占了相当大的比例（一般使用SAS磁盘的服务器50%以上均为磁盘故障），因此很有必要对磁盘做自动化健康检查。磁盘系统作为服务器的IO设备是一个复杂且庞大的体系，它并不像内存那样只有相对单一的结构和规格，光是磁盘的接口类型就有SAS、SATA两种，而且还有阵列卡、直连卡等IO中间设备作为磁盘系统的一部分。通常使用阵列卡的服务器较多，下面来讲讲在阵列卡环境下如何实现磁盘的自动化健康检查。</p>
+<h3 id="磁盘健康检查工具的实现原理"><a href="#磁盘健康检查工具的实现原理" class="headerlink" title="磁盘健康检查工具的实现原理"></a>磁盘健康检查工具的实现原理</h3><p>阵列卡作为磁盘系统的一部分，能够将多块物理盘通过不同的阵列算法组合成一个大的虚拟盘；同时阵列卡又承担起管理虚拟盘和物理盘的责任，对于虚拟盘和物理盘出现的错误进行检查和管理。而我们开发的自动化健康检查工具，正是基于能够和阵列卡信息交互的工具来了解虚拟盘和物理盘的健康状况的（如图8-14所示）。</p>
+<p><img src="/images/15061659316693.jpg" alt=""></p>
+<p>图8-14  磁盘健康检查工具的实现原理图</p>
+<p>市面上的服务器大部分使用的阵列卡是基于LSI公司设计生产的芯片，因此和阵列卡的交互都可以通过MegaCli工具实现。</p>
+<p>通过MegaCli工具可以获取到虚拟盘和物理磁盘的拓扑结构以及一些基础信息，比如某个阵列卡下有一个虚拟盘VD0由物理盘PD0、PD1、PD2组成，阵列类型是RAID 5，缓存设置为No Read Ahead、Write Back，并且当前状态为Online等；物理盘PD0、PD1、PD2分别对应的槽位ID为slot0、slot1、slot2，并且磁盘状态均为Online；以上信息说明虚拟盘VD0和物理盘PD0、PD1、PD2均处于Online状态，没有任何故障出现。<br>进一步，我们可以单独了解PD0的更详细信息。</p>
+<p>比如它的某项错误计数器Media Error Count数量已经大于100，表明已经有超过100个的物理坏道出现，但是磁盘仍旧处于Online状态，这说明磁盘虽然还能正常工作，但是已经处于非健康状态，这块盘很可能会在近期出现故障，因此通过MegaCli工具获取到这些信息提前预见了故障。通过上面的这些判断逻辑，我们将健康检查分成两类：虚拟盘的健康检查和物理盘的健康检查。</p>
+<h3 id="定义不同级别的故障信息"><a href="#定义不同级别的故障信息" class="headerlink" title="定义不同级别的故障信息"></a>定义不同级别的故障信息</h3><p>为了能够区分磁盘故障的紧急程度，我们根据故障紧急程度的不同定义了不同级别的故障信息通知INFO、WARN、ERROR和FATAL。</p>
+<p>◎       INFO：information，即信息级别，通知用户磁盘处于非异常也非完全健康的状态，紧急程度最低；比如虚拟盘正处于修复状态中。</p>
+<p>◎       WARN：warning，即警告级别，通知用户磁盘系统存在一些问题，但是并非完全被定义为故障；比如出现Unconfigured Good状态的磁盘，可能是虚拟盘出现了掉盘的问题。</p>
+<p>◎       ERROR：error，即故障级别，通知用户磁盘系统出现了故障但并不致命，不会出现数据丢失的情况，级别比WARN高，需要用户尽快介入处理故障以避免故障级别升级；比如一组RAID 5的虚拟盘出现了一块磁盘故障的情况，虽然虚拟盘仍旧可以提供IO服务，但是无法再忍受更多的磁盘故障，因此需要尽快更换故障盘。</p>
+<p>◎       FATAL：fatal error，即致命故障级别，通知用户磁盘系统出现了致命的故障，已经无法提供IO服务，并且有极大的概率会出现数据丢失的问题；比如一组使用RAID 0的虚拟盘有一块磁盘出现故障，致使虚拟盘已经无法继续提供IO服务，并且数据全部丢失。</p>
+<h3 id="虚拟盘健康检查的设计逻辑"><a href="#虚拟盘健康检查的设计逻辑" class="headerlink" title="虚拟盘健康检查的设计逻辑"></a>虚拟盘健康检查的设计逻辑</h3><p>根据虚拟盘的不同状态来判断其健康状况，虚拟盘分别有Optimal、Offline、Recovery和Degraded四种状态。</p>
+<p>◎       Optimal为最佳状态，意味着虚拟盘目前处于健康状态，没有任何故障和异常。</p>
+<p>◎       Offline为离线状态，意味着虚拟盘已经出现了严重的故障，比如RAID 0出现一块磁盘故障，或者RAID 5出现两块磁盘故障，表示虚拟盘已经不可用并且数据有丢失。</p>
+<p>◎       Recovery为虚拟盘修复中状态，意味着虚拟盘之前出现了磁盘故障并降级，更换故障盘后阵列卡对新盘进行有效数据填充的过程。</p>
+<p>◎       Degraded为虚拟盘降级状态，意味着带有阵列保护的虚拟盘出现了磁盘故障，但不至于对虚拟盘的数据完整性造成破坏，比如RAID 5出现一块磁盘故障就会导致虚拟盘降级。</p>
+<p>通过上面的这些状态我们就可以设计一套判断虚拟盘是否健康的逻辑，具体的设计逻辑图如图8-15所示。如果检查一个虚拟盘状态为Optimal，则不输出任何信息，直接检查下一个虚拟盘。检查状态为Offline，则按照最高级别FATAL输出错误通知；状态为Degraded，则按照比FATAL低一级别的ERROR输出错误通知；状态为Recovery，则表示处于非异常也非健康状态，因此以INFO级别输出错误通知。</p>
+<p><img src="/images/15061659759772.jpg" alt=""></p>
+<p>图8-15  虚拟盘健康检查的设计逻辑图</p>
+<h3 id="物理盘健康检查的设计逻辑"><a href="#物理盘健康检查的设计逻辑" class="headerlink" title="物理盘健康检查的设计逻辑"></a>物理盘健康检查的设计逻辑</h3><p>物理盘也有类似的一些状态来判断是否健康，如Unconfigured Good、Unconfigured Bad、Online、Offline、Rebuild等。</p>
+<p>◎       Unconfigured Good为未被配置为阵列的健康盘，可能是新加的磁盘或者是某个阵列出现了掉盘都会被阵列卡设置为这种状态。</p>
+<p>◎       Unconfigured Bad为被阵列卡判断为异常状态的磁盘，可能之前属于某个阵列，但是由于出现错误较多而被阵列卡从阵列配置中踢出，也有可能是新加入的磁盘被阵列卡检查健康状态后判断为故障盘。</p>
+<p>◎       Online为在线状态，但并不意味着磁盘本身不存在问题，它仅仅代表该磁盘尚能提供IO服务。某些出现坏道而引发降速的磁盘，由于尚能提供IO服务，仍会被阵列卡判断为在线状态，因此还需要增加其他的因素去判断一块磁盘是否真正健康。</p>
+<p>◎       Offline为离线状态，拔盘或者因为接口通信异常而掉线的磁盘都会被阵列卡设置为该状态，更严重的是磁盘故障到已经无法通信的情况也会被设置为离线状态。</p>
+<p>◎       Rebuild为修复中状态，当一块新盘被用以替换故障盘而参与整个虚拟盘数据修复时，阵列卡会将该盘设置为修复状态。</p>
+<p>◎       此外，上面讲到即使一块物理盘处于Online状态，也无法判断为健康状态，因此物理盘比虚拟盘还多了一种可以辅助判断是否健康的因素，那就是错误计数器：MEC（Media Error Count）、OEC（Other Error Count）、PFC（Predictive Failure Count）。</p>
+<p>◎       MEC（Media Error Count）为物理坏道计数器，通常指的是磁盘出现无法修复的物理坏道数量，该计数器积累到一定程度后即可判断为磁盘故障。</p>
+<p>◎       OEC（Other Error Count）为其他错误计数器，指的是物理坏道以外的错误数量。由于磁盘是一种比较精密且复杂的机械和电子部件，因此任何部件的异常磁盘都有一种检查机制能够感知并写入磁盘的SMART信息中，因此该计数器可作为判断磁盘是否故障的辅助手段。</p>
+<p>◎       PFC（Predictive Failure Count）为故障预警计数器，它通常集合了一套判断磁盘是否即将故障的逻辑，阵列卡根据磁盘提供的各种错误代码和信息判断磁盘即将故障，该计数器积累到一定程度后即可判断为磁盘故障。</p>
+<p>通过上面的这些状态和错误计数器，我们就可以设计一套判断物理盘是否健康的逻辑，具体的设计逻辑图如图8-16所示。如果检查一块磁盘为非Online状态，就会开始一系列检查：Unconfigured Good状态会以WARN级别输出错误通知；Unconfigured Bad或Offline状态均会以ERROR级别输出错误通知；而Rebuild状态则会以INFO级别输出信息通知。</p>
+<p>最后，无论该物理盘状态是否为Online，都会对计数器值进行检查判断，如果三个计数器有任何一个超过临界值，都会以WARN级别输出错误通知，以及时通知用户磁盘存在异常。</p>
+<p><img src="/images/15061660069239.jpg" alt=""></p>
+<p>图8-16  物理盘健康检查的设计逻辑图</p>
+<h3 id="故障信息的输出格式"><a href="#故障信息的输出格式" class="headerlink" title="故障信息的输出格式"></a>故障信息的输出格式</h3><p>关于健康检查的故障通知的输出设计逻辑是：检查到任何异常便输出通知，没有异常不输出任何信息。因此，用户可以专注于出现故障信息的服务器，而不必被一些过多的状态信息所干扰。此外，对于信息的输出格式我们也有精心设计，一条故障信息由故障定级、故障来源和故障原因三部分组成。具体的输出格式演示如图8-17所示。</p>
+<p>故障定级：前面提到过错误信息的定级分类，错误输出信息里也应该有这部分内容，以便用户在获取到信息后再次对错误信息按照紧急程度进行分类，增强用户体验。</p>
+<p>故障来源：错误信息中应该包含具体哪个虚拟盘、哪块物理盘的消息，甚至可以告知用户物理盘的槽位号，帮助用户精准定位故障来源。</p>
+<p>故障原因：有了错误信息的具体来源还不够，还需要告知用户具体的错误原因，比如某块物理盘处于Offline状态，某个虚拟盘由于掉盘而出现Degraded状态，这些具体的错误原因都要在错误信息中输出，帮助用户更好地判断如何处理故障。</p>
+<p><img src="/images/15061660267297.jpg" alt=""></p>
+<p>图8-17  故障信息输出格式演示</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/under-the-ops/20170923-08-test-type-selection-of-server-hardware/" title="第八章：服务器硬件测试选型">http://www.yulongjun.com/under-the-ops/20170923-08-test-type-selection-of-server-hardware/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hardware/" rel="tag"># Hardware</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/under-the-ops/20170923-07-asset-management/" rel="next" title="第七章：资产管理">
+                <i class="fa fa-chevron-left"></i> 第七章：资产管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/under-the-ops/20170923-09-growth-of-network/" rel="prev" title="第九章：网络成长之路">
+                第九章：网络成长之路 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器硬件测试"><span class="nav-number">1.</span> <span class="nav-text">服务器硬件测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入硬件性能评测，提供选型依据"><span class="nav-number">1.1.</span> <span class="nav-text">引入硬件性能评测，提供选型依据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同类硬件只考虑一种规格"><span class="nav-number">1.2.</span> <span class="nav-text">同类硬件只考虑一种规格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#追求单机性价比"><span class="nav-number">1.3.</span> <span class="nav-text">追求单机性价比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器套餐化"><span class="nav-number">2.</span> <span class="nav-text">服务器套餐化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对服务器套餐进行分类"><span class="nav-number">2.1.</span> <span class="nav-text">对服务器套餐进行分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精简套餐数量，实现规模效应"><span class="nav-number">2.2.</span> <span class="nav-text">精简套餐数量，实现规模效应</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成本的持续优化"><span class="nav-number">3.</span> <span class="nav-text">成本的持续优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多品牌服务器的引入"><span class="nav-number">3.1.</span> <span class="nav-text">多品牌服务器的引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配件选型减少服务器规模"><span class="nav-number">3.2.</span> <span class="nav-text">配件选型减少服务器规模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件性能调优"><span class="nav-number">3.3.</span> <span class="nav-text">硬件性能调优</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机柜高密度部署的探索"><span class="nav-number">4.</span> <span class="nav-text">机柜高密度部署的探索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#降低服务器运行功率"><span class="nav-number">4.1.</span> <span class="nav-text">降低服务器运行功率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件状态扫描和故障预警"><span class="nav-number">5.</span> <span class="nav-text">硬件状态扫描和故障预警</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#大部分故障都是显性的"><span class="nav-number">5.1.</span> <span class="nav-text">大部分故障都是显性的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘健康检查工具"><span class="nav-number">6.</span> <span class="nav-text">磁盘健康检查工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘健康检查工具的实现原理"><span class="nav-number">6.1.</span> <span class="nav-text">磁盘健康检查工具的实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义不同级别的故障信息"><span class="nav-number">6.2.</span> <span class="nav-text">定义不同级别的故障信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟盘健康检查的设计逻辑"><span class="nav-number">6.3.</span> <span class="nav-text">虚拟盘健康检查的设计逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理盘健康检查的设计逻辑"><span class="nav-number">6.4.</span> <span class="nav-text">物理盘健康检查的设计逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#故障信息的输出格式"><span class="nav-number">6.5.</span> <span class="nav-text">故障信息的输出格式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1297 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Domain,Access," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="第十二章：域名和接入">
+<meta property="og:url" content="http://www.yulongjun.com/under-the-ops/20170923-12-domain-and-access/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/devops.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061677974761.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061678154942.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061678263046.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061678679381.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061679136999.jpg">
+<meta property="og:updated_time" content="2017-09-23T15:24:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第十二章：域名和接入">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/devops.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/under-the-ops/20170923-12-domain-and-access/"/>
+
+
+
+
+
+  <title> 第十二章：域名和接入 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/under-the-ops/20170923-12-domain-and-access/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第十二章：域名和接入
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-23T17:18:27+08:00">
+                2017-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/under-the-ops/" itemprop="url" rel="index">
+                    <span itemprop="name">under-the-ops</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/under-the-ops/20170923-12-domain-and-access/" class="leancloud_visitors" data-flag-title="第十二章：域名和接入">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/devops.png" alt="devops"><br><a id="more"></a></p>
+<p>域名是所有互联网公司服务的入口，也是重要的公司品牌。域名的使用和设计是否合理，不仅影响用户能否快速访问到业务，而且也直接影响内部服务的部署架构、管理复杂度、自动化运维实现等方面。众所周知，域名的解析结果是一个或多个IP地址，利用域名解析的结果，就可以实现：<br>◎ 基本的负载均衡；<br>◎ 引导流量接入到期望的目的地址。</p>
+<p>若只使用域名解析来接入服务，则存在以下问题：<br>◎ 受Cache等因素影响，利用域名解析多IP地址进行负载均衡效果有折扣；<br>◎ 域名指向的IP地址必须要直接接入互联网（公网）。</p>
+<p>Cache还不足以造成严重的影响，但要求所有业务前端必须接入公网，在小规模情况下问题还不突显，但当业务发展到一定规模时，所引起的副作用就足以让运维人员疲于应付。主要问题有：<br>◎ 服务器接入公网对网络规划的要求；<br>◎ 服务器接入公网后的安全性考虑；<br>◎ 服务器接入公网后的防攻击考虑。</p>
+<p>因而，基于VS/NAT的四层负载均衡器和基于URL分流之类的七层负载均衡器应运而生，其核心思想就是只利用少量的、直接暴露在公网的负载均衡层接入用户请求，再通过算法和策略，平均地转发到内网的业务前端进行处理。同样地，也将内网前端的处理结果，原路返回发送给对应用户。负载均衡层在用户和业务之间起到代理和转发的作用。通过图12-1可以看出有/无负载均衡层在结构上的区别。</p>
+<p><img src="/images/15061677974761.jpg" alt=""></p>
+<p>图12-1  有/无负载均衡层在结构上的区别</p>
+<p>负载均衡技术的引入有效地控制了对外暴露服务器的规模，使得安全策略和防攻击都能够被集中和统一地解决。并且与前端服务器规模不成正比关系，无论业务规模如何发展，对外暴露服务器的规模都是有限的。同时，负载均衡技术使前端服务的扩展更加平滑、透明和可控（不受用户DNS Cache影响）。</p>
+<p>下面分别介绍我们在域名和负载均衡实践应用中的运维设计和自动化管理方面的经验与考量。</p>
+<h2 id="负载均衡及自动化"><a href="#负载均衡及自动化" class="headerlink" title="负载均衡及自动化"></a>负载均衡及自动化</h2><p>负载均衡器在大规模业务集中发展为必不可少的设施，在业务乃至整个基础环境中都起着至关重要的作用。包括：<br>1．简化网络结构和网络维护成本<br>以最原始的互联网服务为例，对互联网用户提供服务就必须将服务器接入到公网中，如图12-2所示。在小规模业务中，为满足这样的需求进行网络规划和实施并非难事，也不存在太大的成本，甚至内网和外网都可以共享同一套物理设备，所以也是比较常见的形态。</p>
+<p><img src="/images/15061678154942.jpg" alt=""></p>
+<p>图12-2  增加负载均衡器前的网络结构</p>
+<p>但随着业务的发展、规模的扩大，会逐渐地发现：<br>◎ 除了前端服务器（业务的入口），大部分服务器并没有访问外网或被外网访问的需求，因此配置外网实际上是一种浪费，甚至还额外引入了安全风险；<br>◎ 如果内、外网共享物理设备，则有相互干扰的风险。例如，外网被攻击导致设备工作异常，内网也会同时受到影响。但如果拆分内、外网，则又会出现两套网络，浪费物理资源。<br>增加负载均衡器后，网络结构变得更清晰和简洁，如图12-3所示。</p>
+<p><img src="/images/15061678263046.jpg" alt=""></p>
+<p>图12-3  增加负载均衡器后的网络结构</p>
+<p>在增加了负载均衡器的结构中内、外网是分离的，外网流量通过负载均衡器转发进入内网，即使外网发生故障异常也不会不影响内部服务的运转。负载均衡器的规模与流量和转发性能成正比，与内网服务的规模无关。而通常业务功能的扩展和集群规模的扩大都主要发生在内网。</p>
+<p><strong>2．减轻在业务升级维护过程中对用户的直接影响</strong></p>
+<p>从图12-2中可以看到，用户请求直接与服务器交互，服务器正常的维护、升级、故障等因素都会导致短暂的服务中断，虽然用户端可以设置重试策略，在请求失败后重试到其余服务器，但是对于新用户请求来说仍然会有一部分会访问到异常服务器上，即服务中断期间，有n/m的请求会出现失败和重试（n为服务中断服务器数量，m为提供该服务的服务器总量）。</p>
+<p>而从图12-3中可以看到，用户请求与负载均衡器进行交互，再由它进行转发，因此如何进行转发是可控和可配置的。当内网中某服务器异常或维护时，在负载均衡层屏蔽该服务器即可使用外网流量，不再转发到该服务器，从而消除了用户请求存在n/m失败重试的可能性。</p>
+<p><strong>3．更集中的安全策略控制和防攻击</strong></p>
+<p>增加负载均衡器后，与互联网（公网）互联的服务器由分散的多个入口收敛为集中的一个入口，从而使安全防护策略也跟随集中和统一，更方便地进行维护和变更，消除和避免安全防护策略的缺失、遗漏而造成的隐患和损失。在防攻击方面，图13-2所示的结构是以寡敌众，容易被逐个击破；而图13-3所示的结构通过负载均衡器将内网的服务集群虚拟为外部可见的一台服务器，是以众敌众，强者胜之。</p>
+<p><strong>4．支撑业务前端更灵活和实时的容量扩展</strong></p>
+<p>如前面所述，负载均衡器将内网的服务集群进行了虚拟，在外部用户看来就是一台服务器，内、外网之间的流量由其决定如何转发，因此内网服务器的扩展和调整是可控制的，变更的生效是更为实时的，集群的规模几乎是不受限制的（例如，使用域名-&gt;IP地址会受到DNS相同域名的最大条目数限制集群规模），并且变更的过程对于用户透明、无感知。</p>
+<p>负载均衡的解决方案有多种，如基于四层或七层，基于硬件或软件；在大规模业务场景中历练过的不乏有F5、LVS、Nginx、HAProxy等。作为一个重要的基础设施，负载均衡方案的性能、可扩展性、均衡策略、对业务是否透明等指标直接关系到业务的稳定性、处理能力和接入维护成本。</p>
+<p>下面介绍的是以经典代表LVS+Keepalived为基础的负载均衡器接入设计和自动化管理方案。</p>
+<h2 id="选择LVS-Keepalived的考虑"><a href="#选择LVS-Keepalived的考虑" class="headerlink" title="选择LVS+Keepalived的考虑"></a>选择LVS+Keepalived的考虑</h2><p>当前LVS在业内已得到广泛的应用和认可，属于四层负载均衡实现，最初具有NAT、DR、TUNNEL三种工作模式，在随后业内的工程实践中又增加了FULLNAT工作模式，并由taobao开源，使之更适用于大规模业务场景。四层负载均衡如同底层交换设备一样具有天生的业务透明性，接驳到业务流中时对应用层无感知，无须进行额外的设置和调整。</p>
+<p>而FULLNAT则是专为大规模工程应用而设计的，消除了原有DR/NAT模式在应用中的诸多限制，比如要求前端服务器在同一广播域或同一网段等。FULLNAT模式使网络结构的设计更为清晰，同时跨网段的转发使服务集群的扩展更加灵活、便捷。LVS可以运行在普通服务器上，有不俗的性能表现，并且安装和配置不复杂，名副其实的低成本和高收益。针对LVS的部署过程已有丰富的文档和手册详细介绍，在此不再赘述。</p>
+<p>Keepalived则是基于底层负载均衡框架（如LVS）进一步扩展和增强了负载均衡的高可用性，使之具备构建集群的能力，提供了更适合于维护的配置格式、健康检查能力等。概括来说，LVS实现了内部的业务集群抽象和虚拟，而Keepalived则完成了LVS集群的构建，以及LVS映射关系管理。</p>
+<p>负载均衡器接入结构<br>负载均衡器接入结构如图12-4所示。</p>
+<p><img src="/images/15061678679381.jpg" alt=""></p>
+<p>图12-4  负载均衡器接入结构</p>
+<p>在实际应用中基于LVS+Keepalived的负载均衡器采用了如图13-4所描述的结构，LVS的外网侧与交换设备通过OSPF进行接驳，LVS的内网侧与内网交换设备直连。这种结构的特点和优势如下。</p>
+<p><strong>1．容量可扩展的LVS集群</strong></p>
+<p>在前面已经提到，Keepalived使LVS具备了构建集群的能力，但是Keepalived使用VRRP进行容错备份，而VRRP协议造成了两方面的局限：<br>◎ 在一个集群中，同一时刻只有Master能够工作，若干Slave只能作为冷备。<br>◎ VRRP只能工作在二层网络，因此所有LVS节点必须部署在同一广播域。</p>
+<p>通过VRRP协议构建的LVS集群，起到了冗余和备份的作用，但在集群处理性能和容量上仍然是单机性能为上限，并不能通过扩展节点来扩充容量。另外，同属于一个广播域的要求也必须要在网络架构上进行设计和支持，在某种程度上也会增加网络维护的成本和复杂度，其中不能水平扩展在大规模服务的应用场景中是明显的软肋。</p>
+<p>所以，必须要使LVS节点具备热备的能力以及水平扩展的能力。通过在LVS与交换设备间建立OSPF邻居关系便是可行的方案之一，OSPF邻居关系建立后，交换设备可以动态发现和感知LVS节点变化，并从LVS节点学习路由。若有多个LVS节点同时宣告了相同路由，交换设备则会通过ECMP（Equal Cost Multipath Routing，等价路由）机制进行分流，而这恰好就是我们所需要的热备机制。在热备的基础上，增加或减少LVS节点数便能够重新分流，达到容量伸缩的目的。</p>
+<p><strong>2．独立的LVS节点</strong></p>
+<p>不再依赖VRRP作为构建集群的基础后，LVS节点之间便消除了相互通信和选举的需求，不会再发生类似VRRP模式下出现多个Master或无Master的情况。各个LVS节点更具独立性，单节点故障或进行维护不影响其他节点的正常运行。<br>在OSPF+LVS构建的集群化负载均衡结构中，虽然解决了大规模应用中的诸多问题，但也并非十全十美。</p>
+<p>首先，单节点故障会造成交换设备路由的变化，造成ECMP机制重新计算。在交换设备中ECMP通常只是简单hash计算，没有一致性hash的特性，因此数据流将会完全打乱（简单hash计算保证了转发的性能和均衡性，而一致性hash除了增加复杂度外，也不能保证绝对均衡，所以当前交换机基本上都不支持一致性hash的特性）。若没有对LVS节点的Session进行同步，打乱后的数据流无法再进行转发，从而造成连接中断。例如，ECMP重新计算前业务流是经过LVS NODE1分流和转发的；而ECMP重新计算后，业务流则可能会被分配到LVS NODE2。由于LVS NODE2上并没有之前会话的任何信息，因而无法正常继续之前的转发和交互。</p>
+<p>其次，FULLNAT模块in/out流量都会经由LVS节点穿行，对LVS节点转发性能造成额外的开销。<br>最后，也是由于各节点的独立性，在配置有差异的情况下，各节点仍然能够正常运行，使得配置上错误或不同等小隐患不容易被及时发现。<br>LVS的集群化增强了业务架构体系的稳定性和高可用性，但规模化的集群管理是衍生而来的运维烦恼。如何保证集群的同步一致和可靠运行，便是随之而来的课题。</p>
+<h2 id="自动化管理系统"><a href="#自动化管理系统" class="headerlink" title="自动化管理系统"></a>自动化管理系统</h2><p>Keepalived在LVS的基础上，提供了更为友好的配置形式，便于人工维护。但在大规模应用中，由于配置的条目多，造成人工维护的变更成本高、误操作概率高等衍生问题，从而使得规模越大配置越难维护。而同时，LVS又是内、外网流量接驳的咽喉，一旦出现误操作，就会损失全部用户流量。因此，LVS配置的有效性、变更的准确性至关重要。抛弃人工管理实现自动化，既是顺势而为，又是必然的趋势。</p>
+<p>系统结构如图12-5所示。</p>
+<p><img src="/images/15061679136999.jpg" alt=""></p>
+<p>图12-5  系统结构</p>
+<p>首先，系统的核心是Etcd，一款用于配置管理和服务发现的开源的分布式KV存储。Etcd数据是以树状结构存储的，而Keepalived配置同样也是树状的层次关系，DC-&gt;CLUSTER-&gt;VS-&gt;RS-&gt;RS HealthCheck，因此Keepalived经过层次化转换后，可以很容易地保存到Etcd中，并由Etcd自身存储结构来始终保证这样的层次性。同样在读取方面，指定一个节点（如CLUSTER），拉取以该节点为root的子树，经过简单的合并，就可以轻松地将整个节点配置转换为Keepalived的格式。这也是我们选取Etcd作为Keepalived配置存储的考量。</p>
+<p>其次，利用Etcd已有的HTTP API接口，封装和完善数据的权限及有效性检查，从而通过UI或工具就能自动化地进行Etcd数据操作，保证配置变更的准确性和可靠性，减少人为误操作。</p>
+<p>再次，Etcd作为整个系统的核心，同样也需要保证高可用性和高可靠性，而其自身的分布式设计便能满足高可用性需求。</p>
+<p>最后，在Keepalived端，设计采用拉取的策略从Etcd查询得到集群配置并转换为Keepalived配置文件生效。pull策略无疑牺牲了配置生效的实时性，但在稳定性和实时性之间，整个负载均衡器的稳定性是具有更高优先级的。</p>
+<p><strong>为什么pull策略会更稳定？主要体现在如下几个方面。</strong></p>
+<p>（1）pull动作的触发并非是用户行为，因而是可控的、周期性的，即使有大量的集中的配置变更，也不会造成KPD的频繁加载。</p>
+<p>（2）pull形式更便捷地保证了LVS集群配置的一致性，例如某节点在故障或维护后，重新加入集群时，配置可能就已经发生过变化或更新。pull方式在加入集群时强制拉取一次，便可以完成线上配置的同步。而若换作push方式，事情就会变得复杂，在节点故障期间，要记录状态不能往故障机器发布，节点恢复后，再重置状态触发配置的推送和发布。如果状态处理得不正确，就会导致集群配置的不一致，造成隐患。</p>
+<p>（3）避免功能模块间的耦合，从图12-6中可以看出，UI、Etcd和LVS是相对独立的业务模块，Etcd通过标准接口接受更新、查询请求，各个模块的升级不影响和依赖其他。</p>
+<p>在实现LVS的自动化管理之后，才能进一步整合其他系统，实现体系的自动化。比如通过与部署系统的接驳，实现应用部署完成后自动流量引入；通过与域名管理系统的接驳，实现域名申请后自动进行LVS虚拟IP地址申请等。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在互联网行业，高可用性和高性能业务架构是永远不能懈怠的话题，通过负载均衡技术进行流量的接入，不仅提高了业务的可靠性和冗余性，还使资源利用率和请求响应时间得到提升。如何利用好负载均衡这件利器，是持续的实践和探索。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/under-the-ops/20170923-12-domain-and-access/" title="第十二章：域名和接入">http://www.yulongjun.com/under-the-ops/20170923-12-domain-and-access/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Domain/" rel="tag"># Domain</a>
+          
+            <a href="/tags/Access/" rel="tag"># Access</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/under-the-ops/20170923-11-cdn/" rel="next" title="第十一章：从外包到自建，小中企业CDN运维进阶指南">
+                <i class="fa fa-chevron-left"></i> 第十一章：从外包到自建，小中企业CDN运维进阶指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/under-the-ops/20170923-13-website-operation-reliability/" rel="prev" title="第十三章：网站可靠性运维">
+                第十三章：网站可靠性运维 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡及自动化"><span class="nav-number">1.</span> <span class="nav-text">负载均衡及自动化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择LVS-Keepalived的考虑"><span class="nav-number">2.</span> <span class="nav-text">选择LVS+Keepalived的考虑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动化管理系统"><span class="nav-number">3.</span> <span class="nav-text">自动化管理系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

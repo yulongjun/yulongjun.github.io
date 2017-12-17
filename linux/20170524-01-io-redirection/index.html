@@ -1,0 +1,1317 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,IO,IO Redirection," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="01-IO重定向">
+<meta property="og:url" content="http://www.yulongjun.com/linux/20170524-01-io-redirection/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/14975176407733.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/1495628807365.png">
+<meta property="og:updated_time" content="2017-11-18T12:46:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="01-IO重定向">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/14975176407733.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/linux/20170524-01-io-redirection/"/>
+
+
+
+
+
+  <title> 01-IO重定向 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170524-01-io-redirection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                01-IO重定向
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-24T20:00:00+08:00">
+                2017-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/linux/20170524-01-io-redirection/" class="leancloud_visitors" data-flag-title="01-IO重定向">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/14975176407733.jpg" alt=""></p>
+<a id="more"></a>
+<h3 id="标准IO（Standard-Input-Output）"><a href="#标准IO（Standard-Input-Output）" class="headerlink" title="标准IO（Standard Input/Output）"></a>标准IO（Standard Input/Output）</h3><p>可用于做输入的设备：</p>
+<blockquote>
+<p>键盘设备、文件系统上的常规文件、网卡等。</p>
+</blockquote>
+<p>可用于做输出的设备：</p>
+<blockquote>
+<p>显示器、文件系统上的常规文件、网卡等。</p>
+</blockquote>
+<p>程序的数据流有三种：</p>
+<ul>
+<li>输入的数据流：&lt;– 标准输入（<code>stdin</code>(standard input)）,默认接受来自键盘的输入。</li>
+<li>输出的数据流：–&gt; 标准输出（<code>stdout</code>(standard output)），默认输出到终端窗口。</li>
+<li>错误输出流：–&gt; 标准错误（<code>stderr</code>(standard error)），默认输出到终端窗口。</li>
+</ul>
+<p><code>fd</code>:file descriptor，文件描述符<br>标准输入：<code>0</code><br>标准输出：<code>1</code><br>标准错误：<code>2</code></p>
+<p><code>echo $?</code>（bash脚本编程中，很多判断基于<code>$?</code>这个来决定）</p>
+<p><img src="/images/1495628807365.png" alt=""></p>
+<hr>
+<h3 id="IO重定向-Input-Output-Redirection"><a href="#IO重定向-Input-Output-Redirection" class="headerlink" title="IO重定向(Input/Output Redirection)"></a>IO重定向(Input/Output Redirection)</h3><blockquote>
+<p><strong>输入本来默认是键盘，我们改成其他输入，就是输入重定向</strong> ：例如从文本文件里输入。<br><strong>本来输出的位置是显示器，我们改成其他输出，就是输出重定向</strong>：例如输出到文件。</p>
+</blockquote>
+<p><code>set -C</code>：</p>
+<blockquote>
+<p>禁止覆盖输出重定向到已存在的文件(在这种模式下，如果你非要覆盖，可以使用<code>&gt;|</code>）</p>
+</blockquote>
+<p><code>set +C</code>：</p>
+<blockquote>
+<p>关闭上述特性</p>
+</blockquote>
+<p><code>/dev/null</code></p>
+<blockquote>
+<p>特殊设备，空设备，也叫黑洞，数据进去都没了。</p>
+</blockquote>
+<hr>
+<h3 id="输出重定向（Output-Redirection）的几种方法"><a href="#输出重定向（Output-Redirection）的几种方法" class="headerlink" title="输出重定向（Output Redirection）的几种方法"></a>输出重定向（Output Redirection）的几种方法</h3><h4 id="1-正常输出重定向：-gt-（覆盖输出）、-gt-gt-（追加输出）"><a href="#1-正常输出重定向：-gt-（覆盖输出）、-gt-gt-（追加输出）" class="headerlink" title="1. 正常输出重定向：&gt;（覆盖输出）、&gt;&gt;（追加输出）"></a><strong>1. 正常输出重定向</strong>：<code>&gt;</code>（覆盖输出）、<code>&gt;&gt;</code>（追加输出）</h4><p>例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>cat /etc/issue &gt; /tmp/issue.out</div><div class="line"><span class="comment">#开两个ssh连接,我们先看第二个的终端所在的虚拟设备文件，然后在第一个输入</span></div><div class="line"></div><div class="line"><span class="comment">#第二个ssh：</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>tty</div><div class="line">/dev/pts/<span class="number">1</span></div><div class="line"></div><div class="line"><span class="comment">#第一个ssh输入：</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>cat /etc/issue &gt; /dev/pts/<span class="number">1</span></div><div class="line"><span class="comment"># 我们看到第二个ssh输出了信息</span></div><div class="line"></div><div class="line"><span class="comment">#追加输出</span></div><div class="line">ls /var &gt; /tmp/test.out</div><div class="line">cat /etc/fstab &gt;&gt; /tmp/test.out</div></pre></td></tr></table></figure></p>
+<h4 id="2-错误输出重定向：2-gt-（覆盖输出）、2-gt-gt-（追加输出）"><a href="#2-错误输出重定向：2-gt-（覆盖输出）、2-gt-gt-（追加输出）" class="headerlink" title="2. 错误输出重定向：2&gt;（覆盖输出）、2&gt;&gt;（追加输出）"></a><strong>2. 错误输出重定向</strong>：<code>2&gt;</code>（覆盖输出）、<code>2&gt;&gt;</code>（追加输出）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">ls /etc/issue1111 2&gt;&gt; /tmp/error.out</div><div class="line">catt /etc/issue 2&gt;&gt; /dev/null</div></pre></td></tr></table></figure>
+<h4 id="3-正确和错误的都进行输出重定向："><a href="#3-正确和错误的都进行输出重定向：" class="headerlink" title="3. 正确和错误的都进行输出重定向："></a><strong>3. 正确和错误的都进行输出重定向</strong>：</h4><ul>
+<li>新写法：<code>COMMAND &amp;&gt; /path/to/somefile</code>、<code>COMMAND &amp;&gt;&gt; /path/to/somefile</code></li>
+<li>老写法：<code>COMMAND &gt; /path/to/somefile 2&gt;&amp;1</code>、<code>COMMAND &gt;&gt; /path/to/somefile 2&gt;&amp;1</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ls /boot /err &amp;&gt; /tmp/all1.log <span class="comment"># 新写法</span></div><div class="line">ls /boot /err &amp;&gt;&gt; /tmp/all2.log <span class="comment"># 新写法</span></div><div class="line">ls /boot /err &gt; /tmp/all3.log <span class="number">2</span>&gt;&amp;<span class="number">1</span> <span class="comment"># 老写法</span></div><div class="line">ls /boot /err &gt;&gt; /tmp/all4.log <span class="number">2</span>&gt;&amp;<span class="number">1</span> <span class="comment"># 老写法</span></div></pre></td></tr></table></figure>
+<hr>
+<h3 id="输入重定向（Input-Redirection）的方法"><a href="#输入重定向（Input-Redirection）的方法" class="headerlink" title="输入重定向（Input Redirection）的方法"></a><strong>输入重定向（Input Redirection）的方法</strong></h3><h4 id="tr命令"><a href="#tr命令" class="headerlink" title="tr命令"></a><code>tr</code>命令</h4><p><code>tr [OPTION]... SET1 [SET2]</code><br>把输入的数据当中的字符，凡是在<code>SET1</code>定义范围内出现的，通通对位转换为<code>SET2</code>出现的字符</p>
+<ul>
+<li><code>tr SET1 SET2 &lt; /path/from/somefile</code>对位转化SET1中的字符为SET2中的字符</li>
+<li><code>tr -d SET1 &lt; /path/from/somefile</code>删除指定集合里出现的字符</li>
+<li><code>tr -s  &quot;\n&quot; /path/from/somefile</code>把指定的连续的字符以一个字符表示，压缩。</li>
+<li><code>tr -c</code>Complement ,取字符集的补集，通常与其他参数结合使用，例如<code>-dc</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">[root❄centos7 ~]☭ tr &apos;a-z&apos; &apos;A-Z&apos;</div><div class="line">aabbcc33</div><div class="line">AABBCC33</div><div class="line">^C</div><div class="line">[root❄centos7 ~]☭ tr &apos;a-z&apos; &apos;A-Z&apos; &lt;/etc/issue</div><div class="line">\S</div><div class="line">KERNEL \R ON AN \M</div><div class="line"></div><div class="line">[root❄centos7 ~]☭ tr &apos;a-z&apos; &apos;A-Z&apos; &lt; /etc/issue &gt; /app/issue2</div><div class="line">[root❄centos7 ~]☭ cat /app/issue2</div><div class="line">\S</div><div class="line">KERNEL \R ON AN \M</div></pre></td></tr></table></figure>
+<blockquote>
+<p>tips：如果是输入后再输出到同一个文件，就会清空这个文件，所以最好不要这么用，下面是一个错误示范：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root❄centos7 ~]☭ cd /app/</div><div class="line">[root❄centos7 app]☭ cp issue2 issue3</div><div class="line">[root❄centos7 app]☭ tr &apos;a-z&apos; &apos;A-Z&apos; &lt; issue3 &gt;issue3</div><div class="line">[root❄centos7 app]☭ cat issue3</div><div class="line">[root❄centos7 app]☭</div></pre></td></tr></table></figure>
+<p>追加是可以的，在原有文件基础上再追加一段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[root❄centos7 app]☭ cat issue2</div><div class="line">\S</div><div class="line">KERNEL \R ON AN \M</div><div class="line"></div><div class="line">[root❄centos7 app]☭ tr &apos;A-Z&apos; &apos;a-z&apos; &lt; issue2 &gt;&gt; issue2</div><div class="line">[root❄centos7 app]☭ cat issue2</div><div class="line">\S</div><div class="line">KERNEL \R ON AN \M</div><div class="line"></div><div class="line">\s</div><div class="line">kernel \r on an \m</div></pre></td></tr></table></figure>
+<p>dc结合使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[root❄centos7 app]☭ echo &#123;a..z&#125; &gt;f1</div><div class="line">[root❄centos7 app]☭ cat f1</div><div class="line">a b c d e f g h i j k l m n o p q r s t u v w x y z</div><div class="line">[root❄centos7 app]☭ tr -d &apos;f-n&apos; &lt;f1</div><div class="line">a b c d e          o p q r s t u v w x y z</div><div class="line">[root❄centos7 app]☭ cat f1</div><div class="line">a b c d e f g h i j k l m n o p q r s t u v w x y z</div><div class="line">[root❄centos7 app]☭ tr -dc &apos;f-n&apos; &lt; f1</div><div class="line">fghijklmn[root❄centos7 app]☭</div></pre></td></tr></table></figure>
+<h4 id="Here-documents"><a href="#Here-documents" class="headerlink" title="Here documents"></a>Here documents</h4><p>输出到屏幕，或创建多行文档)：<code>&lt;&lt;终止词</code></p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">[root❄centos7 app]☭ cat &lt;&lt;EOF</div><div class="line">&gt; yulongjun</div><div class="line">&gt; zhaoweiqiang</div><div class="line">&gt; EOF</div><div class="line"></div><div class="line">yulongjun</div><div class="line">zhaoweiqiang</div><div class="line"></div><div class="line">[root❄centos7 app]☭ cat &gt;cat.out &lt;&lt;END</div><div class="line">&gt; yulongjun</div><div class="line">&gt; zhaoweiqiang</div><div class="line">&gt; hanjinze</div><div class="line">&gt; songda</div><div class="line">&gt; END</div><div class="line"></div><div class="line">[root❄centos7 app]☭ cat /tmp/cat.out </div><div class="line">yulongjun</div><div class="line">zhaoweiqiang</div><div class="line">hanjinze</div><div class="line">songda</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="代表输出流"><a href="#代表输出流" class="headerlink" title="-代表输出流"></a><code>-</code>代表输出流</h3><blockquote>
+<p>此段来源于：<a href="https://www.cnblogs.com/dachenzi/p/6790596.html" target="_blank" rel="external">https://www.cnblogs.com/dachenzi/p/6790596.html</a></p>
+</blockquote>
+<p><strong>搭配<code>cat</code></strong></p>
+<p><code>cat -</code>：如果指定cat的文件为-，表示从标准输入读取（和直接使用cat，好像没什么区别）</p>
+<p><strong>搭配<code>|</code></strong></p>
+<p><code>echo 123 | cat -</code>：表示把管道符前面的输出流，在交给cat执行一遍（这就很牛逼了）</p>
+<p><strong>例子：</strong></p>
+<p>如果操作系统没有scp命令，只有ssh，那么是不是就不能远程拷贝了（前提：没有openssh-clients软件包）</p>
+<p>利用<code>-</code>，就可以实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat jdk.tar.gz | ssh 192.168.56.101  &apos;cat - &gt; /tmp/jdk.tar.gz&apos;</div></pre></td></tr></table></figure>
+<p><code>cat jdk.tar.gz</code> 产生输出流， 在管道后面的 <code>-</code> ,则可以接受输出流，并重定向到 <code>/tmp/jdk.tar.gz</code> </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/linux/20170524-01-io-redirection/" title="01-IO重定向">http://www.yulongjun.com/linux/20170524-01-io-redirection/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/IO/" rel="tag"># IO</a>
+          
+            <a href="/tags/IO-Redirection/" rel="tag"># IO Redirection</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux/20170522-05-inode-link/" rel="next" title="05-inode、软硬链接">
+                <i class="fa fa-chevron-left"></i> 05-inode、软硬链接
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux/20170524-02-pipe/" rel="prev" title="02-管道">
+                02-管道 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#标准IO（Standard-Input-Output）"><span class="nav-number">1.</span> <span class="nav-text">标准IO（Standard Input/Output）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO重定向-Input-Output-Redirection"><span class="nav-number">2.</span> <span class="nav-text">IO重定向(Input/Output Redirection)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出重定向（Output-Redirection）的几种方法"><span class="nav-number">3.</span> <span class="nav-text">输出重定向（Output Redirection）的几种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-正常输出重定向：-gt-（覆盖输出）、-gt-gt-（追加输出）"><span class="nav-number">3.1.</span> <span class="nav-text">1. 正常输出重定向：>（覆盖输出）、>>（追加输出）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-错误输出重定向：2-gt-（覆盖输出）、2-gt-gt-（追加输出）"><span class="nav-number">3.2.</span> <span class="nav-text">2. 错误输出重定向：2>（覆盖输出）、2>>（追加输出）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-正确和错误的都进行输出重定向："><span class="nav-number">3.3.</span> <span class="nav-text">3. 正确和错误的都进行输出重定向：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入重定向（Input-Redirection）的方法"><span class="nav-number">4.</span> <span class="nav-text">输入重定向（Input Redirection）的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tr命令"><span class="nav-number">4.1.</span> <span class="nav-text">tr命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Here-documents"><span class="nav-number">4.2.</span> <span class="nav-text">Here documents</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代表输出流"><span class="nav-number">5.</span> <span class="nav-text">-代表输出流</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

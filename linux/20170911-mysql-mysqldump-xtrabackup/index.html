@@ -1,0 +1,1456 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="mysqldump,xtrabackup,innobackupex," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL备份恢复（mysqldump、xtrabackup）">
+<meta property="og:url" content="http://www.yulongjun.com/linux/20170911-mysql-mysqldump-xtrabackup/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/15052313103723.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15052253759063.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15052253598670.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15052196758027.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15052199174599.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15052195352622.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15052197099155.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15052203968963.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15052196302410.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15052223537323.jpg">
+<meta property="og:updated_time" content="2017-09-12T15:48:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL备份恢复（mysqldump、xtrabackup）">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/15052313103723.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/linux/20170911-mysql-mysqldump-xtrabackup/"/>
+
+
+
+
+
+  <title> MySQL备份恢复（mysqldump、xtrabackup） | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170911-mysql-mysqldump-xtrabackup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MySQL备份恢复（mysqldump、xtrabackup）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-11T19:04:31+08:00">
+                2017-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/linux/20170911-mysql-mysqldump-xtrabackup/" class="leancloud_visitors" data-flag-title="MySQL备份恢复（mysqldump、xtrabackup）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/15052313103723.jpg" alt=""></p>
+<a id="more"></a>
+<p><strong>备份分为：</strong></p>
+<ul>
+<li><strong>冷备</strong>（cold backup）：cold backup。闭服务下拷贝文件，属于物理备份。</li>
+<li><strong>温备</strong>（warm backup）：只读模式下备份，数据可读，但是不能写，属于逻辑备份。</li>
+<li><strong>热备</strong>（hot backup）：读写模式下备份，在某一时间点拍快照，只备份这时间戳之前的数据库状态，属于逻辑备份。</li>
+</ul>
+<p><strong>全量备份、增量备份、差异备份概念：</strong></p>
+<ul>
+<li><strong>完全备份</strong>（full backup）：完整的数据备份。</li>
+<li><strong>增量备份</strong>（incremental backup）：仅备份自上一次完全备份或增量备份以来变量的那部数据。</li>
+<li><strong>差异备份</strong>（differential backup）：仅备份自上一次完全备份以来变量的那部数据。</li>
+</ul>
+<p>图示：</p>
+<p>周末全备，每天在前一天的基础上打增备：<br><img src="/images/15052253759063.png" alt=""></p>
+<p>周末全备，每天针对周末那天打差异备份。<br><img src="/images/15052253598670.png" alt=""></p>
+<p><strong>备份工具：</strong></p>
+<ul>
+<li><code>mysqldump</code><ul>
+<li>全量+binlog </li>
+</ul>
+</li>
+<li><code>xtrabackup</code><ul>
+<li>全量+差异+binlog</li>
+<li>全量+增量+binlog</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="mysqldump"><a href="#mysqldump" class="headerlink" title="mysqldump"></a>mysqldump</h2><h3 id="1-使用方法介绍"><a href="#1-使用方法介绍" class="headerlink" title="1. 使用方法介绍"></a>1. 使用方法介绍</h3><p>mysqldump基本指令：</p>
+<blockquote>
+<p>mysqldump [options] db_name [tbl_name …]<br>mysqldump [options] –databases db_name …<br>mysqldump [options] –all-databases</p>
+</blockquote>
+<p>mysqldump 直接输出到屏幕命令，我们可以重定向到任何一个文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqldump --all-databases &gt;/backup/fullbackup-$(date +%Y%m%d).sql</div></pre></td></tr></table></figure>
+<p><strong>MyISAM存储引擎</strong>：仅支持温备，不支持热备，备份时要锁定表，<code>mysqldump</code>还需要以下参数：</p>
+<ul>
+<li><p><code>-x</code>, <code>--locak-all-tables</code>：锁定所有库的所有表，即加一个读锁</p>
+</li>
+<li><p><code>-l</code>, <code>--lock-tables</code>：锁定指定库所有表。</p>
+</li>
+</ul>
+<p><strong>InnoDB存储引擎</strong>：同时支持温备和热备。（能自动提交完成的任务，回滚未完成的任务，然后拍个快照，在此快照基础上创建事务。），<code>musqldump</code>支持以下参数：</p>
+<ul>
+<li><p>热备：<code>--single-stransaction</code>：创建一个事务，基于快照执行备份。</p>
+</li>
+<li><p>温备：同MyISAM的<code>-x</code>和<code>-l</code>。</p>
+</li>
+</ul>
+<p><code>mysqldump</code>命令的其他选项：</p>
+<ul>
+<li><code>-R</code>， <code>--routines</code>：存储过程和存储函数</li>
+<li><code>--triggers</code>：触发器</li>
+<li><code>-E</code>， <code>--events</code>：事件调度器</li>
+<li><code>--flush-logs</code>：锁定表完成后，进行日志刷新操作。</li>
+<li><code>--master-data[=1|2]</code>：记录备份时候binglog日志所处的位置。<ul>
+<li><code>1</code>：记录为CHANGE MASTER TO语句。</li>
+<li><code>2</code>：同样记录为CHANGE MASTER TO语句，但是是注释掉的。（给从服务器用的，要是只有一个主，就可以选择2注释掉，或者不写就什么也没有）</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-模拟一个完整的温备和恢复过程："><a href="#2-模拟一个完整的温备和恢复过程：" class="headerlink" title="2. 模拟一个完整的温备和恢复过程："></a>2. 模拟一个完整的温备和恢复过程：</h3><blockquote>
+<p>前提条件：<code>/etc/my.conf.d/server.cnf</code> 里加一条 <code>log-bin=master-log</code>,启动二进制文件的记录功能。修改完配置后重启数据库服务，可以看到<code>/var/lib/mysql/</code>下有<code>master-log.xxxxxx</code>,表明启动二进制文件记录功能成功。</p>
+</blockquote>
+<p><strong>（1）温备</strong></p>
+<p><code>mysqldump -x -R -E --triggers --all-databases --master-data=2 --flush-logs &gt;/backup/fullbackup-$(date +%Y%m%d).sql</code></p>
+<blockquote>
+<p>作者操作日期为20170912，备份的文件需要复制多份到其他服务器，以免服务器崩溃。</p>
+</blockquote>
+<p><strong>（2）对数据库添加或删除表或数据</strong></p>
+<p><strong>（3）模拟数据库崩溃</strong></p>
+<p>记得先拷贝<code>/etc/my.conf.d/server.cnf</code>和<code>/var/lib/mysql/master-log.xxxxxx</code>到别处。(配置文件，一般配置服务器会保存一份；binlog日志文件，一般是存到不同的服务器做冗余。这里假设都是从其他服务器拷贝过来的，暂时copy一份作为恢复用。你应该知道，这个应该是从其他服务器上拷贝的，这里临时用就不那么麻烦了。）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl stop mariadb.service</div><div class="line">rm -rf /var/lib/mysql/*</div></pre></td></tr></table></figure>
+<p><strong>（4）恢复数据库全备文件</strong></p>
+<p>恢复配置文件<code>/etc/my.conf.d/server.cnf</code>、binlog日志文件<code>/var/lib/mysql/master-log.xxxx</code>、数据库备份文件/backup/</p>
+<p><code>vim /etc/my.conf.d/server.cnf</code>,这里注释掉<code>log-bin=master-log</code>，不启动bin_log日志记录功能。</p>
+<p>恢复全库备份文件：</p>
+<p>第一种方法，本机运行mysql命令，然后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MariaDB &gt; \. /backup/fullbackup-20170912.sql</div></pre></td></tr></table></figure>
+<p>第二种方法：远程或本机执行命令（远程的前提是有远程权限）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u USER -h HOST -p PASSWORD &lt; /backup/fullbackup-20170912.sql</div></pre></td></tr></table></figure>
+<p>这里USER为用户名，HOST为主机名或IP，PASSWORD为密码。</p>
+<p><strong>（5）恢复binlog日志</strong></p>
+<p>我们查询到<code>/backup/fullbackup-20170912.sql</code>里日志记录的的<code>CHANGE MASTER TO</code>的位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-- CHANGE MASTER TO MASTER_LOG_FILE=&apos;master-log.000002&apos;, MASTER_LOG_POS=245;</div></pre></td></tr></table></figure>
+<p>我们看到位置是245，也就是开头的位置（因为我们备份时候启动日志滚动<code>--flush-log</code>了，所以会滚动到下一个日志文件的开头），所以我们要把包含<code>master-log.000002</code>和之后的的所有binlog日志文件，用<code>mysqlbinlog</code>命令工具，读取几个binlog日志文件内容，然后重定向到到一个文件里。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd /var/lib/mysql/</div><div class="line">mysqlbinlog master-log.000002 ... master-log.00000x &gt;/backup/binlog-20170912.sql</div></pre></td></tr></table></figure>
+<p>执行bin_log里的语句进行恢复：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MariaDB &gt; \. /backup/binlog-20170912.sql</div></pre></td></tr></table></figure>
+<p>修改配置文件<code>/etc/my.conf.d/server.cnf</code>，把<code>bin-log=master-log</code>的注释去掉。然后重启MariaDB服务，即可正常使用了。</p>
+<hr>
+<h2 id="xtrabackup使用方法"><a href="#xtrabackup使用方法" class="headerlink" title="xtrabackup使用方法"></a>xtrabackup使用方法</h2><p>官网介绍：<a href="https://www.percona.com/software/mysql-database/percona-xtrabackup" target="_blank" rel="external">https://www.percona.com/software/mysql-database/percona-xtrabackup</a></p>
+<p>使用文档：<a href="https://www.percona.com/software/mysql-database/percona-xtrabackup" target="_blank" rel="external">http://ovg31ww7o.bkt.clouddn.com/Percona-XtraBackup-2.4.8.pdf</a></p>
+<h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h3><p>Xtrabackup是由percona提供的mysql数据库备份工具，据官方介绍，这也是世界上惟一一款开源的能够对innodb和xtradb数据库进行热备的工具。特点：<br>(1)备份过程快速、可靠；<br>(2)备份过程不会打断正在执行的事务；<br>(3)能够基于压缩等功能节约磁盘空间和流量；<br>(4)自动实现备份检验；<br>(5)还原速度快。</p>
+<h3 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h3><p>安装：<code>yum install xtrabackup</code></p>
+<blockquote>
+<p>要用新版本可以去上面的官网下载安装。</p>
+</blockquote>
+<h3 id="3-命令简介"><a href="#3-命令简介" class="headerlink" title="3. 命令简介"></a>3. 命令简介</h3><p>我们主要用封装了的命令<code>innobackupex</code>。</p>
+<p>基础用法：</p>
+<p><code>innobackupex --user=DBUSER --password=DBUSERPASS /path/to/BACKUP-DIR/</code></p>
+<h3 id="4-实际使用"><a href="#4-实际使用" class="headerlink" title="4. 实际使用"></a>4. 实际使用</h3><h4 id="1-了解备份原理"><a href="#1-了解备份原理" class="headerlink" title="(1) 了解备份原理"></a>(1) 了解备份原理</h4><p>如果要使用一个最小权限的用户进行备份，则可基于如下命令创建此类用户：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mysql&gt; CREATE USER ’bkpuser’@’localhost’ IDENTIFIED BY ’s3cret’;</div><div class="line">mysql&gt; REVOKE ALL PRIVILEGES, GRANT OPTION FROM ’bkpuser’;</div><div class="line">mysql&gt; GRANT RELOAD, LOCK TABLES, REPLICATION CLIENT ON *.* TO ’bkpuser’@’localhost’;</div><div class="line">mysql&gt; FLUSH PRIVILEGES;</div></pre></td></tr></table></figure>
+<p>使用innobakupex备份时，其会调用xtrabackup备份所有的InnoDB表，复制所有关于表结构定义的相关文件(.frm)、以及MyISAM、MERGE、CSV和ARCHIVE表的相关文件，同时还会备份触发器和数据库配置信息相关的文件。这些文件会被保存至一个<strong>以时间命名的目录</strong>中。</p>
+<blockquote>
+<p>在使用innobackupex进行备份时，还可以使用<code>--no-timestamp</code>选项来阻止命令自动创建一个以时间命名的目录；如此一来，innobackupex命令将会创建一个BACKUP-DIR目录来存储备份数据。</p>
+</blockquote>
+<p>具体使用的一个例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">innobackupex --no-timestamp  /xtrabackup/$(date +%Y%m%d)</div></pre></td></tr></table></figure>
+<p>在备份的同时，innobackupex还会在备份目录中创建如下文件：<br><img src="/images/15052196758027.jpg" alt=""></p>
+<ul>
+<li><code>xtrabackup_info</code> —— 总体备份信息。</li>
+</ul>
+<p><img src="/images/15052199174599.jpg" alt=""></p>
+<ul>
+<li><code>xtrabackup_checkpoints</code> —— 备份类型（如完全或增量）、备份状态（如是否已经为prepared状态）和LSN(日志序列号)范围信息；</li>
+</ul>
+<p><img src="/images/15052195352622.jpg" alt=""></p>
+<blockquote>
+<p><code>LSN</code>：每个InnoDB页(通常为16k大小)都会包含一个日志序列号，即LSN。LSN是整个数据库系统的系统版本号，每个页面相关的LSN能够表明此页面最近是如何发生改变的。</p>
+</blockquote>
+<ul>
+<li><code>xtrabackup_binlog_info</code> —— mysql服务器当前正在使用的二进制日志文件及至备份这一刻为止二进制日志事件的位置。</li>
+</ul>
+<p><img src="/images/15052197099155.jpg" alt=""></p>
+<ul>
+<li><code>backup-my.cnf</code> —— 备份命令用到的配置选项信息。</li>
+</ul>
+<p><img src="/images/15052203968963.jpg" alt=""></p>
+<h4 id="2-准备-prepare-一个完全备份"><a href="#2-准备-prepare-一个完全备份" class="headerlink" title="(2) 准备(prepare)一个完全备份"></a>(2) 准备(prepare)一个完全备份</h4><p>一般情况下，在备份完成后，数据尚且不能用于恢复操作，因为备份的数据中可能会包含尚未提交的事务或已经提交但尚未同步至数据文件中的事务。因此，此时数据文件仍处理不一致状态。“准备”的主要作用正是通过<strong>回滚未提交的事务</strong>及<strong>同步已经提交的事务至数据文件</strong>使得数据文件处于一致性状态。</p>
+<p>innobakupex命令的<code>--apply-log</code>选项可用于实现上述功能。如下面的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">innobackupex --apply-log  /path/to/BACKUP-DIR</div></pre></td></tr></table></figure>
+<p>实际使用例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">innobackupex --apply-log --no-timestamp /xtrabackup/$(date +%Y%m%d)</div></pre></td></tr></table></figure>
+<p>如果执行正确，其最后输出的几行信息通常如下：<br><img src="/images/15052196302410.jpg" alt=""></p>
+<p>在实现“准备”的过程中，innobackupex通常还可以使用<code>--use-memory</code>选项来指定其可以使用的内存的大小，默认通常为100M。如果有足够的内存可用，可以多划分一些内存给prepare的过程，以提高其完成速度。</p>
+<h4 id="3-从一个完全备份中恢复数据"><a href="#3-从一个完全备份中恢复数据" class="headerlink" title="(3) 从一个完全备份中恢复数据"></a>(3) 从一个完全备份中恢复数据</h4><blockquote>
+<p>注意：恢复不用启动MySQL</p>
+</blockquote>
+<p>innobackupex命令的<code>--copy-back</code>选项用于执行恢复操作，其通过复制所有数据相关的文件至mysql服务器DATADIR目录中来执行恢复过程。innobackupex通过<code>backup-my.cnf</code>来获取DATADIR目录的相关信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">innobackupex --copy-back  /path/to/BACKUP-DIR</div></pre></td></tr></table></figure>
+<p>实际使用例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">innobackupex --copy-back /extrabakup/20170912</div></pre></td></tr></table></figure>
+<p>如果执行正确，其输出信息的最后几行通常如下：</p>
+<p><img src="/images/15052223537323.jpg" alt=""></p>
+<p>请确保如上信息的最行一行出现“<strong>innobackupex: completed OK!</strong>”。</p>
+<p>当数据恢复至DATADIR目录以后，还需要确保所有数据文件的属主和属组均为正确的用户，如mysql，否则，在启动mysqld之前还需要事先修改数据文件的属主和属组。如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chown -R mysql:mysql /var/lib/mysql/</div></pre></td></tr></table></figure>
+<h4 id="4-使用innobackupex进行增量备份"><a href="#4-使用innobackupex进行增量备份" class="headerlink" title="(4) 使用innobackupex进行增量备份"></a>(4) 使用innobackupex进行增量备份</h4><p>每个InnoDB的页面都会包含一个LSN信息，每当相关的数据发生改变，相关的页面的LSN就会自动增长。这正是InnoDB表可以进行增量备份的基础，即innobackupex通过备份上次完全备份之后发生改变的页面来实现。</p>
+<p>要实现第一次增量备份，可以使用下面的命令进行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">innobackupex --incremental /backup --incremental-basedir=BASEDIR</div></pre></td></tr></table></figure>
+<p>实际使用的例子：</p>
+<p>做一些数据库操作，然后，做一次增量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">innobackupex --incremental /xtrabackup/20170912-incre-1 --incremental-basedir=/xtrabackup/20170912</div></pre></td></tr></table></figure>
+<p>然后再做一些操作，在做一次增量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">innobackupex --incremental /xtrabackup/20170912-incre-2 --incremental-basedir=/xtrabackup/20170912</div></pre></td></tr></table></figure>
+<p>其中，<code>BASEDIR</code>指的是完全备份所在的目录，此命令执行结束后，innobackupex命令会在/backup目录中创建一个新的以时间命名的目录以存放所有的增量备份数据。另外，在执行过增量备份之后再一次进行增量备份时，其<code>--incremental-basedir</code>应该指向上一次的增量备份所在的目录。</p>
+<blockquote>
+<p>注意：增量备份仅能应用于InnoDB或XtraDB表，对于MyISAM表而言，执行增量备份时其实进行的是完全备份。</p>
+</blockquote>
+<h4 id="5-模拟数据库崩溃"><a href="#5-模拟数据库崩溃" class="headerlink" title="(5) 模拟数据库崩溃"></a>(5) 模拟数据库崩溃</h4><blockquote>
+<p>注意：实验里没有备份，记得先把那几个binlog <code>master-log.xxxxxx</code>拷贝出来，这个在生产中都是存多份，生产中是从其他机器上copy过来的。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 注意真实环境binlogs是存在其他服务器上的</span></div><div class="line">mkdir /xtrabackup/binlogs</div><div class="line">cp /var/lib/mysql/master-log* /xtrabackup/binlogs/</div><div class="line"><span class="comment"># 模拟崩溃</span></div><div class="line">systemctl stop mariadb</div><div class="line">rm -rf /var/lib/mysql/*</div></pre></td></tr></table></figure>
+<h4 id="6-恢复备份的数据"><a href="#6-恢复备份的数据" class="headerlink" title="(6) 恢复备份的数据"></a>(6) 恢复备份的数据</h4><p>恢复备份的数据，包括，全量备份，增量备份，还有binlog。</p>
+<p>记得要加<code>--apply-log</code> 和<code>--redo-only</code>(指的是该提交的提交，没做完的不回滚，这里和准备备份文件那里不太一样）。</p>
+<p>添加开始的全备文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">innobackupex --apply-log --redo-only BASE-DIR</div></pre></td></tr></table></figure>
+<p>接着添加第一个增量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">innobackupex --apply-log --redo-only BASE-DIR --incremental-dir=INCREMENTAL-DIR-1</div></pre></td></tr></table></figure>
+<p>而后是第二个增量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">innobackupex --apply-log --redo-only BASE-DIR --incremental-dir=INCREMENTAL-DIR-2</div></pre></td></tr></table></figure>
+<p>其中<code>BASE-DIR</code>指的是完全备份所在的目录，而<code>INCREMENTAL-DIR-1</code>指的是第一次增量备份的目录，<code>INCREMENTAL-DIR-2</code>指的是第二次增量备份的目录，其它依次类推，即如果有多次增量备份，每一次都要执行如上操作；</p>
+<p>最后一个增量命令完成后，要在全量备份上做“回滚”操作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">innobackupex --apply-log BASE-DIR</div></pre></td></tr></table></figure>
+<p>实际的例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 打全备，该提交的提交，不回滚</span></div><div class="line">innobackupex --apply-log --redo-only /xtrabackup/20170912</div><div class="line"><span class="comment"># 打第一个增备，该提交的提交，不回滚</span></div><div class="line">innobackupex --apply-log --redo-only /xtrabackup/20170912 --incremental-dir=/xtrabackup/20170912-incre-1</div><div class="line"><span class="comment"># 打第二个增备，该提交的提交，不回滚</span></div><div class="line">innobackupex --apply-log --redo-only /xtrabackup/20170912 --incremental-dir=/xtrabackup/20170912-incre-2</div><div class="line"><span class="comment"># 该回滚的回滚</span></div><div class="line">innobackupex --apply-log /xtrabackup/20170912</div><div class="line"></div><div class="line">innobackupex --copy-back /extrabackup/20170912</div></pre></td></tr></table></figure>
+<h4 id="7-重放binlog"><a href="#7-重放binlog" class="headerlink" title="(7) 重放binlog"></a>(7) 重放binlog</h4><p>直接使用上面的例子来说明:</p>
+<p>查看最后一个增量的文件夹里的<code>xtrabackup_binlog_info</code>信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat /extrabackup/20170912-incre-2/xtrabackup_binlog_info</div></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">master-log.000003 1244</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/lib/mysql/</div><div class="line"><span class="comment"># 真实环境是从其他备份的服务器上copy过来</span></div><div class="line">cp /backup/binlogs/master-log* .</div><div class="line"></div><div class="line"><span class="comment"># 把从master-log.000003 1244位置往后的所有二进制日志，用mysqlbinlog命令生成sql语句，重定向到一个文件里。</span></div><div class="line">mysqlbinlog -j 1244 master-log.000003 ... master-log.00000x &gt;/xtrabackup/binlogs/binlog-20170912.sql</div></pre></td></tr></table></figure>
+<p>登录MariaDB，执行恢复binlog操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MariaDb &gt; set @@session.sql_log_bin=OFF;</div><div class="line">MariaDb &gt; \. /xtrabackup/binlogs/binlog-20170912.sql</div><div class="line">MariaDb &gt; exit</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>需要随时<strong>准备</strong>好一台<strong>新的机器</strong>。</p>
+</li>
+<li><p>我们的数据库的<strong>备份数据</strong>（包括全备、增备、差异备份）都要存多份数据。</p>
+</li>
+<li><p>同时，<strong>binlog</strong>要同时写入到多个服务器或磁盘。防止崩溃时候，有些数据无法恢复。</p>
+</li>
+<li><p>还有<strong>数据库配置文件</strong>，也要在配置分发系统里保存好，一旦服务器崩溃后，可以迅速分发到新的服务器上。</p>
+</li>
+</ul>
+<p><strong>恢复的过程：</strong></p>
+<ol>
+<li>关闭连接数据库的周边程序。</li>
+<li>从配置分发系统里分发MySQL配置。</li>
+<li>恢复全备数据。</li>
+<li>恢复增备或差异备份数据。</li>
+<li>恢复binlog数据。</li>
+<li>测试数据完整性。</li>
+<li>打开连接数据库的周边程序。</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/linux/20170911-mysql-mysqldump-xtrabackup/" title="MySQL备份恢复（mysqldump、xtrabackup）">http://www.yulongjun.com/linux/20170911-mysql-mysqldump-xtrabackup/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysqldump/" rel="tag"># mysqldump</a>
+          
+            <a href="/tags/xtrabackup/" rel="tag"># xtrabackup</a>
+          
+            <a href="/tags/innobackupex/" rel="tag"># innobackupex</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/macos/20170909-create-macos-usbdisk/" rel="next" title="制作macOS的U盘安装盘">
+                <i class="fa fa-chevron-left"></i> 制作macOS的U盘安装盘
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/cloud/20170922-git/" rel="prev" title="Git和GitHub笔记">
+                Git和GitHub笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysqldump"><span class="nav-number">1.</span> <span class="nav-text">mysqldump</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-使用方法介绍"><span class="nav-number">1.1.</span> <span class="nav-text">1. 使用方法介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-模拟一个完整的温备和恢复过程："><span class="nav-number">1.2.</span> <span class="nav-text">2. 模拟一个完整的温备和恢复过程：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xtrabackup使用方法"><span class="nav-number">2.</span> <span class="nav-text">xtrabackup使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-简介"><span class="nav-number">2.1.</span> <span class="nav-text">1. 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装"><span class="nav-number">2.2.</span> <span class="nav-text">2. 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-命令简介"><span class="nav-number">2.3.</span> <span class="nav-text">3. 命令简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-实际使用"><span class="nav-number">2.4.</span> <span class="nav-text">4. 实际使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-了解备份原理"><span class="nav-number">2.4.1.</span> <span class="nav-text">(1) 了解备份原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-准备-prepare-一个完全备份"><span class="nav-number">2.4.2.</span> <span class="nav-text">(2) 准备(prepare)一个完全备份</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-从一个完全备份中恢复数据"><span class="nav-number">2.4.3.</span> <span class="nav-text">(3) 从一个完全备份中恢复数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-使用innobackupex进行增量备份"><span class="nav-number">2.4.4.</span> <span class="nav-text">(4) 使用innobackupex进行增量备份</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-模拟数据库崩溃"><span class="nav-number">2.4.5.</span> <span class="nav-text">(5) 模拟数据库崩溃</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-恢复备份的数据"><span class="nav-number">2.4.6.</span> <span class="nav-text">(6) 恢复备份的数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-重放binlog"><span class="nav-number">2.4.7.</span> <span class="nav-text">(7) 重放binlog</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

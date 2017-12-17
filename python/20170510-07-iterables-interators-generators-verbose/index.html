@@ -1,0 +1,1355 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Iterables,Iterators,Generators," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="英文原文：http://nvie.com/posts/iterators-vs-generators/
+翻译：（译者：于龙君，严禁未经本人同意的转载，如要转载，请联系本人，转载也请注明出处。）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解 可迭代对象(Iterables)、迭代器(Iterators)、生成器(Generators)">
+<meta property="og:url" content="http://www.yulongjun.com/python/20170510-07-iterables-interators-generators-verbose/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:description" content="英文原文：http://nvie.com/posts/iterators-vs-generators/
+翻译：（译者：于龙君，严禁未经本人同意的转载，如要转载，请联系本人，转载也请注明出处。）">
+<meta property="og:image" content="http://www.yulongjun.com/images/14977027890788.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/14976920008027.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/14976920172509.png">
+<meta property="og:updated_time" content="2017-06-17T12:47:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="详解 可迭代对象(Iterables)、迭代器(Iterators)、生成器(Generators)">
+<meta name="twitter:description" content="英文原文：http://nvie.com/posts/iterators-vs-generators/
+翻译：（译者：于龙君，严禁未经本人同意的转载，如要转载，请联系本人，转载也请注明出处。）">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/14977027890788.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/python/20170510-07-iterables-interators-generators-verbose/"/>
+
+
+
+
+
+  <title> 详解 可迭代对象(Iterables)、迭代器(Iterators)、生成器(Generators) | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170510-07-iterables-interators-generators-verbose/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                详解 可迭代对象(Iterables)、迭代器(Iterators)、生成器(Generators)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-10T23:33:33+08:00">
+                2017-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170510-07-iterables-interators-generators-verbose/" class="leancloud_visitors" data-flag-title="详解 可迭代对象(Iterables)、迭代器(Iterators)、生成器(Generators)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/14977027890788.jpg" alt=""></p>
+<p>英文原文：<a href="http://nvie.com/posts/iterators-vs-generators/" target="_blank" rel="external">http://nvie.com/posts/iterators-vs-generators/</a></p>
+<p>翻译：（译者：于龙君，严禁未经本人同意的转载，如要转载，请联系本人，转载也请注明出处。）</p>
+<a id="more"></a>
+<p>有时我会混淆Python中的几个概念：</p>
+<ul>
+<li>容器（container）</li>
+<li>可迭代对象（iterable）</li>
+<li>迭代器（iterator）</li>
+<li>生成器（generator）</li>
+<li>生成器表达式（generator expression）</li>
+<li>列表、集合、字典解析式（{list, set, dict} comprehension）</li>
+</ul>
+<p>故写下这个帖子作为袖珍指南。</p>
+<p><img src="/images/14976920008027.png" alt=""></p>
+<h2 id="容器（Containers）"><a href="#容器（Containers）" class="headerlink" title="容器（Containers）"></a>容器（Containers）</h2><p>容器是指存有元素的数据结构，支持成员测试。容器是存在内存里的数据结构，通常它们的值也在内存里。在Python里内置的容器有：</p>
+<ul>
+<li><strong>list</strong>, deque, …</li>
+<li><strong>set</strong>, frozensets, …</li>
+<li><strong>dict</strong>, defaultdict, OrderedDict, Counter, …</li>
+<li><strong>tuple</strong>, namedtuple, …</li>
+<li><strong>str</strong></li>
+</ul>
+<p>容器易于掌握，因为您可以将其视为现实生活中的容器：盒子，立方体，房屋，船舶等。</p>
+<p>从技术上讲，一个对象是一个容器，可以询问它是否<strong>包含</strong>某个元素。您可以对列表，集合或元组执行这样的成员关系测试：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">1</span> <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]      <span class="comment"># lists</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">4</span> <span class="keyword">not</span> <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">1</span> <span class="keyword">in</span> &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;      <span class="comment"># sets</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">4</span> <span class="keyword">not</span> <span class="keyword">in</span> &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">1</span> <span class="keyword">in</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)      <span class="comment"># tuples</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">4</span> <span class="keyword">not</span> <span class="keyword">in</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</div></pre></td></tr></table></figure>
+<p>字典是检查keys：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>d = &#123;<span class="number">1</span>: <span class="string">'foo'</span>, <span class="number">2</span>: <span class="string">'bar'</span>, <span class="number">3</span>: <span class="string">'qux'</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">1</span> <span class="keyword">in</span> d</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">4</span> <span class="keyword">not</span> <span class="keyword">in</span> d</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="string">'foo'</span> <span class="keyword">not</span> <span class="keyword">in</span> d  <span class="comment"># 'foo' is not a _key_ in the dict</span></div></pre></td></tr></table></figure>
+<p>你也可以查看一个字符串是否包含一个子字符串：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">'foobar'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="string">'b'</span> <span class="keyword">in</span> s</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="string">'x'</span> <span class="keyword">not</span> <span class="keyword">in</span> s</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="string">'foo'</span> <span class="keyword">in</span> s  <span class="comment"># a string "contains" all its substrings</span></div></pre></td></tr></table></figure>
+<p>最后一个例子有一点奇怪，不过它展示了容器接口如何隐式呈现对象。一个字符串不会将所有子字符串的副本存储在内存中，但是可以这样来使用。</p>
+<blockquote>
+<p><strong>注意：</strong><br>尽管大多数容器数据结构提供了生成包含的每个元素的方法，但他们并不一定生成一个容器，也可能是一个可迭代对象（稍后会说到）。</p>
+<p>并不是所有的容器都必须是可迭代的。一个例子是<a href="http://en.wikipedia.org/wiki/Bloom_filter" target="_blank" rel="external">Bloom filter</a>。是一种概率性的数据结构，我们可以问他是否包含某个元素，但是不能返回其中的任何元素。</p>
+</blockquote>
+<h2 id="可迭代对象（Iterables-）"><a href="#可迭代对象（Iterables-）" class="headerlink" title="可迭代对象（Iterables ）"></a>可迭代对象（Iterables ）</h2><p>如上所述，大多数容器也是iterable，但是还有更多的东西是iterable，比如说打开的文件，打开的套接字（sockets）等。容器通常是有限的；iterable可以是有限的，也可以表示无限的数据源。</p>
+<p>iterable不只可以是数据结构，也可以是能返回迭代器（Iterator）的任何对象（目的是为了返回其中的元素）。听起来有一点绕，但iterable和iterator有一个重要的不同，我们来看例子更明了：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; x = [1, 2, 3]</div><div class="line">&gt;&gt;&gt; y = iter(x)</div><div class="line">&gt;&gt;&gt; z = iter(x)</div><div class="line">&gt;&gt;&gt; next(y)</div><div class="line">1</div><div class="line">&gt;&gt;&gt; next(y)</div><div class="line">2</div><div class="line">&gt;&gt;&gt; next(z)</div><div class="line">1</div><div class="line">&gt;&gt;&gt; type(x)</div><div class="line">&lt;class 'list'&gt;</div><div class="line">&gt;&gt;&gt; type(y)</div><div class="line">&lt;class 'list_iterator'&gt;</div></pre></td></tr></table></figure>
+<p>从例子可以看出, <code>x</code> 是 <strong>iter<u>able</u></strong>, <code>y</code> 和 <code>z</code> 是两个单独的<strong>iterat<u>or</u></strong>实例，这两个实例从iterable<code>x</code>生成值。 <code>y</code> 和 <code>z</code> 都保存各自的状态。在例子里， <code>x</code> 是一个数据结构 (list列表), y是list_iterator(列表迭代器）。</p>
+<blockquote>
+<p><strong>注意：</strong><br>Often, for pragmatic reasons, iterable classes will implement both <code>__iter__()</code> and <code>__next__()</code> in the same class, and have <code>__iter__()</code> return <code>self</code>, which makes the class both an iterable and its own iterator. It is perfectly fine to return a different object as the iterator, though.</p>
+</blockquote>
+<p>最后，当你写下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> x = [1, 2, 3]</div><div class="line">for elem in x:</div><div class="line">    ...</div></pre></td></tr></table></figure>
+<p>这是实际发生的：</p>
+<p><img src="/images/14976920172509.png" alt=""></p>
+<p>当您反汇编此Python代码时，您可以看到显式调用<code>GET_ITER</code>, 这实际上就像调用 <code>iter(x)</code>。 <code>FOR_ITER</code> 是一个指令，它将相当于重复调用<code>next()</code>以获取每个元素，但是这不会从字节码指令中显示，因为它在解释器中针对速度进行了优化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> dis</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>dis.dis(<span class="string">'for _ in x: pass'</span>)</div><div class="line">  <span class="number">1</span>           <span class="number">0</span> SETUP_LOOP              <span class="number">14</span> (to <span class="number">17</span>)</div><div class="line">              <span class="number">3</span> LOAD_NAME                <span class="number">0</span> (x)</div><div class="line">              <span class="number">6</span> GET_ITER</div><div class="line">        &gt;&gt;    <span class="number">7</span> FOR_ITER                 <span class="number">6</span> (to <span class="number">16</span>)</div><div class="line">             <span class="number">10</span> STORE_NAME               <span class="number">1</span> (_)</div><div class="line">             <span class="number">13</span> JUMP_ABSOLUTE            <span class="number">7</span></div><div class="line">        &gt;&gt;   <span class="number">16</span> POP_BLOCK</div><div class="line">        &gt;&gt;   <span class="number">17</span> LOAD_CONST               <span class="number">0</span> (<span class="keyword">None</span>)</div><div class="line">             <span class="number">20</span> RETURN_VALUE</div></pre></td></tr></table></figure>
+<h2 id="迭代器（Iterators）"><a href="#迭代器（Iterators）" class="headerlink" title="迭代器（Iterators）"></a>迭代器（Iterators）</h2><p>那么什么是 <strong>iterator</strong> 呢？它是一个有状态的帮助对象，当您调用 <code>next()</code> 时将生成下一个值。因此，任何具有<code>__next__()</code>方法的对象都是iterator，如何生成一个价值是无关紧要的。</p>
+<p>所以迭代器是一个生产值的工厂。每次你要求它的“下一个”值，它知道如何计算它，因为它保存内部状态。</p>
+<p>有无数的迭代器例子。所有的<code>itertools</code>函数都返回iterator。</p>
+<p>有些生成无限序列(infinite sequences)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> count</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>counter = count(start=<span class="number">13</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(counter)</div><div class="line"><span class="number">13</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(counter)</div><div class="line"><span class="number">14</span></div></pre></td></tr></table></figure>
+<p>有些生成从有限序列（finite sequences）生成无限序列：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> cycle</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>colors = cycle([<span class="string">'red'</span>, <span class="string">'white'</span>, <span class="string">'blue'</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(colors)</div><div class="line"><span class="string">'red'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(colors)</div><div class="line"><span class="string">'white'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(colors)</div><div class="line"><span class="string">'blue'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(colors)</div><div class="line"><span class="string">'red'</span></div></pre></td></tr></table></figure>
+<p>有些从无限序列生成有限序列：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> islice</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>colors = cycle([<span class="string">'red'</span>, <span class="string">'white'</span>, <span class="string">'blue'</span>])  <span class="comment"># infinite</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>limited = islice(colors, <span class="number">0</span>, <span class="number">4</span>)            <span class="comment"># finite</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> limited:                         <span class="comment"># so safe to use for-loop on</span></div><div class="line"><span class="meta">... </span>    print(x)</div><div class="line">red</div><div class="line">white</div><div class="line">blue</div><div class="line">red</div></pre></td></tr></table></figure>
+<p>为了更好地了解interator的内部结构，我们来构建一个产生斐波那契数的interator：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">fib</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line"><span class="meta">... </span>        self.prev = <span class="number">0</span></div><div class="line"><span class="meta">... </span>        self.curr = <span class="number">1</span></div><div class="line"><span class="meta">... </span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> self</div><div class="line"><span class="meta">... </span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></div><div class="line"><span class="meta">... </span>        value = self.curr</div><div class="line"><span class="meta">... </span>        self.curr += self.prev</div><div class="line"><span class="meta">... </span>        self.prev = value</div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> value</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>f = fib()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>list(islice(f, <span class="number">0</span>, <span class="number">10</span>))</div><div class="line">[<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">13</span>, <span class="number">21</span>, <span class="number">34</span>, <span class="number">55</span>]</div></pre></td></tr></table></figure>
+<p>请注意，这个类即是一个iterable（因为它运行一个<code>__iter__()</code> 方法），也是迭代器（因为它有一个<code>__next__()</code>方法）。</p>
+<p>这个iterator中的状态完全保存在内部的<code>prev</code>和<code>curr</code>实例变量中，并用于后续调用迭代器。每一次调用next()都要做两件重要的事情：</p>
+<ol>
+<li>修改状态，为了下一次调用<code>next()</code>做准备。</li>
+<li>生成当前调用的结果。</li>
+</ol>
+<blockquote>
+<p><strong>中心思想：一个懒惰的工厂</strong><br>从外面看，interator就像一个懒惰的工厂，平常是空闲的，除非你向它请求一个值，他才会产生一个单个的值，然后再次进入空闲状态，直到你下次再调用，这样循环往复。</p>
+</blockquote>
+<h2 id="生成器（Generators）"><a href="#生成器（Generators）" class="headerlink" title="生成器（Generators）"></a>生成器（Generators）</h2><p>最后，我们终于要说generator了！generator是我最爱的Python语言功能。一个generator就是一个特殊的迭代器——优雅的那种。 </p>
+<p>一个生成器允许你像上面的斐波纳契序列迭代器示例一样，来编写迭代器，但是使用了一个优雅的简洁语法，避免在类里写<code>__iter__()</code>和<code>__next__()</code>方法。</p>
+<p>让我们明确的说一下：</p>
+<ul>
+<li><p>任何generator也是一个iterator（反之亦然！）;</p>
+</li>
+<li><p>因此，任何generator也是一个惰性生成值的工厂。</p>
+</li>
+</ul>
+<p>下面也是一个斐波那契序列工厂，但是是用generator写的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">()</span>:</span></div><div class="line"><span class="meta">... </span>    prev, curr = <span class="number">0</span>, <span class="number">1</span></div><div class="line"><span class="meta">... </span>    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line"><span class="meta">... </span>        <span class="keyword">yield</span> curr</div><div class="line"><span class="meta">... </span>        prev, curr = curr, prev + curr</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>f = fib()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>list(islice(f, <span class="number">0</span>, <span class="number">10</span>))</div><div class="line">[<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">13</span>, <span class="number">21</span>, <span class="number">34</span>, <span class="number">55</span>]</div></pre></td></tr></table></figure>
+<p>哇，是不是很优雅？注意美丽的魔法关键字：</p>
+<blockquote>
+<p><code>yield</code></p>
+</blockquote>
+<p>让我们分解一下这里发生的一切：首先要注意的<code>fib</code>是一个普通的Python函数，没什么特别的。但是，请注意，在函数体里没有<code>return</code>关键字。函数的返回值将是一个generator（心中默念：一个iterator，一个懒惰的工厂，一个有状态的帮助对象）。</p>
+<p>现在，当<code>f = fib()</code>被调用时，genrator（懒惰的工厂）被实例化并返回，此时不会执行任何代码：只是启动了一个初始化状态的空闲generator。要明白一点：<code>prev, curr = 0, 1</code>这行代码还没有被执行。</p>
+<p>然后，这个generator实例被包在一个<code>islice()</code>函数里。<code>lslice(f,0,10)</code>本身也是一个迭代器，最初是空闲的。还是什么都没有发生。</p>
+<p>然后，这个迭代器被包装在一个<code>list()</code>函数里，它将消耗它的所有参数，并从它构建一个列表。为了做到这一点，它将开始在<code>islice()</code>实例里调用<code>next()</code> ，这其实是转向<code>f</code>实例里调用<code>next()</code>。</p>
+<p>但是一次只有一步。在第一次调用时，代码会最终运行一点：prev, curr = 0, 1这行执行了，然后再到while True循环开始，然后遇到<code>yield curr</code>语句。然后会生成一个值，这个是就是当前<code>curr</code>变量里的值，然后再次进入空闲状态。</p>
+<p>这个产生的值传入到<code>islice()</code>，list()函数可以把第一次生成的值<code>1</code>加入到列表里。</p>
+<p>因为还没到第10个，这时会要求<code>islice()</code>下一个值，然后传递到要求<code>f</code>下一个值，它将<code>f</code>从之前的状态“取消暂停” ，接着运行<code>prev, curr = curr, prev + curr</code>。然后再次进入<code>while</code>循环的下一次迭代，并且命中<code>yield curr</code>语句，返回下一个<code>curr</code>的值<code>2</code>。</p>
+<p>直到输出列表为10个元素长度，这时list()要求 islice()第11个值时，islice()会引发<code>StopIteration</code>异常，表示已到达结束，并且列表将返回结果：10个项目的列表，其中包含了前10个斐波纳契数。请注意，generator不接收第十一个next()的调用。实际上，它不会再被使用了，之后会被垃圾回收。</p>
+<h3 id="生成器类型（Types-of-Generators）"><a href="#生成器类型（Types-of-Generators）" class="headerlink" title="生成器类型（Types of Generators）"></a>生成器类型（Types of Generators）</h3><p>Python中有两种类型的generator：generator<strong>函数（function）</strong>和generator<strong>表达式(expression)</strong>。只要yield在其函数体内出现，就叫generator函数。我们刚才还看了一个例子就是这样的。关键字的yield的出现足以使函数成为generator函数。</p>
+<p>假设你用下面的列表解析式（list comprehension）语法来构建一个平方数列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>[x * x <span class="keyword">for</span> x <span class="keyword">in</span> numbers]</div><div class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>]</div></pre></td></tr></table></figure>
+<p>你可以用集合解析式(set comprehension)来做相同的事情：<br>You could do the same thing with a set comprehension:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;x * x <span class="keyword">for</span> x <span class="keyword">in</span> numbers&#125;</div><div class="line">&#123;<span class="number">1</span>, <span class="number">4</span>, <span class="number">36</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>&#125;</div></pre></td></tr></table></figure>
+<p>或者是一个字典解析式(dict comprehension)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;x: x * x <span class="keyword">for</span> x <span class="keyword">in</span> numbers&#125;</div><div class="line">&#123;<span class="number">1</span>: <span class="number">1</span>, <span class="number">2</span>: <span class="number">4</span>, <span class="number">3</span>: <span class="number">9</span>, <span class="number">4</span>: <span class="number">16</span>, <span class="number">5</span>: <span class="number">25</span>, <span class="number">6</span>: <span class="number">36</span>&#125;</div></pre></td></tr></table></figure>
+<p>但是您也可以使用生成器表达式（generator expression）（注意：这<strong>不是</strong>一个元组解析式(tuple comprehension），没有元组解析式这种东西）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>lazy_squares = (x * x <span class="keyword">for</span> x <span class="keyword">in</span> numbers)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>lazy_squares</div><div class="line">&lt;generator object &lt;genexpr&gt; at <span class="number">0x10d1f5510</span>&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(lazy_squares)</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>list(lazy_squares)</div><div class="line">[<span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>]</div></pre></td></tr></table></figure>
+<p>需要注意的是，因为我们用<code>next()</code>方法从<code>lazy_squares</code>读入第一个值，状态目前在第二个item上，所以，当我们通过调用<code>list()</code>来消费所有元素时，只会从第二个开始读入，因为我们已经用next()消费了一个了。（这也向我们展示了惰性求值行为）。这也是一个和上面例子一样的generator（当然了，也是iterator）</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>generator是一个不可思议的强大的编程结构。它们允许您编写具有较少中间变量和数据结构的流式代码。除此之外，它们具有更高的内存和CPU效率，他们也用更少的代码行来书写。</p>
+<p>开始使用generator。</p>
+<p>在代码中找到如下位置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">something</span><span class="params">()</span>:</span></div><div class="line">    result = []</div><div class="line">    <span class="keyword">for</span> ... <span class="keyword">in</span> ...:</div><div class="line">        result.append(x)</div><div class="line">    <span class="keyword">return</span> result</div></pre></td></tr></table></figure>
+<p>并替换为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">iter_something</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">for</span> ... <span class="keyword">in</span> ...:</div><div class="line">        <span class="keyword">yield</span> x</div><div class="line"></div><div class="line"><span class="comment"># def something():  </span></div><div class="line"><span class="comment"># 当你真的需要一个列表结构时：</span></div><div class="line"><span class="comment">#     return list(iter_something())</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/python/20170510-07-iterables-interators-generators-verbose/" title="详解 可迭代对象(Iterables)、迭代器(Iterators)、生成器(Generators)">http://www.yulongjun.com/python/20170510-07-iterables-interators-generators-verbose/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Iterables/" rel="tag"># Iterables</a>
+          
+            <a href="/tags/Iterators/" rel="tag"># Iterators</a>
+          
+            <a href="/tags/Generators/" rel="tag"># Generators</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/python/20170510-06-iterables-interators-generators-simple/" rel="next" title="简单了解 可迭代对象(Iterables)、迭代器(Iterators)、生成器(Generators)">
+                <i class="fa fa-chevron-left"></i> 简单了解 可迭代对象(Iterables)、迭代器(Iterators)、生成器(Generators)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/python/20170511-01-function-define/" rel="prev" title="函数基本定义和函数调用">
+                函数基本定义和函数调用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#容器（Containers）"><span class="nav-number">1.</span> <span class="nav-text">容器（Containers）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可迭代对象（Iterables-）"><span class="nav-number">2.</span> <span class="nav-text">可迭代对象（Iterables ）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代器（Iterators）"><span class="nav-number">3.</span> <span class="nav-text">迭代器（Iterators）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成器（Generators）"><span class="nav-number">4.</span> <span class="nav-text">生成器（Generators）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成器类型（Types-of-Generators）"><span class="nav-number">4.1.</span> <span class="nav-text">生成器类型（Types of Generators）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

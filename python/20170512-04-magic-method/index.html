@@ -1,0 +1,1338 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python,OOP,Encapsulate,Inheritance,Polymorphism," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="魔术方法/特殊方法(Magic Methods)">
+<meta property="og:url" content="http://www.yulongjun.com/python/20170512-04-magic-method/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/14987260641097.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458465369859.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458465493354.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458465569217.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458466970032.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458467228460.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458467267272.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458474701110.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458474720783.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458474744317.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458475159209.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458475225225.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458477588760.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458477601644.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458476833430.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458479255343.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458482149593.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/oop-class/1458482401531.png">
+<meta property="og:updated_time" content="2017-06-30T13:14:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="魔术方法/特殊方法(Magic Methods)">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/14987260641097.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/python/20170512-04-magic-method/"/>
+
+
+
+
+
+  <title> 魔术方法/特殊方法(Magic Methods) | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170512-04-magic-method/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                魔术方法/特殊方法(Magic Methods)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-12T10:33:30+08:00">
+                2017-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170512-04-magic-method/" class="leancloud_visitors" data-flag-title="魔术方法/特殊方法(Magic Methods)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/14987260641097.jpg" alt=""></p>
+<a id="more"></a>
+<p>总是以双下划线开始，双下划线结束的方法，就叫做<strong>魔术方法</strong>（magic methods）。</p>
+<p><strong>init</strong>可以读作<code>dunder init</code></p>
+<h2 id="对象的创建与销毁"><a href="#对象的创建与销毁" class="headerlink" title="对象的创建与销毁"></a>对象的创建与销毁</h2><ul>
+<li><code>__new__</code>：创建对象的方法（用到很少，只有元编程的时候用到）</li>
+<li><code>__init__</code>：初始化对象（用到比较多）</li>
+<li><code>__del__</code>：当销毁对象的时候调用（用的也不多，但是也会用到）（比如程序里打开了一些资源，在python运行时，并没有释放，只有等程序运行完了才释放，这时候就可以用del来提前释放）</li>
+</ul>
+<p>看个例子：</p>
+<p><img src="/images/oop-class/1458465369859.png" alt=""></p>
+<h2 id="可视化对象"><a href="#可视化对象" class="headerlink" title="可视化对象"></a>可视化对象</h2><p>在我们打印类A的实例a时候，并不能输出可视化：</p>
+<p><img src="/images/oop-class/1458465493354.png" alt=""></p>
+<p>我们可以用<code>__repr__</code>、 <code>__str__</code>、<code>__bytes</code>__这三种来加强可视化：</p>
+<p><img src="/images/oop-class/1458465569217.png" alt=""></p>
+<p><code>print(a)</code>就相当于先调用a的<code>__repr_</code> 方法， 即相当于<code>print(repr(a))</code>。<br>类似的 <code>str(a)</code>，就是调用a的<code>__str__</code>方法。法；<code>bytes(a)</code>，就是调用a的<code>__bytes__</code>方法。</p>
+<h2 id="比较运算符重载-reload"><a href="#比较运算符重载-reload" class="headerlink" title="比较运算符重载(reload)"></a>比较运算符重载(reload)</h2><p>例子：<br><img src="/images/oop-class/1458466970032.png" alt=""></p>
+<p>这里我们不能比较p1和p2的大小，但是如果我们想比较呢，用什么方法？</p>
+<p>可以采用下面的方法，就可以比较了：</p>
+<p><img src="/images/oop-class/1458467228460.png" alt=""></p>
+<p>我们分别比较下：</p>
+<p><img src="/images/oop-class/1458467267272.png" alt=""></p>
+<h2 id="bool函数"><a href="#bool函数" class="headerlink" title="bool函数"></a><code>bool</code>函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">79</span>]: bool([])   <span class="comment"># 空列表是Flase</span></div><div class="line">Out[<span class="number">79</span>]: <span class="keyword">False</span></div><div class="line"></div><div class="line">In [<span class="number">80</span>]: bool(<span class="number">0</span>)    <span class="comment"># 数字0是False</span></div><div class="line">Out[<span class="number">80</span>]: <span class="keyword">False</span></div><div class="line"></div><div class="line">In [<span class="number">81</span>]: bool(<span class="keyword">None</span>) <span class="comment"># None是False</span></div><div class="line">Out[<span class="number">81</span>]: <span class="keyword">False</span></div><div class="line"></div><div class="line">In [<span class="number">82</span>]: bool(p1)   <span class="comment"># 上一节的p1实例是True</span></div><div class="line">Out[<span class="number">82</span>]: <span class="keyword">True</span></div><div class="line"></div><div class="line">In [<span class="number">85</span>]: <span class="class"><span class="keyword">class</span> <span class="title">Grok</span>:</span></div><div class="line"> ....:     <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, val)</span>:</span></div><div class="line"> ....:         self.val = val</div><div class="line"> ....:     <span class="function"><span class="keyword">def</span> <span class="title">__bool__</span><span class="params">(self)</span>:</span></div><div class="line"> ....:         <span class="keyword">return</span> <span class="keyword">not</span> self.val</div><div class="line"> ....:</div><div class="line"></div><div class="line">In [<span class="number">86</span>]: grok1 = Grok(<span class="keyword">True</span>)</div><div class="line"></div><div class="line">In [<span class="number">87</span>]: bool(grok1) <span class="comment">#grok1是True，定义中bool是返回not True，也就是False</span></div><div class="line">Out[<span class="number">87</span>]: <span class="keyword">False</span></div><div class="line"></div><div class="line">In [<span class="number">88</span>]: grok2 = Grok(<span class="keyword">False</span>)</div><div class="line"></div><div class="line">In [<span class="number">89</span>]: bool(grok2) <span class="comment">#grok2是False，定义中bool是返回not False，也就是True</span></div><div class="line">Out[<span class="number">89</span>]: <span class="keyword">True</span></div></pre></td></tr></table></figure>
+<p>我们随便<code>dir([])</code>，发现其实类默认是没有<code>__bool__</code>方法的，那么是如何使用<code>bool()</code>函数的呢？——其实使用<code>__len__</code>方法的值，值如果是<code>0</code>，就是<code>False</code>，值如果是非<code>0</code>，就是<code>True</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">91</span>]: <span class="class"><span class="keyword">class</span> <span class="title">List</span>:</span></div><div class="line"> ....:     <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,*args)</span>:</span></div><div class="line"> ....:         self.val = args</div><div class="line"> ....:</div><div class="line"> ....:     <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></div><div class="line"> ....:         <span class="keyword">return</span> len(self.val)</div><div class="line"> ....:</div><div class="line"></div><div class="line">In [<span class="number">92</span>]: lst = List(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</div><div class="line"></div><div class="line">In [<span class="number">93</span>]: len(lst)</div><div class="line">Out[<span class="number">93</span>]: <span class="number">3</span></div><div class="line"></div><div class="line">In [<span class="number">94</span>]: bool(lst)</div><div class="line">Out[<span class="number">94</span>]: <span class="keyword">True</span></div><div class="line"></div><div class="line">In [<span class="number">95</span>]: lst2 = list()</div><div class="line"></div><div class="line">In [<span class="number">96</span>]: len(lst2)</div><div class="line">Out[<span class="number">96</span>]: <span class="number">0</span></div><div class="line"></div><div class="line">In [<span class="number">97</span>]: bool(lst2)</div><div class="line">Out[<span class="number">97</span>]: <span class="keyword">False</span></div></pre></td></tr></table></figure>
+<p>如果我们定义了<code>__bool__</code>方法，那么就按照<code>__bool__</code>方法的定义来：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">98</span>]: <span class="class"><span class="keyword">class</span> <span class="title">List</span>:</span></div><div class="line"> ....:     <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,*args)</span>:</span></div><div class="line"> ....:         self.val = args</div><div class="line"> ....: </div><div class="line"> ....:     <span class="function"><span class="keyword">def</span> <span class="title">__bool__</span><span class="params">(self)</span>:</span></div><div class="line"> ....:         <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"> ....:</div><div class="line"> ....:     <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></div><div class="line"> ....:         <span class="keyword">return</span> len(self.val)</div><div class="line"> ....:</div><div class="line"></div><div class="line">In [<span class="number">99</span>]: lst3 = List()</div><div class="line"></div><div class="line">In [<span class="number">100</span>]: bool(lst3)</div><div class="line">Out[<span class="number">100</span>]: <span class="keyword">True</span></div></pre></td></tr></table></figure>
+<h2 id="hash-与可hash对象"><a href="#hash-与可hash对象" class="headerlink" title="hash() 与可hash对象"></a><code>hash()</code> 与可hash对象</h2><p><img src="/images/oop-class/1458474701110.png" alt=""></p>
+<p>当我们重写了<code>__hash__</code>后，变为<code>pass</code>，那么就用hash就会抛出异常</p>
+<p><img src="/images/oop-class/1458474720783.png" alt=""></p>
+<p><img src="/images/oop-class/1458474744317.png" alt=""></p>
+<p>系统如果是64位的，hash值是64位的</p>
+<p><img src="/images/oop-class/1458475159209.png" alt=""></p>
+<h2 id="可调用对象"><a href="#可调用对象" class="headerlink" title="可调用对象"></a>可调用对象</h2><p>函数是可调用对象：</p>
+<p><img src="/images/oop-class/1458475225225.png" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">106</span>]: <span class="class"><span class="keyword">class</span> <span class="title">Function</span>:</span></div><div class="line"> .....:     <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self,name)</span>:</span></div><div class="line"> .....:         print(<span class="string">'I am callable, my name is &#123;0&#125;'</span>.format(name))</div><div class="line"> .....:</div><div class="line"></div><div class="line">In [<span class="number">107</span>]: func = Function()</div><div class="line"></div><div class="line">In [<span class="number">109</span>]: func(<span class="string">'magedu'</span>)</div><div class="line">I am callable, my name <span class="keyword">is</span> magedu</div></pre></td></tr></table></figure>
+<p><strong>callable函数经常用在装饰器上：</strong></p>
+<p><img src="/images/oop-class/1458477588760.png" alt=""></p>
+<p><img src="/images/oop-class/1458477601644.png" alt=""></p>
+<p><strong>单例（singleton)：</strong><br>单例模式可以保证系统中一个类只有一个实例而且该实例易于外界访问，从而方便对实例个数的控制并节约系统资源。如果希望在系统中某个类的对象只能存在一个，单例模式是最好的解决方案。</p>
+<p>下面写一个单例，用到可调用对象：</p>
+<p><img src="/images/oop-class/1458476833430.png" alt=""></p>
+<p>（后面会详细讲单例，这里不做赘述）</p>
+<h3 id="针对反射的方法"><a href="#针对反射的方法" class="headerlink" title="针对反射的方法"></a>针对反射的方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Grok</span>:</span></div><div class="line"> X = <span class="number">1</span></div><div class="line"> Y = <span class="number">2</span></div><div class="line"> Z = <span class="number">3</span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x, y, z)</span>:</span></div><div class="line"> self.x = x</div><div class="line"> self.y = y</div><div class="line"> self.z = z</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">method</span><span class="params">(self)</span>:</span></div><div class="line"> <span class="keyword">pass</span></div><div class="line"></div><div class="line">grok = Grok(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</div></pre></td></tr></table></figure>
+<ul>
+<li><code>__dict__</code>反射：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">112</span>]: grok.__dict__</div><div class="line">Out[<span class="number">112</span>]: &#123;<span class="string">'x'</span>: <span class="number">1</span>, <span class="string">'y'</span>: <span class="number">2</span>, <span class="string">'z'</span>: <span class="number">3</span>&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>__class__</code>反射：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">113</span>]: grok.__class__</div><div class="line">Out[<span class="number">113</span>]: __main__.Grok</div></pre></td></tr></table></figure>
+<ul>
+<li><code>__dir__</code>反射：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">113</span>]: grok.__dir__</div><div class="line">Out[<span class="number">113</span>]:</div><div class="line">[<span class="string">'Y'</span>,</div><div class="line"> <span class="string">'__repr__'</span>,</div><div class="line"> <span class="string">'Z'</span>,</div><div class="line"> <span class="string">'__eq__'</span>,</div><div class="line"> <span class="string">'__getattribute__'</span>,</div><div class="line"> <span class="string">'__str__'</span>,</div><div class="line"> <span class="string">'__reduce__'</span>,</div><div class="line"> <span class="string">'__delattr__'</span>,</div><div class="line"> <span class="string">'__ne__'</span>,</div><div class="line"> <span class="string">'__le__'</span>,</div><div class="line"> <span class="string">'__dir__'</span>,</div><div class="line"> <span class="string">'__hash__'</span>,</div><div class="line"> <span class="string">'__sizeof__'</span>,</div><div class="line"> <span class="string">'__weakref__'</span>,</div><div class="line"> <span class="string">'z'</span>,</div><div class="line"> <span class="string">'__class__'</span>,</div><div class="line"> <span class="string">'__setattr__'</span>,</div><div class="line"> <span class="string">'__format__'</span>,</div><div class="line"> <span class="string">'__lt__'</span>,</div><div class="line"> <span class="string">'__new__'</span>,</div><div class="line"> <span class="string">'__dict__'</span>,</div><div class="line"> <span class="string">'__reduce_ex__'</span>,</div><div class="line"> <span class="string">'y'</span>,</div><div class="line"> <span class="string">'__module__'</span>,</div><div class="line"> <span class="string">'method'</span>,</div><div class="line"> <span class="string">'X'</span>,</div><div class="line"> <span class="string">'__gt__'</span>,</div><div class="line"> <span class="string">'__doc__'</span>,</div><div class="line"> <span class="string">'__ge__'</span>,</div><div class="line"> <span class="string">'x'</span>,</div><div class="line"> <span class="string">'__init__'</span>,</div><div class="line"> <span class="string">'__subclasshook__'</span>]</div></pre></td></tr></table></figure>
+<ul>
+<li><code>__getattr__</code>、<code>__setattr__</code>、<code>__delattr__</code>反射：</li>
+</ul>
+<p><img src="/images/oop-class/1458479255343.png" alt=""></p>
+<h3 id="with语句与-enter-、-exit"><a href="#with语句与-enter-、-exit" class="headerlink" title="with语句与 __enter__ 、__exit__"></a><code>with</code>语句与 <code>__enter__</code> 、<code>__exit__</code></h3><p>一般打开文件，连接数据库，连接socket等，结束后都要<code>close()</code>退出操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">f = open(<span class="string">'./notes.adoc'</span>)</div><div class="line">f.readline()</div><div class="line">f.close()</div><div class="line"></div><div class="line">pymysql.connect()</div><div class="line">...</div><div class="line">pymysq.close()</div><div class="line"></div><div class="line">socket.connect()</div><div class="line">.....</div><div class="line">socket.close()</div></pre></td></tr></table></figure>
+<p>但是如果用with，就不用写close()，在离开with段后会自动退出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> open(<span class="string">'./notes.adoc'</span>) <span class="keyword">as</span> f:</div><div class="line"> f.readline()</div></pre></td></tr></table></figure>
+<p>这是利用的什么原理呢？就是<code>__enter__</code> 、<code>__exit__</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">145</span>]: <span class="class"><span class="keyword">class</span> <span class="title">Resouce</span>:</span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line"> print(<span class="string">'init'</span>)</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">__enter__</span><span class="params">(self)</span>:</span></div><div class="line"> print(<span class="string">'enter'</span>)</div><div class="line"> print(self)</div><div class="line"> <span class="keyword">return</span> self</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">__exit__</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line"> print(<span class="string">'exit'</span>)</div><div class="line">In [<span class="number">146</span>]: <span class="keyword">with</span> Resouce() <span class="keyword">as</span> res:</div><div class="line"> print(res)</div><div class="line">Out[<span class="number">146</span>]:</div><div class="line">init</div><div class="line">enter</div><div class="line">&lt;__main__.Resouce object at <span class="number">0x7f00d443f588</span>&gt;</div><div class="line">&lt;__main__.Resouce object at <span class="number">0x7f00d443f588</span>&gt;</div><div class="line">exit</div></pre></td></tr></table></figure>
+<p>看上面代码，用<code>with</code>语法后，先执行了<code>__init__</code>，然后进入<code>__enter__</code>，最后进入<code>__exit__</code>自动退出。</p>
+<p>with语法可以自动清理不用的资源，如果一段程序老是打开不关闭，打开的多了，就会造成资源的浪费，最终导致系统崩溃，所以要养成用with语法的习惯。</p>
+<h3 id="描述器（descriptor）"><a href="#描述器（descriptor）" class="headerlink" title="描述器（descriptor）"></a>描述器（descriptor）</h3><p>只要能实现getter、setter、deleter方法的类就叫描述器。</p>
+<p>用代码来说明。</p>
+<p>point表示平面坐标上的一个点：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">110</span>]: <span class="class"><span class="keyword">class</span> <span class="title">Point</span>:</span></div><div class="line"> .....:     <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x, y)</span>:</span></div><div class="line"> .....:         self.x = x</div><div class="line"> .....:         self.y = y</div></pre></td></tr></table></figure>
+<p> 上面代码只是一个简单的定义，x可以是数字也可以是字符串，如何能保证坐标点是数字呢？可以用描述器来实现：</p>
+<p><img src="/images/oop-class/1458482149593.png" alt=""></p>
+<p><code>point</code>的<code>getter</code>和<code>setter</code>方法都可以实现，而且当<code>setter</code>的时候是非数值，就会报<code>TypeError</code>错误，并提示<code>&quot;excepted int or float&quot;</code></p>
+<p><img src="/images/oop-class/1458482401531.png" alt=""></p>
+<p>可以看之前继承那里的<code>property</code>、<code>setter</code>、<code>getter</code>、<code>deleter</code>来理解。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/python/20170512-04-magic-method/" title="魔术方法/特殊方法(Magic Methods)">http://www.yulongjun.com/python/20170512-04-magic-method/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/OOP/" rel="tag"># OOP</a>
+          
+            <a href="/tags/Encapsulate/" rel="tag"># Encapsulate</a>
+          
+            <a href="/tags/Inheritance/" rel="tag"># Inheritance</a>
+          
+            <a href="/tags/Polymorphism/" rel="tag"># Polymorphism</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/python/20170512-03-multi-inheritance-mro/" rel="next" title="03-多继承、MRO算法">
+                <i class="fa fa-chevron-left"></i> 03-多继承、MRO算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/python/20170513-exception/" rel="prev" title="异常（Exception）">
+                异常（Exception） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象的创建与销毁"><span class="nav-number">1.</span> <span class="nav-text">对象的创建与销毁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可视化对象"><span class="nav-number">2.</span> <span class="nav-text">可视化对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较运算符重载-reload"><span class="nav-number">3.</span> <span class="nav-text">比较运算符重载(reload)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bool函数"><span class="nav-number">4.</span> <span class="nav-text">bool函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash-与可hash对象"><span class="nav-number">5.</span> <span class="nav-text">hash() 与可hash对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可调用对象"><span class="nav-number">6.</span> <span class="nav-text">可调用对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#针对反射的方法"><span class="nav-number">6.1.</span> <span class="nav-text">针对反射的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#with语句与-enter-、-exit"><span class="nav-number">6.2.</span> <span class="nav-text">with语句与 __enter__ 、__exit__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#描述器（descriptor）"><span class="nav-number">6.3.</span> <span class="nav-text">描述器（descriptor）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

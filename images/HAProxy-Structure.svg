@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" version="1.1" viewBox="63.25 27.75 744 271" width="62pc" height="271pt" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata> Produced by OmniGraffle 7.4.3 
+    <dc:date>2017-10-06 15:28:37 +0000</dc:date>
+  </metadata>
+  <defs>
+    <font-face font-family="Helvetica" font-size="12" units-per-em="1000" underline-position="-75.68359" underline-thickness="49.316406" slope="0" x-height="532.22656" cap-height="719.7266" ascent="770.0195" descent="-229.98047" font-weight="bold">
+      <font-face-src>
+        <font-face-name name="Helvetica-Bold"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Helvetica" font-size="12" units-per-em="1000" underline-position="-75.68359" underline-thickness="49.316406" slope="0" x-height="522.9492" cap-height="717.28516" ascent="770.0195" descent="-229.98047" font-weight="500">
+      <font-face-src>
+        <font-face-name name="Helvetica"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="PingFang SC" font-size="12" panose-1="2 11 4 0 0 0 0 0 0 0" units-per-em="1000" underline-position="-150" underline-thickness="58" slope="0" x-height="600" cap-height="860" ascent="1060.0021" descent="-340.0007" font-weight="500">
+      <font-face-src>
+        <font-face-name name="PingFangSC-Regular"/>
+      </font-face-src>
+    </font-face>
+  </defs>
+  <g stroke="none" stroke-opacity="1" stroke-dasharray="none" fill="none" fill-opacity="1">
+    <title>Canvas 1</title>
+    <rect fill="white" width="744" height="271"/>
+    <g>
+      <title>Layer 1</title>
+      <rect x="225.5" y="34" width="107.5" height="60"/>
+      <rect x="225.5" y="34" width="107.5" height="60" stroke="#232ba9" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+      <text transform="translate(230.5 43)" fill="black">
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="4.7314453" y="11" textLength="17.332031">HA</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="500" x="22.063477" y="11" textLength="70.70508"> (Keepalived)</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="11.416992" y="39" textLength="15.996094">LB</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="500" x="27.413086" y="39" textLength="58.66992"> (HAProxy)</tspan>
+      </text>
+      <rect x="537.5" y="34" width="107.5" height="60"/>
+      <rect x="537.5" y="34" width="107.5" height="60" stroke="#a91c19" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+      <text transform="translate(542.5 43)" fill="black">
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="4.7314453" y="11" textLength="17.332031">HA</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="500" x="22.063477" y="11" textLength="70.70508"> (Keepalived)</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="11.416992" y="39" textLength="15.996094">LB</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="500" x="27.413086" y="39" textLength="58.66992"> (HAProxy)</tspan>
+      </text>
+      <rect x="69.5" y="232.5" width="107.5" height="60"/>
+      <rect x="69.5" y="232.5" width="107.5" height="60" stroke="#0da7a9" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+      <text transform="translate(74.5 247)" fill="black">
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="36.19043" y="11" textLength="11.326172">W</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="47.305664" y="11" textLength="17.33789">eb </tspan>
+        <tspan font-family="PingFang SC" font-size="12" font-weight="500" x="3.3984375" y="27" textLength="12">（</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="500" x="15.398438" y="27" textLength="78.703125">Nginx or httpd)</tspan>
+      </text>
+      <rect x="225.5" y="232.5" width="107.5" height="60"/>
+      <rect x="225.5" y="232.5" width="107.5" height="60" stroke="#0da7a9" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+      <text transform="translate(230.5 247)" fill="black">
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="36.19043" y="11" textLength="11.326172">W</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="47.305664" y="11" textLength="17.33789">eb </tspan>
+        <tspan font-family="PingFang SC" font-size="12" font-weight="500" x="3.3984375" y="27" textLength="12">（</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="500" x="15.398438" y="27" textLength="78.703125">Nginx or httpd)</tspan>
+      </text>
+      <rect x="381.5" y="232.5" width="107.5" height="60"/>
+      <rect x="381.5" y="232.5" width="107.5" height="60" stroke="#0da7a9" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+      <text transform="translate(386.5 247)" fill="black">
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="36.19043" y="11" textLength="11.326172">W</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="47.305664" y="11" textLength="17.33789">eb </tspan>
+        <tspan font-family="PingFang SC" font-size="12" font-weight="500" x="3.3984375" y="27" textLength="12">（</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="500" x="15.398438" y="27" textLength="78.703125">Nginx or httpd)</tspan>
+      </text>
+      <rect x="537.5" y="228.5" width="107.5" height="60"/>
+      <rect x="537.5" y="228.5" width="107.5" height="60" stroke="#0da7a9" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+      <text transform="translate(542.5 243)" fill="black">
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="36.19043" y="11" textLength="11.326172">W</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="47.305664" y="11" textLength="17.33789">eb </tspan>
+        <tspan font-family="PingFang SC" font-size="12" font-weight="500" x="3.3984375" y="27" textLength="12">（</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="500" x="15.398438" y="27" textLength="78.703125">Nginx or httpd)</tspan>
+      </text>
+      <rect x="693.5" y="228.5" width="107.5" height="60"/>
+      <rect x="693.5" y="228.5" width="107.5" height="60" stroke="#0da7a9" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+      <text transform="translate(698.5 243)" fill="black">
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="36.19043" y="11" textLength="11.326172">W</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="bold" x="47.305664" y="11" textLength="17.33789">eb </tspan>
+        <tspan font-family="PingFang SC" font-size="12" font-weight="500" x="3.3984375" y="27" textLength="12">（</tspan>
+        <tspan font-family="Helvetica" font-size="12" font-weight="500" x="15.398438" y="27" textLength="78.703125">Nginx or httpd)</tspan>
+      </text>
+      <line x1="254.6908" y1="95.25" x2="147.8092" y2="231.25" stroke="#232ba9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <line x1="279.25" y1="95.25" x2="279.25" y2="231.25" stroke="#232ba9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <line x1="303.8092" y1="95.25" x2="410.6908" y2="231.25" stroke="#232ba9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <line x1="329.37853" y1="95.25" x2="541.12147" y2="227.25" stroke="#232ba9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <line x1="334.25" y1="86.85791" x2="692.25" y2="235.6421" stroke="#232ba9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <line x1="536.25" y1="87.32799" x2="178.25" y2="239.172" stroke="#a91c19" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <line x1="542.1316" y1="95.25" x2="328.3684" y2="231.25" stroke="#a91c19" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <line x1="566.6908" y1="95.25" x2="459.8092" y2="231.25" stroke="#a91c19" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <line x1="591.25" y1="95.25" x2="591.25" y2="227.25" stroke="#a91c19" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <line x1="616.3143" y1="95.25" x2="722.1857" y2="227.25" stroke="#a91c19" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </g>
+  </g>
+</svg>

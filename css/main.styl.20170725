@@ -1,0 +1,65 @@
+// CSS Style Guide: http://codeguide.co/#css
+
+
+
+$scheme    = hexo-config('scheme') ? hexo-config('scheme') : 'Muse';
+$variables = base $scheme custom;
+$mixins    = base $scheme custom;
+
+
+
+// Variables Layer
+// --------------------------------------------------
+for $variable in $variables
+  @import "_variables/" + $variable
+
+
+// Mixins Layer
+// --------------------------------------------------
+for $mixin in $mixins
+  @import "_mixins/" + $mixin;
+
+
+
+// Common Layer
+// --------------------------------------------------
+
+// Scaffolding
+@import "_common/scaffolding";
+
+// Layout
+@import "_common/outline";
+
+// Components
+@import "_common/components";
+
+
+// Schemes Layer
+// --------------------------------------------------
+@import "_schemes/" + $scheme;
+
+
+
+// Custom Layer
+// --------------------------------------------------
+@import "_custom/custom";
+
+// Yu Longjun Custom
+code {
+  font-size:0.9em;
+  padding:1px 3px;
+  margin:0 3px
+  background:#ddd;
+  border:1px solid #ccc;
+}
+
+.headband {
+  height: 3px;
+  background: #9b0000;
+}
+
+.site-meta {
+  padding: 20px 0;
+  color: #fff;
+  background: #9b0000;
+}

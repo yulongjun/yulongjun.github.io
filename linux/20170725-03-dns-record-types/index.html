@@ -1,0 +1,1373 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="DNS,DNS Record," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="03-DNS记录类型">
+<meta property="og:url" content="http://www.yulongjun.com/linux/20170725-03-dns-record-types/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/15009926609363.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15010656300047.jpg">
+<meta property="og:updated_time" content="2017-08-06T08:50:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="03-DNS记录类型">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/15009926609363.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/linux/20170725-03-dns-record-types/"/>
+
+
+
+
+
+  <title> 03-DNS记录类型 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170725-03-dns-record-types/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                03-DNS记录类型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-25T21:41:03+08:00">
+                2017-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/linux/20170725-03-dns-record-types/" class="leancloud_visitors" data-flag-title="03-DNS记录类型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/15009926609363.jpg" alt=""></p>
+<a id="more"></a>
+<p>在之前的文章中，我们了解了<a href="http://www.yulongjun.com/linux/20170725-01-what-is-dns">什么是DNS</a>以及<a href="http://www.yulongjun.com/20170725-02-how-dns-work-together">DNS如何工作</a>，现在让我们来看看 DNS 记录有哪些种类，以及它们有什么作用。</p>
+<p>要理解不同的 DNS 记录，首先必须了解区域文件是什么?</p>
+<h3 id="区域文件-Zone-files"><a href="#区域文件-Zone-files" class="headerlink" title="区域文件(Zone files)"></a>区域文件(Zone files)</h3><p>区域文件是名称服务器存储其所知道的域名的信息的方式。名称服务器知道的每个域名都存储在区域文件中。对于名称服务器来说，大多数请求都不能在它自己服务器中找到区域文件。</p>
+<p>如果它被配置成可以递归查询，如解析名称服务器，那它会递归找到结果并返回。否则，它会告诉请求者方下一步到哪里查询。</p>
+<p>名称服务器具有的区域文件越多，它能够权威回答的请求越多。</p>
+<p>区域文件描述 DNS “区域”，其基本上是整个 DNS 命名系统的子集。它通常只配置一个域名。它可以包含多个记录，定义了该域名下的资源位置。</p>
+<p>区域文件的 <code>$ORIGIN</code> 表示该区域最高等级的权威。</p>
+<p>所以如果一个区域文件被配置为 “example.com” 域，<code>$ORIGIN</code> 会被设置为 <code>example.com</code>。</p>
+<p>它配置在区域文件的顶部，或者可以在引用区域文件的 DNS 服务器的配置文件中定义。无论哪种方式，此参数描述区域将是什么等级的权威。</p>
+<p>类似地，<code>$TTL</code> 配置它提供的信息的 “生存时间”。它基本上是一个计时器。高速缓存名称服务器可以使用先前查询的结果来回答问题，直到 TTL 值用完。</p>
+<p>ZONE file的资源记录（RR:Resource Record)的格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">name [TTL] IN rr_type value</div></pre></td></tr></table></figure>
+<ul>
+<li>TTL可以从全局继承，即在文件首行放一个类似这样的<code>$TTL 1D</code>的全局字段。</li>
+<li>@可以用于表明当前区域的名字，属于省略的写法，如果name后面没有跟区域名，如<code>ns1</code>的话，默认就会补全区域名。</li>
+</ul>
+<p>rr_type,资源记录类型（RR:Resource Record)主要分为以下几种：</p>
+<ul>
+<li>SOA记录（Start Of Authority record）：起始授权记录</li>
+<li>A 和 AAAA 记录（Adress record）</li>
+<li>CNAME：Canonical Name record</li>
+<li>MX 记录（Mail eXchange record）</li>
+<li>NS 记录(Name Server record)</li>
+<li>PTR 记录（PoinTer Record）</li>
+</ul>
+<p>下面详解一下各种记录类型：</p>
+<h3 id="SOA记录（Start-Of-Authority-record）"><a href="#SOA记录（Start-Of-Authority-record）" class="headerlink" title="SOA记录（Start Of Authority record）"></a>SOA记录（Start Of Authority record）</h3><p>起始授权记录，或者说是 SOA，这种记录是所有区域性文件中的强制性记录。它必须是一个文件中的第一个记录（<code>$ORIGIN</code> 和 <code>$TTL</code> 会在它之前指定）。它还是最难理解的一种记录。</p>
+<p>开始权限记录的看起来像这样：</p>
+<p><img src="/images/15010656300047.jpg" alt=""></p>
+<p>我们来解释一下各部分分别表示什么：</p>
+<ul>
+<li><p><strong><code>domain.com.</code></strong>：这是区域的根。这表明该区域文件用于 domain.com 域名。通常，你会看到这个用 @ 代替，它只是一个占位符，表示我们之前学到的 <code>$ORIGIN</code> 变量的内容。</p>
+</li>
+<li><p><strong><code>IN SOA</code></strong>：”IN” 部分表示互联网（它会出现在许多记录中）, IN 可以省略不写。 SOA 是表示这是开始权限记录。</p>
+</li>
+<li><p><strong><code>ns1.domain.com.</code></strong>：这定义了该域的主名称服务器。名称服务器可以是主服务器或从服务器，如果配置了动态 DNS，就像这里，则一个服务器需要是 “主服务器”。如果你未配置动态 DNS，那么这只是你其中一个主名称服务器。</p>
+</li>
+<li><p><strong><code>admin.domain.com.</code></strong>：这是这个区域文件管理员的邮箱地址。邮箱地址的 @ 这里用一个 . 代替。如果你的名字中也有 . 它会用 \ 代替。（比如 your.name@domain.com 变成 your\name.domain.com）</p>
+</li>
+<li><p><strong><code>12083</code></strong>：这是区域文件的序列号。每次编辑区域文件时，必须增加此序列号以使区域文件能够正确传播。从服务器将检查主服务器的区域序列号是否大于它们在系统上的序列号。如果是，它请求新的区域文件，如果不是，它继续服务原始文件。</p>
+</li>
+<li><p><strong><code>3h</code></strong>：这是区域的刷新间隔。这是从服务器向主服务器轮询检查区域文件是否变更之间等待的时间量。</p>
+</li>
+<li><p><strong><code>30m</code></strong>：这是此区域的重试间隔。如果slave从机在刷新周期结束时无法连接到master主机，则它将等待此时间并重试轮询主机。</p>
+</li>
+<li><p><strong><code>3w</code></strong>：这是到期时间。如果slave从服务器在此时间内无法与master主服务器联系，则它不再作为此区域的权威来源的返回响应，并停止对外提供服务。</p>
+</li>
+<li><p><strong><code>1h</code></strong>：这是名称服务器在此文件中找不到所请求的名称时缓存找不到结果的时间量。</p>
+</li>
+</ul>
+<h3 id="A-和-AAAA-记录（Adress-record）"><a href="#A-和-AAAA-记录（Adress-record）" class="headerlink" title="A 和 AAAA 记录（Adress record）"></a>A 和 AAAA 记录（Adress record）</h3><p>这两个记录都将主机映射到 IP 地址。 “A” 记录用于将主机映射到 IPv4 IP 地址，而 “AAAA” 记录用于将主机映射到 IPv6 地址。</p>
+<p>这些记录的一般格式是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">host     IN      A       IPv4_address</div><div class="line">host     IN      AAAA    IPv6_address</div></pre></td></tr></table></figure>
+<p>因为我们的 SOA 记录指出了我们的主服务器是 “ns1.domain.com”，而 “ns1.domain.com” 也是 “domain.com” 区域文件定义的，所以我们需要把它指向一个 IP 地址。</p>
+<p>这条记录可能看起来像这样：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ns1     IN  A       111.222.111.222</div></pre></td></tr></table></figure>
+<p>请注意，我们不必提供全名。我们可以只给主机名，不需要 FQDN，然后 DNS 服务器会通过 <code>$ORIGIN</code> 补足其余部分。但是，我们也可以使用完整的 FQDN ：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ns1.domain.com.     IN  A       111.222.111.222</div></pre></td></tr></table></figure>
+<p>大多数情况下，在这里你可以将你的 web 服务器定义为 “www”：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">www     IN  A       222.222.222.222</div></pre></td></tr></table></figure>
+<p>我们还可以说明基本域解析到哪里。如下表示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">domain.com.     IN  A       222.222.222.222</div></pre></td></tr></table></figure>
+<p>我们还可以使用 “@” 来表示基本域名：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@       IN  A       222.222.222.222</div></pre></td></tr></table></figure>
+<p>我们还可以解析此域下未明确定义的任何内容到此服务器。可以使用 “*” 通配符：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*       IN  A       222.222.222.222</div></pre></td></tr></table></figure>
+<p>以上这些对于 AAAA 记录同样适用。</p>
+<h3 id="CNAME-记录（Canonical-Name-record）"><a href="#CNAME-记录（Canonical-Name-record）" class="headerlink" title="CNAME 记录（Canonical Name record）"></a>CNAME 记录（Canonical Name record）</h3><p>CNAME 记录为您的服务器（由A或AAAA记录定义的名称）定义规范名称的别名。</p>
+<p>例如，我们可以有一个 A 记录定义 “server1” 主机，然后使用 “www” 作为此主机的别名：</p>
+<pre><code class="bash">server1     IN  A       111.111.111.111
+www         IN  CNAME   server1
+</code></pre>
+<p>请注意，这些别名会带来一些性能损失，因为它们需要对服务器进行额外的查询。大多数时候，通过使用附加的 A 或 AAAA 记录可以实现相同的结果。</p>
+<p>推荐使用 CNAME 的一种情况是为当前区域之外的资源提供别名。</p>
+<h3 id="MX-记录（Mail-eXchange-record）"><a href="#MX-记录（Mail-eXchange-record）" class="headerlink" title="MX 记录（Mail eXchange record）"></a>MX 记录（Mail eXchange record）</h3><p>MX 记录用来定义用于域的邮件交换。这有助于电子邮件正确到达您的邮件服务器。</p>
+<p>与许多其他记录类型不同的是，邮件记录通常不会将主机映射到某些内容，因为它们适用于整个区域。因此，他们通常看起来像这样：</p>
+<pre><code class="bash">IN  MX  10   mail.domain.com.
+</code></pre>
+<p>请注意，开头没有主机名。</p>
+<p>还要注意，它还有一个额外的数字。如果定义了多个邮件服务器，这是帮助计算机决定发送邮件的服务器的首选项号。较低的数字具有较高的优先级。</p>
+<p>MX 记录通常应指向由 A 或 AAAA 记录定义的主机，而不是由 CNAME 定义的主机。</p>
+<p>所以，假设我们有两个邮件服务器。可以这样表示：</p>
+<pre><code class="bash">IN  MX  10  mail1.domain.com.
+IN  MX  50  mail2.domain.com.
+mail1   IN  A       111.111.111.111
+mail2   IN  A       222.222.222.222
+</code></pre>
+<p>在这个例子中，”mail1” 主机是首选电子邮件交换服务器。</p>
+<p>我们也可以这样写：</p>
+<pre><code class="bash">IN  MX  10  mail1
+IN  MX  50  mail2
+mail1   IN  A       111.111.111.111
+mail2   IN  A       222.222.222.222
+</code></pre>
+<h3 id="NS-记录-Name-Server-record"><a href="#NS-记录-Name-Server-record" class="headerlink" title="NS 记录(Name Server record)"></a>NS 记录(Name Server record)</h3><p>此记录类型定义用于此区域的名称服务器。</p>
+<p>你可能想知道，”如果区域文件放在名称服务器上，为什么它需要引用自身？”。DNS 如此成功的其中一个原因是它的多级缓存。在区域文件中定义名称服务器的一个原因是区域文件可能是另外一个名称服务器的缓存副本。至于其他原因，我们不在这里讨论。</p>
+<p>与 MX 记录一样，它也有一些区域范围的参数，因此它们也不使用主机。一般来说，它们看起来像这样：</p>
+<pre><code class="bash">IN  NS     ns1.domain.com.
+IN  NS     ns2.domain.com.
+</code></pre>
+<p>你应该在每个区域文件中至少定义两个名称服务器，以便在一个服务器出现问题时还能正确运行。如果只有一个名称服务器，大多数 DNS 服务器软件都会认为区域文件无效。</p>
+<p>同样，把主机的 A 或者 AAAA 映射也包含记录中：</p>
+<pre><code class="bash">IN  NS     ns1.domain.com.
+IN  NS     ns2.domain.com.
+ns1     IN  A      111.222.111.111
+ns2     IN  A      123.211.111.233
+</code></pre>
+<p>你还可以使用很多其他记录类型，但这些可能是你会遇到的最常见的类型。</p>
+<h3 id="PTR-记录（PoinTer-Record）"><a href="#PTR-记录（PoinTer-Record）" class="headerlink" title="PTR 记录（PoinTer Record）"></a>PTR 记录（PoinTer Record）</h3><p>PTR 记录用于定义与 IP 地址相关联的名称。 PTR 记录是 A 或 AAAA 记录的逆。 PTR 记录是唯一的，因为它们以 .arpa 根开始并被委派给 IP 地址的所有者。区域互联网注册管理机构（RIRs）管理 IP 地址到组织和服务提供商的指派。区域互联网注册管理机构包括 APNIC，ARIN，RIPE NCC，LACNIC 和 AFRINIC。</p>
+<p>这里是一个 111.222.333.444 的 PTR 记录的示例：</p>
+<pre><code class="bash">444.333.222.111.in-addr.arpa.   33692   IN  PTR host.example.com.
+</code></pre>
+<p>我们可以看到地址是反的，而且ip后面加了一个特定的后缀<code>.in-addr.arpa.</code>。</p>
+<p>IPv6 地址的这个 PTR 记录示例使用了 Google IPv6 DNS 服务器(2001:4860:4860::8888)的逆转形式的半字节格式。</p>
+<pre><code class="bash">8.8.8.8.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.6.8.4.0.6.8.4.1.0.0.2.ip6.arpa. 86400IN PTR google-public-dns-a.google.com.
+</code></pre>
+<p><code>dig</code> 命令的 <code>-x</code> 参数可用于查找 IP 地址的反向 DNS 名称。</p>
+<p>下面是一个 <code>dig</code> 命令的例子。<code>+short</code> 确保只输出反向 DNS 名称。</p>
+<pre><code class="bash">dig -x 8.8.4.4 +short
+</code></pre>
+<p>上述 <code>dig</code> 命令的输出将是该 IP 地址的 PTR 记录中的域名：</p>
+<pre><code class="bash">google-public-dns-b.google.com.
+</code></pre>
+<p>互联网上的服务器在日志中使用 PTR 记录，来做出明智的垃圾邮件处理决策，并显示​​其他设备上的易于阅读的详细信息。</p>
+<p>最常用的电子邮件服务器将查找从其接收电子邮件的 IP 地址的 PTR 记录。如果源 IP 地址没有与其相关联的 PTR 记录，则发送的电子邮件可被视为垃圾邮件并被拒绝。PTR 中的 FQDN 与要发送的电子邮件的域名是否匹配并不重要，重要的是存在有效的 PTR 记录，具有对应的和匹配的前向 A 记录。</p>
+<p>通常，互联网上的网络路由器会被赋予与其物理位置相对应的 PTR 记录。例如，你可能会在纽约市或芝加哥看到使用 “NYC” 或 “CHI”。这对于运行 traceroute 或者 MTR 来检查网络流量经过的路径很有用。</p>
+<p>大多数提供专用服务器或 VPS 服务的提供商允许客户为其 IP 地址设置 PTR 记录。</p>
+<blockquote>
+<p>注意: PTR 记录中的 FQDN 具有对应的和匹配的正向 A 记录是非常重要的。示例：<code>111.222.333.444</code> 有一条指向 <code>server.example.com</code> 的 PTR 记录，那 <code>server.example.com</code> 需要具有一条指向 <code>111.222.333.444</code> 的 A 记录。</p>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>了解了不同类型的 DNS 记录以及它们的作用之后，你就可以根据需要选择不同的 DNS 记录。</p>
+<p>不同的域名服务商提供了不一样的 DNS 记录的的配置方法，但是你理解了 DNS 记录的作用之后，配置对你来说就不是难事了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/linux/20170725-03-dns-record-types/" title="03-DNS记录类型">http://www.yulongjun.com/linux/20170725-03-dns-record-types/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DNS/" rel="tag"># DNS</a>
+          
+            <a href="/tags/DNS-Record/" rel="tag"># DNS Record</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux/20170725-02-how-dns-work-together/" rel="next" title="02-DNS如何工作">
+                <i class="fa fa-chevron-left"></i> 02-DNS如何工作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux/20170725-04-bind-config/" rel="prev" title="04-bind（named）配置文件">
+                04-bind（named）配置文件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#区域文件-Zone-files"><span class="nav-number">1.</span> <span class="nav-text">区域文件(Zone files)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SOA记录（Start-Of-Authority-record）"><span class="nav-number">2.</span> <span class="nav-text">SOA记录（Start Of Authority record）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-和-AAAA-记录（Adress-record）"><span class="nav-number">3.</span> <span class="nav-text">A 和 AAAA 记录（Adress record）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CNAME-记录（Canonical-Name-record）"><span class="nav-number">4.</span> <span class="nav-text">CNAME 记录（Canonical Name record）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MX-记录（Mail-eXchange-record）"><span class="nav-number">5.</span> <span class="nav-text">MX 记录（Mail eXchange record）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NS-记录-Name-Server-record"><span class="nav-number">6.</span> <span class="nav-text">NS 记录(Name Server record)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PTR-记录（PoinTer-Record）"><span class="nav-number">7.</span> <span class="nav-text">PTR 记录（PoinTer Record）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

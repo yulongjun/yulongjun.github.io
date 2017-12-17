@@ -1,0 +1,1262 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串（Strings）">
+<meta property="og:url" content="http://www.yulongjun.com/python/20170509-04-strings/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/14977098435146.jpg">
+<meta property="og:updated_time" content="2017-06-17T14:30:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="字符串（Strings）">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/14977098435146.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/python/20170509-04-strings/"/>
+
+
+
+
+
+  <title> 字符串（Strings） | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170509-04-strings/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                字符串（Strings）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T20:33:55+08:00">
+                2017-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170509-04-strings/" class="leancloud_visitors" data-flag-title="字符串（Strings）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/14977098435146.jpg" alt=""></p>
+<a id="more"></a>
+<p>在Python3中，字符串是一个unicode的序列，在Python2中一个byte的序列。字符串的很多特性和元组类似，字符串也是不可变的。</p>
+<h3 id="定义字符串"><a href="#定义字符串" class="headerlink" title="定义字符串"></a>定义字符串</h3><ul>
+<li><code>&#39;</code></li>
+<li><code>&quot;</code></li>
+<li><code>&#39;&#39;&#39;</code></li>
+<li><code>&quot;&quot;&quot;</code></li>
+</ul>
+<p>Python中单引号和双引号的效果是一样的。</p>
+<p>三个单引号或双引号表通常用在字符串为多行的情况下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">1</span>]: s = <span class="string">'yulongjun'</span></div><div class="line"></div><div class="line">In [<span class="number">2</span>]: s = <span class="string">"yulongjun"</span></div><div class="line"></div><div class="line">In [<span class="number">3</span>]: s = <span class="string">''' My name is YuLongjun.</span></div><div class="line">   ...: My age is 18.'''</div><div class="line"></div><div class="line">In [<span class="number">4</span>]: s = <span class="string">""" My name is YuLongjun.</span></div><div class="line">   ...: My age is 18."""</div></pre></td></tr></table></figure>
+<h3 id="连接字符串"><a href="#连接字符串" class="headerlink" title="连接字符串"></a>连接字符串</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">1</span>]: list1=[<span class="string">'I'</span>,<span class="string">'love'</span>,<span class="string">'Python'</span>]</div><div class="line"></div><div class="line">In [<span class="number">2</span>]: <span class="string">' '</span>.join(list1)     <span class="comment">#用空格连接</span></div><div class="line">Out[<span class="number">2</span>]: <span class="string">'I love Python'</span></div><div class="line"></div><div class="line">In [<span class="number">3</span>]: <span class="string">','</span>.join(list1)     <span class="comment">#用逗号连接</span></div><div class="line">Out[<span class="number">3</span>]: <span class="string">'I,love,Python'</span></div><div class="line"></div><div class="line">In [<span class="number">5</span>]: <span class="string">'Yu'</span> + <span class="string">'Longjun'</span></div><div class="line">Out[<span class="number">5</span>]: <span class="string">'YuLongjun'</span></div></pre></td></tr></table></figure>
+<h3 id="字符串分割"><a href="#字符串分割" class="headerlink" title="字符串分割"></a>字符串分割</h3><p><code>split()</code>函数，从左边开始分割</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">9</span>]: s=<span class="string">'I love Python'</span></div><div class="line"></div><div class="line">In [<span class="number">10</span>]: s.split()   <span class="comment">#默认是以空格为分隔符分割</span></div><div class="line">Out[<span class="number">10</span>]: [<span class="string">'I'</span>, <span class="string">'love'</span>, <span class="string">'Python'</span>]</div><div class="line"></div><div class="line">In [<span class="number">11</span>]: s.split(<span class="string">'o'</span>) <span class="comment"># 指定分隔符为o</span></div><div class="line">Out[<span class="number">11</span>]: [<span class="string">'I l'</span>, <span class="string">'ve Pyth'</span>, <span class="string">'n'</span>]</div><div class="line"></div><div class="line">In [<span class="number">12</span>]: s.split(<span class="string">' '</span>,<span class="number">1</span>) <span class="comment"># 以空格为分隔符，最大分割次数为1</span></div><div class="line">Out[<span class="number">12</span>]: [<span class="string">'I'</span>, <span class="string">'love Python'</span>]</div><div class="line"></div><div class="line">In [<span class="number">13</span>]: s=<span class="string">'root:x:0:0:root:/root:/bin/bash'</span></div><div class="line"></div><div class="line">In [<span class="number">14</span>]: s.split(<span class="string">':'</span>,<span class="number">1</span>) <span class="comment"># 以冒号为分隔符，最大分割次数为1</span></div><div class="line">Out[<span class="number">14</span>]: [<span class="string">'root'</span>, <span class="string">'x:0:0:root:/root:/bin/bash'</span>]</div><div class="line">In [<span class="number">16</span>]: username,_=s.split(<span class="string">':'</span>,<span class="number">1</span>)</div><div class="line"></div><div class="line">In [<span class="number">17</span>]: username</div><div class="line">Out[<span class="number">17</span>]: <span class="string">'root'</span></div><div class="line"></div><div class="line">In [<span class="number">18</span>]: line =<span class="string">'url:http://www.google.com'</span></div><div class="line"></div><div class="line">In [<span class="number">19</span>]: key,value=line.split(<span class="string">':'</span>,<span class="number">1</span>)</div><div class="line"></div><div class="line">In [<span class="number">20</span>]: key</div><div class="line">Out[<span class="number">20</span>]: <span class="string">'url'</span></div><div class="line"></div><div class="line">In [<span class="number">21</span>]: value</div><div class="line">Out[<span class="number">21</span>]: <span class="string">'http://www.google.com'</span></div></pre></td></tr></table></figure>
+<p><code>rsplit()</code>：和<code>split()</code>相反，是从右往左分割的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">18</span>]: line=<span class="string">'url:http://www.google.com'</span></div><div class="line">In [<span class="number">22</span>]: line.rsplit(<span class="string">':'</span>,<span class="number">1</span>)</div><div class="line">Out[<span class="number">22</span>]: [<span class="string">'url:http'</span>, <span class="string">'//www.google.com'</span>]</div></pre></td></tr></table></figure>
+<p><code>splitlines</code>：分割段</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">24</span>]: s =<span class="string">'''</span></div><div class="line">   ....: I love Python</div><div class="line">   ....: I also love Linux</div><div class="line">   ....: '''</div><div class="line"></div><div class="line">In [<span class="number">25</span>]: s.splitlines()</div><div class="line">Out[<span class="number">25</span>]: [<span class="string">''</span>, <span class="string">'I love Python'</span>, <span class="string">'I also love Linux'</span>]</div><div class="line"></div><div class="line">In [<span class="number">26</span>]: s.splitlines(<span class="keyword">True</span>) <span class="comment">#默认是False，即去掉换行符\n,True的话即保留换行符</span></div><div class="line">Out[<span class="number">26</span>]: [<span class="string">'\n'</span>, <span class="string">'I love Python\n'</span>, <span class="string">'I also love Linux\n'</span>]</div><div class="line"></div><div class="line">In [<span class="number">27</span>]: s.splitlines(<span class="keyword">False</span>)</div><div class="line">Out[<span class="number">27</span>]: [<span class="string">''</span>, <span class="string">'I love Python'</span>, <span class="string">'I also love Linux'</span>]</div></pre></td></tr></table></figure>
+<p><code>partition</code>分割</p>
+<p>有点像split之后接了一个参数1，但是还会保留分隔符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">29</span>]: help(s.partition)</div><div class="line"><span class="comment"># Help on built-in function partition:</span></div><div class="line"></div><div class="line"><span class="comment">#partition(...) method of builtins.str instance</span></div><div class="line"> <span class="comment">#S.partition(sep) -&gt; (head, sep, tail)</span></div><div class="line"></div><div class="line"> <span class="comment"># Search for the separator sep in S, and return the part before it,the separator itself, and the part after it.  If the separator is not found, return S and two empty strings.</span></div><div class="line"></div><div class="line">In [<span class="number">30</span>]: s=<span class="string">'root:x:0:0:root:/root:/bin/bash'</span></div><div class="line"></div><div class="line">In [<span class="number">31</span>]: s.partition(<span class="string">':'</span>)</div><div class="line">Out[<span class="number">31</span>]: (<span class="string">'root'</span>, <span class="string">':'</span>, <span class="string">'x:0:0:root:/root:/bin/bash'</span>)</div><div class="line"></div><div class="line">In [<span class="number">32</span>]: h,_,t=s.partition(<span class="string">':'</span>)</div><div class="line"></div><div class="line">In [<span class="number">33</span>]: t</div><div class="line">Out[<span class="number">33</span>]: <span class="string">'x:0:0:root:/root:/bin/bash'</span></div><div class="line"></div><div class="line">In [<span class="number">34</span>]: h,_,t=t.partition(<span class="string">':'</span>)</div><div class="line"></div><div class="line">In [<span class="number">35</span>]: t</div><div class="line">Out[<span class="number">35</span>]: <span class="string">'0:0:root:/root:/bin/bash'</span></div><div class="line"></div><div class="line">In [<span class="number">36</span>]: h,_,t=t.partition(<span class="string">':'</span>)</div><div class="line"></div><div class="line">In [<span class="number">37</span>]: t</div><div class="line">Out[<span class="number">37</span>]: <span class="string">'0:root:/root:/bin/bash'</span></div></pre></td></tr></table></figure>
+<p><code>rpartition</code>：和<code>partition</code>相反，是从右向左分割</p>
+<h3 id="字符串修改-大小写"><a href="#字符串修改-大小写" class="headerlink" title="字符串修改-大小写"></a>字符串修改-大小写</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">40</span>]: s=<span class="string">'I love Python'</span></div><div class="line"></div><div class="line">In [<span class="number">41</span>]: s.capitalize()       <span class="comment">#首字母大写</span></div><div class="line">Out[<span class="number">41</span>]: <span class="string">'I love python'</span></div><div class="line"></div><div class="line">In [<span class="number">42</span>]: s.title()            <span class="comment">#所有单词首字母大写</span></div><div class="line">Out[<span class="number">42</span>]: <span class="string">'I Love Python'</span></div><div class="line"></div><div class="line">In [<span class="number">43</span>]: s.lower()            <span class="comment">#所有字母小写</span></div><div class="line">Out[<span class="number">43</span>]: <span class="string">'i love python'</span></div><div class="line"></div><div class="line">In [<span class="number">44</span>]: s.upper()            <span class="comment">#所有字母大写</span></div><div class="line">Out[<span class="number">44</span>]: <span class="string">'I LOVE PYTHON'</span></div><div class="line"></div><div class="line">In [<span class="number">46</span>]: s.swapcase()         <span class="comment">#所有字母大小写反转</span></div><div class="line">Out[<span class="number">46</span>]: <span class="string">'i LOVE pYTHON'</span></div></pre></td></tr></table></figure>
+<h3 id="字符串修改-填充（对齐）、清除（修剪）"><a href="#字符串修改-填充（对齐）、清除（修剪）" class="headerlink" title="字符串修改-填充（对齐）、清除（修剪）"></a>字符串修改-填充（对齐）、清除（修剪）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">2</span>]: s = <span class="string">'Python'</span></div><div class="line"></div><div class="line">In [<span class="number">3</span>]: s.center(<span class="number">30</span>)       <span class="comment">#中间填充</span></div><div class="line">Out[<span class="number">3</span>]: <span class="string">'            Python            '</span></div><div class="line"></div><div class="line">In [<span class="number">4</span>]: s.center(<span class="number">30</span>,<span class="string">'*'</span>)   <span class="comment">#中间填充，用*填充</span></div><div class="line">Out[<span class="number">4</span>]: <span class="string">'************Python************'</span></div><div class="line"></div><div class="line">In [<span class="number">5</span>]: s.ljust(<span class="number">30</span>)        <span class="comment">#字符串在左边，右边填充</span></div><div class="line">Out[<span class="number">5</span>]: <span class="string">'Python                        '</span></div><div class="line"></div><div class="line">In [<span class="number">6</span>]: s.ljust(<span class="number">30</span>,<span class="string">'*'</span>)    <span class="comment">#字符串在左边，右边用*填充</span></div><div class="line">Out[<span class="number">6</span>]: <span class="string">'Python************************'</span></div><div class="line"></div><div class="line">In [<span class="number">7</span>]: s.rjust(<span class="number">30</span>,<span class="string">'*'</span>)    <span class="comment">#字符串在左边，左边用*填充</span></div><div class="line">Out[<span class="number">7</span>]: <span class="string">'************************Python'</span></div><div class="line"></div><div class="line">In [<span class="number">16</span>]: s=<span class="string">'root:x::0:0:root:/root:/bin/bash\n'</span></div><div class="line"></div><div class="line">In [<span class="number">17</span>]: s.strip()        <span class="comment">#去掉两边的空白符（space、制表符tab、换行符\n)</span></div><div class="line">Out[<span class="number">17</span>]: <span class="string">'root:x::0:0:root:/root:/bin/bash'</span></div><div class="line"></div><div class="line">In [<span class="number">18</span>]: s.lstrip()       <span class="comment">#去掉左边的空白符</span></div><div class="line">Out[<span class="number">18</span>]: <span class="string">'root:x::0:0:root:/root:/bin/bash\n'</span></div><div class="line"></div><div class="line">In [<span class="number">19</span>]: s.rstrip()       <span class="comment">#去掉右边的空白符 </span></div><div class="line">Out[<span class="number">19</span>]: <span class="string">'root:x::0:0:root:/root:/bin/bash'</span></div><div class="line"></div><div class="line">In [<span class="number">20</span>]: s = <span class="string">'##test##'</span></div><div class="line"></div><div class="line">In [<span class="number">21</span>]: s.strip(<span class="string">'#'</span>)</div><div class="line">Out[<span class="number">22</span>]: <span class="string">'test'</span></div><div class="line"></div><div class="line">In [<span class="number">22</span>]: s.lstrip(<span class="string">'#'</span>)</div><div class="line">Out[<span class="number">22</span>]: <span class="string">'test##'</span></div><div class="line"></div><div class="line">In [<span class="number">23</span>]: s.rstrip(<span class="string">'#'</span>)</div><div class="line">Out[<span class="number">23</span>]: <span class="string">'##test'</span></div></pre></td></tr></table></figure>
+<h3 id="字符串判断"><a href="#字符串判断" class="headerlink" title="字符串判断"></a>字符串判断</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">74</span>]: poem=<span class="string">'''There was a Young Lady of Norway,</span></div><div class="line">who casually sat in a doorway;</div><div class="line">when the door squeezed her flat,</div><div class="line">She exclaimed, "What of that?"</div><div class="line">this courageous Young Lady of Norway.'''</div><div class="line">In [<span class="number">76</span>]: poem[:<span class="number">13</span>]</div><div class="line">Out[<span class="number">76</span>]: <span class="string">'There was a Y'</span></div><div class="line"></div><div class="line">In [<span class="number">77</span>]: len(poem)                   <span class="comment">#字符串长度</span></div><div class="line">Out[<span class="number">77</span>]: <span class="number">166</span></div><div class="line"></div><div class="line">In [<span class="number">78</span>]: poem.startswith(<span class="string">'There'</span>)    <span class="comment">#以'There'开头</span></div><div class="line">Out[<span class="number">78</span>]: <span class="keyword">True</span></div><div class="line"></div><div class="line">In [<span class="number">79</span>]: poem.endswith(<span class="string">'Norway.'</span>)    <span class="comment">#以'Norway.'结尾</span></div><div class="line">Out[<span class="number">79</span>]: <span class="keyword">True</span></div><div class="line"></div><div class="line">In [<span class="number">80</span>]: poem.isalnum()              <span class="comment">#所有字符都是字母或数字吗？is*还有很多用法，可以自己查看</span></div><div class="line">Out[<span class="number">80</span>]: <span class="keyword">False</span></div></pre></td></tr></table></figure>
+<h3 id="字符串查找"><a href="#字符串查找" class="headerlink" title="字符串查找"></a>字符串查找</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">81</span>]: poem.count(<span class="string">'a'</span>)            <span class="comment">#字符串'a'出现了多少次</span></div><div class="line">Out[<span class="number">81</span>]: <span class="number">16</span></div><div class="line"></div><div class="line">In [<span class="number">82</span>]: poem.index(<span class="string">'a'</span>)            <span class="comment">#字符串'a'出现的第一次的位置</span></div><div class="line">Out[<span class="number">82</span>]: <span class="number">7</span></div><div class="line">In [<span class="number">82</span>]: poem.rindex(<span class="string">'a'</span>)            <span class="comment">#字符串'a'从右边开始出现的第一次的位置</span></div><div class="line">Out[<span class="number">82</span>]: <span class="number">7</span></div><div class="line"></div><div class="line">In [<span class="number">83</span>]: poem.find(<span class="string">'a'</span>)              <span class="comment">#查找第一次出现'a'的位置</span></div><div class="line">Out[<span class="number">83</span>]: <span class="number">7</span></div><div class="line"></div><div class="line">In [<span class="number">83</span>]: poem.find(<span class="string">'a'</span>，<span class="number">50</span>,<span class="number">100</span>)       <span class="comment">#查找从50到100，第一次出现'a'的位置</span></div><div class="line">Out[<span class="number">83</span>]: <span class="number">54</span></div><div class="line"></div><div class="line">In [<span class="number">84</span>]: poem.rfind(<span class="string">'a'</span>,<span class="number">50</span>,<span class="number">100</span>)       <span class="comment">#查找从50到100，从右开始找，第一次出现'a'的位置</span></div><div class="line">Out[<span class="number">84</span>]: <span class="number">94</span></div></pre></td></tr></table></figure>
+<h3 id="replace-替换"><a href="#replace-替换" class="headerlink" title="replace()替换"></a><code>replace()</code>替换</h3><p>s.replace(old,new[,count])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">27</span>]: s=<span class="string">'root:x::0:0:root:/root:/bin/bash\n'</span></div><div class="line"></div><div class="line">In [<span class="number">28</span>]: s.replace(<span class="string">'root'</span>,<span class="string">'yulongjun'</span>)        <span class="comment">#默认替换所有</span></div><div class="line">Out[<span class="number">28</span>]: <span class="string">'yulongjun:x::0:0:yulongjun:/yulongjun:/bin/bash\n'</span></div><div class="line"></div><div class="line">In [<span class="number">29</span>]: s.replace(<span class="string">'root'</span>,<span class="string">'yulongjun'</span>,<span class="number">1</span>)      <span class="comment">#只替换第一个</span></div><div class="line">Out[<span class="number">29</span>]: <span class="string">'yulongjun:x::0:0:root:/root:/bin/bash\n'</span></div><div class="line"></div><div class="line">In [<span class="number">30</span>]: s.replace(<span class="string">'root'</span>,<span class="string">'yulongjun'</span>,<span class="number">-1</span>)     <span class="comment">#负数还是替换所有</span></div><div class="line">Out[<span class="number">30</span>]: <span class="string">'yulongjun:x::0:0:yulongjun:/yulongjun:/bin/bash\n'</span></div><div class="line"></div><div class="line">In [<span class="number">31</span>]: s.replace(<span class="string">'root'</span>,<span class="string">'yulongjun'</span>,<span class="number">-2</span>)     <span class="comment">#负数还是替换所有</span></div><div class="line">Out[<span class="number">31</span>]: <span class="string">'yulongjun:x::0:0:yulongjun:/yulongjun:/bin/bash\n'</span></div><div class="line"></div><div class="line">In [<span class="number">32</span>]: s.replace(<span class="string">'root'</span>,<span class="string">'yulongjun'</span>,<span class="number">1000</span>)   <span class="comment">#超过最大个数也是替换所有</span></div><div class="line">Out[<span class="number">32</span>]: <span class="string">'yulongjun:x::0:0:yulongjun:/yulongjun:/bin/bash\n'</span></div></pre></td></tr></table></figure>
+<h3 id="Python3使用str类型，底层实现是用unicode编码"><a href="#Python3使用str类型，底层实现是用unicode编码" class="headerlink" title="Python3使用str类型，底层实现是用unicode编码"></a>Python3使用str类型，底层实现是用unicode编码</h3><p>str –&gt; encode –&gt; bytes</p>
+<p>bytes –&gt; decode –&gt; str</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">12</span>]: s=<span class="string">'于龙君'</span></div><div class="line"></div><div class="line">In [<span class="number">13</span>]: s</div><div class="line">Out[<span class="number">13</span>]: <span class="string">'于龙君'</span></div><div class="line"></div><div class="line">In [<span class="number">14</span>]: s.encode()  <span class="comment">#编码（不填参数默认utf-8）</span></div><div class="line">Out[<span class="number">14</span>]: <span class="string">b'\xe4\xba\x8e\xe9\xbe\x99\xe5\x90\x9b'</span></div><div class="line"></div><div class="line">In [<span class="number">15</span>]: d=s.encode()</div><div class="line"></div><div class="line">In [<span class="number">16</span>]: d.decode() <span class="comment">#解码（不填参数默认utf-8）</span></div><div class="line">Out[<span class="number">16</span>]: <span class="string">'于龙君'</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/python/20170509-04-strings/" title="字符串（Strings）">http://www.yulongjun.com/python/20170509-04-strings/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/python/20170509-03-tuples/" rel="next" title="元组">
+                <i class="fa fa-chevron-left"></i> 元组
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/python/20170509-05-slice/" rel="prev" title="切片（Slice）">
+                切片（Slice） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义字符串"><span class="nav-number">1.</span> <span class="nav-text">定义字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接字符串"><span class="nav-number">2.</span> <span class="nav-text">连接字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串分割"><span class="nav-number">3.</span> <span class="nav-text">字符串分割</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串修改-大小写"><span class="nav-number">4.</span> <span class="nav-text">字符串修改-大小写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串修改-填充（对齐）、清除（修剪）"><span class="nav-number">5.</span> <span class="nav-text">字符串修改-填充（对齐）、清除（修剪）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串判断"><span class="nav-number">6.</span> <span class="nav-text">字符串判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串查找"><span class="nav-number">7.</span> <span class="nav-text">字符串查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#replace-替换"><span class="nav-number">8.</span> <span class="nav-text">replace()替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python3使用str类型，底层实现是用unicode编码"><span class="nav-number">9.</span> <span class="nav-text">Python3使用str类型，底层实现是用unicode编码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

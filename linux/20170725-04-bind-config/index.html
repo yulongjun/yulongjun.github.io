@@ -1,0 +1,1320 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="DNS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="04-bind（named）配置文件">
+<meta property="og:url" content="http://www.yulongjun.com/linux/20170725-04-bind-config/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/dns.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15010544230567.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15015953753385.jpg">
+<meta property="og:updated_time" content="2017-10-22T03:55:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="04-bind（named）配置文件">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/dns.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/linux/20170725-04-bind-config/"/>
+
+
+
+
+
+  <title> 04-bind（named）配置文件 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170725-04-bind-config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                04-bind（named）配置文件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-25T22:41:03+08:00">
+                2017-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/linux/20170725-04-bind-config/" class="leancloud_visitors" data-flag-title="04-bind（named）配置文件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/dns.png" alt=""></p>
+<a id="more"></a>
+<p>CentOS下，<code>yum install bind</code>安装bind软件来实现DNS服务,<code>yum info bind</code>可以查看到描述：<br><img src="/images/15010544230567.jpg" alt=""></p>
+<p>BIND是DNS协议的一种实现。BIND包含了一个DNS Server（服务名叫named）,用来解析主机名到ip地址；一个解析库；一些辅助工具，还有一个安全目录工具，分别属于下面几个包：</p>
+<ul>
+<li><strong><code>bind</code></strong>：包里主要包含：<ul>
+<li><code>named</code> DNS服务</li>
+<li><code>named-chkconfig</code>（named.conf文件检查工具）</li>
+<li><code>named-checkzone</code>(zone文件检车工具）</li>
+<li><code>rndc</code>（本地和远程dns控制工具）</li>
+</ul>
+</li>
+<li><strong><code>bind-libs</code></strong>：named DNS服务的库</li>
+<li><strong><code>bind-utils</code></strong>：包含一系列辅助工具来测试<ul>
+<li><code>host</code></li>
+<li><code>dig</code></li>
+<li><code>nslookup</code></li>
+<li><code>nsupdate</code></li>
+</ul>
+</li>
+<li><strong><code>bind-chroot</code></strong>：切根程序，用来切换默认目录到另外一个深层的安全的目录<code>/var/named/chroot</code>，类似于前面光盘进入救援模式的那种情况。</li>
+</ul>
+<h3 id="named-涉及的文件"><a href="#named-涉及的文件" class="headerlink" title="named 涉及的文件"></a>named 涉及的文件</h3><p><code>rpm -ql named</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">/etc/named.conf              <span class="comment"># bind主配置文件</span></div><div class="line">/etc/named.rfc1912.zones     <span class="comment"># 定义zone的文件</span></div><div class="line">/etc/rc.d/init.d/named       <span class="comment"># bind脚本文件</span></div><div class="line">/etc/rndc.conf               <span class="comment"># rndc配置文件</span></div><div class="line">/usr/sbin/named-checkconf    <span class="comment"># 检测/etc/named.conf文件语法</span></div><div class="line">/usr/sbin/named-checkzone    <span class="comment"># 检测zone和对应zone文件的语法</span></div><div class="line">/usr/sbin/rndc               <span class="comment"># 远程dns管理工具</span></div><div class="line">/usr/sbin/rndc-confgen       <span class="comment"># 生成rndc密钥</span></div><div class="line">/var/named/named.ca          <span class="comment"># 根解析库</span></div><div class="line">/var/named/named.localhost   <span class="comment"># 本地主机解析库</span></div><div class="line">/var/named/slaves            <span class="comment"># 从ns服务器文件夹</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>可以查看<code>/usr/share/doc/bind-*/sample/</code>下有各种例子可以参考：<br><img src="/images/15015953753385.jpg" alt=""></p>
+</blockquote>
+<p>根据参考来配置各个文件。</p>
+<h3 id="named主配置文件-etc-named-conf"><a href="#named主配置文件-etc-named-conf" class="headerlink" title="named主配置文件/etc/named.conf"></a>named主配置文件<code>/etc/named.conf</code></h3><p>这里主要配置named服务的配置，包括：</p>
+<ul>
+<li>监听端口(listen-on port)和ip地址</li>
+<li>服务作用范围（本机还是指定网段还是全网）（allow-query）</li>
+<li>递归还是迭代查询(recursion)</li>
+<li>根区域解析文件（zone），其他区域文件可以看到有个<code>include &quot;/etc/named.rfc1912.zones&quot;;</code>，这下面保存了localhost的区域文件，如果新添加的，卸载这个zones文件里，里面指向了zone文件地址。然后每一个zone文件，是在/var/named下面。</li>
+</ul>
+<p>下面是原配置文件的部分：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">options &#123;</div><div class="line">        listen-on port 53 &#123; 127.0.0.1; &#125;;  // ipv4监听端口和ip地址，默认只有本地的</div><div class="line">        listen-on-v6 port 53 &#123; ::1; &#125;;  // ipv6的监听端口和ip地址</div><div class="line">        directory       <span class="string">"/var/named"</span>;</div><div class="line">        dump-file       <span class="string">"/var/named/data/cache_dump.db"</span>;</div><div class="line">        statistics-file <span class="string">"/var/named/data/named_stats.txt"</span>;</div><div class="line">        memstatistics-file <span class="string">"/var/named/data/named_mem_stats.txt"</span>;</div><div class="line">        allow-query     &#123; localhost; &#125;;</div><div class="line">        recursion yes;  // 递归还是迭代查询</div><div class="line"></div><div class="line">        dnssec-enable yes;  // dns安全扩展,可以改为no关闭</div><div class="line">        dnssec-validation yes; //可以改为no关闭</div><div class="line"></div><div class="line">        /* Path to ISC DLV key */</div><div class="line">        bindkeys-file <span class="string">"/etc/named.iscdlv.key"</span>;</div><div class="line"></div><div class="line">        managed-keys-directory <span class="string">"/var/named/dynamic"</span>;</div><div class="line"></div><div class="line">        pid-file <span class="string">"/run/named/named.pid"</span>;</div><div class="line">        session-keyfile <span class="string">"/run/named/session.key"</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">logging &#123;</div><div class="line">        channel default_debug &#123;</div><div class="line">                file <span class="string">"data/named.run"</span>;</div><div class="line">                severity dynamic;</div><div class="line">        &#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">zone <span class="string">"."</span> IN &#123;  // 定义zone文件，这里是定义的根域的文件位置</div><div class="line">        <span class="built_in">type</span> hint;</div><div class="line">        file <span class="string">"named.ca"</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">include <span class="string">"/etc/named.rfc1912.zones"</span>;  // 把named.rfc1912.zones文件包含进来</div><div class="line">include <span class="string">"/etc/named.root.key"</span>;  // 把/etc/named.root.key文件包含进来</div></pre></td></tr></table></figure>
+<p>下面贴出一个修改后的区域文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">options &#123;</div><div class="line">	listen-on port 53 &#123; 192.168.111.254; 127.0.0.1; &#125;;  //监听端口修改为某一网卡地址，和回环地址。</div><div class="line">	listen-on-v6 port 53 &#123; ::1; &#125;;</div><div class="line">	directory 	<span class="string">"/var/named"</span>;</div><div class="line">	dump-file 	<span class="string">"/var/named/data/cache_dump.db"</span>;</div><div class="line">	statistics-file <span class="string">"/var/named/data/named_stats.txt"</span>;</div><div class="line">	memstatistics-file <span class="string">"/var/named/data/named_mem_stats.txt"</span>;</div><div class="line">	allow-query     &#123; 192.168.111.0/24; &#125;; //查询范围只允许192.168.111.0网段查询。</div><div class="line"></div><div class="line">	recursion yes;</div><div class="line"></div><div class="line">	dnssec-enable no;  //关闭dnssec</div><div class="line">	dnssec-validation no;  //关闭dnssec</div><div class="line"></div><div class="line">	bindkeys-file <span class="string">"/etc/named.iscdlv.key"</span>;</div><div class="line"></div><div class="line">	managed-keys-directory <span class="string">"/var/named/dynamic"</span>;</div><div class="line"></div><div class="line">	pid-file <span class="string">"/run/named/named.pid"</span>;</div><div class="line">	session-keyfile <span class="string">"/run/named/session.key"</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">logging &#123;</div><div class="line">        channel default_debug &#123;</div><div class="line">                file <span class="string">"data/named.run"</span>;</div><div class="line">                severity dynamic;</div><div class="line">        &#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">zone <span class="string">"."</span> IN &#123;</div><div class="line">	<span class="built_in">type</span> hint;</div><div class="line">	file <span class="string">"named.ca"</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">include <span class="string">"/etc/named.rfc1912.zones"</span>;</div><div class="line">include <span class="string">"/etc/named.root.key"</span>;</div></pre></td></tr></table></figure>
+<p>配置解析库文件（Zone files）,一般是在<code>/var/named</code>下写，文件名格式一般写为<code>ZONE_NAME.zone</code></p>
+<p><strong>named.conf配置文件所有的配置语句</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">acl          定义一个主机匹配列表，用户访问控制权限</div><div class="line">controls     定义rndc工具与<span class="built_in">bind</span>服务进程的通信</div><div class="line">include      把其他文件的内容包含进来</div><div class="line">key          定义加密秘钥</div><div class="line">logging      定义系统日志信息</div><div class="line">lwres        把named配置为轻量级解析器</div><div class="line">masters      定义主域列表</div><div class="line">options      设置全局选项</div><div class="line">server       定义服务器属性</div><div class="line">trusted-keys 定义信任的dnssec秘钥</div><div class="line">view         定义视图</div><div class="line">zone         定义区域</div></pre></td></tr></table></figure>
+<h2 id="named-rfc1912-zones主配置文件"><a href="#named-rfc1912-zones主配置文件" class="headerlink" title="named.rfc1912.zones主配置文件"></a><code>named.rfc1912.zones</code>主配置文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">zone <span class="string">"ZONE_NAME"</span> IN &#123;</div><div class="line">    <span class="built_in">type</span> &#123;master|slave|hint|forward&#125;;</div><div class="line">    file <span class="string">"ZONE_NAME.zone"</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>zone &quot;ZONE_NAME</code>“：定义解析库名字，通常和解析库文件前缀对应起来。</li>
+<li><code>type</code>：master指的是主dns解析，slave指的是从dns解析，hint指的是根域名解析（根提示域），forward指的是转发，转发不使用file</li>
+<li><code>file</code> ：定义区域解析库文件名字（位置默认在<code>/var/named</code>下面）,file的前缀通常和zone的名字通常对应起来，然后加一个<code>.zone</code>的后缀。</li>
+</ul>
+<p>这里给出一个自定义的总的区域定义文件，新加一个区域文件的定义：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">zone <span class="string">"yulongjun.com"</span> IN &#123;</div><div class="line">	<span class="built_in">type</span> master;</div><div class="line">	file <span class="string">"yulongjun.com.zone"</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="var-named-ZONE-NAME-zone区域配置文件"><a href="#var-named-ZONE-NAME-zone区域配置文件" class="headerlink" title="/var/named/ZONE_NAME.zone区域配置文件"></a><code>/var/named/ZONE_NAME.zone</code>区域配置文件</h2><p>这里给出我一个自定义的区域文件：</p>
+<p><code>yulongjun.com.zone</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$TTL</span> 1D</div><div class="line">@    IN  SOA  ns1.yulongjun.com. me.yulongjun.com ( 0 1H 10M 1D 3H)</div><div class="line">     IN  NS   ns1.yulongjun.com</div><div class="line">     IN  NS   ns2</div><div class="line">         MX 10 mail1</div><div class="line">         MX 20 mail2</div><div class="line">ns1.yulongjun.com  IN  A  192.168.111.254</div><div class="line">ns2  IN  A  192.168.111.253  </div><div class="line">db1   A    192.168.111.100</div><div class="line">db2   A    192.168.111.111</div><div class="line">web1  A    192.168.111.200</div><div class="line">web2  A    192.168.111.222</div><div class="line">mail1 A    192.168.111.10</div><div class="line">mail2 A    192.168.111.20</div><div class="line">www   CNAME   web1</div></pre></td></tr></table></figure>
+<blockquote>
+<p>具体配置选项意义，见前一节DNS记录类型。</p>
+</blockquote>
+<ul>
+<li><code>@</code>指的就是本域<code>yulongjun.com</code></li>
+<li><code>IN ns2.yulongjun.com</code>可以省略写成<code>IN ns2</code></li>
+<li><code>IN</code>都可以省略不写,比如直接写<code>MX mail</code></li>
+</ul>
+<blockquote>
+<p>设置<code>.zone</code>文件权限（参照<code>/var/named/name.xxxx</code>的权限来设置，这里xxx为任意字符）</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chmod 640 yulongjun.com.zone</div><div class="line">chown :named yulongjun.com.zone</div></pre></td></tr></table></figure>
+<p>配置完毕后，启动或重启(已启动的话）服务。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service named start|restart</div></pre></td></tr></table></figure>
+<h2 id="反向区域"><a href="#反向区域" class="headerlink" title="反向区域"></a>反向区域</h2><p>区域名称：是网络地址的犯些.in-addr.arpa.</p>
+<p><code>192.168.111.</code> –&gt; <code>111.168.192.in-addr.arpa.</code></p>
+<p>配置方法：</p>
+<ul>
+<li><strong>先在<code>/etc/named.rfc1512.zones</code>文件下插入下面内容：</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">zone <span class="string">"Reverse_Net_Addr.in-addr.arpa"</span> IN &#123;</div><div class="line">    <span class="built_in">type</span> &#123;master|slave|forward&#125;;</div><div class="line">    file <span class="string">"Net_Addr.zone"</span></div></pre></td></tr></table></figure>
+<p>例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">zone <span class="string">"111.168.192.in-addr.arpa"</span> IN &#123;</div><div class="line">	<span class="built_in">type</span> master;</div><div class="line">	file <span class="string">"192.168.111.zone"</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li><strong>配置/var/named/ZONE_NAME.zone</strong><br>不需要MX、A、AAAA，要有NS记录，以PTR记录为主。</li>
+</ul>
+<p>例子：</p>
+<p>配置<code>192.168.111.zone</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$TTL 1D</div><div class="line">@   IN  SOA ns1.magedu.com. me.yulongjun.com (</div><div class="line">                    20170001</div><div class="line">                    1H</div><div class="line">                    5M</div><div class="line">                    7D</div><div class="line">                    1D)</div><div class="line">    IN NS ns1.yulongjun.com.</div><div class="line">    IN NS ns2.yulongjun.com.</div><div class="line">254 IN PTR ns1.yulongjun.com.</div><div class="line">253 IN PTR ns2.yulongjun.com.</div><div class="line">100 IN PTR db1.magedu.com.</div><div class="line">111 IN PTR db2.magedu.com.</div><div class="line">200 IN PTR web1.magedu.com.</div><div class="line">222 IN PTR web2.magedu.com.</div><div class="line">10  IN PTR mail1.magedu.com.</div><div class="line">20  IN PTR mail2.magedu.com.</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/linux/20170725-04-bind-config/" title="04-bind（named）配置文件">http://www.yulongjun.com/linux/20170725-04-bind-config/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DNS/" rel="tag"># DNS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux/20170725-03-dns-record-types/" rel="next" title="03-DNS记录类型">
+                <i class="fa fa-chevron-left"></i> 03-DNS记录类型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux/20170725-05-bind-utils/" rel="prev" title="04-bind各种辅助工具">
+                04-bind各种辅助工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#named-涉及的文件"><span class="nav-number">1.</span> <span class="nav-text">named 涉及的文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#named主配置文件-etc-named-conf"><span class="nav-number">2.</span> <span class="nav-text">named主配置文件/etc/named.conf</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#named-rfc1912-zones主配置文件"><span class="nav-number"></span> <span class="nav-text">named.rfc1912.zones主配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#var-named-ZONE-NAME-zone区域配置文件"><span class="nav-number"></span> <span class="nav-text">/var/named/ZONE_NAME.zone区域配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向区域"><span class="nav-number"></span> <span class="nav-text">反向区域</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

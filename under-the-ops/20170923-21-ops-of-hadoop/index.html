@@ -1,0 +1,1358 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hadoop," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二十一章：Hadoop运维">
+<meta property="og:url" content="http://www.yulongjun.com/under-the-ops/20170923-21-ops-of-hadoop/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/devops.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061725978569.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061726130161.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061726352435.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061731410510.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061731504826.jpg">
+<meta property="og:updated_time" content="2017-09-23T15:23:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第二十一章：Hadoop运维">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/devops.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/under-the-ops/20170923-21-ops-of-hadoop/"/>
+
+
+
+
+
+  <title> 第二十一章：Hadoop运维 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/under-the-ops/20170923-21-ops-of-hadoop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第二十一章：Hadoop运维
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-23T17:21:00+08:00">
+                2017-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/under-the-ops/" itemprop="url" rel="index">
+                    <span itemprop="name">under-the-ops</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/under-the-ops/20170923-21-ops-of-hadoop/" class="leancloud_visitors" data-flag-title="第二十一章：Hadoop运维">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/devops.png" alt="devops"><br><a id="more"></a></p>
+<p>“大数据”是近几年来IT行业的热词，大数据在各个行业的应用逐渐变得广泛。当听到这个名词的时候，第一想法就是从数据量级上来定义，如淘宝、百度、腾讯、360、小米等公司，服务器上存储着大量的用户数据和业务数据，这就是大数据。然而，这样理解是片面的，我们对大数据的理解是，在复杂多样的海量数据中通过计算分析，快速获取有用信息以产生价值。大数据可以说是计算机和互联网结合的产物，计算机实现了数据数字化，互联网实现了数据网络化，两者结合才赋予了大数据生命力。</p>
+<p>我们的Hadoop集群经历了从几台规模到现在的数千台规模的发展历程，并且随着公司的业务迅速发展，以及全球业务量和用户量的飞速增长，不久的将来服务器规模将达到上万台甚至数万台。这也带来了新的挑战：服务器数量每年以5～10倍的速度增长，业务需求越来越复杂多样，机房每年以好几倍的速度新增，这些对Hadoop集群的运维管理是一个巨大的挑战。</p>
+<p>我们在2014年上线了3种新的计算引擎：Storm（实时计算），秒级延迟；Spark（迭代计算），比MapReduce快10～170倍，代码量减少了70%～90%；Impala（数据仓库），比MapReduce/Hive快10～70倍。日志流式处理我们使用Scribe、Storm、Kafka，以满足对日志的归类和计算处理需求。多样化的集群类型对运维工作也是个挑战。</p>
+<p>目前我们的Hadoop集群在部署和监控方面已经有了比较成熟的自研系统，能够灵活地支持同机多实例；抽象出Service/Job/Task的概念，直观的配置文件描述；灵活便捷的包管理，对开发团队更为友好；直观的WebUI Dashboard，方便的Command Line Tool既支持集群级别的管理，也支持指定Job/Task级别的管理；支持一键部署，方便运维工程师使用；支持除了Hadoop生态系统外的其他服务，可扩展性强。</p>
+<p>本章会重点介绍Hadoop安全认证系统Kerberos及其自动化管理平台和多机房高可用方案；磁盘故障监控和处理自动化方案；软件模拟CPU、内存、磁盘、网络等硬件故障的Failover模拟系统；使用Puppet实现多机房高可用的服务器环境管理方案等运维经验。</p>
+<h2 id="Hadoop安全认证系统"><a href="#Hadoop安全认证系统" class="headerlink" title="Hadoop安全认证系统"></a>Hadoop安全认证系统</h2><p>随着Hadoop集群规模的复杂度和业务的依赖性逐渐增强，以及考虑到用户数据隐私，Hadoop面临着一个重大的问题是安全，我们通过Kerberos认证实现了Hadoop集群的安全保障。</p>
+<p>没有做Kerberos认证的Hadoop集群，只要有Client端就能够连接上。而且通过一个有root权限的内网机器，创建对应的Linux用户，就能够得到Hadoop集群上对应的权限，这样相当危险。而实行Kerberos认证后，任意机器的任意用户都必须先在Kerberos的KDC中有记录，才允许和集群中的模块进行通信。</p>
+<h3 id="Kerberos基本概念"><a href="#Kerberos基本概念" class="headerlink" title="Kerberos基本概念"></a>Kerberos基本概念</h3><p>Kerberos是一个基于共享密钥对称加密的安全网络认证系统，避免将密码在网上传输，而是将密码作为对称加密的密钥，其设计目标是通过密钥系统为C/S应用程序提供强大的认证服务。</p>
+<blockquote>
+<p>Princal（安全个体）：被认证的个体，有一个名字和口令。</p>
+<p>KDC（Key Distribution Center）：一个网络服务，提供Ticket和临时会话密钥。</p>
+<p>Ticket：一个记录，用户用它向服务器证明自己的身份，包括客户标识、会话密钥、时间戳。</p>
+<p>AS（Authentication Server）：认证服务器</p>
+<p>TGT（Ticket Granting Ticket）：票据授权票据，票据的票据。</p>
+<p>TGS（Ticket Granting Server）：票据授权服务器。</p>
+<p>SS（Service Server）：Hadoop中的服务组件，namenode、datanode、nodemanger。</p>
+</blockquote>
+<p>使用Kerberos 时，一个客户端需要经过三个步骤来获取服务。 1. 认证 客户端向认证服务器发送一条报文，并获取一个含时间戳的TGT。 2. 授权 客户端使用TGT向TGS请求一个服务Ticket。 3. 服务请求 客户端向服务器出示服务Ticket，以证实自己的合法性。</p>
+<p>Kerberos需要KDC来进行认证。KDC 只有一个Master机器，可以带多个Slave机器。Slave机器仅进行普通认证。在Master机器上做的修改需要自动同步到Slave机器。另外，KDC需要一个Admin来进行日常的管理操作。这个Admin可以通过远程或者本地方式登录。</p>
+<p>Hadoop集群为什么使用Kerberos？</p>
+<p>Hadoop集群使用Kerberos认证机制后，使得集群中的节点是可信任的。Kerberos可以将认证的密钥在集群部署时事先放到可靠的节点上。集群运行时，集群内的节点使用密钥得到认证，认证通过后的节点才能提供服务。企图冒充的节点由于没有事先得到的密钥信息，无法与集群内部的节点通信。这样就防止了恶意地使用或篡改Hadoop集群的问题，确保了Hadoop集群的可靠性、安全性。</p>
+<h3 id="Kerberos运维历程"><a href="#Kerberos运维历程" class="headerlink" title="Kerberos运维历程"></a>Kerberos运维历程</h3><p>2012年年底，我们正式上线Hadoop集群服务。由于当时公司机房规模较小且单机房，所以考虑Kerberos规划的时候，只要能实现单机房HA，便可以满足当时需求，于是经过调研采用Keepalived通过漂移VIP的方式实现高可用方案。Kerberos主机器通过kdb5_util dump出数据库文件放在KDC Domain目录下，将KDC所在的Domain目录作为Rsync的同步目录，Kerberos备机器启动一个Rsync客户端将自己相应的KDC Domian目录和Kerberos主机器的Domain目录保持同步，Kerberos备机器通过kdb5_util load的方式将同步来的数据库文件导入KDC中。Hadoop所有请求通过请求内网域名，解析到Keepalived绑定的VIP的方式来使用KDC，如图22-1所示。</p>
+<p><img src="/images/15061725978569.jpg" alt=""></p>
+<p><strong>图22-1  单机房HA方案示意图</strong></p>
+<p>从2013年年初到2014年年底，由于公司业务飞速发展且机房快速扩张，短短一年多的时间，海内外上线了近10个机房，各个机房间通过专线互联。由于Hadoop集群都是内网服务，不推荐跨机房访问和部署，所以我们在每个机房都部署了ZooKeeper集群、HDFS集群、YARN集群、HBase集群等，且每个机房的所有集群使用的是同一套Kerberos Principal。然而这样的架构会遇到一个问题，Kerberos服务器所在机房和其他机房专线中断故障时，运维工程师根本没有办法做故障处理，只能等待专线恢复，Hadoop集群服务才能恢复，如果机房间专线故障时间较长，就必须紧急在相应机房部署Kerberos，同步KDC数据，这极大地影响了集群的稳定性和可用性。为了避免这类问题，我们为每个机房部署了一套Kerberos服务，实现了简单的Kerberos多机房HA架构，如图22-2所示。</p>
+<p><img src="/images/15061726130161.jpg" alt=""></p>
+<p><strong>图22-2  多机房HA架构示意图</strong></p>
+<p>每个机房都使用Keepalived漂移VIP的方式上线了一套Kerberos HA架构。使用Rsync同步目录的方式，将A机房的Kerberos主机器的KDC Domain目录作为Rsync Server，其他机房和本机房的Kerberos备机器的所有Kerberos KDC都通过A机房的主机器进行Rsync同步。并且使用了内网DNS分区域解析的方式，同机房的Hadoop集群使用本机房的Kerberos主机器服务。</p>
+<p>2015年年初经过调研和分析Kerberos多机房架构，发现目前的多机房架构有很多的弊端。假设在Kerberos主机器宕机不可恢复的情况下，所有的同步都得重新连接；公司业务增长飞速，Hadoop用户也随着增多，基本上每天都有Kerberos Principal操作的需求，手动操作也越来越频繁，同时也伴随着更多的误操作。这时，我们意识到了Kerberos Principal申请和权限管理自动化的重要性，所以决定着手开发Kerberos管理系统，重新讨论了Kerberos多机房自动化管理方案。</p>
+<p>目前最新的Kerberos多机房架构引入了MySQL主从HA方案、LVS LB方案；海外AWS服务引入了ELB LB方案；Principal申请流程自动化；Principal和LADP结合权限管理；HTTPS+CAS安全登录方案以及使用TCP协议。Kerberos多机房新架构示意图如图22-3所示。</p>
+<p><img src="/images/15061726352435.jpg" alt=""></p>
+<p><strong>图22-3  Kerberos多机房新架构示意图</strong></p>
+<p><strong>针对新版Kerbose的设计实现分如下8个部分进行介绍：</strong></p>
+<p>1．新增用户操作管理</p>
+<p>数百上千个Kerberos Principal管理是一个大问题，过去两年基本上所有的Principal都是运维工程师来手动操作的，如增、删、改、查。为了将运维工程师从苦海中解放出来，我们上线了Kerberos Principal申请和处理流程自动化。在新版Kerberos管理系统中对Kerberos账户的申请和调整进行了规范化，用户首次登录Kerberos管理系统，个人Principal会自动创建，服务Principal通过Web提交Kerberos Principal操作需求发起申请流程，Kerberos Admin收到申请邮件，开始审核，如果审核不通过，Admin打回给提交者重新修改申请；审核通过后，Web Server根据Kerberos Principal申请类型操作KDC，生成相应的Kerberos Principal所需密码或keytab文件。也支持用户删除自己有管理权限的Kerberos Principal，修改Kerberos Principal密码以及导出新的keytab文件，查询自己有权限的Kerberos Principal信息。</p>
+<p>2．服务负载均衡优化</p>
+<p>我们放弃了Hadoop集群Service请求Kerberos Keepalived VIP的方式，经过调研使用同机房走同机房LVS（或海外机房走ELB）的方式分机房进行内网域名解析。当LVS（或ELB）后端一台Kerbose服务器宕机的，LVS会将所有的流量切到另一台Kerbose主机器上，保证同机房Hadoop集群Service服务及Kerbose用户访问KDC的高可用性。目前国内外近10个机房上线使用。</p>
+<p>3．数据同步优化</p>
+<p>数据同步分两块进行介绍：①核心机房KDC双主的数据同步，使用MySQL双主的同步方式，将生成的记录写入MySQL数据库中。数据库采用双主的同步方式，同步到另外一个主库，这台机器的Web Server检测MySQL中有增量，根据增量情况，操作KDC创建相应的账户，以实现核心双主KDC数据库同步。②跨机房KDC数据使用Rsync工具进行增量同步。以国内A核心机房作为主机房，Rsync Server使用了Keepalived VIP的方式，当Kerberos主机宕机后，VIP漂移到另外一台主机器上，Rsync Client会以VIP所在的KDC主机器为Rsync Server进行数据同步，以保证KDC数据同步的高可用性。</p>
+<p>4．监控优化</p>
+<p>我们分为三类进行全方位监控：使用进程管理工具对Kerberos KDC、Web Server和MySQL Server进行进程存活监控，进程异常退出时，进程异常退出时都会被主动拉起；模拟Kerberos用户的真实场景使用KDC，创建了测试Kerberos Principal，客户端在不同机房请求KDC，对请求的返回值进行监控，对端口和KDC实例进行监控。如上三类监控能全方位地监控到KDC服务是否正常提供。</p>
+<p>5．新增权限管理</p>
+<p>通过公司个人LDAP 账户和Kerberos Principal的结合，将Kerberos Principal和公司邮箱账号进行绑定。比如LDAP用户USER1申请了自己服务的Kerberos Principal:s_ service_name，USER1便是s_service_name的管理员，USER1在KDC管理系统中可以赋予USER2对s_service_name的读权限，USER2便可通过Web页面获取s_service_name的密码和keytab文件。当USER1离职时，USER1可以将s_service_name的管理员权限赋予USER2，USER2后续便是s_service_name的管理员。友好的权限管理，对后期运维管理也是一个很大的改善。</p>
+<p>6．新增安全登录</p>
+<p>在新版Kerberos管理系统中，Web Server通过HTTPS进行域名访问。如果通过HTTP访问，Nginx层会自动将其rewrite至HTTPS，且接入到CAS安全认证登录系统，保证了Kerbose Web Server的访问，也方便记录用户的登录使用轨迹。 通过对Kerberos服务架构和功能的优化，对运维自动化和Hadoop集群安全都有可靠性保障。</p>
+<p>7．记录日志</p>
+<p>用户对Kerberos账户的一切操作都会进行日志记录，日志中包括用户查看账户密码，重置账户密码，导出账户keytab，增、删、改、查账户拥有人对账户的权限等，这样我们就能方便的记载用户的访问轨迹。此外，我们对MySQL向KDC同步数据的Replicate进程也进行了日志记录，来获取关于账户的创建、修改等方面的信息。</p>
+<p>8．统计管理</p>
+<p>新版Kerberos管理系统为其他业务系统提供了API接口，通过此接口可以方便的获取账号的拥有人等信息，这样为其他业务系统提供了强有力的支持。 通过对Kerberos服务架构和功能的优化，使账号的高效管理，运维的自动化，Hadoop服务的高可用性以及Hadoop集群安全性都得到了有效的提升。</p>
+<h2 id="Machine-Failover-System"><a href="#Machine-Failover-System" class="headerlink" title="Machine Failover System"></a>Machine Failover System</h2><p>Hadoop集群在上线前需要进行大量的模拟测试，测试完善后才能评估在外界各种故障影响及影响时间长短的情况下，Hadoop集群恢复的能力，同时也可以帮助开发人员不断地提升Hadoop集群的健壮性。在进行Machine Failover测试中，我们用软件模拟出CPU、内存、磁盘与网络等常见的故障与恢复，在这里我们对所用到的工具与技术进行总结。</p>
+<p>在一台机器（HTTP Server）上启动Machine Failover System Server，该机器对所有要压测的host都有无密码授权，通过Curl或者Web发起HTTP请求，通过不同的模拟请求，改变不同的模拟参数，实现故障模拟。</p>
+<p>用户通过以下两种方式访问Machine Failover System Server。 </p>
+<p>1. 通过访问浏览器<code>http://failover.xxx.srv/$type?hostname=$hostname&amp;token=$token</code></p>
+<p>2. 通过命令行请求<code>curl ＂http://failover.xxx.srv/$type?hostname=$hostname&amp;token=$token＂</code></p>
+<p> 设计token的用意在于做权限隔离，不同业务的用户根据自己的token只能操作自己授权的服务器，不影响其他用户的机器。</p>
+<p><strong>下面介绍模拟故障类型。</strong></p>
+<p>（1） RestartHost</p>
+<p>有两种重启需求，暴力重启：通过调用机器远程管理卡提供的API强制断电重启机器，从而达到模拟暴力重启操作系统的效果；优雅重启：如果有优雅重启的需求也可以直接发reboot命令。根据不同的模拟需求选择相应的重启类型。</p>
+<p>（2） CpuLimit</p>
+<p>要限制单个进程的CPU使用率，可以使用开源工具CpuIimit，我们需要在测试服务器上安装CpuIimit，然后通过pid或者进程名对进程进行限制，如cpulimit -p 9001 -l 50，即可限制pid为9001的进程的CPU使用率不能超过50%。如果想模拟机器CPU紧张的情景，也可以使用OpenSSI工具，通过使用openssl speed来耗尽服务器的CPU。这样做的好处是真实地模拟了测试场景，弊端就是会影响其他进程的执行。</p>
+<p>（3） MemoryLimit</p>
+<p>模拟内存受限的情景，可以使用C语言（(unsigned char <em>) realloc(ptr, i+1) </em> meg * sizeof(char))）函数实现的内存消耗程序，使被测进程的可用内存减少。使用kill -s SIGINT $pid，可以随意停止对内存限制的模拟。要实现这个内存限制，需要在服务器上手动编译这个C程序，生成对应的可执行程序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">#include &lt;stdio.h&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include &lt;unistd.h&gt;</div><div class="line">#include &lt;signal.h&gt;</div><div class="line"> </div><div class="line">unsigned char *ptr = NULL;</div><div class="line">void sigint_handler(int);</div><div class="line">int main(int argc, char **argv)</div><div class="line">&#123;</div><div class="line">  unsigned long meg = 1024 * 1024;</div><div class="line">  unsigned int toalloc = 32*1024; // 32GB（可控制）</div><div class="line">  unsigned int sleeptime = 60*60; //1小时（可控制）</div><div class="line">  unsigned long i = 0;</div><div class="line">  unsigned int j = 0;</div><div class="line"> </div><div class="line">  signal(SIGINT, sigint_handler);</div><div class="line"> </div><div class="line">  for (j = 0; j &lt; toalloc; j++) &#123;</div><div class="line">    printf(＂Trying to allocate %u MB of RAM...＂, j + 1);</div><div class="line">    ptr = (unsigned char *) realloc(ptr, (j+1) * meg * sizeof(char));</div><div class="line">    if (ptr == NULL) &#123;</div><div class="line">      printf(＂failed\n＂);</div><div class="line">      free(ptr);</div><div class="line">      return 1;</div><div class="line">    &#125;</div><div class="line">    ptr[0] = 0;</div><div class="line">    for (i = j * meg; i &lt; (j + 1) * meg; i++) &#123;</div><div class="line">      ptr[i] = ptr[i - 1] + 1;    &#125;</div><div class="line">    printf(＂success\r＂);</div><div class="line">  &#125;</div><div class="line">  sleep(sleeptime);</div><div class="line">  free(ptr);</div><div class="line">  printf(＂\n＂);</div><div class="line">  return 0;</div><div class="line">&#125;</div><div class="line"></div><div class="line">void sigint_handler(int status)</div><div class="line">&#123;</div><div class="line">  printf(＂\nCaught SIGINT\n＂);</div><div class="line">  free(ptr);</div><div class="line">  exit(1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>（4）DiskFail</p>
+<p>模拟磁盘故障的方式有很多，使用<code>echo offline &gt; /sys/block/$device/device/state</code>，可以达到拔掉磁盘的目的，使得磁盘不可用；磁盘恢复使用<code>echo running &gt; /sys/block/$device/ device/state</code>。通过使用fiu-ctrl可以很好地控制进程I/O访问的失败率。继续了解发现，libfiu的另一个优势在于不用注入代码，只是被测程序需要使用fiu-run来运行，小型程序可以很方便地控制各种I/O读或写的成功率，但对于大型应用所有进程的启动入口都需要进行相应的修改。对于数据库系统，通过删除数据库持久化文件也能使大量磁盘请求失败。但对于磁盘故障不能读/写的情况还是有所区别的。对于RAID磁盘阵列有相应的工具mdadm，但是对于HDFS这种不开启RAID的文件系统就必须用SCSI fault injection test tool或者SystemTap这类工具了。也有一个小型的开源项目，如fsdisk提供了简便的接口去注入错误。另一种简单的方法是通过命令<code>dd if=/dev/zero of=/dev/sdb/sdb1 bs=1024 count=102400</code>破坏分区的信息，破坏前进行备份，然后通过dd即可恢复。唯一的缺点是恢复后需要重新mount，才能接受正常的读/写请求。本系统是通过对磁盘挂载点目录的权限进行控制，使得该目录没有rwx权限，相当于磁盘完全坏掉了。</p>
+<p>（5）DiskFull</p>
+<p>磁盘满表明没有可用空间了，最直接而且最真实的方法是创建大文件占满磁盘，我们可以使用命令<code>dd if=/dev/zero of=/$path/tst.img bs=1G count=20K</code>来创建超大文件把磁盘占满，恢复也很简单，只要把指定目录下的这个文件删除就可以了。当然，这样我们需要知道生成文件所用的时间，才能观察被测程序在磁盘满的情况下的表现。通过创建大量小文件可以使iNode节点耗尽，导致无法创建新文件，也可以达到磁盘资源不足的故障目的。</p>
+<p>（6）DiskSlow</p>
+<p>模拟磁盘访问速度慢，目前我们考虑使用fio这个压测工具，通过对磁盘进行大量的访问，必然导致其他进程的磁盘访问速度下降，kill掉这个进程相当于将磁盘恢复为正常状态。当然，这种方式很难控制磁盘速度减慢的程度。</p>
+<p>（7）NetworkBandWidthLimit</p>
+<p>模拟服务器网络带宽限制最好的工具是tc（traffic control），而且是由Linux内核提供的，在服务器中输入命令<code>tc qdisc add dev eth0 root tbf rate 5800kbit latency 50ms burst 1540</code>即可限制带宽为5800kbit，如果需要恢复则执行命令<code>tc qdisc del dev eth0 root tbf rate 5800kbit latency 50ms burst 1540</code>。这样我们在本地或者远程都可以控制测试服务器的带宽，进而观察被测程序在带宽受限时的表现。</p>
+<p>（8）NetworkDelay</p>
+<p>模拟网络延迟和网络故障都是通过tc来实现的，我们使用命令<code>tc qdisc add dev eth0 root netem delay 300ms</code>就可以对所有请求都增加300毫秒的延时，然后使用命令<code>tc qdisc del dev eth0 root netem delay 300ms</code>即可恢复过来。注意，设置网络延迟后，包括SSH操作都会感觉到明显的延迟，在测试时必须保证能够远程恢复过来。</p>
+<p>（9）NetworkPackageCorrupt</p>
+<p>模拟包损坏，一些开源项目也是使用tc，以这种形式来注入错误，通过<code>tc qdisc add dev eth0 root netem corrupt 5%</code>命令破坏并使用<code>tc qdisc del dev eth0 root netem corrupt 5%</code>命令来恢复。</p>
+<p>（10）NetworkPackageLost</p>
+<p>模拟丢包，使用<code>sudo tc qdisc add dev eth0 root netem loss 5%</code>命令可设置服务器5%的丢包率，执行<code>sudo tc qdisc del dev eth0 root netem loss 5%</code>命令恢复。设置网络丢包的命令一旦执行后，所有请求都有可能丢失，包括我们发出的恢复命令，所以在模拟这种故障时，恢复命令需要多次重试以保证服务器真的恢复过来了。</p>
+<p>（11）NetworkUnavailable</p>
+<p>如果希望网络不可用，则可以使用空路由<code>ip route add blackhole 10.0.0.0/8</code>，使Route都不可用，这样要恢复就很困难了。所以我们期望的网络不可用应该是针对特定进程或者端口的不可用，于是可以考虑使用iptable这个Linux防火墙。①<code>iptables -A INPUT -p tcp --dport 8080 -j REJECT</code>，限制发往本机8080端口的所有请求，对于监听这个端口的服务相当于不可用了；而通过 <code>iptables -D INPUT -p tcp --dport 8080 -j REJECT</code>，删除限制规则，恢复。②<code>iptables -A OUTPUT -p tcp --dport 8080 -j REJECT</code>，限制本机访问其他机器的8080端口，对于该机器就相当于已经和服务隔离了；而通过<code>iptables -D OUTPUT -p tcp --dport 8080 -j REJECT</code>，删除限制规则，恢复。</p>
+<p>通过该系统在Hadoop集群做的大量测试，我们模拟日常运维中可能出现的各种故障，制定了针对不同故障类型的Hadoop集群故障处理预案，当故障来临时，我们能够轻松地按照预案内容执行，减少了故障处理时间，降低了对业务造成的损失。</p>
+<h2 id="磁盘处理自动化"><a href="#磁盘处理自动化" class="headerlink" title="磁盘处理自动化"></a>磁盘处理自动化</h2><p>据统计，在数据中心中，硬盘相关的故障占全部硬件故障的85%以上。随着大数据时代的到来，服务器数量大幅度增长，更多的存储需求、更低成本硬盘的使用，以及高温、高存储密度等技术的应用，使硬盘故障及报废规模呈明显的增长趋势，这对业务稳定性和运维效率都造成了严重的影响。我们的Hadoop服务器数量占比很大，且离线计算集群刚开始使用民用级磁盘，每天大量的数据读/写导致磁盘故障率比较高，每天都有大量的故障磁盘需要更换维修。以前都是通过硬件监控或应用监控发现问题，然后由应用运维工程师登录服务器确认磁盘故障，尝试使用工具修复。如果修复失败则摘掉硬盘，再发起故障报修申请。</p>
+<p>为了减少人工介入磁盘故障处理的耗时，我们研发了硬盘故障检查报修自动化系统，通过平台提供的API接口和监控系统联动，当监控系统发现硬盘故障后，通过回调接口启动硬盘工具进行软修复，如果修复失败则摘掉硬盘，并在服务管理平台进行记录，自动发起故障维修工单。服务器供应商收到维修工单通知后，根据提供的机房、机柜、硬盘位置，进行集中更换。更换完成后进行通知，再由系统将硬盘分区格式化挂载，开始提供数据存储。</p>
+<p>目前磁盘处理自动化主要分为如下几个模块。</p>
+<p>（1）磁盘故障检测</p>
+<p>磁盘故障检测，针对不同类型的磁盘及故障级别分为4类，即INFO、WARN、ERROR和FATAL。对于WARN，表示磁盘即将故障，而ERROR和FATAL这两种类型，我们定义为已经故障，即对故障通过软件进行修复，如果修复失败，这类磁盘则存在着很大的隐患，对在线的Hadoop业务的影响比直接ReadOnly的影响还要大。</p>
+<p>（2）故障处理</p>
+<p>硬盘故障检查报修系统从监控系统中获取到磁盘处于WARN、ERRO或FATAL状态后，会向服务器发送磁盘下线指令<code>echo offline &gt; /sys/block/$device/device/state,$device</code>，将磁盘下线并卸载。HDFS Datanode检测到该磁盘为只读，将不再对此磁盘读/写，从而将这块磁盘从业务中下线。</p>
+<p>（3）发送故障工单自动化</p>
+<p>磁盘故障后，硬盘故障检查报修系统按照磁盘故障进行分类，以及将主机各盘符等信息发送给系统管理员或机房相关处理人员，机房相关处理人员接到工单后，根据机器和盘符位置进行更换，分区格式化。</p>
+<p>（4）处理磁盘自动化</p>
+<p>硬盘故障检查报修系统通过监控系统获取故障机器的盘符标识为OK状态时，将发送指令<code>echo running&gt;/sys/ block/$device/device/state</code>将该磁盘重新进行上线并挂载，修改权限，然后重启HDFS Datanode进程。</p>
+<p>通过如上4步，在Hadoop集群大规模的生产中解决了很大的人力和沟通成本，大大提高了我们在运维中的工作效率。对硬盘的故障检测、修复、上线、下线、报修、结单检测等实现了全方位的自动化运维，同时定期维护和校正硬盘的运行状态信息。</p>
+<h2 id="Hadoop服务器环境管理方案"><a href="#Hadoop服务器环境管理方案" class="headerlink" title="Hadoop服务器环境管理方案"></a>Hadoop服务器环境管理方案</h2><p>Hadoop集群运行时需要很多基础环境和业务类环境支持，比如需要满足集成JCE的JDK、依赖NTP、依赖DNS、Kerberos客户端支持、关闭iptables、部署进程监控工具、关闭SWAP、设定ulimit、集群所有服务的日志需要及时清理等各种各样的需求。开始时处理的方法是通过写脚本在中控机上执行，每上线一批机器，就针对机型以及集群分类对这批机器进行环境初始化。随着机型异构越来越多，需求复杂多样，特别是在某些集群模块需要升级的情况下，要针对不同机型、不同集群、不同需求定制不同的配置文件，这些配置文件都是通过文本文件的方式进行管理的，然后再通过脚本去处理。脚本中控方式的管理逐渐暴露出各种运维管理问题，随后我们开始调研服务器自动化管理工具，选择使用Puppet解决Hadoop集群运维管理的问题。Puppet是一个开源的软件自动化配置和部署工具，它使用简单且功能强大，正得到越来越多的关注，现在很多大型的IT公司都在使用Puppet对集群中的软件进行管理和部署。</p>
+<p>Puppet采用C/S星状结构，所有的客户端和一台或几台服务器交互。每个客户端周期性（默认半个小时）向服务器发送请求，获得其最新的配置信息，保证和该配置信息同步。每个Puppet客户端每半小时（可以设置）连接一次服务器端，下载最新的配置文件，并且严格按照配置文件来管理服务器环境。配置完成以后，Puppet客户端反馈给服务器端一个消息。如果出错，也会给服务器端反馈一个消息。然后通过发送邮件的方式发送给Puppet Admin，便于直观地看到每次升级更新的进度。</p>
+<p>Puppet的强大功能解决了我们之前遇到的问题，比如通过使用Puppet，解决了Hadoop机型异构管理、Hadoop集群业务支持、软件安装、环境状态保持、用户管理和Crond任务等问题。刚开始时服务器和机房较少，我们只使用了单台Puppet Master，认证和处理都放到同一台机器上。随着机器和机房的数量翻倍增长，CPU到了瓶颈，单台Puppet Master已经不满足所需，经过调研使用了Puppet Master单机多实例，使用Nginx做负载均衡方案，充分利用多核CPU，加快效率。Puppet Master单机多实例架构示意图如图22-5所示。</p>
+<p>CA：Puppet认证服务器，处理CA Funtion</p>
+<p>PM：Puppet服务器端，处理Catalog Request</p>
+<p><img src="/images/15061731410510.jpg" alt=""></p>
+<p><strong>图22-5  Puppet Master单机多实例架构示意图</strong></p>
+<p>随着公司全球化业务的快速扩张，海外机房的数量快速增长，国内到国外的专线已经成了Puppet Agent和Master通信的障碍，经常会出现由于专线带宽较小，导致部署JDK等较大软件包失败的情况。为了迎合多机房在全球的发展，我们经过调研使用了Puppet Master多机房方案，示意图如图22-6所示。在多机房方案中，我们将Puppet CA和Puppet Master拆分，Puppet CA由于安全性要求较高，只部署在国内核心主机房，采用Keepalived走VIP的方式保证CA服务的高可用性。客户端通过配置ca_server指定CA服务器，以达到使用独立CA服务器的目的。Puppet Master要承担主要流量，所以使用Nginx实现Agent请求负载均衡和Master多机多实例。各个机房Agent通过DNS分机房解析进行访问本机房的Master，所有Master的Module我们使用Git统一维护，保持各个机房的Master Module的一致性。</p>
+<p><img src="/images/15061731504826.jpg" alt=""></p>
+<p><strong>图22-6  多机房方案示意图</strong></p>
+<p>Puppet Master多机房配置有以下两大收益。 1. 扩展Puppet Master的SSL传输性能 Puppet使用SSL（HTTPS）协议来进行通信，在默认情况下，Puppet服务器端使用基于Ruby的WEBrick HTTP服务器。由于WEBrick HTTP服务器在处理Agent端的性能方面并不是很强劲，因此需要扩展Puppet，搭建Nginx来处理客户端的HTTPS请求。 2. 横向扩展Puppet Master增加架构的灵活性 有时可能需要提供比单台服务器更多的处理能力，以解决单机单节点故障。在这种情况下，除了纵向扩展外，还可以横向扩展Puppet Master。横向扩展是使用多台服务器提供Puppet Master服务以组成一个集群来获得更多的处理能力。 要提供一个前端的请求处理程序有多种方法和策略可供选择，集群的架构扩展有多种变通与组合方式，我们选择使用HTTP负载均衡技术将客户端的请求直接导向后端服务器。每个Puppet Master都是单独配置。</p>
+<h2 id="运维Hadoop集群的常见问题与处理方法"><a href="#运维Hadoop集群的常见问题与处理方法" class="headerlink" title="运维Hadoop集群的常见问题与处理方法"></a>运维Hadoop集群的常见问题与处理方法</h2><h3 id="HDFS集群不均衡现象"><a href="#HDFS集群不均衡现象" class="headerlink" title="HDFS集群不均衡现象"></a>HDFS集群不均衡现象</h3><p>HDFS集群非常容易出现服务器之间磁盘利用率不平衡的情况，比如在集群中添加新的数据节点；HDFS集群长时间运行，尤其是在大量的Delete操作后，集群中各个数据节点上的空间使用率可能会存在比较大的差异。防止少数数据节点存储过多的文件。少数使用率过高的数据节点会导致对其的数据访问效率变低，这将引发很多问题，比如MR程序无法很好地利用本地计算的优势，机器之间无法达到更好的网络带宽使用率，机器磁盘无法很好地利用，并且如果该数据节点挂掉了，则需要更多的时间进行恢复，对集群也会造成更大的影响。对于HDFS集群，保证HDFS中的数据均衡是非常重要的。</p>
+<p><strong>解决方法：Hadoop中已经提供了均衡机制。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hadoop balancer -threshold &lt;threshold&gt;</div></pre></td></tr></table></figure>
+<h3 id="控制用户对HDFS资源的使用"><a href="#控制用户对HDFS资源的使用" class="headerlink" title="控制用户对HDFS资源的使用"></a>控制用户对HDFS资源的使用</h3><p>公共的HDFS集群，在多人使用的情况下，Quota的设定非常重要。尤其是在处理大量数据的环境下，不小心就容易把所有空间用完造成别人无法存取。Hadoop Quota的设定是针对目录，而不是针对用户的，即使目录属主修改了，Quota也依然存在。 - Name Quotas（设定某个目录下文件和目录的总数） 计算公式：<code>Quota -（Dir_count+File_count）= Remaining_Quota</code> - Space Quotas（设定某个目录下使用的空间大小） 计算公式：<code>Space_Quota - Count_size = Remining_Quota</code></p>
+<p><strong>解决方法：</strong></p>
+<p><code>$ hadoop dfsadmin -setQuota $Quota $directory # Quota是文件和目录数总和 $ hadoop dfsadmin -setSpaceQuota $SpaceQuota $directory # SpaceQuota是目录使用HDFS空间的大小</code> $ hadoop fs -count -q $directory # 查看目录的Quota情况 $ hadoop dfsadmin -clrQuota $directory # 取消设定的Quota`</p>
+<h3 id="HDFS-客户端多集群支持"><a href="#HDFS-客户端多集群支持" class="headerlink" title="HDFS 客户端多集群支持"></a>HDFS 客户端多集群支持</h3><p>我们现在所有业务的日志收集都是使用Scribe将业务日志打到HDFS集群的，有的业务有一些敏感隐私数据，我们将这些数据放到一个单独的集群中。为了保证所有业务使用同一套Scribe Server，在Scribe Server中使用一个HDFS Client，支持多集群。</p>
+<p><strong>解决方法：</strong></p>
+<p>使用cluster_nameA集群的Client包。</p>
+<p>对cluster_nameA集群的配置文件<code>hdfs-site.xml</code>做如下修改和添加。 修改： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;property&gt; </div><div class="line">  &lt;name&gt;dfs.nameServices&lt;/name&gt; </div><div class="line">  &lt;value&gt;cluster_nameA,cluster_nameB&lt;/value&gt; </div><div class="line">&lt;/property&gt;</div></pre></td></tr></table></figure>
+<p>添加： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&lt;property&gt;</div><div class="line">  &lt;name&gt;dfs.client.failover.proxy.provider.cluster_nameB&lt;/name&gt;</div><div class="line">  &lt;value&gt;org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider&lt;/value&gt; </div><div class="line">&lt;/property&gt;</div><div class="line"></div><div class="line">&lt;property&gt;</div><div class="line">  &lt;name&gt;dfs.ha.namenodes.cluster_nameB&lt;/name&gt;</div><div class="line">  &lt;value&gt;host0,host1&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div><div class="line"></div><div class="line">&lt;property&gt;</div><div class="line">  &lt;name&gt;dfs.namenode.http-address.cluster_nameB.host0&lt;/name&gt;</div><div class="line">  &lt;value&gt;ipB:portB&lt;/value&gt;</div><div class="line">&lt;/property&gt; </div><div class="line"></div><div class="line">&lt;property&gt;</div><div class="line">  &lt;name&gt;dfs.namenode.http-address.cluster_nameB.host1&lt;/name&gt;</div><div class="line">  &lt;value&gt;ipB:portB&lt;/value&gt; </div><div class="line">&lt;/property&gt;</div><div class="line"></div><div class="line">&lt;property&gt;</div><div class="line">  &lt;name&gt;dfs.namenode.rpc-address.cluster_nameB.host0&lt;/name&gt;</div><div class="line">  &lt;value&gt;ipB:portB&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div><div class="line"></div><div class="line">&lt;property&gt;</div><div class="line">  &lt;name&gt;dfs.namenode.rpc-address.cluster_nameB.host1&lt;/name&gt;</div><div class="line">  &lt;value&gt;ip:port&lt;/value&gt;</div><div class="line">&lt;/property&gt;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/under-the-ops/20170923-21-ops-of-hadoop/" title="第二十一章：Hadoop运维">http://www.yulongjun.com/under-the-ops/20170923-21-ops-of-hadoop/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/under-the-ops/20170923-22-selection-of-opensource-monitor-system/" rel="next" title="第二十二章：开源监控系统的选择">
+                <i class="fa fa-chevron-left"></i> 第二十二章：开源监控系统的选择
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/under-the-ops/20170923-24-distributed-systems-tracing -infrastructure/" rel="prev" title="第二十四章：分布式调用跟踪系统">
+                第二十四章：分布式调用跟踪系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hadoop安全认证系统"><span class="nav-number">1.</span> <span class="nav-text">Hadoop安全认证系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kerberos基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">Kerberos基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kerberos运维历程"><span class="nav-number">1.2.</span> <span class="nav-text">Kerberos运维历程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Machine-Failover-System"><span class="nav-number">2.</span> <span class="nav-text">Machine Failover System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘处理自动化"><span class="nav-number">3.</span> <span class="nav-text">磁盘处理自动化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hadoop服务器环境管理方案"><span class="nav-number">4.</span> <span class="nav-text">Hadoop服务器环境管理方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运维Hadoop集群的常见问题与处理方法"><span class="nav-number">5.</span> <span class="nav-text">运维Hadoop集群的常见问题与处理方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HDFS集群不均衡现象"><span class="nav-number">5.1.</span> <span class="nav-text">HDFS集群不均衡现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制用户对HDFS资源的使用"><span class="nav-number">5.2.</span> <span class="nav-text">控制用户对HDFS资源的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HDFS-客户端多集群支持"><span class="nav-number">5.3.</span> <span class="nav-text">HDFS 客户端多集群支持</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

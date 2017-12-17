@@ -1,0 +1,1370 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Service Mannagement Platform," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="第十五章：服务管理平台">
+<meta property="og:url" content="http://www.yulongjun.com/under-the-ops/20170923-15-it-service-management-platform/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/devops.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061688355474.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061688554838.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061688670187.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061688801082.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061689869148.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061689928875.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061690211954.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061690386381.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061690531278.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061692776285.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061693200472.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061693342877.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061693799228.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061694490860.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061694854826.jpg">
+<meta property="og:updated_time" content="2017-09-23T15:24:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第十五章：服务管理平台">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/devops.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/under-the-ops/20170923-15-it-service-management-platform/"/>
+
+
+
+
+
+  <title> 第十五章：服务管理平台 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/under-the-ops/20170923-15-it-service-management-platform/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第十五章：服务管理平台
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-23T17:19:19+08:00">
+                2017-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/under-the-ops/" itemprop="url" rel="index">
+                    <span itemprop="name">under-the-ops</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/under-the-ops/20170923-15-it-service-management-platform/" class="leancloud_visitors" data-flag-title="第十五章：服务管理平台">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/devops.png" alt="devops"><br><a id="more"></a></p>
+<p>在前面的章节中，我们讲到了自动化运维的重要性。运维基础信息的管理是自动化运维的前提，自动化水平完全取决于运维基础信息的准确性和完善程度。本章主要讲述我们在服务管理平台建设方面的一些思考和实践。</p>
+<hr>
+<h2 id="服务树"><a href="#服务树" class="headerlink" title="服务树"></a>服务树</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>在运维团队成立之初，运维人员只能通过Excel表记录所负责产品线的服务、服务器及之间的关联关系。在手工运维阶段，运维人员对服务或服务器进行操作时，需要经常维护和查询Excel表。随着业务的增长，服务和服务器越来越多，之间的关联关系越来越复杂，维护成本也逐渐增加。这时需要一个简单的系统来记录此表格信息，并提供API给运维人员使用，可以理解为有API功能Web版本的Excel表格。同时，我们也需要把域名、监控、服务部署等信息通过此服务信息进行关联。</p>
+<p>根据运维经验，我们设计了一个树状结构的数据管理模型，用来记录运维各个维度信息的管理。这样的系统我们称之为服务树。</p>
+<p>服务树主要有三大功能：维护服务与服务器的关联关系；按业务组织成树状结构；与周边业务系统的联动。本节将围绕这三方面来介绍我们设计开发的服务树。主要有如下几个特点：<br>◎ 服务树是整合运维业务系统的核心组件<br>◎ 灵活的服务树结构和展示，满足运维人员的管理需求<br>◎ 多样化的数据记录和支持各种结构化的查询，联动周边系统</p>
+<h3 id="服务树的重要性"><a href="#服务树的重要性" class="headerlink" title="服务树的重要性"></a>服务树的重要性</h3><p>服务与服务器的关联关系，是运维业务中的基础核心数据。服务树管理着这样的关联关系，并且给上层业务提供接口和服务，自然成为了运维平台的核心组件。服务树本身可以理解为一个类名字服务的简易系统，侧重于运维人员的管理需求。通过服务树的节点可以较好地整合上、下游系统与工具，自动变更关联关系，提升自动化水平。</p>
+<p>服务树的关联关系数据，是由部署系统自动维护的，上层业务系统只作为使用者。通过如图15-1所示的运维平台关系图，来协助用户理解“服务树作为运维核心组件”这个概念。</p>
+<p><img src="/images/15061688355474.jpg" alt=""></p>
+<p>图15-1  运维平台关系图</p>
+<p>部署系统是服务发布的具体执行者，是服务树数据来源的核心入口，作为服务信息的生产者。其他系统都作为使用者来获取此服务信息，例如：监控根据服务名获取服务器列表。当服务发布完成时，部署系统通知服务树完成关联关系的变更，监控根据服务名即可实时获取到最新的服务器列表。</p>
+<h3 id="设计实现"><a href="#设计实现" class="headerlink" title="设计实现"></a>设计实现</h3><p>在介绍上层业务系统如何使用服务树节点之前，先了解一下服务树的整体设计实现。<br>服务树主要维护服务与服务器的关联关系，因此核心功能是将这些关联关系对外友好地输出。根据公司业务需求及运维积累的经验，为了支持灵活的树视图及查询方式，我们设计了以Tag为核心的服务树。其中Tag是一个类型和值构成的键值对，并分为两大类：服务相关及服务器属性。<br>为方便读者更容易理解，对Tag进行详细说明，如表15-1所示。</p>
+<p><img src="/images/15061688554838.jpg" alt=""></p>
+<p>表15-2  Tag详细说明</p>
+<p>服务相关的Tag需要组合在一起才能独立使用。例如Nginx服务Tag，用户不能区分具体是哪个产品线的Nginx服务，会产生歧义。因此，为了解决“不产生歧义的服务名”，我们通过这样的格式使其具有唯一性：公司<em>部门</em>产品线<em>服务</em>实例。这种格式的Tag组合我们称为节点串。它是贯穿各个系统的通用描述方法。<br>由于服务树功能并不复杂，所以可以把数据表设计得比较简单些。我们是通过如下三个数据表来实现服务树的，如表15-3所示。</p>
+<p><img src="/images/15061688670187.jpg" alt=""></p>
+<p>表15-3  数据表及用途</p>
+<h3 id="服务树视图"><a href="#服务树视图" class="headerlink" title="服务树视图"></a>服务树视图</h3><p>服务树的一个重要功能是提供Web视图，满足用户的管理需求。视图是和用户交流最直观的一个纽带，同时也是引导和限制用户规范性操作的一个重要入口，进而减少程序的管理成本。服务树视图主要支持：服务层级关系的可视化展示，用户通过点击节点或搜索快速定位。</p>
+<p>服务树的展示方式、各层级的先后顺序、节点层级显示与否，都可以由用户自定义。同一棵树，可以根据不同的配置、用户的需求，展示成不同的视图，如图15-4所示。</p>
+<p><img src="/images/15061688801082.jpg" alt=""></p>
+<p>图15-4  服务树视图</p>
+<p>不同的运维业务系统需要的视图也可能不一样。运维业务基本都是基于服务的维度进行管理，因此大部分业务（例如服务树、监控、权限系统）的默认视图树结构是公司-&gt;部门-&gt;产品线-&gt;服务组-&gt;服务-&gt;服务实例组-&gt;服务实例。</p>
+<p>在部分业务中，为了减少节点变更带来的管理成本，我们需要引导用户将数据关联至产品线，例如域名管理、LVS管理、部署等业务，视图树结构是公司-&gt;部门-&gt;产品线。在服务器登录权限集中管理的业务系统中，以默认视图进行展示，同时为了支持一些特殊的需求（例如，给系统组授予公司所有故障机器的root登录权限），允许用户在地址栏中修改树结构参数来刷新服务树视图，进而满足对应的特殊需求。</p>
+<h3 id="查询功能及命令行工具"><a href="#查询功能及命令行工具" class="headerlink" title="查询功能及命令行工具"></a>查询功能及命令行工具</h3><p>服务树的另一个重要功能就是给上层业务和运维人员提供查询功能，主要包括两方面：通过服务信息筛选服务器列表和通过服务器反查询服务信息。</p>
+<p>筛选服务器列表是查询某个服务部署在哪些服务器上。服务树提供接口给上层业务查询，同时也将此接口封装为一个脚本工具给运维人员使用。这个工具的输入参数是节点串，比如输入corp.A_dep.B_pdl.C_service.nginx，可以得到A公司B部门C产品线下服务属于Nginx的服务器列表。当某个系统版本出现安全漏洞时，运维人员就可以通过类似derp.D_pdl.P_os.centos63来获取本产品线CentOS 6.3版本的问题服务器。</p>
+<p>反查询是查询某台服务器上有哪些服务。同样也会提供接口给上层业务查询，并且也将此接口封装为一个脚本工具给运维人员使用。这个脚本的输入参数是服务器名，比如xx-test01.bj，可以查询服务器的所属产品线及状态等基本信息。</p>
+<p>目前较多的使用场景是根据节点获取服务器列表，并可以对有登录权限的服务器列表进行相应的操作。同时，公司内部的Ansible获取服务器列表也是基于服务树接口改造的，这样运维人员使用Ansible时就无须维护服务器列表了。</p>
+<h3 id="高可用性"><a href="#高可用性" class="headerlink" title="高可用性"></a>高可用性</h3><p>服务树属于Web型服务，前端使用AngularJS和HTML开发，使用Python开发后台，数据存储在MySQL中。在运维平台业务快速发展的过程中，服务树的可用性将影响到上层业务的稳定性。</p>
+<p>作为一个重要的基础服务，需要有非常高的稳定性。在稳定性方面我们是如何设计考虑的呢？首先理解服务树的业务特点：大多数时候绝大部分节点数据很少变动，获取实时数据的要求不是很高，允许有一定的延迟；但有些场景需要获取实时数据，比如发起部署时，部署Agent首先向服务树注册服务器列表，成功后再向LVS注册Real Server。这时LVS就需要向服务树获取实时数据，用于判断服务器是否有权限注册LVS。</p>
+<p>因此，根据这样的业务特点，我们做了两件事情：完善服务端API的缓存，以及提供服务树的SDK。</p>
+<p><strong>（1）服务端缓存</strong></p>
+<p>服务端缓存主要分三个方面。<br>◎ 计算数据结果的缓存。例如获取公司、部门级大节点的服务器列表，不需要实时数据，可以直接返回缓存数据。<br>◎ 数据库配置尽可能多的内存缓存。理论上，可以缓存大部分select语句的结果集。好处就是当数据进行变更时，MySQL自身可以保证缓存数据和实时数据的一致性，进而减少业务代码处理缓存的复杂逻辑。<br>◎ 数据库多机房多实例。程序通过配置，优先获取本机房数据库，当本机房数据库异常时，程序重试连接耗时最短的数据库，尽量保证可以读取到有效的数据库实例。同时MySQL的数据库主从同步功能，目前已非常成熟，进而避免自身业务处理分布式数据的复杂逻辑。</p>
+<p><strong>（2）服务树SDK</strong></p>
+<p>多机房多实例部署，是目前通用的高可用部署思路，失败时可以重试不同的实例来提高可用度。这里主要给大家分享SDK的思路。SDK的好处在于可以嵌入对方的代码，部署在应用方的机器上，因此可以做一些缓存数据和重试功能。<br>◎ 配置多个域名，默认连接本区域的服务实例，允许轮询多个实例；<br>◎ 默认封装HTTP长连接，给出一些最佳实践的用法，引导用户批量、多次请求时使用长连接模式；<br>◎ 默认缓存响应数据，减少服务端的请求压力，同时当服务端都异常时，还可以使用本地有效的缓存数据，尽量减少因服务端宕机带来的影响。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>由于关联关系通过部署系统自动化关联起来，相比人工管理阶段，减少了人工维护成本，同时自动化整合上、下游。</p>
+<p>服务树本身就是一个很简单的系统，设计和实现时应该简化设计思路。同时我们觉得此系统的难点在于作为平台底层核心，周边系统一旦依赖，改动代价就比较大了。这就要求设计产品形态时需要尽量考虑周全，同时还得考虑支持后续的业务发展。</p>
+<hr>
+<h2 id="运维权限系统"><a href="#运维权限系统" class="headerlink" title="运维权限系统"></a>运维权限系统</h2><h3 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h3><p>在自动化运维体系中，服务树管理着公司服务器与服务的各维度关系，而运维权限系统维护着公司人员与服务权限的对应关系。通过对人员权限的准确控制，最大限度地减少由于权限管理问题而导致的各类安全风险。<br>运维权限系统经历了两个版本的迭代，下面分享相关的发展过程和经验。</p>
+<h3 id="第一版"><a href="#第一版" class="headerlink" title="第一版"></a>第一版</h3><p>在运维团队成立之初，运维平台的绝大部分功能都只面向运维人员，少部分功能提供给其他部门的同事使用。运维平台主要是由运维人员提炼需求，同时依据此阶段“简单、粗暴、有效、满足80%场景”原则，快速开发完成的。</p>
+<p>因此，我们的运维权限系统在此阶段具有两个特点：精简的权限模型和简单有效的人员管理。<br>随着平台业务的发展，运维业务都与服务树节点进行关联，节点成为了贯穿运维相关业务的“公共语言”。因此，我们的权限模型也是基于服务树节点设计的：服务树节点、功能权限、用户，这么一个简单的权限三元组就可以完成权限校验功能（见图15-5）。其中功能权限只有读、写两种。</p>
+<p>◎ 读权限：只对服务信息有查看权限<br>◎ 写权限：对节点下的所有数据（服务、服务器、域名等）有查看、执行、更改、删除操作权限</p>
+<p><img src="/images/15061689869148.jpg" alt=""></p>
+<p>图15-5 权限模型</p>
+<p>这时权限系统提供简单的页面进行展示及配置，如图15-6所示。</p>
+<p><img src="/images/15061689928875.jpg" alt=""></p>
+<p>图15-6  权限列表</p>
+<p>权限系统使用这种方式来管理权限，并给周边系统提供用户权限校验服务，周边系统通过API对用户和节点的权限关系进行合法性校验。从理论上说，这个校验接口可以满足绝大部分需求，继而支撑运维平台的正常运行。</p>
+<p>模型设计完成之后，就可以支持运维人员管理用户的需求了。但如果是针对每个人进行单独权限设定，当运维人员面对几十、上百用户规模时，权限管理将是一件非常痛苦的事情，最终无法管理。因此需要引入用户组的概念，我们把节点与权限的组合称为用户组。</p>
+<p>此阶段，我们设计了“人员管理”的简单原则：只要用户在用户组中，这个用户就可以增加、删除此用户组的成员。这样的设计简化了权限模型，使人员管理的成本及实现逻辑非常简单。开通权限的整体过程一般是这样的：管理员首次开通用户组权限，后续就可以由组内用户管理了。</p>
+<h2 id="第二版"><a href="#第二版" class="headerlink" title="第二版"></a>第二版</h2><p>随着服务管理维度和运维需求的不断增加，第一版的权限模型逐渐不能满足需求了，因此我们设计了第二版权限系统。</p>
+<p><strong>1．新需求</strong></p>
+<p>随着公司的发展，产品线越来越多，研发、测试人员等公司员工快速增长，权限需求就逐步发生了变化。<br>（1）部分运维工作需要研发或测试人员共同承担。例如，在测试环境下服务器的运维、系统重装、报警等基础运维工作，逐步由对应的研发工程师进行承担；Preview、Staging环境的程序部署，也可由研发或测试人员负责。</p>
+<p>（2）员工的快速增长，业务的快速扩张，需要更细粒度地划分权限，两个简单的读/写权限已不能满足要求。例如，用户可能只需部署系统的发布权限，但基于第一阶段的情况只能授予写权限（可以重启服务器、操作域名、登录服务器权限等），存在一定的安全隐患。<br>运维平台是运维人员提炼需求，并前后参与完成的。研发人员的权限需由运维人员根据需求进行合理授权，避免出现安全事故。</p>
+<p><strong>2．设计概述</strong></p>
+<p>第二版重新设计了权限模型：服务树节点、角色模板、用户和业务权限点，如图15-7所示。</p>
+<p><img src="/images/15061690211954.jpg" alt=""></p>
+<p>图15-7  权限模型</p>
+<p>根据运维业务各个功能的不同，我们允许权限进行细分。不同的运维业务系统，各个操作都可以设置不同的权限点来表示。比如监控系统，可以有增加监控项、增加报警接收人、查看监控图、删除监控等多个业务权限点。为了减少业务系统的管理成本，我们建议业务系统尽量控制权限点的数量，例如服务器重启、服务器改名、服务器关机等相类似操作都用一个权限点来表示。</p>
+<p>为了减少权限点授权管理的成本，我们引入了角色模板的概念。角色模板是一批权限点的集合，根据日常的角色进行划分。为了方便运维人员分配、管理权限点，每个节点都可以绑定多个角色模板。我们的角色模板具有如下两个特点。</p>
+<p>（1）继承角色模板：在上级节点绑定的角色模板，在下级节点也可以继承使用。同时允许下级节点调整此角色模板的权限点，其最大权限点由上级节点模板决定。<br>（2）自定义角色模板：权限系统给运维人员提供的公司角色模板，不一定能完全满足所有产品线的权限需求，因此运维人员可根据实际情况，自定义产品线的角色模板。</p>
+<p><strong>3．产品形态</strong><br>第二版解决了只有读/写权限的问题，提供了更加丰富、更加细化的权限点，可以根据实际情况定制化角色模板。下面将详细描述这个产品的细节，给读者更加直观的印象。<br>如图15-8所示就是配置完角色模板与权限点后的整体概况。通过此图，方便运维人员给用户分配合适的角色模板，同时也方便管理员调整权限点。</p>
+<p><img src="/images/15061690386381.jpg" alt=""></p>
+<p>图15-8  角色模板详情</p>
+<p>根据工程师的实际使用情况，目前我们公司整体分为两类角色：运维人员和非运维人员（用Dev表示）。权限系统的所有操作都是通过权限点进行控制的，管理员可随时调整每个角色模板的权限。</p>
+<p>角色模板配置完成后，就需要给用户配置权限。如图15-9所示，为了方便用户快速查询权限信息，我们以表格的形式进行展示。授权时支持运维人员单个或批量操作，同时也支持用户以正则方式快速搜索权限信息。</p>
+<p>权限模板是一批权限点的集合，运维人员可根据用户对服务的掌握程度进行调整。例如小王是运维部新入职的同事，运维管理员可先授予其Dev角色的权限。随着小王对服务的逐渐掌握，运维管理员就可以将部分运维事物交由小王负责，可以通过授予小王运维人员或运维管理员的角色完成。</p>
+<p><img src="/images/15061690531278.jpg" alt=""></p>
+<p>图15-9  权限列表</p>
+<p>如所图15-10所示，运维管理员角色模板关联了几乎所有的权限。节点表示此角色模板所生效的范围。如果填写的是公司节点，此角色模板将适用于公司所有节点；如果填写的是部门，则只能适用于部门内部的节点。</p>
+<p>我们允许用户根据自身产品线的实际情况，对上级节点角色模板的权限点进行缩小或调整，如图15-11所示。<br>也允许用户新增产品线的自定义角色模板，此角色模板的权限点可以不受限制并由运维人员自行选择，如图15-12所示。</p>
+<p><img src="/images/15061692776285.jpg" alt=""></p>
+<p>图15-10  角色模板</p>
+<p><img src="/images/15061693200472.jpg" alt=""></p>
+<p>图15-11 调整权限点</p>
+<p><img src="/images/15061693342877.jpg" alt=""></p>
+<p>图15-12  自定义角色模板</p>
+<h2 id="与外部系统交互"><a href="#与外部系统交互" class="headerlink" title="与外部系统交互"></a>与外部系统交互</h2><p>权限系统作为平台的基础组件，管理着公司人员与服务的关联关系。为了保证上层业务的正常运转，运维权限需要对外部提供灵活和高可用的服务。如下是我们对外提供的5个接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 检查权限</div><div class="line">check(节点, 权限点, 用户名)</div><div class="line"># 获取节点对应的成员列表</div><div class="line">members(节点, 角色模板)</div><div class="line"># 通过节点发送邮件</div><div class="line">mail(节点, 邮件标题, 邮件内容, 邮件发送者，角色模板)</div><div class="line"># 通过节点发送短信</div><div class="line">sms(节点, 短信内容，角色模板)</div><div class="line"># 将操作日志发送至服务端统一存储、展示、分析及审计</div><div class="line">event(事件名, 请求IP, 用户名, 服务器名, 节点串, 详情备注)</div></pre></td></tr></table></figure>
+<p>我们把用户的运维操作行为通过event函数统一收集起来，如图15-13所示。目前已对外提供简单的文本查询，后续将会收集更详细的数据，并提供友好的界面查询及展示。</p>
+<p><img src="/images/15061693799228.jpg" alt=""></p>
+<p>图15-13  运维操作审计</p>
+<p>同时我们还允许上层业务系统，通过接口和服务账号来自动变更有权限的相关数据。例如，DBA在数据库平台部署数据库实例时，通过调用权限系统的接口就可以对数据库及服务器的登录进行实时授权及变更。也允许公司内部PaaS平台通过接口实时授权相关人员登录Docker容器。</p>
+<h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><p>在我们公司，依赖运维相关资源（服务器、域名、IP地址等）的系统，基本都会和服务树节点进行关联。服务树和权限系统所构造的运维基础体系，更好地管理和对接各个业务系统。</p>
+<hr>
+<h2 id="服务器生命周期管理"><a href="#服务器生命周期管理" class="headerlink" title="服务器生命周期管理"></a>服务器生命周期管理</h2><p>一台服务器从业务提出预算需求，到最终可以提供线上服务，要经过很多部门的共同协作配合才能完成。随着业务的发展，对服务器的需求也在不断增大。因此采购变得越发频繁，各业务购买的服务器数量也很多。如果整个过程还靠人来协调各部门协作，靠人来完成一些重复过程的操作（如安装系统、系统参数调整、业务依赖基础软件安装等），将会导致效率的极度下降。最终会因服务器交付延期而导致服务出现问题，甚至影响新功能上线，影响业务发展。</p>
+<p>随着时间的推移，服务器逐渐老化，故障概率增大，故障频度也会增加。如果服务器规模较大，那么处理服务器故障更是家常便饭。在处理故障服务器时，运维工程师需要预先做很多工作，比如协调备件或新服务器，将故障服务器从集群中摘除，调整监控等。如果服务器只修不换的话，还需要进行持续的状态跟进、记录，以免后续忘记。整个过程非常耗费人力。</p>
+<p>正因为服务器的采买、安装、运行、故障、归属调整等时刻都在发生，但过程又是如此的繁杂，所以对服务器平台化管理的需求显得非常急迫。而纵观运维自动化系统，服务器是一种非常明确的实体资源。自动化服务管理的关键能力之一就是通过调度实现服务器资源的调配，当服务器资源不足时，可以自动调配服务器，进行服务部署，并将其注册到服务集群中。而当服务器资源过剩时（如深夜），又能自动减少服务器，将过盛的资源进行归还或调度到其他服务。</p>
+<p>服务器在各个阶段会有不同的状态，相关系统会根据状态进行相应的处理。这些状态的变化有些是人通过工单系统触发的，有些是系统执行操作后自动改变的（初始化系统、部署系统、监控系统）。我们将运维场景中产生的各种状态进行梳理，明确每个状态变更点的触发条件、保障流程等，最终形成了对服务器全生命周期的闭环管理，也就是所有状态均在平台中通过特定动作改变，不会出现人为干预而导致的服务器状态错误。这对自动化管理系统非常重要。试想：如果一台服务器正处于“维修”状态，而这时却因为使用系统操作而变为了“可使用”状态，那么它将会被调度系统分配给线上业务进行使用，后果可想而知。</p>
+<p>在本节中，我们会介绍如何通过系统管理服务器状态，以及需要哪些前置条件等。对服务器状态的自动维护、状态的触发是工单系统、监控系统自动发现等。前置条件需要备机池，需要产品线临时机器池。</p>
+<h3 id="服务器状态"><a href="#服务器状态" class="headerlink" title="服务器状态"></a>服务器状态</h3><p>服务器从业务提出需求到为线上提供服务，再到故障维修、下线归还，主要经过几大环节，包括：采购、装机、服务准备、服务中、故障、下线。每个环节会有多种子状态，涉及不同的自动化系统。</p>
+<p><strong>1．采购</strong><br>预算、采购主要是通过预算系统来完成的。工程师通过该系统提交服务器需求，各团队在此系统中完成审核、审批、生成采购单等工作。采购包括审批中、采购中、已到货三种子状态，这是由人来更新的。运维工程师可以通过此系统跟进服务器的购买进度。</p>
+<p><strong>2．装机</strong><br>服务器到货后，会进入装机环节，系统运维工程师会进行网络资源分配、系统安装等工作，对应的子状态为“网络资源分配完成”、“系统安装完成”。这些动作都是通过相关系统完成的，涉及网络资源管理系统、自动装机系统。</p>
+<p><strong>3．服务准备</strong><br>当系统工程师将系统装好后，服务器会进入到服务准备环节，此时服务器开始按业务的需求进行服务器命名修改、系统环境私有参数修改、服务程序部署。两种子状态分别为“私有环境初始化完成”、“服务部署完成”。此时，虽然服务器已经搭建好，但并未加入到在线集群中。一般构建好一个服务环境后，还需要进行相应的测试。</p>
+<p><strong>4．在线服务</strong><br>线下测试通过后，准备阶段完成，该服务器会被加入到线上集群中，提供线上服务。此时进入到在线服务环节，子状态变为“服务中”。</p>
+<p><strong>5．离线</strong><br>如果服务器资源出现过剩，则需要释放资源，我们会将服务器归还公司。服务器进入离线环节，子状态为“离线中”。在调度系统中，这种状态的机器被定义为健康的、可随时使用的资源，是被优先筛选的。</p>
+<p><strong>6．故障</strong><br>在服务器出现故障时，我们会将其子状态设置为“故障中”，此时服务器进入故障环节。对于故障的处理方式有两种：停机维修和更换服务器。SRE会根据情况进行选择。如果故障服务器的内存等易换件坏了，我们会选择停机维修，主要是更换机器就涉及应用、数据的迁移，考虑到运维成本，这是没必要的，但这种维修一般需要的时间可能会偏长，需要业务确认是否可以容忍。如果服务器主板等维修起来很麻烦的部件坏了，一般会选择更换服务器。</p>
+<p>对于硬件故障的判别，我们主要靠带外监控来主动发现。还有一种情况是从业务上判断服务器整体性能出现下降，不如其他同型号服务器，我们可能不知道是什么原因导致的，这时就会选择更换服务器。具体的故障点系统工程师线下再去追查。当服务器修好后，会自动进入装机环节，重新安装系统等待调度（注：有一种情况不会进入到装机环节，而是进入到服务准备环节，具体场景在业务临时机器池中说明）。</p>
+<p><strong>7．报废</strong><br>这种状态一般SRE不太关注，系统工程师会根据服务器的年限、故障情况设置其状态。<br>具体状态如表15-14所示。</p>
+<p><img src="/images/15061694490860.jpg" alt=""></p>
+<p>表15-14  具体状态</p>
+<p>在机器管理中，需要两个服务器池来放置不同状态的服务器，即公共备机池、业务临时机器池。</p>
+<h3 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h3><p>在服务器管理系统建设中，需要两个服务器池来存放不同状态、不同业务归属的服务器。</p>
+<p><strong>1．公共备机池</strong><br>这里的服务器不属于任何业务，是公共资源。服务器都处于系统安装完成状态。当某个业务资源不够时，调度系统会从中调配服务器。也可以通过系统来进行筛选，并通过工单系统发起备机申请流程，进行服务器借用。最终归还时，也会划分到公共备机池中，继续供其他业务调配使用。进入到备机池的服务器都会被强行重装系统，避免之前业务修改的系统参数影响别的服务。</p>
+<p><strong>2．业务临时机器池</strong><br>这里的服务器属于特定的业务，是私有资源。主要是为两种场景设计的：一是特定业务定向采购的服务器，当安装完操作系统后，会自动进入业务临时机器池中，对应的服务器状态为“系统安装完成”，工程师可以随时使用；二是服务器故障，需要停机维修，因为选择了保存业务环境，所以修复后其依然归特定业务所有，此时服务器状态为“故障中”。在服务器维修好后，不会进入到装机环节，而是进入到服务准备环节的“服务部署完成”状态。在测试通过后，会由人触发，将其加入集群提供服务。如果这个步骤接驳自动化测试，则可以自动完成，但目前主要还是人工干预。</p>
+<h3 id="服务器管理系统"><a href="#服务器管理系统" class="headerlink" title="服务器管理系统"></a>服务器管理系统</h3><p>在系统设计阶段，我们对服务器管理系统提出了三大原则，以保证该系统可以作为底层服务可靠地运行。</p>
+<p>（1）灵活扩充环节与状态。主要因为公司的组织结构有可能发生变化。这时有可能影响整个服务器生命周期涉及的团队及流程。举例来说，公司出于安全考虑，新出规定要求所有报废的服务器必须由安全团队进行审查（审查可能是人工完成，也可能是系统完成）才能最终得到“报废”状态。这时我们就需要增加安全审查环节，制定相应子状态并与其系统对接。</p>
+<p>（2）流程的闭环。服务器状态的正确性是非常重要的。一旦状态出现混乱。我们将不知道哪些服务器可用，哪些不可用。调度系统也会将有问题的服务器提供给线上使用。因此，所有状态的变更必须通过明确的平台流程进行控制。主要是为了确保状态信息的准确，不会出现“遗漏”或“配错”。例如大批服务器到货，系统运维工程师安装完操作系统后，会交付给各业务的运维工程师，如果靠人来通知各业务服务器列表，再由各业务手工改变服务器状态，从历史来看一定会出现遗漏。如果自动装机系统能够自动触发状态变化，运维工程师只要查看自己业务的临时机器池中是否有新机器即可。不需要人在中间进行执行，那将不会出现实施层面的遗漏。</p>
+<p>（3）提供统一接口获取资源。无论是实体服务器资源还是虚拟机资源，也不管是服务于公司的私有云还是对外的公有云，都需要通过统一接口进行资源申请，获取到资源后再自行安排使用。因为如果是多套系统或多种申请方式，将导致工程师要进行频繁的工作方式切换，降低工作效率。自动化系统也要考虑各个服务器管理系统的融合（这本不该是自动化系统考虑的）。更重要的是，服务器管理涉及业务使用资产成本的问题，不统一管理，将出现资产的混乱。<br>如图15-15所示是服务器状态图，我们会针对一些关键流程进行说明。</p>
+<p><img src="/images/15061694854826.jpg" alt=""></p>
+<p>图15-15  服务器状态图</p>
+<p><strong>1．私有环境初始化</strong><br>服务器在系统安装完成后，只有一个临时名称，在业务临时机器池中一般命名为music-tmp100。music代表业务线，tmp100代表业务临时机器池内的服务器及数量编号。在公共备机池中的会被命名为sys-buffer199。不管服务器来源于哪里，业务都需要对其进行私有环境的初始化。我们会将其按业务需求进行改名，如music-fe30，规则同上，这个名称确定了其在music业务中用于什么。这里可能有人会问：为什么不在预算环节就定义好服务器名称，这样就可以省了这一步？这是因为在采购的这段时间，线上服务器也在发生着变化，可能会导致与预算服务器定义名称冲突，从而带来未知问题。</p>
+<p>服务器改名完成后，开始进行业务私有环境部署，如JDK升级、Python升级等，我们称之为runtime，也就是业务运行时所需要的依赖。我们是通过Ansible自动完成这个动作的。此时服务器状态被设置为“私有环境初始化完成”。<br>基础环境准备好后，就可以通过部署系统部署服务程序了。只要有一个程序部署成功，系统就会将服务器置为服务部署完成状态。这里可能大家会有疑问，一台服务器上可能部署多个程序，为什么只要一个部署完成，即会改变状态？这样设计的原因主要是为后续调度系统考虑，它会根据线上情况自动决定服务器上部署什么，所以哪个程序部署成功，即代表其提供什么服务。</p>
+<p><strong>2．服务中</strong><br>测试通过后，就可以提供线上服务了。这种状态目前由人来触发，后续接入自动化测试后，可自动完成。</p>
+<p><strong>3．服务器下线</strong><br>下线分为两种场景。<br>（1）服务器归还公共备机池。这类服务器一般是业务较长时间内不再需要这些资源，所以释放给公司，作为公共资源。资源统计系统也不再将其计为该业务成本。<br>（2）服务器放到业务临时机器池中。这种情况是业务短时间内还需要使用这些资源。如果放到公共备机池中，有可能被分配走，所以临时放置在这里。但资源统计系统会定期筛查，超过一段时间没有使用，会自动将其划分给公共备机池。</p>
+<p><strong>4．服务器借用</strong><br>当业务自己的临时备机池筛选不出服务器时，会考虑借用，来源统一为公共备机池。即便是两个不同业务线之间借用服务器，也要遵守这个规则。被借方需要将服务器归还公共备机池，需求方再从中借用。业务线之间私自调换服务器的行为一定要控制，否则在资产管理上将会出现混乱。</p>
+<p><strong>5．服务器故障</strong><br>故障的处理分为两类。<br>（1）更换服务器。主要适用一些不好修或不确定问题的场景。这个过程比较容易，分配一台新的服务器即可。但需要初始化、部署服务等环节。而旧的服务器下线修好后，会被放置到公共备机池中。<br>（2）故障维修。如果只是硬盘、内存等坏了，一般会选择这种方式。迁移成本比较小。这种处理方式，在系统修好后，还属于原来的业务，启动服务即可。</p>
+<h2 id="环境初始化"><a href="#环境初始化" class="headerlink" title="环境初始化"></a>环境初始化</h2><p>环境初始化的需求是这样产生的：<br>（1）由于基础设施的区域化自治设计，部分配置在不同区域有差异。比如内网DNS区域化自治，不同区域的服务器，在resolve.conf中配置的服务器IP地址不同，需要进行环境初始化。<br>（2）随着运维基础设施的建设，每台服务器上越来越多的Agent需要安装升级，升级频度远比装机包的更新高，因此也必须额外进行环境初始化。<br>（3）业务应用程序，对系统环境有特定的需求（库、语言环境、内核参数等），但这些特定的环境需求又无法统一，这是环境初始化最重要的需求。</p>
+<p>传统模式的环境初始化，通常使用业内流行的配置管理工具完成，如Puppet/Chef/Ansible等。常见的批量管理工具大致分为Agent模式和非Agent模式两类，在性能、可靠性、易用性、可维护性等方面各有千秋。基于以下几方面考量，我们选择非Agent模式的开源工具Ansible作为统一的批量管理工具。</p>
+<p>◎ Agent维护成本。Ansible使用SSHD作为Agent，不产生额外维护成本；省去了Agent端的安装、升级、进程守护等额外的管理成本。<br>◎ 权限和认证管理。Ansible的设计模式使其天生就具有认证功能，而中心控制模式容易与现有权限管理系统进行对接，实现基于用户身份的认证和访问控制。<br>◎ 功能可扩展性。模块化实现使扩展功能更容易，并且中心控制模式使扩展功能的升级更加便捷，利用扩展模块与其他自动化系统接驳和联动，使Ansible更加易用。<br>◎ 易用性。Ansible的使用方式更接近于传统SSH，更适合支持传统的运维管理方式。<br>◎ PlayBook。基于PlayBook功能，容易将基础环境配置、常用操作等固化，并结合初始化平台进行主机初始化或统一变更。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/under-the-ops/20170923-15-it-service-management-platform/" title="第十五章：服务管理平台">http://www.yulongjun.com/under-the-ops/20170923-15-it-service-management-platform/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Service-Mannagement-Platform/" rel="tag"># Service Mannagement Platform</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/under-the-ops/20170923-14-disaster-management/" rel="next" title="第十四章：灾备管理">
+                <i class="fa fa-chevron-left"></i> 第十四章：灾备管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/under-the-ops/20170923-16-service-discovery/" rel="prev" title="第十六章：服务发现">
+                第十六章：服务发现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务树"><span class="nav-number">1.</span> <span class="nav-text">服务树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务树的重要性"><span class="nav-number">1.2.</span> <span class="nav-text">服务树的重要性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计实现"><span class="nav-number">1.3.</span> <span class="nav-text">设计实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务树视图"><span class="nav-number">1.4.</span> <span class="nav-text">服务树视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询功能及命令行工具"><span class="nav-number">1.5.</span> <span class="nav-text">查询功能及命令行工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高可用性"><span class="nav-number">1.6.</span> <span class="nav-text">高可用性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.7.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运维权限系统"><span class="nav-number">2.</span> <span class="nav-text">运维权限系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介-1"><span class="nav-number">2.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一版"><span class="nav-number">2.2.</span> <span class="nav-text">第一版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二版"><span class="nav-number">3.</span> <span class="nav-text">第二版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与外部系统交互"><span class="nav-number">4.</span> <span class="nav-text">与外部系统交互</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-1"><span class="nav-number">4.1.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器生命周期管理"><span class="nav-number">5.</span> <span class="nav-text">服务器生命周期管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器状态"><span class="nav-number">5.1.</span> <span class="nav-text">服务器状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前置条件"><span class="nav-number">5.2.</span> <span class="nav-text">前置条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器管理系统"><span class="nav-number">5.3.</span> <span class="nav-text">服务器管理系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境初始化"><span class="nav-number">6.</span> <span class="nav-text">环境初始化</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

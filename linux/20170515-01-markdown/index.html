@@ -1,0 +1,1394 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="markdown," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记所使用的markdown语法">
+<meta property="og:url" content="http://www.yulongjun.com/linux/20170515-01-markdown/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/14975930524608.jpg">
+<meta property="og:image" content="https://octodex.github.com/images/yaktocat.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15079850359859.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/1495411596173.png">
+<meta property="og:updated_time" content="2017-10-14T12:46:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="笔记所使用的markdown语法">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/14975930524608.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/linux/20170515-01-markdown/"/>
+
+
+
+
+
+  <title> 笔记所使用的markdown语法 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170515-01-markdown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                笔记所使用的markdown语法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-15T18:00:00+08:00">
+                2017-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/linux/20170515-01-markdown/" class="leancloud_visitors" data-flag-title="笔记所使用的markdown语法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/14975930524608.jpg" alt=""></p>
+<a id="more"></a>
+<h2 id="Markdown是什么？"><a href="#Markdown是什么？" class="headerlink" title="Markdown是什么？"></a>Markdown是什么？</h2><p>Markdown是web上的一种格式文本。Markdown功能强大，我们可以使用Markdown控制文档的显示、把文字格式为粗体或斜体、添加图像、创建列表等等。特别值得一提的是，Markdown编写只需普通文字与一些非字母字符，比如<code>#</code>或<code>*</code>，易于学习与掌握。</p>
+<p>Markdown文件的后缀是<code>.md</code>或<code>.markdown</code></p>
+<p>此篇教程就是用Markdown编写的，而且采用的是Github的markdown扩展语法——<a href="https://guides.github.com/features/mastering-markdown/#GitHub-flavored-markdown" target="_blank" rel="external">GFM(GitHub Flavored Markdown)</a></p>
+<h2 id="markdown软件"><a href="#markdown软件" class="headerlink" title="markdown软件"></a>markdown软件</h2><ul>
+<li><p><strong>Mweb（目前使用的）</strong></p>
+<ul>
+<li>支持平台： <code>web</code>/<code>chrome app</code>/<code>windows</code>/<code>macOS</code></li>
+<li>官网： <a href="http://zh.mweb.im/" target="_blank" rel="external">http://zh.mweb.im/</a></li>
+<li>收费情况：试用14天，收费版98/年。</li>
+<li>优点： 对 Hexo、Octpress、Jekyll 等静态博客做了优化，以方便插入图片和实时预览。可以同步到各种平台，如印象笔记，Wordpress等。支持图片存储到七牛云。</li>
+<li>缺点：只有Mac版和iOS版本</li>
+<li>网上评价：<a href="https://zhuanlan.zhihu.com/p/21760223" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/21760223</a></li>
+</ul>
+</li>
+<li><p><strong>马克飞象（用过两年）</strong></p>
+<ul>
+<li>支持平台： <code>web</code>/<code>chrome app</code>/<code>windows</code>/<code>macOS</code></li>
+<li>官网： <a href="https://maxiang.io/" target="_blank" rel="external">https://maxiang.io/</a></li>
+<li>收费情况：试用10天，无免费版，收费版79/年。</li>
+<li>优点：有浏览器就能使用，可随便贴图，而不用指定图片路径，可与印象笔记同步，可导出md源格式，导出生成pdf或html格式。</li>
+<li>缺点：收费，联网才能使用。</li>
+<li>网上评价：<a href="https://www.zhihu.com/question/24676344" target="_blank" rel="external">https://www.zhihu.com/question/24676344</a></li>
+</ul>
+</li>
+<li><p><strong>Visual Studio Code</strong></p>
+<ul>
+<li>支持平台：<code>Windows</code>/<code>macOS</code>/<code>Linux</code></li>
+<li>官网：<a href="https://code.visualstudio.com/" target="_blank" rel="external">https://code.visualstudio.com/</a></li>
+<li>收费情况：完全免费</li>
+<li>优点：界面美观，插件众多，一个功能强大的编辑器，支持众多语法，支持git，微软随便弄一个团队做出业的产品，就比市面上的类似产品，如<code>Atom</code>,<code>Sublime Text</code>好很多,打开大文件速度非常快，没有Atom卡慢的问题，比<code>Sublime Text</code>安装插件的方式更简洁。</li>
+<li>缺点：markdown的话，无法贴图，要放好位置，手动敲入图片路径（不知道是否有插件能支持）</li>
+<li>网上评价：<a href="https://www.zhihu.com/question/29984607" target="_blank" rel="external">https://www.zhihu.com/question/29984607</a></li>
+</ul>
+</li>
+<li><p><strong>简书博客平台</strong></p>
+<ul>
+<li>支持平台：<code>Web</code>/<code>Android</code>/<code>iOS</code></li>
+<li>官网：www.jianshu.com</li>
+<li>收费情况：完全免费</li>
+<li>优点：支持直接贴图，可以做为博客使用，界面美观</li>
+<li>缺点：无法导出md源文件(连图片都导出的那种功能)，无法导出pdf</li>
+</ul>
+</li>
+</ul>
+<h2 id="Markdown语法讲解"><a href="#Markdown语法讲解" class="headerlink" title="Markdown语法讲解"></a>Markdown语法讲解</h2><h3 id="文本加粗、斜体和超链接"><a href="#文本加粗、斜体和超链接" class="headerlink" title="文本加粗、斜体和超链接"></a>文本加粗、斜体和超链接</h3><p><strong><code>代码</code></strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">用Markdown让词句有**加粗**或*斜体*的效果很容易.</div><div class="line">你也可以创建一个文本超链接，像这样：[连接到Github](https://github.com)</div></pre></td></tr></table></figure>
+<p><strong><code>代码的效果</code></strong>：</p>
+<p>用Markdown让词句有<strong>加粗</strong>或<em>斜体</em>的效果很容易.<br>你也可以创建一个文本超链接，像这样：<a href="https://github.com" target="_blank" rel="external">连接到Github</a></p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p><strong><code>代码</code></strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">有时候你想要带数字编号的列表</div><div class="line"></div><div class="line">1. 一</div><div class="line">2. 二</div><div class="line">3. 三</div><div class="line"></div><div class="line"></div><div class="line">有时候你想要`·`作为编号，以下3个符号`*`、`+`、`-`可以混用</div><div class="line"></div><div class="line"></div><div class="line">* 可以用`*`</div><div class="line">* 继续用`*`</div><div class="line">+ 可以用`+`</div><div class="line">+ 继续用`+`</div><div class="line">- 可以用`-`</div><div class="line">- 继续用`-`</div><div class="line"></div><div class="line">还可以用分级形式</div><div class="line"></div><div class="line"></div><div class="line">1. 第一章</div><div class="line">2. 第二章</div><div class="line">3. 第三章</div><div class="line">  - 你好</div><div class="line">  - 再见</div></pre></td></tr></table></figure>
+<p><strong><code>代码的效果</code></strong>：</p>
+<p>有时候你想要带数字编号的列表</p>
+<ol>
+<li>一</li>
+<li>二</li>
+<li>三</li>
+</ol>
+<p>有时候你想要<code>·</code>作为编号，以下3个符号<code>*</code>、<code>+</code>、<code>-</code>可以混用</p>
+<ul>
+<li>可以用<code>*</code></li>
+<li>继续用<code>*</code></li>
+</ul>
+<ul>
+<li>可以用<code>+</code></li>
+<li>继续用<code>+</code></li>
+</ul>
+<ul>
+<li>可以用<code>-</code></li>
+<li>继续用<code>-</code></li>
+</ul>
+<p>还可以用分级形式</p>
+<ol>
+<li>第一章</li>
+<li>第二章</li>
+<li>第三章<ul>
+<li>你好</li>
+<li>再见</li>
+</ul>
+</li>
+</ol>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p><strong><code>代码</code></strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Github的Yaktocat</div><div class="line"></div><div class="line">![ Yaktocat图片](https://octodex.github.com/images/yaktocat.png)</div></pre></td></tr></table></figure>
+<p><strong><code>代码的效果</code></strong>：</p>
+<p>Github的Yaktocat</p>
+<p><img src="https://octodex.github.com/images/yaktocat.png" alt=" Yaktocat图片"></p>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>标题由<code>#</code>+<code>标题</code>表示，从<code>#</code>到<code>######</code>一共六个等级的标题<br><strong><code>代码</code></strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#标题1</div><div class="line">##标题2</div><div class="line">###标题3</div></pre></td></tr></table></figure>
+<p><strong><code>代码的效果</code></strong>：</p>
+<p><img src="/images/15079850359859.jpg" alt=""></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>如果你想要引用某些东西，在行前面用<code>&gt;</code>符号。例如：</p>
+<p><strong><code>代码</code></strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; 我是一个运维，刚开始学编程,我觉得：</div><div class="line"></div><div class="line">&gt;&gt; Markdown真是一个好用的工具。</div><div class="line">&gt;&gt; 编程是一个不停实践的过程。</div><div class="line"></div><div class="line">&gt; ——*于龙君*</div></pre></td></tr></table></figure>
+<p><strong><code>代码的效果</code></strong>：</p>
+<blockquote>
+<p>我是一个运维，刚开始学编程,我觉得：</p>
+<blockquote>
+<p>Markdown真是一个好用的工具。<br>编程是一个不停实践的过程。</p>
+</blockquote>
+<p>——<em>于龙君</em></p>
+</blockquote>
+<h2 id="代码加阴影和高亮"><a href="#代码加阴影和高亮" class="headerlink" title="代码加阴影和高亮"></a>代码加阴影和高亮</h2><p>无论是一小行代码加阴影还是一整段程序加阴影，都可以用反引号`。</p>
+<p>####<code>代码</code>：</p>
+<p><img src="/images/1495411596173.png" alt=""></p>
+<p><strong><code>代码的效果</code></strong>：</p>
+<p>段落中出现的代码可以用，如<code>/usr/bin/env python3</code>,整个大段的程序代码也可以用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python3</span></div><div class="line"><span class="comment"># -*- encoding: utf-8 -*-</span></div><div class="line">print(<span class="string">'Hello,World!'</span>)</div><div class="line">print(<span class="string">'Hello,Markdown'</span>)</div></pre></td></tr></table></figure>
+<h2 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h2><p><strong><code>代码</code></strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">我是一个程序员小白，我在学编程，我的学习列表是：</div><div class="line">- [x] Markdown使用方法</div><div class="line">- [x] git&amp;github使用方法</div><div class="line">- [x] Python3.5学习</div><div class="line">- [ ] Python3实战项目</div><div class="line">- [ ] shell</div></pre></td></tr></table></figure>
+<p><strong><code>代码的效果</code></strong>：</p>
+<p>我是一个程序员小白，我在学编程，我的学习列表是：</p>
+<ul>
+<li>[x] Markdown使用方法</li>
+<li>[x] git&amp;github使用方法</li>
+<li>[x] Python3学习</li>
+<li>[ ] Python3实战项目</li>
+<li>[ ] Shell</li>
+</ul>
+<p>这个属于<a href="https://guides.github.com/features/mastering-markdown/#GitHub-flavored-markdown" target="_blank" rel="external">GMF语法</a></p>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>表格支持左对齐<code>:----</code>，右对齐<code>----:</code>，居中对齐 <code>:--:</code>，如果没有<code>:</code>，默认左对齐。</p>
+<p><strong><code>代码</code></strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">| 我喜欢的电子产品 |   价格(USD)   | 喜欢程度 |</div><div class="line">| :------------ |   ----:  |  :--: |</div><div class="line">| Macbook pro   | 1399-2799| ★★★★★ |</div><div class="line">| Surface Book  | 1499-3199 | ★★★★★ |</div><div class="line">| ipad pro      |  599-1129 | ★★★☆☆ |</div><div class="line">| iphone plus   |  869-969 | ★★★★☆ |</div></pre></td></tr></table></figure>
+<p><strong><code>代码的效果</code></strong>：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">我喜欢的电子产品</th>
+<th style="text-align:right">价格(USD)</th>
+<th style="text-align:center">喜欢程度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Macbook pro</td>
+<td style="text-align:right">1399-2799</td>
+<td style="text-align:center">★★★★★</td>
+</tr>
+<tr>
+<td style="text-align:left">Surface Book</td>
+<td style="text-align:right">1499-3199</td>
+<td style="text-align:center">★★★★★</td>
+</tr>
+<tr>
+<td style="text-align:left">ipad pro</td>
+<td style="text-align:right">599-1129</td>
+<td style="text-align:center">★★★☆☆</td>
+</tr>
+<tr>
+<td style="text-align:left">iphone plus</td>
+<td style="text-align:right">869-969</td>
+<td style="text-align:center">★★★★☆</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/linux/20170515-01-markdown/" title="笔记所使用的markdown语法">http://www.yulongjun.com/linux/20170515-01-markdown/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/markdown/" rel="tag"># markdown</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/python/20170514-08-heap/" rel="next" title="堆（heap）">
+                <i class="fa fa-chevron-left"></i> 堆（heap）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux/20170515-02-six-pl/" rel="prev" title="本文章集合所遵循的开源协议以及开源协议介绍(GPL,LGPL,BSD,MIT,Apache,CC)">
+                本文章集合所遵循的开源协议以及开源协议介绍(GPL,LGPL,BSD,MIT,Apache,CC) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Markdown是什么？"><span class="nav-number">1.</span> <span class="nav-text">Markdown是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown软件"><span class="nav-number">2.</span> <span class="nav-text">markdown软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Markdown语法讲解"><span class="nav-number">3.</span> <span class="nav-text">Markdown语法讲解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文本加粗、斜体和超链接"><span class="nav-number">3.1.</span> <span class="nav-text">文本加粗、斜体和超链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表"><span class="nav-number">3.2.</span> <span class="nav-text">列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片"><span class="nav-number">4.</span> <span class="nav-text">图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标题"><span class="nav-number">5.</span> <span class="nav-text">标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-number">6.</span> <span class="nav-text">引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码加阴影和高亮"><span class="nav-number">7.</span> <span class="nav-text">代码加阴影和高亮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务列表"><span class="nav-number">8.</span> <span class="nav-text">任务列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表格"><span class="nav-number">9.</span> <span class="nav-text">表格</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

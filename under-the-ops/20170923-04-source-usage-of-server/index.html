@@ -1,0 +1,1325 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Usage," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四章：服务器资源使用率">
+<meta property="og:url" content="http://www.yulongjun.com/under-the-ops/20170923-04-source-usage-of-server/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/devops.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061603791561.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061604057184.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15061605189020.jpg">
+<meta property="og:updated_time" content="2017-09-23T15:22:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第四章：服务器资源使用率">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/devops.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/under-the-ops/20170923-04-source-usage-of-server/"/>
+
+
+
+
+
+  <title> 第四章：服务器资源使用率 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/under-the-ops/20170923-04-source-usage-of-server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第四章：服务器资源使用率
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-23T17:16:11+08:00">
+                2017-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/under-the-ops/" itemprop="url" rel="index">
+                    <span itemprop="name">under-the-ops</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/under-the-ops/20170923-04-source-usage-of-server/" class="leancloud_visitors" data-flag-title="第四章：服务器资源使用率">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/devops.png" alt="devops"><br><a id="more"></a></p>
+<p>服务器数量达到一定规模后，老板们开始担心了：“每季度这么大金额的服务器采购支出，我们的服务器资源使用率如何？”</p>
+<hr>
+<h2 id="指标计算"><a href="#指标计算" class="headerlink" title="指标计算"></a>指标计算</h2><p>了解资源使用率的前提是记录所拥有的服务器资源以及归属，在服务器采购到位后，就开始跟踪服务器的各项资源指标。但每次老板们问到这个问题时，作为运维人员还是很难直接回答。我们记录了每台机器历史的各项资源使用数据，但如何体现整体的资源使用情况，通过简单的指标表示出来还是比较麻烦的。</p>
+<p>首先，我们不能把所有服务器罗列出来，逐台给老板汇报。</p>
+<p>其次，每台服务器每天的资源占用情况是随时间，随业务特性动态变化的，需要将CPU、内存、磁盘、IO等每个动态变化的资源指标分别换算成一个值。</p>
+<p>例如：一台CPU密集型的服务器，每个时间点访问量的不同，CPU使用率也是不同的，如图4-1所示。</p>
+<p>最后，每台服务器每天的平均值，由于高峰期或低峰期的差值很大，均值没有任何参考意义。取每台服务器每天的最大峰值，有时候可能由于某一次数据传输，或者跑一个临时MD5运算导致CPU使用率突增，也不能合理代表这台服务器的CPU使用率。</p>
+<p><img src="/images/15061603791561.jpg" alt=""></p>
+<p>图4-1  CPU使用率</p>
+<p>了解到的业界一般的计算方法是：</p>
+<p>◎ 定义每天的业务高峰期为 10:00AM—10:00PM，求这段时间平均值表示该台服务器当天的使用率；</p>
+<p>◎ 每天取峰值的3个点，求这3个峰值点的平均值表示该台服务器当天的使用率。</p>
+<p>对于定义业务高峰期，然后求平均值，我们认为不够精准，很多业务不一定白天时间达到它的峰值。如果每个业务都个性化定义高峰时间，工作量比较大，管理起来也很麻烦。每天取峰值的3个点求平均值，很多时候人工操作或者临时性的计算很容易把这个峰值提得太高。</p>
+<p>经过多次讨论后，确定了下面的计算方法：</p>
+<p>（1）每台服务器的CPU、内存、磁盘、IO、网卡数据每2秒钟采集一次；</p>
+<p>（2）每天分别取这些数据的TOP n%求平均值。</p>
+<p>如图4-2所示为某台服务器某天的监控数据，我们计算出CPU、内存、磁盘和IO的数值如表4-1所示。</p>
+<p><img src="/images/15061604057184.jpg" alt=""></p>
+<p>图4-2  监控数据</p>
+<table>
+<thead>
+<tr>
+<th>资源项</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>98.12%</td>
+</tr>
+<tr>
+<td>内存</td>
+<td>73.29%</td>
+</tr>
+<tr>
+<td>磁盘</td>
+<td>58.69%</td>
+</tr>
+<tr>
+<td>IO</td>
+<td>29.05%</td>
+</tr>
+</tbody>
+</table>
+<p>表4-1  资源数值</p>
+<p>当然，怎么计算这个资源数值都没有问题，只要是统一的计算模型，能够表示所有机器的资源占用指标即可。我们这么计算是希望能够更接近服务器的平均峰值，消除一些临时性尖峰导致数值较大的问题。</p>
+<h2 id="指标展现"><a href="#指标展现" class="headerlink" title="指标展现"></a>指标展现</h2><p>完成了资源使用率计算，但如何整体展现所有服务器的资源使用率也是一个问题。由于业务特性的不同，有消耗CPU的，有消耗内存的，也有类似离线存储消耗磁盘空间的，不可能把所有服务器的某项值加起来，然后求平均值，这样说明不了任何问题，而且值会低得可怜。在一个案例中，公司所有服务器每天的CPU值求平均值，CPU使用率只有23%左右。所有人看到这样的数据都会问一句话：“为什么我们的服务器资源使用率这么低？”</p>
+<p>对于如何体现公司整体的服务器资源使用率这个问题，我们也没有什么好的方法，不过可以从另外两个维度去体现。</p>
+<p>（1）将整个公司这个维度拆解到最小的相同功能集群的粒度，统计和展现这些小集群的资源使用率情况。这个时候就需要结合之前提到过的“服务树”，我们通过服务树将公司的产品划分到产品线-&gt;子系统-&gt;集群这样的粒度，每个小集群的功能是类似的，这群服务器的资源使用模型也是类似的。研发或运维在提交采购预算时，以最小集群为单位。领导在审批预算时，可以很方便地查看该集群的资源使用情况，决定是否购买。</p>
+<p>（2）每月统计出资源使用率不达标的服务器，发给相关的研发主管和运维人员，督促他们尽快利用或者归还资源。比如某个集群每月不达标的服务器数量超过该集群的5%，则认为这个产品线资源使用不达标。</p>
+<p>这样侧面解决了如何整体展现公司资源使用率的问题，给出最小集群资源使用率不达标的情况，展现的数据量比较少，而且能够很好地跟进和解决。还可以给出资源使用率不达标服务器和所有服务器的占比曲线，用来观察整个公司服务器资源使用率的变化情况。</p>
+<p>这样既满足了工程师需要了解具体信息，执行改进的需求，也满足了老板需要了解整体信息，把握全局的需求。</p>
+<p>怎么计算、怎么展现才算合理，每个公司都有自己的做法。当然，在你认为公司整体资源使用率都还不错的情况下，所有服务器的平均值也许可以作为一个基准，用来宏观监控整体资源使用率有没有变好或变坏也是挺不错的。</p>
+<h2 id="不达标原因分析"><a href="#不达标原因分析" class="headerlink" title="不达标原因分析"></a>不达标原因分析</h2><p>完成上述工作后，我们开展了一次资源使用率未达标服务器原因分析，按照未达标的原因进行了归类。如图4-3所示。</p>
+<p><img src="/images/15061605189020.jpg" alt=""></p>
+<p>图4-3  资源使用率未达标原因归类</p>
+<p>每类原因说明如下：</p>
+<p>◎ 灾备：该类型服务器属于对重要服务的备份服务器，平时没有或有很少的流量。</p>
+<p>◎ 特殊服务：该类型服务器属于特殊用途需要独占或者多副本存在，如ZooKeeper，或类似博客对外服务又需要安全隔离的业务等。</p>
+<p>◎ 服务部署中：服务扩容、搬迁时，暂时未引入业务流量。</p>
+<p>◎ 流量未达预期：业务已经在线上运行，但由于流量预估不准确，服务上线后流量和计算量未达到预期。</p>
+<p>◎ 开发测试中：新服务小流量运行，处于开发联调阶段。</p>
+<p>◎ 测试环境：研发或测试的线下集群，用于压力测试、功能测试等。</p>
+<p>◎ 计划下线：服务优化、架构调整、业务功能裁剪等，空闲服务器处于待下线归还状态。</p>
+<p>◎ 故障中：服务器故障停止业务，处于维修状态中。</p>
+<p>◎ 高峰预留：为了应对比如业务促销活动、特殊节假日等流量高峰，提前储备的服务器资源。</p>
+<p>下面分析导致前几类原因出现的问题。</p>
+<h4 id="1．业务线预算不准确"><a href="#1．业务线预算不准确" class="headerlink" title="1．业务线预算不准确"></a>1．业务线预算不准确</h4><p>◎ 预估的业务流量较大，实际业务流量未达到预期，导致已经上线的服务器资源浪费。</p>
+<p>◎ 项目计划不准确，原计划3月份进行新服务上线或者扩容，结果项目延迟到6月份，导致3个月时间的服务器资源闲置。</p>
+<h4 id="2．服务器采购效率低，缺少快速伸缩的能力"><a href="#2．服务器采购效率低，缺少快速伸缩的能力" class="headerlink" title="2．服务器采购效率低，缺少快速伸缩的能力"></a>2．服务器采购效率低，缺少快速伸缩的能力</h4><p>◎ 随着公司对于服务器需求的数量越来越大，很早以前那种随用随买的模式已经不适合了，转而采用服务器集采的模式，从预算申请，到领导审批、采购招标、供货商送货、服务器上架、系统装机交付等多个环节，在正常情况下会耗时2个月。那么业务部门往往会提前并较多地购买服务器，造成一定时间段的服务器资源浪费。</p>
+<p>◎ 为了应对某次突增几倍的业务促销活动流量，需要提前准备服务器资源。当活动结束后，服务器资源的归往往不及时，归还后其他业务部门消化这部分资源的时间也比较长。</p>
+<p>◎ 服务器采购时资产是划分到各个部门的。服务器资源归还后，还存在部门间资产更新计算的问题。</p>
+<h4 id="3．缺少资源监控平台"><a href="#3．缺少资源监控平台" class="headerlink" title="3．缺少资源监控平台"></a>3．缺少资源监控平台</h4><p>缺少资源监控和审查机制，业务部门浪费的机器也不会及时归还。</p>
+<h2 id="资源优化"><a href="#资源优化" class="headerlink" title="资源优化"></a>资源优化</h2><p>看到这几类原因后，第一时间能够想到的解决方案就是公有云。类似AWS的服务，能够快速地交付或归还虚拟机资源，按时间、按流量收费。虽然大部分业务是可以部署在公有云上的，但还有很多类似HBase、离线计算等对磁盘IO、内网带宽有较高需求的业务，不太适合在虚拟机上部署，成熟公司这部分业务的服务器数量一般占到30%～60%。</p>
+<p>先不讨论公有云是否真正省成本，仅就对目前国内云服务商的安全评估，我们还不敢把高敏感、高安全要求的用户数据、现金支付类业务放置在云端。另外，多机房服务冗余、机房间专线互通等各种因素也需要考虑进去。</p>
+<p>我们的目标是通过缩短服务器采购周期，资源能够具备快速伸缩的能力，结合预算审批、资源监控等手段，将不达标服务器控制在合理范围内。综合考虑后，可选的解决思路如下：</p>
+<p>（1）支持物理机租赁模式，提高服务器交付效率；</p>
+<p>（2）支持私有云和公有云的使用，降低物理机的需求；</p>
+<p>（3）统一预算平台，限制不达标业务的申请；</p>
+<p>（4）资源监控，不达标服务器资源能够及时归还。</p>
+<p>作为一些互联网公司，不希望投入过多的资源在固定资产上。运维人员也不愿意投入过多的精力在服务器的采购、上架、维保以及后续的报废处理上。当前已经有很多公有云支持虚拟机和物理机的租赁业务，传统的IDC厂商也陆续提供物理机租赁业务，由他们负责服务器的采购、上架等一系列工作，按照我们要求的时间、地点（IDC、机柜位置等）进行交付。公有云或服务器外包公司提供足够的备机池资源，能够应对我们对于服务器快速伸缩的需求，按照实际租赁时间收费。</p>
+<p>成本方面，按照服务器3年淘汰，每次物理机采购实际是预付了3年的使用费用。采用租赁的方式按实际使用时间付费，不需要提前支付未来的费用。对于项目计划不合理、预算不准确、高峰期预留等问题，我们可以通过快速的服务器交付、归还的方式缓解这些问题，将成本支出降到最低。当前，足够的备机池、快速的交付时间是有成本支出的。</p>
+<p>预算平台和资源监控的结合，限制和发现那些资源使用率不达标的服务器，督促业务线及时归还资源，减少成本支付。</p>
+<p>提升服务器资源使用率还有很多方法，比如服务模块混布、资源闲时利用，这些属于运维可控的范围。另外，研发对于代码和功能的优化，效果往往会更加明显。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/under-the-ops/20170923-04-source-usage-of-server/" title="第四章：服务器资源使用率">http://www.yulongjun.com/under-the-ops/20170923-04-source-usage-of-server/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Usage/" rel="tag"># Usage</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/under-the-ops/20170923-03-platform-of-ops/" rel="next" title="第三章：运维平台">
+                <i class="fa fa-chevron-left"></i> 第三章：运维平台
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/under-the-ops/20170923-05-the-future-of-ops/" rel="prev" title="第五章：运维的未来">
+                第五章：运维的未来 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#指标计算"><span class="nav-number">1.</span> <span class="nav-text">指标计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指标展现"><span class="nav-number">2.</span> <span class="nav-text">指标展现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不达标原因分析"><span class="nav-number">3.</span> <span class="nav-text">不达标原因分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1．业务线预算不准确"><span class="nav-number">3.0.1.</span> <span class="nav-text">1．业务线预算不准确</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2．服务器采购效率低，缺少快速伸缩的能力"><span class="nav-number">3.0.2.</span> <span class="nav-text">2．服务器采购效率低，缺少快速伸缩的能力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3．缺少资源监控平台"><span class="nav-number">3.0.3.</span> <span class="nav-text">3．缺少资源监控平台</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源优化"><span class="nav-number">4.</span> <span class="nav-text">资源优化</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

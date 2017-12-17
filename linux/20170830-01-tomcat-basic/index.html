@@ -1,0 +1,1377 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Tomcat," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tomcat基础知识">
+<meta property="og:url" content="http://www.yulongjun.com/linux/20170830-01-tomcat-basic/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/Tomcat.svg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15041002491252.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15041013087323.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15041016765645.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15041017641763.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15041022444526.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15041023540213.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15040982600418.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15041470375724.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15041476190485.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15041477769444.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15041630263553.jpg">
+<meta property="og:updated_time" content="2017-10-15T13:37:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tomcat基础知识">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/Tomcat.svg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/linux/20170830-01-tomcat-basic/"/>
+
+
+
+
+
+  <title> Tomcat基础知识 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170830-01-tomcat-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Tomcat基础知识
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T20:26:51+08:00">
+                2017-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/linux/20170830-01-tomcat-basic/" class="leancloud_visitors" data-flag-title="Tomcat基础知识">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/Tomcat.svg" alt="Tomcat.svg"></p>
+<a id="more"></a>
+<p>介绍Tomcat之前先介绍下Java相关的知识。</p>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><h3 id="Java简介"><a href="#Java简介" class="headerlink" title="Java简介"></a>Java简介</h3><p>Java代码的运行：</p>
+<blockquote>
+<p><code>*.java</code>(source code) –&gt; <strong>javac</strong> –&gt; <code>*.class</code>(bytecode) –&gt; <code>JVM</code></p>
+</blockquote>
+<p><code>*.java</code>源代码经过<strong>javac</strong>编译之后，生成字节码<code>*.class</code>，然后发送给<strong>JVM</strong>来运行。</p>
+<p><strong>JVM</strong>（Java Virtual Machine）：class loader，加载程序的类文件，及程序的类文件依赖到的其它的类文件而后运行； 整个运行表现为一个jvm进程。</p>
+<h3 id="Java-Applet-、Java-Servlet、"><a href="#Java-Applet-、Java-Servlet、" class="headerlink" title="Java Applet 、Java Servlet、"></a>Java Applet 、Java Servlet、</h3><p>在浏览器或客户端运行的Java程序就叫：<strong>Java Applet</strong></p>
+<p>在服务端运行的的Java程序就叫：<strong>Java Servlet</strong></p>
+<p>Applet和Servlet都不是独立的程序，都需要Java运行环境。</p>
+<h3 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h3><p><strong>Java Server Pages(JSP)</strong>是一种实现普通静态HTML和动态HTML混合编码的技术，JSP并没有增加任何本质上不能用Servlet实现的功能。但是，在 JSP中编写静态HTML更加方便，不必再用println语句来输出每一行HTML代码。更重要的是，借助内容和外观的分离，页面制作中不同性质的任务可以方便地分开：比如，由页面设计者进行HTML设计，同时留出供Servlet程序员插入动态内容的空间。</p>
+<blockquote>
+<p>此段转载自：<a href="http://blog.csdn.net/yasi_xi/article/details/22071099" target="_blank" rel="external">http://blog.csdn.net/yasi_xi/article/details/22071099</a><br>如果想要详细了解，可以阅读原文。</p>
+</blockquote>
+<h3 id="jasper"><a href="#jasper" class="headerlink" title="jasper"></a>jasper</h3><p>jasper程序的功能，就是把JVM不认识的JSP文件解析成java文件，然后由javac程序编译成class文件提供使用。目前有很多的JSP解析引擎，Tomcat中使用的是Jasper。如下：</p>
+<blockquote>
+<p><code>*.jsp</code> –&gt; <strong>jasper</strong> –&gt; <code>*.java</code> –&gt; <strong>javac</strong> –&gt; <code>*.class</code> –&gt; <strong>JVM</strong></p>
+</blockquote>
+<hr>
+<h2 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h2><p>JDK（Java Development Kits）：Java 开发套件，一共分为两种：</p>
+<ul>
+<li>OpenJDK</li>
+<li>Oracle JDK</li>
+</ul>
+<h3 id="安装-OpenJDK-1-8"><a href="#安装-OpenJDK-1-8" class="headerlink" title="安装 OpenJDK 1.8"></a>安装 <code>OpenJDK 1.8</code></h3><p><code>yum list|grep openjdk</code>发现包含1.6、1.7、1.8，我们可以过滤一下，只看1.8的x86_64版本的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum list|grep java-1.8.0-openjdk.*x86_64</div></pre></td></tr></table></figure>
+<p><img src="/images/15041002491252.jpg" alt=""></p>
+<p><code>openjdk</code>是<strong>The OpenJDK runtime environment</strong>，只有运行环境; <code>openjdk-devel</code>是<strong>The OpenJDK development tools</strong>,是开发工具包组。所以我们来安装<code>openjdk-devel</code>，这样有一系列的开发工具包组可供使用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y java-1.8.0-openjdk-devel</div></pre></td></tr></table></figure>
+<p>这条命令会安装<code>java-1.8.0</code>、<code>java-1.8.0-poenjdk-devel</code>、<code>java-1.8.0-openjdk-headless</code>以及其他相关依赖。</p>
+<p><code>java -version</code>可以看到java版本：</p>
+<p><img src="/images/15041013087323.jpg" alt=""></p>
+<h2 id="安装-Oracle-的-JDK-8"><a href="#安装-Oracle-的-JDK-8" class="headerlink" title="安装 Oracle 的 JDK 8"></a>安装 Oracle 的 <code>JDK 8</code></h2><p>Oracle 官方也有对应的JRE和JDK。可以去官网下载安装：<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
+<p><img src="/images/15041016765645.jpg" alt=""></p>
+<p>包含3个版本，这里选择JDK版本下载，包格式选择rpm</p>
+<p><img src="/images/15041017641763.jpg" alt=""></p>
+<p>用rpm命令进行安装：</p>
+<p><img src="/images/15041022444526.jpg" alt=""></p>
+<p>这里单独下载安装的JDK的rpm，是无法用<code>rpm -ql</code>查询的，我们可以在<code>/usr/java</code>下找到：</p>
+<p><img src="/images/15041023540213.jpg" alt=""></p>
+<p>默认latest指向jdk的版本的文件夹，default指向latest文件夹，如果后来升级了，可以把指向自行更换。</p>
+<p>我们还需要写一下环境变量，让系统可以找到java程序<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 写到环境变量里，下次启动生效。</span></div><div class="line">cat &gt; /etc/profile.d/java.sh &lt;&lt;EOF</div><div class="line"><span class="built_in">export</span> JAVA_HOME=/usr/java/latest</div><div class="line"><span class="built_in">export</span> PATH=\<span class="variable">$JAVA_HOME</span>/bin:\<span class="variable">$PATH</span></div><div class="line">EOF</div><div class="line"><span class="comment"># source一下，在当前环境下立即生效。</span></div><div class="line"><span class="built_in">source</span> /etc/profile.d/java.sh</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这里推荐用<code>OpenJDK</code>，免去了配置环境变量的操作。而且<code>JDK</code>属于Oracle公司未开源产品，万一你公司做大了，Oracle像告谷歌一样告你呢？:-D</p>
+</blockquote>
+<hr>
+<h2 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h2><h3 id="Tomcat简介"><a href="#Tomcat简介" class="headerlink" title="Tomcat简介"></a>Tomcat简介</h3><p>Tomcat 服务器是一个免费的开放源代码的Web 应用服务器，Tomcat是Apache 软件基金会（Apache Software Foundation）的Jakarta 项目中的一个核心项目：<a href="tomcat.apache.org">tomcat.apache.org</a>，它的项目名称为<strong>catalina</strong>，后来由Apache、Sun 和其他一些公司及个人共同开发而成，因为在O’Reilly家出的书的封面是一只汤姆猫，所以软件更名为<strong>Tomcat</strong>。Tomcat 是一个小型的轻量级应用服务器，在中小型系统和并发访问用户不是很多的场合下被普遍使用，是开发和调试JSP 程序的首选，因为Tomcat 技术先进、性能稳定，成为目前比较流行的Web 应用服务器。Tomcat是应用（java）服务器，它只是一个servlet容器，是Apache的扩展，但它是独立运行的。</p>
+<h3 id="Tomcat架构"><a href="#Tomcat架构" class="headerlink" title="Tomcat架构"></a>Tomcat架构</h3><p><img src="/images/15040982600418.jpg" alt=""></p>
+<blockquote>
+<p>图片来自于：<a href="http://www.blogjava.net/honzeland/archive/2010/05/10/320458.html" target="_blank" rel="external">http://www.blogjava.net/honzeland/archive/2010/05/10/320458.html</a></p>
+</blockquote>
+<p>它由一组嵌套的层次和组件组成，一般可分为以下四类：</p>
+<ul>
+<li><strong>顶级组件</strong>：位于配置层次的顶级，并且彼此间有着严格的对应关系。<code>Server</code></li>
+<li><strong>服务类组件</strong>：位于Server的下一级。<code>Service</code></li>
+<li><strong>连接器组件</strong>：连接客户端（可以是浏览器或Web服务器）请求至Servlet容器。<code>http</code>，<code>https</code>， <code>ajp</code></li>
+<li><strong>容器类组件</strong>：包含一组其它组件。<code>Engine</code>，<code>Host</code>，<code>Context</code></li>
+<li><strong>被嵌套的组件</strong>：位于一个容器当中，但不能包含其它组件。<code>valve</code>，<code>loger</code>，<code>realm</code>，<code>loader</code>，<code>manager</code>，…</li>
+<li><strong>集群类组件</strong>： <code>listener</code>，<code>cluster</code>，…</li>
+</ul>
+<p><strong>各常见组件：</strong></p>
+<p>1、<strong>服务器(server)</strong>：Tomcat的一个实例，通常一个JVM只能包含一个Tomcat实例；因此，一台物理服务器上可以在启动多个JVM的情况下在每一个JVM中启动一个Tomcat实例，每个实例分属于一个独立的管理端口。这是一个<strong>顶级组件</strong>。</p>
+<p>2、<strong>服务(service)</strong>：一个服务组件通常包含一个引擎和与此引擎相关联的一个或多个连接器。给服务命名可以方便管理员在日志文件中识别不同服务产生的日志。一个server可以包含多个service组件，但通常情下只为一个service指派一个server。<br>连接器类组件：</p>
+<p>3、<strong>连接器(connectors)</strong>：负责连接客户端（可以是浏览器或Web服务器）请求至Servlet容器内的Web应用程序，通常指的是接收客户发来请求的位置及服务器端分配的端口。默认端口通常是HTTP协议的8080，管理员也可以根据自己的需要改变此端口。还可以支持HTTPS ，默认HTTPS端口为8443。同时也支持AJP，即（A）一个引擎可以配置多个连接器，但这些连接器必须使用不同的端口。默认的连接器是基于HTTP/1.1的Coyote。同时，Tomcat也支持<strong>AJP</strong>、JServ和JK2连接器。</p>
+<p><strong>容器类组件：</strong></p>
+<p>4、<strong>引擎(Engine)</strong>：引擎通是指处理请求的Servlet引擎组件，即<strong>Catalina Servlet</strong>引擎，它检查每一个请求的HTTP首部信息以辨别此请求应该发往哪个host或context，并将请求处理后的结果返回的相应的客户端。严格意义上来说，容器不必非得通过引擎来实现，它也可以是只是一个容器。如果Tomcat被配置成为独立服务器，默认引擎就是已经定义好的引擎。而如果Tomcat被配置为Apache Web服务器的提供Servlet功能的后端，默认引擎将被忽略，因为Web服务器自身就能确定将用户请求发往何处。一个引擎可以包含多个host组件。</p>
+<p>5、<strong>主机(Host)</strong>：主机组件类似于Apache中的虚拟主机，但在Tomcat中只支持基于FQDN的“虚拟主机”。一个引擎至少要包含一个主机组件。</p>
+<p>6、<strong>上下文(Context)</strong>：Context组件是最内层次的组件，它表示Web应用程序本身。配置一个Context最主要的是指定Web应用程序的根目录，以便Servlet容器能够将用户请求发往正确的位置。Context组件也可包含自定义的错误页，以实现在用户访问发生错误时提供友好的提示信息。</p>
+<p><strong>被嵌套类(nested)组件</strong>：</p>
+<p>这类组件通常包含于容器类组件中以提供具有管理功能的服务，它们不能包含其它组件，但有些却可以由不同层次的容器各自配置。</p>
+<p>7、<strong>阀门(Valve)</strong>：用来拦截请求并在将其转至目标之前进行某种处理操作，类似于Servlet规范中定义的过滤器。Valve可以定义在任何容器类的组件中。Valve常被用来记录客户端请求、客户端IP地址和服务器等信息，这种处理技术通常被称作请求转储(request dumping)。请求转储valve记录请求客户端请求数据包中的HTTP首部信息和cookie信息文件中，响应转储valve则记录响应数据包首部信息和cookie信息至文件中。</p>
+<p>8、<strong>日志记录器(Logger)</strong>：用于记录组件内部的状态信息，可被用于除Context之外的任何容器中。日志记录的功能可被继承，因此，一个引擎级别的Logger将会记录引擎内部所有组件相关的信息，除非某内部组件定义了自己的Logger组件。</p>
+<p>9、<strong>领域(Realm)</strong>：用于用户的认证和授权；在配置一个应用程序时，管理员可以为每个资源或资源组定义角色及权限，而这些访问控制功能的生效需要通过Realm来实现。Realm的认证可以基于文本文件、数据库表、LDAP服务等来实现。Realm的效用会遍及整个引擎或顶级容器，因此，一个容器内的所有应用程序将共享用户资源。同时，Realm可以被其所在组件的子组件继承，也可以被子组件中定义的Realm所覆盖。</p>
+<blockquote>
+<p>此段来自于：<a href="http://www.ttlsa.com/tomcat/tomcat-install-and-configure/" target="_blank" rel="external">http://www.ttlsa.com/tomcat/tomcat-install-and-configure/</a></p>
+</blockquote>
+<hr>
+<h2 id="安装Tomcat"><a href="#安装Tomcat" class="headerlink" title="安装Tomcat"></a>安装Tomcat</h2><p>安装好OpenJDK或JDK之后，就可以安装tomcat了。</p>
+<h3 id="yum-安装方式"><a href="#yum-安装方式" class="headerlink" title="yum 安装方式"></a>yum 安装方式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install tomcat-lib tomcat tomcat-admin-webapps tomcat-webapps tomcat-docs-webapp tomcat-webapps</div></pre></td></tr></table></figure>
+<p>依赖的tomcat-libs、tomcat api和其他组件会自动安装上。</p>
+<p>CentOS7 默认安装的tomcat版本是7：</p>
+<p><img src="/images/15041470375724.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start tomcat</div></pre></td></tr></table></figure>
+<p>浏览器打开<code>http://tomcat_ip:8080</code>，这里的<code>tomcat_ip</code>换成你tomcat服务器的ip</p>
+<p><img src="/images/15041476190485.jpg" alt=""></p>
+<h3 id="手动安装过程"><a href="#手动安装过程" class="headerlink" title="手动安装过程"></a>手动安装过程</h3><p>看官方版本图：<a href="http://tomcat.apache.org/whichversion.html" target="_blank" rel="external">http://tomcat.apache.org/whichversion.html</a></p>
+<p><img src="/images/15041477769444.jpg" alt=""></p>
+<p>我们可以看到，在目前来说，8.0.x属于superseded(废弃）状态，9.0.x属于alpha版，不考虑,8.5.x是目前的主流版本，故下载8.5.x版本，目前版本是8.5.20，笔者到清华镜像下载的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">wget https://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-8/v8.5.20/bin/&#123;apache-tomcat-8.5.20.tar.gz,apache-tomcat-8.5.20-fulldocs.tar.gz,apache-tomcat-8.5.20-deployer.tar.gz&#125;</div><div class="line"></div><div class="line">tar -xvf apache-tomcat-8.5.20.tar.gz -C /usr/local</div><div class="line">cd /usr/local</div><div class="line">link -sv apache-tomcat-8.5.20 tomcat</div><div class="line"></div><div class="line">cat &gt; /etc/profile.d/tomcat.sh &lt;&lt; EOF</div><div class="line">export CATALINA_BASE=/usr/local/tomcat</div><div class="line">export PATH=\$CATALINA_BASE/bin:\$PATH</div><div class="line">EOF</div><div class="line">. /etc/profile.d/tomcat.sh</div><div class="line"></div><div class="line">useradd -r tomcat</div><div class="line">chown -R tomcat:tomcat /usr/local/tomcat/</div><div class="line">su - tomcat -c &apos;catalina.sh start&apos;</div></pre></td></tr></table></figure>
+<p>手动安装的话，设置完环境变量后，手动安装的版本可以使用<code>catlina.sh</code>来进行各种操作。</p>
+<p><code>catalina.sh start</code> 后，浏览器打开<code>http://tomcat_ip:8080</code>，这里的<code>tomcat_ip</code>换成你tomcat服务器的ip:</p>
+<p><img src="/images/15041630263553.jpg" alt=""></p>
+<h3 id="Tomcat-目录结构"><a href="#Tomcat-目录结构" class="headerlink" title="Tomcat 目录结构"></a>Tomcat 目录结构</h3><p><strong>tomcat的目录结构：</strong></p>
+<ul>
+<li><code>bin</code>：脚本，及启动时用到的类。</li>
+<li><code>conf</code>：配置文件目录。</li>
+<li><code>lib</code>：库文件，Java类库，jar。</li>
+<li><code>logs</code>：日志文件目录。</li>
+<li><code>temp</code>：临时文件目录。</li>
+<li><code>webapps</code>：webapp的默认目录。</li>
+<li><code>work</code>：工作目录。存放编译后的字节码文件。</li>
+</ul>
+<p><strong>tomcat的配置目录文件构成：</strong></p>
+<ul>
+<li><code>server.xml</code>：主配置文件；</li>
+<li><code>web.xml</code>：每个webapp只有“部署”后才能被访问，它的部署方式通常由web.xml进行定义，其存放位置为WEB-INF/目录中；此文件为所有的webapps提供默认部署相关的配置；</li>
+<li><code>context.xml</code>：每个webapp都可以专用的配置文件，它通常由专用的配置文件context.xml来定义，其存放位置为WEB-INF/目录中；此文件为所有的webapps提供默认配置；</li>
+<li><code>tomcat-users.xml</code>：用户认证的账号和密码文件；</li>
+<li><code>catalina.policy</code>：当使用-security选项启动tomcat时，用于为tomcat设置安全策略； </li>
+<li><code>catalina.properties</code>：Java属性的定义文件，用于设定类加载器路径，以及一些与JVM调优相关参数；</li>
+<li><code>logging.properties</code>：日志系统相关的配置。</li>
+</ul>
+<p><strong>JSP Webapp的组织结构：</strong></p>
+<p><strong>webapps的根目录：</strong></p>
+<ul>
+<li><code>index.jsp</code>：主页；</li>
+<li><code>WEB-INF/</code>：当前webapp的私有资源路径；通常用于存储当前webapp的web.xml和context.xml配置文件；</li>
+<li><code>META-INF/</code>：类似于WEB-INF/；</li>
+<li><code>classes/</code>：类文件，当前webapp所提供的类；</li>
+<li><code>lib/</code>：类文件，当前webapp所提供的类，被打包为jar格式；</li>
+</ul>
+<p><strong>webapp归档格式：</strong></p>
+<ul>
+<li><code>.war</code>：webapp</li>
+<li><code>.jar</code>：EJB的类打包文件；</li>
+<li><code>.rar</code>：资源适配器类打包文件；</li>
+<li><code>.ear</code>：企业级webapp；</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/linux/20170830-01-tomcat-basic/" title="Tomcat基础知识">http://www.yulongjun.com/linux/20170830-01-tomcat-basic/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Tomcat/" rel="tag"># Tomcat</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/cloud/20170829-vagrant-custom-box/" rel="next" title="自制的 Vagrant box —— longdream/centos7">
+                <i class="fa fa-chevron-left"></i> 自制的 Vagrant box —— longdream/centos7
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux/20170830-02-tomcat-manage/" rel="prev" title="Tomcat管理页面">
+                Tomcat管理页面 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">1.</span> <span class="nav-text">Java</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java简介"><span class="nav-number">1.1.</span> <span class="nav-text">Java简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-Applet-、Java-Servlet、"><span class="nav-number">1.2.</span> <span class="nav-text">Java Applet 、Java Servlet、</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSP"><span class="nav-number">1.3.</span> <span class="nav-text">JSP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jasper"><span class="nav-number">1.4.</span> <span class="nav-text">jasper</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK"><span class="nav-number">2.</span> <span class="nav-text">JDK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-OpenJDK-1-8"><span class="nav-number">2.1.</span> <span class="nav-text">安装 OpenJDK 1.8</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-Oracle-的-JDK-8"><span class="nav-number">3.</span> <span class="nav-text">安装 Oracle 的 JDK 8</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tomcat"><span class="nav-number">4.</span> <span class="nav-text">Tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat简介"><span class="nav-number">4.1.</span> <span class="nav-text">Tomcat简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat架构"><span class="nav-number">4.2.</span> <span class="nav-text">Tomcat架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Tomcat"><span class="nav-number">5.</span> <span class="nav-text">安装Tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#yum-安装方式"><span class="nav-number">5.1.</span> <span class="nav-text">yum 安装方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动安装过程"><span class="nav-number">5.2.</span> <span class="nav-text">手动安装过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat-目录结构"><span class="nav-number">5.3.</span> <span class="nav-text">Tomcat 目录结构</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

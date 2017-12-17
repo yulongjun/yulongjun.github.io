@@ -1,0 +1,4863 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20171111-learning-linux-toc/</loc>
+    <lastmod>2017-12-17T17:34:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>【置顶】Learning Linux目录</title>
+        <pubTime>2017-11-11T14:22:22.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>TOC</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/essay/20171101-01-futures-new-tech/</loc>
+    <lastmod>2017-12-03T22:30:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>浅谈目前技术框架下，期货公司可用的新技术</title>
+        <pubTime>2017-11-01T03:33:47.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="essay" url="http://www.yulongjun.com/categories/essay/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170507-02-pyenv-centos/</loc>
+    <lastmod>2017-11-18T14:47:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS下Python多版本控制软件的安装：pyenv、pyenv-virtualenv</title>
+        <pubTime>2017-05-07T15:33:12.000Z</pubTime>
+        
+        <tag>CentOS</tag>
+         
+        <tag>pyenv</tag>
+         
+        <tag>pyenv-virtualenv</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170524-01-io-redirection/</loc>
+    <lastmod>2017-11-18T12:46:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-IO重定向</title>
+        <pubTime>2017-05-24T12:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>IO</tag>
+         
+        <tag>IO Redirection</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20171111-learning-python3-toc/</loc>
+    <lastmod>2017-11-16T14:18:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>【置顶】Learning Python3 目录</title>
+        <pubTime>2017-11-11T03:11:11.000Z</pubTime>
+        
+        <tag>TOC</tag>
+         
+        <tag>Python3</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-00-under-the-ops-contact/</loc>
+    <lastmod>2017-11-12T15:19:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>【临时置顶】《运维之下（转载）》目录</title>
+        <pubTime>2017-09-23T09:15:26.000Z</pubTime>
+        
+        <tag>Under the Ops</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170817-01-lvs-introduction/</loc>
+    <lastmod>2017-11-09T11:57:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>LVS原理、模式、调度算法</title>
+        <pubTime>2017-08-17T11:26:51.000Z</pubTime>
+        
+        <tag>LVS</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170508-02-operator/</loc>
+    <lastmod>2017-11-06T14:04:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>运算符</title>
+        <pubTime>2017-05-08T03:33:55.000Z</pubTime>
+        
+        <tag>operator</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170930-01-openstack-installation-prepare/</loc>
+    <lastmod>2017-11-01T08:22:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-OpenStack(Pike)安装实战——环境准备</title>
+        <pubTime>2017-09-30T11:33:47.000Z</pubTime>
+        
+        <tag>Openstack</tag>
+         
+        <tag>Pike</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170508-03-control/</loc>
+    <lastmod>2017-10-31T05:37:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>程序控制结构</title>
+        <pubTime>2017-05-08T07:33:55.000Z</pubTime>
+        
+        <tag>control</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170531-01-text-tools/</loc>
+    <lastmod>2017-10-29T07:30:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-文本处理工具(cut、sort、tr、grep等)</title>
+        <pubTime>2017-05-31T12:58:08.000Z</pubTime>
+        
+        <tag>grep</tag>
+         
+        <tag>cut</tag>
+         
+        <tag>sort</tag>
+         
+        <tag>wc</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170904-02-keepalived-configuration/</loc>
+    <lastmod>2017-10-25T09:25:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-Keepalived配置</title>
+        <pubTime>2017-09-04T11:30:00.000Z</pubTime>
+        
+        <tag>Keepalived</tag>
+         
+        <tag>VRRP</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170722-cobbler-reposync/</loc>
+    <lastmod>2017-10-22T15:51:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>Cobbler 同步网络yum仓库到本地（Reposync用法)</title>
+        <pubTime>2017-07-22T13:11:50.000Z</pubTime>
+        
+        <tag>Cobbler</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170927-01-zabbix-server-installation/</loc>
+    <lastmod>2017-10-22T15:38:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-Zabbix Server安装指南</title>
+        <pubTime>2017-09-27T10:52:33.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170725-06-dns-slave/</loc>
+    <lastmod>2017-10-22T04:09:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-DNS主从复制</title>
+        <pubTime>2017-07-25T15:43:03.000Z</pubTime>
+        
+        <tag>DNS</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170725-04-bind-config/</loc>
+    <lastmod>2017-10-22T03:55:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-bind（named）配置文件</title>
+        <pubTime>2017-07-25T14:41:03.000Z</pubTime>
+        
+        <tag>DNS</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/server/20170616-02-server-hard-raid/</loc>
+    <lastmod>2017-10-18T08:12:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>HPE x86服务器硬RAID做法</title>
+        <pubTime>2017-06-16T13:25:09.000Z</pubTime>
+        
+        <tag>HPE</tag>
+         
+         
+           
+             
+              <breadCrumb title="server" url="http://www.yulongjun.com/categories/server/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170527-02-special-permission/</loc>
+    <lastmod>2017-10-18T03:43:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-特殊权限</title>
+        <pubTime>2017-05-27T13:00:00.000Z</pubTime>
+        
+        <tag>special permission</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170527-04-practice/</loc>
+    <lastmod>2017-10-18T03:43:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-权限和ACL练习题</title>
+        <pubTime>2017-05-27T15:26:33.000Z</pubTime>
+        
+        <tag>acl</tag>
+         
+        <tag>facl</tag>
+         
+        <tag>permission</tag>
+         
+        <tag>practice</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170522-05-inode-link/</loc>
+    <lastmod>2017-10-18T02:57:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>05-inode、软硬链接</title>
+        <pubTime>2017-05-22T13:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>inode</tag>
+         
+        <tag>link</tag>
+         
+        <tag>hard link</tag>
+         
+        <tag>soft link</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/cloud/20170922-gitlab/</loc>
+    <lastmod>2017-10-17T04:59:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS7上简单安装部署GitLab</title>
+        <pubTime>2017-09-22T12:04:31.000Z</pubTime>
+        
+        <tag>GitLab</tag>
+         
+         
+           
+             
+              <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170830-01-tomcat-basic/</loc>
+    <lastmod>2017-10-15T13:37:15.000Z</lastmod>
+    <data>
+        <display>
+        <title>Tomcat基础知识</title>
+        <pubTime>2017-08-30T12:26:51.000Z</pubTime>
+        
+        <tag>Tomcat</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170830-03-tomcat-server-config/</loc>
+    <lastmod>2017-10-15T11:15:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>Tomcat主配置详解</title>
+        <pubTime>2017-08-30T14:26:51.000Z</pubTime>
+        
+        <tag>Tomcat</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170830-02-tomcat-manage/</loc>
+    <lastmod>2017-10-15T11:15:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>Tomcat管理页面</title>
+        <pubTime>2017-08-30T13:26:51.000Z</pubTime>
+        
+        <tag>Tomcat</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170927-06-zabbix-actions-config/</loc>
+    <lastmod>2017-10-15T11:14:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>06-Zabbix Actions(动作）设置</title>
+        <pubTime>2017-09-27T15:52:33.000Z</pubTime>
+        
+        <tag>Zabbix</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170706-sed/</loc>
+    <lastmod>2017-10-15T09:39:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>文本处理工具-sed</title>
+        <pubTime>2017-07-06T11:13:28.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170626-03-network-config-centos6/</loc>
+    <lastmod>2017-10-15T09:34:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS6网络配置</title>
+        <pubTime>2017-06-26T12:30:10.000Z</pubTime>
+        
+        <tag>network</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170626-05-bonding/</loc>
+    <lastmod>2017-10-15T08:54:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>网卡绑定(bonding)</title>
+        <pubTime>2017-06-26T14:00:10.000Z</pubTime>
+        
+        <tag>network</tag>
+         
+        <tag>bonding</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170626-04-network-config-centos7/</loc>
+    <lastmod>2017-10-15T08:52:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS7网络配置</title>
+        <pubTime>2017-06-26T13:00:10.000Z</pubTime>
+        
+        <tag>network</tag>
+         
+        <tag>bonding</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170616-01-raid/</loc>
+    <lastmod>2017-10-15T08:47:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>磁盘阵列（RAID）</title>
+        <pubTime>2017-06-16T09:13:28.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170609-03-extract-compress/</loc>
+    <lastmod>2017-10-15T08:41:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-打包压缩命令tar、zip、split</title>
+        <pubTime>2017-06-09T13:33:20.000Z</pubTime>
+        
+        <tag>tar</tag>
+         
+        <tag>zip</tag>
+         
+        <tag>split</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170526-01-whatis-user-group/</loc>
+    <lastmod>2017-10-15T08:40:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-什么是用户和组</title>
+        <pubTime>2017-05-26T10:00:00.000Z</pubTime>
+        
+        <tag>user</tag>
+         
+        <tag>group</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170526-02-user-group-file/</loc>
+    <lastmod>2017-10-15T08:40:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-用户和组文件</title>
+        <pubTime>2017-05-26T10:30:00.000Z</pubTime>
+        
+        <tag>group</tag>
+         
+        <tag>passwd</tag>
+         
+        <tag>shadow</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170526-03-user-group-cmmands/</loc>
+    <lastmod>2017-10-15T08:40:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-用户和用户组的管理命令</title>
+        <pubTime>2017-05-26T11:00:00.000Z</pubTime>
+        
+        <tag>user</tag>
+         
+        <tag>group</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170526-04-user-group-practice/</loc>
+    <lastmod>2017-10-15T08:40:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-用户和组练习题</title>
+        <pubTime>2017-05-26T11:30:00.000Z</pubTime>
+        
+        <tag>user</tag>
+         
+        <tag>group</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170526-05-recovery-system/</loc>
+    <lastmod>2017-10-15T08:39:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>05-实践：Linux用户、组和密码相关文件被破坏如何恢复系统</title>
+        <pubTime>2017-05-26T14:00:00.000Z</pubTime>
+        
+        <tag>recovery</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170527-01-permission/</loc>
+    <lastmod>2017-10-15T08:39:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-文件和目录权限</title>
+        <pubTime>2017-05-27T12:00:00.000Z</pubTime>
+        
+        <tag>permission</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170527-03-acl/</loc>
+    <lastmod>2017-10-15T08:39:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-访问控制列表（ACL）</title>
+        <pubTime>2017-05-27T14:00:00.000Z</pubTime>
+        
+        <tag>acl</tag>
+         
+        <tag>facl</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170602-01-vim/</loc>
+    <lastmod>2017-10-15T08:39:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-vim简明教程(附快速记忆方法)</title>
+        <pubTime>2017-06-02T04:58:37.000Z</pubTime>
+        
+        <tag>Vim</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170605-03-shell-operation/</loc>
+    <lastmod>2017-10-15T08:39:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-运算</title>
+        <pubTime>2017-06-05T12:13:57.000Z</pubTime>
+        
+        <tag>Shell</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170605-04-shell-condition/</loc>
+    <lastmod>2017-10-15T08:39:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-条件测试</title>
+        <pubTime>2017-06-05T13:15:07.000Z</pubTime>
+        
+        <tag>test</tag>
+         
+        <tag>Shell</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170605-05-bash-profile/</loc>
+    <lastmod>2017-10-15T08:39:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>05-bash配置相关</title>
+        <pubTime>2017-06-05T14:15:07.000Z</pubTime>
+        
+        <tag>bashrc</tag>
+         
+        <tag>bash_profile</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170608-exam/</loc>
+    <lastmod>2017-10-15T08:39:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>第一阶段测试题</title>
+        <pubTime>2017-06-08T11:11:22.000Z</pubTime>
+        
+        <tag>test</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170609-01-rescure/</loc>
+    <lastmod>2017-10-15T08:38:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-误删系统重要文件，无法启动，如何恢复（以删除库文件为例）</title>
+        <pubTime>2017-06-09T01:02:48.000Z</pubTime>
+        
+        <tag>rescure</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170609-01-rpm/</loc>
+    <lastmod>2017-10-15T08:38:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-程序包管理工具rpm</title>
+        <pubTime>2017-06-09T02:06:51.000Z</pubTime>
+        
+        <tag>rpm</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170609-02-yum/</loc>
+    <lastmod>2017-10-15T08:38:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-程序包管理工具yum</title>
+        <pubTime>2017-06-09T03:06:58.000Z</pubTime>
+        
+        <tag>yum</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170609-04-make-install/</loc>
+    <lastmod>2017-10-15T08:38:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-编译安装</title>
+        <pubTime>2017-06-09T15:06:58.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>make install</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170519-10-practice/</loc>
+    <lastmod>2017-10-15T08:30:45.000Z</lastmod>
+    <data>
+        <display>
+        <title>作业</title>
+        <pubTime>2017-05-19T15:40:00.000Z</pubTime>
+        
+        <tag>homework</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170518-08-lf-cr/</loc>
+    <lastmod>2017-10-15T08:29:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>08-换行（LF）和回车（CR）详解</title>
+        <pubTime>2017-05-18T15:20:00.000Z</pubTime>
+        
+        <tag>LF</tag>
+         
+        <tag>CR</tag>
+         
+        <tag>CRLF</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170516-01-linux-distribution-timeline/</loc>
+    <lastmod>2017-10-15T08:27:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux各发行版时间线2017年版本</title>
+        <pubTime>2017-05-16T14:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>Timeline</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170515-04-shadowsocks/</loc>
+    <lastmod>2017-10-15T08:16:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>学会科学上网——用搬瓦工和Shadowsocks搭梯子</title>
+        <pubTime>2017-05-15T13:00:00.000Z</pubTime>
+        
+        <tag>bandwagon</tag>
+         
+        <tag>Shadowsocks</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/cloud/20170813-vagrant/</loc>
+    <lastmod>2017-10-15T08:13:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>Vagrant--快速搭建实验环境利器</title>
+        <pubTime>2017-08-13T06:26:51.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170930-00-openstack-introduction/</loc>
+    <lastmod>2017-10-15T06:15:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>OpenStack简介</title>
+        <pubTime>2017-09-30T10:33:47.000Z</pubTime>
+        
+        <tag>OpenStack</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170605-02-shell-position-variables-and-exit-code/</loc>
+    <lastmod>2017-10-14T14:17:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-位置变量和退出码</title>
+        <pubTime>2017-06-05T11:13:57.000Z</pubTime>
+        
+        <tag>position variables</tag>
+         
+        <tag>exit code</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170605-01-shell-global-and-local-variables/</loc>
+    <lastmod>2017-10-14T14:16:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-全局变量和局部变量</title>
+        <pubTime>2017-06-05T11:00:00.000Z</pubTime>
+        
+        <tag>variables</tag>
+         
+        <tag>Shell</tag>
+         
+        <tag>local variables</tag>
+         
+        <tag>global variables</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170517-01-install-centos6/</loc>
+    <lastmod>2017-10-14T14:01:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS 6 安装步骤</title>
+        <pubTime>2017-05-17T10:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>install</tag>
+         
+        <tag>CentOS 6</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170517-02-install-centos7/</loc>
+    <lastmod>2017-10-14T13:59:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS 7 安装步骤</title>
+        <pubTime>2017-05-17T11:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>CentOS 7</tag>
+         
+        <tag>install</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170515-03-xmanager-realvnc/</loc>
+    <lastmod>2017-10-14T13:44:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>工欲善其事必先利其器 —— Xmanager Enterprise 5 和 RealVNC 5/6 介绍</title>
+        <pubTime>2017-05-15T12:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>Xmanager</tag>
+         
+        <tag>realVNC</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170531-03-practice/</loc>
+    <lastmod>2017-10-14T13:29:00.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-文本处理练习题</title>
+        <pubTime>2017-05-31T15:30:42.000Z</pubTime>
+        
+        <tag>RegExp</tag>
+         
+        <tag>grep</tag>
+         
+        <tag>egrep</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170531-02-regexp/</loc>
+    <lastmod>2017-10-14T13:28:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-正则表达式(RegExp)</title>
+        <pubTime>2017-05-31T15:12:09.000Z</pubTime>
+        
+        <tag>RegExp</tag>
+         
+        <tag>grep</tag>
+         
+        <tag>egrep</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170524-03-practice/</loc>
+    <lastmod>2017-10-14T13:20:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>IO重定向和管道练习题</title>
+        <pubTime>2017-05-24T15:00:00.000Z</pubTime>
+        
+        <tag>inode</tag>
+         
+        <tag>link</tag>
+         
+        <tag>hard link</tag>
+         
+        <tag>soft link</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170524-02-pipe/</loc>
+    <lastmod>2017-10-14T13:18:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-管道</title>
+        <pubTime>2017-05-24T14:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>pipe</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170519-09-screen-script-scriptreplay/</loc>
+    <lastmod>2017-10-14T13:04:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>09-延伸小技巧screen、script、scriptreplay</title>
+        <pubTime>2017-05-19T15:30:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>command</tag>
+         
+        <tag>screen</tag>
+         
+        <tag>script</tag>
+         
+        <tag>scriptreplay</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170515-02-six-pl/</loc>
+    <lastmod>2017-10-14T12:58:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>本文章集合所遵循的开源协议以及开源协议介绍(GPL,LGPL,BSD,MIT,Apache,CC)</title>
+        <pubTime>2017-05-15T11:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>GPL</tag>
+         
+        <tag>LGPL</tag>
+         
+        <tag>BSD</tag>
+         
+        <tag>MIT</tag>
+         
+        <tag>Apache</tag>
+         
+        <tag>CC</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170515-01-markdown/</loc>
+    <lastmod>2017-10-14T12:46:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>笔记所使用的markdown语法</title>
+        <pubTime>2017-05-15T10:00:00.000Z</pubTime>
+        
+        <tag>markdown</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170522-01-fhs/</loc>
+    <lastmod>2017-10-14T09:00:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-Linux系统层级结构标准</title>
+        <pubTime>2017-05-22T10:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>FHS</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170522-04-linux-file-command/</loc>
+    <lastmod>2017-10-14T08:24:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-Linux文件类型和文件相关命令</title>
+        <pubTime>2017-05-22T12:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>File Type</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170522-03-shotcuts/</loc>
+    <lastmod>2017-10-14T06:41:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-bash快捷键</title>
+        <pubTime>2017-05-22T11:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>shotcuts</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-17-deploy-system/</loc>
+    <lastmod>2017-10-12T14:39:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>第十七章：部署系统</title>
+        <pubTime>2017-09-23T09:19:57.000Z</pubTime>
+        
+        <tag>Deploy System</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170927-05-zabbix-triggers-config/</loc>
+    <lastmod>2017-10-10T01:31:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>05-Zabbix trigger（触发器）设置</title>
+        <pubTime>2017-09-27T14:52:33.000Z</pubTime>
+        
+        <tag>Zabbix</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170927-04-zabbix-chinese-display/</loc>
+    <lastmod>2017-10-10T01:30:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-Zabbix Web 中文字体显示问题</title>
+        <pubTime>2017-09-27T13:52:33.000Z</pubTime>
+        
+        <tag>Zabbix</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170927-03-zabbix-host-monitor-config/</loc>
+    <lastmod>2017-10-10T01:30:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-Zabbix Server设置主机监控</title>
+        <pubTime>2017-09-27T12:52:33.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170927-02-zabbix-agent-installation/</loc>
+    <lastmod>2017-10-10T01:30:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-Zabbix Agent 安装指南和 Zabbix Server 设置自动发现</title>
+        <pubTime>2017-09-27T11:52:33.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170722-cobbler/</loc>
+    <lastmod>2017-10-08T13:20:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>Cobbler——无人值守安装多种版本多种配置操作系统</title>
+        <pubTime>2017-07-22T12:11:50.000Z</pubTime>
+        
+        <tag>Cobbler</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170722-02-tftp-pxe/</loc>
+    <lastmod>2017-10-08T12:54:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>TFTP和PXE</title>
+        <pubTime>2017-07-22T11:57:34.000Z</pubTime>
+        
+        <tag>tftp</tag>
+         
+        <tag>tftpd</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170828-02-haproxy-simple-configuration/</loc>
+    <lastmod>2017-10-08T12:27:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-HAProxy简单配置和基本用法</title>
+        <pubTime>2017-08-28T11:44:51.000Z</pubTime>
+        
+        <tag>HAProxy</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170828-04-haproxy-stats/</loc>
+    <lastmod>2017-10-08T12:27:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-HAProxy 统计页面</title>
+        <pubTime>2017-08-28T13:44:51.000Z</pubTime>
+        
+        <tag>HAProxy</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170828-03-haproxy-params/</loc>
+    <lastmod>2017-10-08T12:14:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-HAProxy 具体配置参数</title>
+        <pubTime>2017-08-28T12:44:51.000Z</pubTime>
+        
+        <tag>HAProxy</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170828-01-haproxy-introduction/</loc>
+    <lastmod>2017-10-08T12:11:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-HAProxy简介</title>
+        <pubTime>2017-08-28T10:44:51.000Z</pubTime>
+        
+        <tag>HAProxy</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/cloud/20170829-vagrant-custom-box/</loc>
+    <lastmod>2017-10-07T14:56:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>自制的 Vagrant box —— longdream/centos7</title>
+        <pubTime>2017-08-28T18:18:57.000Z</pubTime>
+        
+        <tag>Vagrant</tag>
+         
+        <tag>Vagrant Cloud</tag>
+         
+        <tag>Vagrant box</tag>
+         
+        <tag>longdream/centos7</tag>
+         
+         
+           
+             
+              <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/cloud/20170922-git/</loc>
+    <lastmod>2017-10-04T14:49:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>Git和GitHub笔记</title>
+        <pubTime>2017-09-22T11:04:31.000Z</pubTime>
+        
+        <tag>Git</tag>
+         
+        <tag>GitHub</tag>
+         
+         
+           
+             
+              <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170404-01-start/</loc>
+    <lastmod>2017-10-03T02:41:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>新的开始</title>
+        <pubTime>2017-04-03T20:15:29.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/macos/20170909-create-macos-high-sierra-usbdisk/</loc>
+    <lastmod>2017-09-26T02:59:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>macOS 10.13 U盘安装全过程</title>
+        <pubTime>2017-09-09T02:04:31.000Z</pubTime>
+        
+        <tag>macOS 10.12.6</tag>
+         
+         
+           
+             
+              <breadCrumb title="macos" url="http://www.yulongjun.com/categories/macos/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-02-sorrows-of-ops/</loc>
+    <lastmod>2017-09-23T15:56:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>第二章：运维的烦恼</title>
+        <pubTime>2017-09-23T09:15:42.000Z</pubTime>
+        
+        <tag>Sorrows</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-01-work-of-ops/</loc>
+    <lastmod>2017-09-23T15:56:15.000Z</lastmod>
+    <data>
+        <display>
+        <title>第一章：互联网运维工作</title>
+        <pubTime>2017-09-23T09:15:26.000Z</pubTime>
+        
+        <tag>Ops</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-25-buid-iaas-platform/</loc>
+    <lastmod>2017-09-23T15:30:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>第二十五章：Iaas平台建设</title>
+        <pubTime>2017-09-23T14:15:53.000Z</pubTime>
+        
+        <tag>Iaas</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-09-growth-of-network/</loc>
+    <lastmod>2017-09-23T15:24:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>第九章：网络成长之路</title>
+        <pubTime>2017-09-23T09:17:38.000Z</pubTime>
+        
+        <tag>Network</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-12-domain-and-access/</loc>
+    <lastmod>2017-09-23T15:24:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>第十二章：域名和接入</title>
+        <pubTime>2017-09-23T09:18:27.000Z</pubTime>
+        
+        <tag>Domain</tag>
+         
+        <tag>Access</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-13-website-operation-reliability/</loc>
+    <lastmod>2017-09-23T15:24:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>第十三章：网站可靠性运维</title>
+        <pubTime>2017-09-23T09:18:52.000Z</pubTime>
+        
+        <tag>Reliability</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-14-disaster-management/</loc>
+    <lastmod>2017-09-23T15:24:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>第十四章：灾备管理</title>
+        <pubTime>2017-09-23T09:19:06.000Z</pubTime>
+        
+        <tag>disaster Mannagement</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-15-it-service-management-platform/</loc>
+    <lastmod>2017-09-23T15:24:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>第十五章：服务管理平台</title>
+        <pubTime>2017-09-23T09:19:19.000Z</pubTime>
+        
+        <tag>Service Mannagement Platform</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-16-service-discovery/</loc>
+    <lastmod>2017-09-23T15:24:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>第十六章：服务发现</title>
+        <pubTime>2017-09-23T09:19:37.000Z</pubTime>
+        
+        <tag>Service Discovery</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-18-dynamic-scheduling/</loc>
+    <lastmod>2017-09-23T15:23:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>第十八章：动态调度</title>
+        <pubTime>2017-09-23T09:20:25.000Z</pubTime>
+        
+        <tag>Dynamic Scheduling</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-19-db-automatic-ops-system/</loc>
+    <lastmod>2017-09-23T15:23:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>第十九章：数据库自动运维系统</title>
+        <pubTime>2017-09-23T09:20:38.000Z</pubTime>
+        
+        <tag>Database</tag>
+         
+        <tag>Automatic Ops</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-20-db-backup-and-recovery-system/</loc>
+    <lastmod>2017-09-23T15:23:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>第二十章：数据库备份还原系统</title>
+        <pubTime>2017-09-23T09:20:49.000Z</pubTime>
+        
+        <tag>Database</tag>
+         
+        <tag>Backup</tag>
+         
+        <tag>Recovery</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-21-ops-of-hadoop/</loc>
+    <lastmod>2017-09-23T15:23:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>第二十一章：Hadoop运维</title>
+        <pubTime>2017-09-23T09:21:00.000Z</pubTime>
+        
+        <tag>Hadoop</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-22-selection-of-opensource-monitor-system/</loc>
+    <lastmod>2017-09-23T15:23:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>第二十二章：开源监控系统的选择</title>
+        <pubTime>2017-09-23T09:21:00.000Z</pubTime>
+        
+        <tag>Zabbix</tag>
+         
+        <tag>Cacti</tag>
+         
+        <tag>RRDtool</tag>
+         
+        <tag>Collectd</tag>
+         
+        <tag>Nagios</tag>
+         
+        <tag>OpenTSDB</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-23-monitor-system-of-internet-enterprise-level/</loc>
+    <lastmod>2017-09-23T15:23:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>第二十三章：互联网企业级监控系统实践</title>
+        <pubTime>2017-09-23T13:50:35.000Z</pubTime>
+        
+        <tag>Open-Falcon</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-24-distributed-systems-tracing%20-infrastructure/</loc>
+    <lastmod>2017-09-23T15:23:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>第二十四章：分布式调用跟踪系统</title>
+        <pubTime>2017-09-23T09:21:10.000Z</pubTime>
+        
+        <tag>Distributed systems Tracing Infranstructure</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-08-test-type-selection-of-server-hardware/</loc>
+    <lastmod>2017-09-23T15:23:15.000Z</lastmod>
+    <data>
+        <display>
+        <title>第八章：服务器硬件测试选型</title>
+        <pubTime>2017-09-23T09:17:23.000Z</pubTime>
+        
+        <tag>Hardware</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-07-asset-management/</loc>
+    <lastmod>2017-09-23T15:23:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>第七章：资产管理</title>
+        <pubTime>2017-09-23T09:17:06.000Z</pubTime>
+        
+        <tag>Asset Management</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-06-sys-ops-introduction/</loc>
+    <lastmod>2017-09-23T15:23:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>第六章：系统运维概述</title>
+        <pubTime>2017-09-23T09:16:52.000Z</pubTime>
+        
+        <tag>Sys Ops</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-05-the-future-of-ops/</loc>
+    <lastmod>2017-09-23T15:22:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>第五章：运维的未来</title>
+        <pubTime>2017-09-23T09:16:25.000Z</pubTime>
+        
+        <tag>Future</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-04-source-usage-of-server/</loc>
+    <lastmod>2017-09-23T15:22:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>第四章：服务器资源使用率</title>
+        <pubTime>2017-09-23T09:16:11.000Z</pubTime>
+        
+        <tag>Usage</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-03-platform-of-ops/</loc>
+    <lastmod>2017-09-23T15:22:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>第三章：运维平台</title>
+        <pubTime>2017-09-23T09:15:56.000Z</pubTime>
+        
+        <tag>Platform</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-11-cdn/</loc>
+    <lastmod>2017-09-23T15:22:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>第十一章：从外包到自建，小中企业CDN运维进阶指南</title>
+        <pubTime>2017-09-23T09:18:11.000Z</pubTime>
+        
+        <tag>CDN</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/under-the-ops/20170923-10-the-construction-of-transmission-network/</loc>
+    <lastmod>2017-09-23T14:31:19.000Z</lastmod>
+    <data>
+        <display>
+        <title>第十章：传输网建设</title>
+        <pubTime>2017-09-23T09:17:52.000Z</pubTime>
+        
+        <tag>Transmission Network</tag>
+         
+         
+           
+             
+              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170507-03-ide/</loc>
+    <lastmod>2017-09-14T14:56:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>开发环境（vim/Jupyter Notebook/Pycharm）</title>
+        <pubTime>2017-05-07T15:33:55.000Z</pubTime>
+        
+        <tag>pyenv</tag>
+         
+        <tag>pyenv-virtualenv</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170507-01-pyenv-macos/</loc>
+    <lastmod>2017-09-14T14:56:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>macOS下Python多版本控制软件的安装：pyenv、pyenv-virtualenv</title>
+        <pubTime>2017-05-07T15:13:12.000Z</pubTime>
+        
+        <tag>pyenv</tag>
+         
+        <tag>pyenv-virtualenv</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170904-00-keepalived-content/</loc>
+    <lastmod>2017-09-12T15:50:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>Keepalived系列文章</title>
+        <pubTime>2017-09-04T09:30:00.000Z</pubTime>
+        
+        <tag>Keepalived</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170821-00-nginx-content/</loc>
+    <lastmod>2017-09-12T15:50:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx系列文章</title>
+        <pubTime>2017-08-21T10:26:51.000Z</pubTime>
+        
+        <tag>Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170821-01-nginx-introduction/</loc>
+    <lastmod>2017-09-12T15:49:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-Nginx简介</title>
+        <pubTime>2017-08-21T11:26:51.000Z</pubTime>
+        
+        <tag>Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170911-mysql-mysqldump-xtrabackup/</loc>
+    <lastmod>2017-09-12T15:48:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>MySQL备份恢复（mysqldump、xtrabackup）</title>
+        <pubTime>2017-09-11T11:04:31.000Z</pubTime>
+        
+        <tag>mysqldump</tag>
+         
+        <tag>xtrabackup</tag>
+         
+        <tag>innobackupex</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170823-10-ngx_stream_module/</loc>
+    <lastmod>2017-09-11T14:57:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>10-ngx__stream_*_module详解</title>
+        <pubTime>2017-08-23T14:44:51.000Z</pubTime>
+        
+        <tag>Nginx FastCGI</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170823-09-ngx_http_upstream_module/</loc>
+    <lastmod>2017-09-09T16:16:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>09-ngx_http_upstream_module详解</title>
+        <pubTime>2017-08-23T13:44:51.000Z</pubTime>
+        
+        <tag>Nginx FastCGI</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170904-01-keepalived-introduction/</loc>
+    <lastmod>2017-09-09T13:52:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-Keepalived介绍</title>
+        <pubTime>2017-09-04T10:30:00.000Z</pubTime>
+        
+        <tag>Keepalived</tag>
+         
+        <tag>VRRP</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170904-05-keepalived-nginx/</loc>
+    <lastmod>2017-09-09T12:32:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>05-双网络双活模式的Keepalived+Nginx配置</title>
+        <pubTime>2017-09-04T14:30:00.000Z</pubTime>
+        
+        <tag>VRRP</tag>
+         
+        <tag>Keepalived+Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170904-04-keepalived-lvs/</loc>
+    <lastmod>2017-09-09T12:32:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-单网络双活模式的Keepalived+LVS-DR配置</title>
+        <pubTime>2017-09-04T13:30:00.000Z</pubTime>
+        
+        <tag>VRRP</tag>
+         
+        <tag>Keepalived+LVS</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170823-08-ngx_http_fastcgi_module/</loc>
+    <lastmod>2017-09-09T11:49:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>08-ngx_http_fastcgi_module详解</title>
+        <pubTime>2017-08-23T12:44:51.000Z</pubTime>
+        
+        <tag>Nginx FastCGI</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170823-06-ngx-http-other-modules/</loc>
+    <lastmod>2017-09-09T08:41:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>06-Nginx的HTTP相关的杂项模块</title>
+        <pubTime>2017-08-23T10:44:51.000Z</pubTime>
+        
+        <tag>Nginx ACL</tag>
+         
+        <tag>Nginx Status</tag>
+         
+        <tag>Nginx Log</tag>
+         
+        <tag>Nginx Gzip</tag>
+         
+        <tag>Nginx SSL</tag>
+         
+        <tag>Nginx Rewrite</tag>
+         
+        <tag>Nginx Upstream</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/macos/20170909-create-macos-usbdisk/</loc>
+    <lastmod>2017-09-09T03:14:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>制作macOS的U盘安装盘</title>
+        <pubTime>2017-09-09T02:04:31.000Z</pubTime>
+        
+        <tag>macOS 10.12.6</tag>
+         
+         
+           
+             
+              <breadCrumb title="macos" url="http://www.yulongjun.com/categories/macos/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170904-03-keepalived-models/</loc>
+    <lastmod>2017-09-09T03:11:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-Keepalived各种模式配置</title>
+        <pubTime>2017-09-04T12:30:00.000Z</pubTime>
+        
+        <tag>Keepalived</tag>
+         
+        <tag>VRRP</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170823-07-ngx_http_proxy_module/</loc>
+    <lastmod>2017-09-08T12:31:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>07-ngx_http_proxy_module详解</title>
+        <pubTime>2017-08-23T11:44:51.000Z</pubTime>
+        
+        <tag>Nginx Reverse Proxy</tag>
+         
+        <tag>Nginx Cache</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170821-02-io-model/</loc>
+    <lastmod>2017-09-08T12:00:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-IO模型</title>
+        <pubTime>2017-08-21T12:26:51.000Z</pubTime>
+        
+        <tag>IO model</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170804-lamp/</loc>
+    <lastmod>2017-09-07T18:35:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>LAMP 一键安装脚本</title>
+        <pubTime>2017-08-04T07:47:22.000Z</pubTime>
+        
+        <tag>LAMP</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170821-05-ngx_http_core_module/</loc>
+    <lastmod>2017-09-02T17:05:43.000Z</lastmod>
+    <data>
+        <display>
+        <title>05-ngx_http_core_module详解</title>
+        <pubTime>2017-08-21T15:26:51.000Z</pubTime>
+        
+        <tag>Nginx HTTP</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170821-04-nginx-default-httpd-config/</loc>
+    <lastmod>2017-09-02T16:37:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-Nginx的默认http配置选项</title>
+        <pubTime>2017-08-21T14:26:51.000Z</pubTime>
+        
+        <tag>default http config</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170821-03-nginx-global-config/</loc>
+    <lastmod>2017-09-02T16:37:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-Nginx主配置文件</title>
+        <pubTime>2017-08-21T13:26:51.000Z</pubTime>
+        
+        <tag>IO model</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170819-03-lvs-nat/</loc>
+    <lastmod>2017-08-20T16:25:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>LVS/NAT实验</title>
+        <pubTime>2017-08-19T11:26:51.000Z</pubTime>
+        
+        <tag>LVS</tag>
+         
+        <tag>LVS/NAT</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170819-02-lvs-dr/</loc>
+    <lastmod>2017-08-20T16:25:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>LVS/DR实验</title>
+        <pubTime>2017-08-19T10:26:51.000Z</pubTime>
+        
+        <tag>LVS</tag>
+         
+        <tag>LVS/DR</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170815-iptables/</loc>
+    <lastmod>2017-08-18T14:35:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>防火墙Netfilter/iptables</title>
+        <pubTime>2017-08-15T08:26:51.000Z</pubTime>
+        
+        <tag>Netfilter</tag>
+         
+        <tag>iptables</tag>
+         
+        <tag>firewalld</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/essay/20170811-new-logo/</loc>
+    <lastmod>2017-08-18T06:42:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>网站启用新logo和新头像</title>
+        <pubTime>2017-08-11T10:22:21.000Z</pubTime>
+        
+        <tag>logo</tag>
+         
+         
+           
+             
+              <breadCrumb title="essay" url="http://www.yulongjun.com/categories/essay/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/database/20170727-02-mariadb-install/</loc>
+    <lastmod>2017-08-16T14:57:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-MariaDB安装</title>
+        <pubTime>2017-07-27T12:48:35.000Z</pubTime>
+        
+        <tag>MariaDB</tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://www.yulongjun.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170720-02-pam/</loc>
+    <lastmod>2017-08-14T13:28:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>PAM认证模块</title>
+        <pubTime>2017-07-20T11:43:05.000Z</pubTime>
+        
+        <tag>PAM</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170720-01-tcp_wrappers/</loc>
+    <lastmod>2017-08-14T09:39:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>TCP_Wrappers应用层防火墙</title>
+        <pubTime>2017-07-20T10:43:05.000Z</pubTime>
+        
+        <tag>TCP_Wrappers</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170519-04-useage-of-alias/</loc>
+    <lastmod>2017-08-14T03:49:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-别名的使用方法</title>
+        <pubTime>2017-05-19T13:00:00.000Z</pubTime>
+        
+        <tag>alias</tag>
+         
+        <tag>unalias</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170519-02-command-help/</loc>
+    <lastmod>2017-08-14T03:49:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-查看命令的帮助</title>
+        <pubTime>2017-05-19T11:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>command</tag>
+         
+        <tag>man</tag>
+         
+        <tag>help</tag>
+         
+        <tag>whatis</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170519-01-command-base-type/</loc>
+    <lastmod>2017-08-14T03:49:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-命令基本格式</title>
+        <pubTime>2017-05-19T10:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>command</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170519-03-command-info/</loc>
+    <lastmod>2017-08-14T03:45:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-命令信息相关命令</title>
+        <pubTime>2017-05-19T12:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>hash</tag>
+         
+        <tag>command</tag>
+         
+        <tag>type</tag>
+         
+        <tag>which</tag>
+         
+        <tag>whereis</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170519-06-date-datetime/</loc>
+    <lastmod>2017-08-14T03:34:41.000Z</lastmod>
+    <data>
+        <display>
+        <title>06-日期时间相关命令</title>
+        <pubTime>2017-05-19T14:30:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>command</tag>
+         
+        <tag>date</tag>
+         
+        <tag>clock</tag>
+         
+        <tag>ntpdate</tag>
+         
+        <tag>timezone</tag>
+         
+        <tag>cal</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170718-04-sudo/</loc>
+    <lastmod>2017-08-14T01:28:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>Sudo</title>
+        <pubTime>2017-07-18T14:43:05.000Z</pubTime>
+        
+        <tag>Sudo</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/database/20170727-01-db-and-sql-introduction/</loc>
+    <lastmod>2017-08-13T12:07:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-数据库和SQL简介</title>
+        <pubTime>2017-07-27T11:35:15.000Z</pubTime>
+        
+        <tag>DB</tag>
+         
+        <tag>SQL</tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://www.yulongjun.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/database/20170727-03-sql-language/</loc>
+    <lastmod>2017-08-13T12:07:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-SQL语句简单示例</title>
+        <pubTime>2017-07-27T13:35:15.000Z</pubTime>
+        
+        <tag>CREATE</tag>
+         
+        <tag>ALTER</tag>
+         
+        <tag>DROP</tag>
+         
+        <tag>INSERT</tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://www.yulongjun.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/database/20170727-04-sql-select/</loc>
+    <lastmod>2017-08-13T12:07:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-SELECT语句</title>
+        <pubTime>2017-07-27T14:48:35.000Z</pubTime>
+        
+        <tag>SELECT</tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://www.yulongjun.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/database/20170727-05-sql-insert-delete-update/</loc>
+    <lastmod>2017-08-13T12:07:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>05-INSERT、DELETE、UPDATE语句</title>
+        <pubTime>2017-07-27T15:48:35.000Z</pubTime>
+        
+        <tag>SELECT</tag>
+         
+         
+           
+             
+              <breadCrumb title="database" url="http://www.yulongjun.com/categories/database/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170725-05-bind-utils/</loc>
+    <lastmod>2017-08-07T07:11:00.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-bind各种辅助工具</title>
+        <pubTime>2017-07-25T15:41:03.000Z</pubTime>
+        
+        <tag>DNS</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170725-03-dns-record-types/</loc>
+    <lastmod>2017-08-06T08:50:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-DNS记录类型</title>
+        <pubTime>2017-07-25T13:41:03.000Z</pubTime>
+        
+        <tag>DNS</tag>
+         
+        <tag>DNS Record</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/macos/20170614-apple-hfs/</loc>
+    <lastmod>2017-08-03T02:42:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-macOS磁盘管理工具</title>
+        <pubTime>2017-06-14T05:06:58.000Z</pubTime>
+        
+        <tag>macOS</tag>
+         
+        <tag>GUID</tag>
+         
+        <tag>MBR</tag>
+         
+         
+           
+             
+              <breadCrumb title="macos" url="http://www.yulongjun.com/categories/macos/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/macos/20170728-mweb-hexo/</loc>
+    <lastmod>2017-08-03T02:42:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>使MWeb外部模式支持Hexo</title>
+        <pubTime>2017-07-28T08:42:07.000Z</pubTime>
+        
+        <tag>MWeb</tag>
+         
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="macos" url="http://www.yulongjun.com/categories/macos/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170725-02-how-dns-work-together/</loc>
+    <lastmod>2017-08-02T15:29:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-DNS如何工作</title>
+        <pubTime>2017-07-25T13:38:33.000Z</pubTime>
+        
+        <tag>DNS</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170715-ca/</loc>
+    <lastmod>2017-08-01T11:10:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>CA认证和证书</title>
+        <pubTime>2017-07-15T15:43:05.000Z</pubTime>
+        
+        <tag>CA</tag>
+         
+        <tag>CRL</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170725-01-what-is-dns/</loc>
+    <lastmod>2017-07-26T14:30:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-什么是DNS</title>
+        <pubTime>2017-07-25T12:57:07.000Z</pubTime>
+        
+        <tag>DNS</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170721-exam/</loc>
+    <lastmod>2017-07-26T07:30:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>第二阶段考试</title>
+        <pubTime>2017-07-21T10:57:34.000Z</pubTime>
+        
+        <tag>exam</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170722-01-dhcp/</loc>
+    <lastmod>2017-07-24T16:26:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>DHCP详解</title>
+        <pubTime>2017-07-22T10:57:34.000Z</pubTime>
+        
+        <tag>dhcp</tag>
+         
+        <tag>dhcpd</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/macos/20170608-macos-init-config/</loc>
+    <lastmod>2017-07-23T13:20:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>macOS重装后初始设置(运维和开发人员自用版，可参考）</title>
+        <pubTime>2017-06-08T12:33:24.000Z</pubTime>
+        
+        <tag>macOS</tag>
+         
+        <tag>Serria</tag>
+         
+         
+           
+             
+              <breadCrumb title="macos" url="http://www.yulongjun.com/categories/macos/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170705-02-string/</loc>
+    <lastmod>2017-07-23T13:19:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>字符串处理</title>
+        <pubTime>2017-07-05T14:54:39.000Z</pubTime>
+        
+        <tag>string</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170705-01-array/</loc>
+    <lastmod>2017-07-23T13:18:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>数组和关联数组</title>
+        <pubTime>2017-07-05T13:30:39.000Z</pubTime>
+        
+        <tag>array</tag>
+         
+        <tag>associate array</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170703-02-function/</loc>
+    <lastmod>2017-07-23T13:18:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>shell进阶--函数</title>
+        <pubTime>2017-07-03T13:31:39.000Z</pubTime>
+        
+        <tag>function</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170703-01-flow/</loc>
+    <lastmod>2017-07-23T13:15:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>shell进阶--流程</title>
+        <pubTime>2017-07-03T13:00:39.000Z</pubTime>
+        
+        <tag>if elif else</tag>
+         
+        <tag>for</tag>
+         
+        <tag>case</tag>
+         
+        <tag>while</tag>
+         
+        <tag>until</tag>
+         
+        <tag>select</tag>
+         
+        <tag>trap</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170720-kickstart-iso/</loc>
+    <lastmod>2017-07-23T05:46:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>自制kickstart光盘</title>
+        <pubTime>2017-07-20T11:41:55.000Z</pubTime>
+        
+        <tag>kickstart光盘</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170704-02-function-practice/</loc>
+    <lastmod>2017-07-21T07:32:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>shell进阶之函数练习题</title>
+        <pubTime>2017-07-04T14:30:13.000Z</pubTime>
+        
+        <tag>function</tag>
+         
+        <tag>practice</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170718-03-sshd/</loc>
+    <lastmod>2017-07-19T11:27:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>SSH服务端</title>
+        <pubTime>2017-07-18T13:43:05.000Z</pubTime>
+        
+        <tag>SSH</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170718-01-ssh-commands/</loc>
+    <lastmod>2017-07-19T11:27:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>SSH客户端命令</title>
+        <pubTime>2017-07-18T11:43:05.000Z</pubTime>
+        
+        <tag>SSH</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170718-02-ssh-port-forward/</loc>
+    <lastmod>2017-07-19T11:27:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>SSH转发</title>
+        <pubTime>2017-07-18T12:43:05.000Z</pubTime>
+        
+        <tag>SSH</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170709-lfs8-2/</loc>
+    <lastmod>2017-07-15T15:13:00.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux From Scratch 8 之二--创建LFS的分区，下载源码包</title>
+        <pubTime>2017-07-09T14:43:05.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>LFS 8</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170709-lfs8-3/</loc>
+    <lastmod>2017-07-09T16:25:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux From Scratch 8 之三--构建临时系统</title>
+        <pubTime>2017-07-09T15:43:05.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>LFS 8</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170709-lfs8-1/</loc>
+    <lastmod>2017-07-09T16:25:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux From Scratch 8 之一--构建前准备主机系统</title>
+        <pubTime>2017-07-09T13:32:03.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>LFS 8</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170514-02-stack/</loc>
+    <lastmod>2017-07-07T11:51:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-stack</title>
+        <pubTime>2017-05-14T07:02:43.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>stack</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170630-02-at-cron/</loc>
+    <lastmod>2017-07-06T12:00:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>计划任务at、cron</title>
+        <pubTime>2017-06-30T14:00:10.000Z</pubTime>
+        
+        <tag>network</tag>
+         
+        <tag>bonding</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170630-01-kill/</loc>
+    <lastmod>2017-07-06T11:58:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>kill命令</title>
+        <pubTime>2017-06-30T13:00:10.000Z</pubTime>
+        
+        <tag>kill</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170704-03-rescure-initrd-initramfs/</loc>
+    <lastmod>2017-07-06T09:05:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>破坏实验--破坏5的initrd、6和7的initramfs文件，然后恢复</title>
+        <pubTime>2017-07-04T15:33:33.000Z</pubTime>
+        
+        <tag>initrd</tag>
+         
+        <tag>initramfs</tag>
+         
+        <tag>mkinitrd</tag>
+         
+        <tag>dracut</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/software/20170704-axure-rp8/</loc>
+    <lastmod>2017-07-06T09:04:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>Axure RP 8 安装与汉化</title>
+        <pubTime>2017-07-04T12:38:39.000Z</pubTime>
+        
+        <tag>Axure RP 8</tag>
+         
+         
+           
+             
+              <breadCrumb title="software" url="http://www.yulongjun.com/categories/software/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170705-fedora25-dont-sleep/</loc>
+    <lastmod>2017-07-06T09:04:15.000Z</lastmod>
+    <data>
+        <display>
+        <title>设置Fedora合上盖子不休眠</title>
+        <pubTime>2017-07-05T12:54:39.000Z</pubTime>
+        
+        <tag>Fedora 25</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170704-01-flow-practice/</loc>
+    <lastmod>2017-07-06T08:49:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>shell进阶之流程练习题</title>
+        <pubTime>2017-07-04T13:12:13.000Z</pubTime>
+        
+        <tag>practice</tag>
+         
+        <tag>flow</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170703-03-init/</loc>
+    <lastmod>2017-07-06T07:29:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS5、CentOS6启动流程</title>
+        <pubTime>2017-07-03T14:33:33.000Z</pubTime>
+        
+        <tag>init</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170519-07-echo/</loc>
+    <lastmod>2017-07-04T01:12:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>07-回显命令</title>
+        <pubTime>2017-05-19T15:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>command</tag>
+         
+        <tag>echo</tag>
+         
+        <tag>quote</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170628-02-process/</loc>
+    <lastmod>2017-06-30T13:21:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>进程</title>
+        <pubTime>2017-06-28T14:00:10.000Z</pubTime>
+        
+        <tag>network</tag>
+         
+        <tag>bonding</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170514-03-stack-parse-expr/</loc>
+    <lastmod>2017-06-30T13:18:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-stack应用--表达式解析</title>
+        <pubTime>2017-05-14T07:24:47.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>stack</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170514-04-stack-parse-rules/</loc>
+    <lastmod>2017-06-30T13:17:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>04-stack应用-规则解析</title>
+        <pubTime>2017-05-14T07:26:35.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>stack</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170514-05-queue/</loc>
+    <lastmod>2017-06-30T13:17:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>05-队列（queue）</title>
+        <pubTime>2017-05-14T07:28:40.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>queue</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170514-06-hash/</loc>
+    <lastmod>2017-06-30T13:17:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>06-哈希（hash）</title>
+        <pubTime>2017-05-14T07:29:51.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>hash</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170514-07-tree/</loc>
+    <lastmod>2017-06-30T13:17:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>07-tree</title>
+        <pubTime>2017-05-14T07:58:38.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>tree</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170514-08-heap/</loc>
+    <lastmod>2017-06-30T13:16:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>堆（heap）</title>
+        <pubTime>2017-05-14T07:58:48.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>heap</tag>
+         
+        <tag>binary heap</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170514-01-singly-linked-list/</loc>
+    <lastmod>2017-06-30T13:16:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-单向链表（Singly linked list）</title>
+        <pubTime>2017-05-14T03:57:27.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>singly linked list</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170513-modularization/</loc>
+    <lastmod>2017-06-30T13:15:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>模块化（Modularization)</title>
+        <pubTime>2017-05-13T02:51:58.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>Modularization</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170513-exception/</loc>
+    <lastmod>2017-06-30T13:15:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>异常（Exception）</title>
+        <pubTime>2017-05-13T02:40:23.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>Exception</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170512-04-magic-method/</loc>
+    <lastmod>2017-06-30T13:14:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>魔术方法/特殊方法(Magic Methods)</title>
+        <pubTime>2017-05-12T02:33:30.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>OOP</tag>
+         
+        <tag>Encapsulate</tag>
+         
+        <tag>Inheritance</tag>
+         
+        <tag>Polymorphism</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170512-03-multi-inheritance-mro/</loc>
+    <lastmod>2017-06-30T13:14:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>03-多继承、MRO算法</title>
+        <pubTime>2017-05-12T02:32:30.000Z</pubTime>
+        
+        <tag>multi-inheritance</tag>
+         
+        <tag>MRO</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170512-02-oop-three-principles/</loc>
+    <lastmod>2017-06-30T13:13:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-OOP的三大特征：封装、继承、多态</title>
+        <pubTime>2017-05-12T01:51:26.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+        <tag>OOP</tag>
+         
+        <tag>Encapsulate</tag>
+         
+        <tag>Inheritance</tag>
+         
+        <tag>Polymorphism</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170512-01-define-class/</loc>
+    <lastmod>2017-06-30T13:13:15.000Z</lastmod>
+    <data>
+        <display>
+        <title>01-类（Class）的定义</title>
+        <pubTime>2017-05-12T01:44:28.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170626-01-clone-vm/</loc>
+    <lastmod>2017-06-29T09:12:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>克隆虚拟机后，需要对克隆的虚拟机做的相关操作</title>
+        <pubTime>2017-06-26T10:30:09.000Z</pubTime>
+        
+        <tag>network</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170626-02-network-commands-centos6/</loc>
+    <lastmod>2017-06-27T16:05:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS6网络命令</title>
+        <pubTime>2017-06-26T11:30:10.000Z</pubTime>
+        
+        <tag>network</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170623-network-introduction/</loc>
+    <lastmod>2017-06-27T15:42:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>网络知识(看书，略）</title>
+        <pubTime>2017-06-23T13:25:09.000Z</pubTime>
+        
+        <tag>network</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170621-network-model/</loc>
+    <lastmod>2017-06-27T15:42:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>网络模型</title>
+        <pubTime>2017-06-21T13:25:09.000Z</pubTime>
+        
+        <tag>network</tag>
+         
+        <tag>OSI</tag>
+         
+        <tag>TCP/IP</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170619-lvm/</loc>
+    <lastmod>2017-06-20T07:41:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>逻辑卷管理（LVM）</title>
+        <pubTime>2017-06-19T11:13:28.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170509-03-tuples/</loc>
+    <lastmod>2017-06-17T14:55:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>元组</title>
+        <pubTime>2017-05-09T10:33:55.000Z</pubTime>
+        
+        <tag>tuple</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170511-08-decoractors/</loc>
+    <lastmod>2017-06-17T14:54:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>装饰器(Decorators)</title>
+        <pubTime>2017-05-11T09:00:00.000Z</pubTime>
+        
+        <tag>function</tag>
+         
+        <tag>decorators</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170511-07-higher-order-function/</loc>
+    <lastmod>2017-06-17T14:54:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>高阶函数、闭包、偏函数、柯里化、匿名函数</title>
+        <pubTime>2017-05-11T08:00:00.000Z</pubTime>
+        
+        <tag>function</tag>
+         
+        <tag>higher order function</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170511-06-generator-function/</loc>
+    <lastmod>2017-06-17T14:54:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>生成器函数</title>
+        <pubTime>2017-05-11T07:30:00.000Z</pubTime>
+        
+        <tag>function</tag>
+         
+        <tag>generator</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170511-05-recursive-function/</loc>
+    <lastmod>2017-06-17T14:53:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>递归函数</title>
+        <pubTime>2017-05-11T07:00:00.000Z</pubTime>
+        
+        <tag>function</tag>
+         
+        <tag>recursive</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170511-04-function-annotation/</loc>
+    <lastmod>2017-06-17T14:53:45.000Z</lastmod>
+    <data>
+        <display>
+        <title>函数注解（类型示意）</title>
+        <pubTime>2017-05-11T06:00:00.000Z</pubTime>
+        
+        <tag>function</tag>
+         
+        <tag>annotation</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170511-03-function-argument/</loc>
+    <lastmod>2017-06-17T14:53:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>函数的参数</title>
+        <pubTime>2017-05-11T05:00:00.000Z</pubTime>
+        
+        <tag>function</tag>
+         
+        <tag>argument</tag>
+         
+        <tag>parameter</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170511-01-function-define/</loc>
+    <lastmod>2017-06-17T14:53:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>函数基本定义和函数调用</title>
+        <pubTime>2017-05-11T02:00:00.000Z</pubTime>
+        
+        <tag>function</tag>
+         
+        <tag>define</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170509-06-unpacking/</loc>
+    <lastmod>2017-06-17T14:51:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>解包（Unpacking）</title>
+        <pubTime>2017-05-09T15:33:55.000Z</pubTime>
+        
+        <tag>unpacking</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170510-04-bytes-bytearrays/</loc>
+    <lastmod>2017-06-17T14:36:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>byte和bytearray</title>
+        <pubTime>2017-05-10T08:33:55.000Z</pubTime>
+        
+        <tag>byte</tag>
+         
+        <tag>bytearray</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170509-04-strings/</loc>
+    <lastmod>2017-06-17T14:30:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>字符串（Strings）</title>
+        <pubTime>2017-05-09T12:33:55.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170509-05-slice/</loc>
+    <lastmod>2017-06-17T14:27:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>切片（Slice）</title>
+        <pubTime>2017-05-09T14:33:55.000Z</pubTime>
+        
+        <tag>slice</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170510-06-iterables-interators-generators-simple/</loc>
+    <lastmod>2017-06-17T14:00:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>简单了解 可迭代对象(Iterables)、迭代器(Iterators)、生成器(Generators)</title>
+        <pubTime>2017-05-10T12:33:55.000Z</pubTime>
+        
+        <tag>Iterables</tag>
+         
+        <tag>Iterators</tag>
+         
+        <tag>Generators</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170511-02-function-process/</loc>
+    <lastmod>2017-06-17T13:58:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>函数执行过程</title>
+        <pubTime>2017-05-11T03:00:00.000Z</pubTime>
+        
+        <tag>function</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170510-07-iterables-interators-generators-verbose/</loc>
+    <lastmod>2017-06-17T12:47:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>详解 可迭代对象(Iterables)、迭代器(Iterators)、生成器(Generators)</title>
+        <pubTime>2017-05-10T15:33:33.000Z</pubTime>
+        
+        <tag>Iterables</tag>
+         
+        <tag>Iterators</tag>
+         
+        <tag>Generators</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170510-05-comprehensions/</loc>
+    <lastmod>2017-06-17T09:11:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>解析式（Comprehensions)</title>
+        <pubTime>2017-05-10T10:33:55.000Z</pubTime>
+        
+        <tag>comprehension</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170510-03-dicts/</loc>
+    <lastmod>2017-06-17T09:10:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>字典（Dictionarys）</title>
+        <pubTime>2017-05-10T06:33:55.000Z</pubTime>
+        
+        <tag>dict</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170510-01-formatting/</loc>
+    <lastmod>2017-06-17T09:07:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>格式化（Formatting）</title>
+        <pubTime>2017-05-10T02:33:55.000Z</pubTime>
+        
+        <tag>formatting</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170510-02-sets/</loc>
+    <lastmod>2017-06-17T09:01:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>集合（Sets）</title>
+        <pubTime>2017-05-10T04:33:55.000Z</pubTime>
+        
+        <tag>set</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170509-02-lists/</loc>
+    <lastmod>2017-06-17T08:53:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>列表（Lists）</title>
+        <pubTime>2017-05-09T08:33:55.000Z</pubTime>
+        
+        <tag>list</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170509-01-numbers/</loc>
+    <lastmod>2017-06-17T08:51:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>数字（Numbers）</title>
+        <pubTime>2017-05-09T02:33:55.000Z</pubTime>
+        
+        <tag>number</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/python/20170508-01-variable/</loc>
+    <lastmod>2017-06-17T08:43:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>变量与命名规则(PEP8)</title>
+        <pubTime>2017-05-08T02:33:55.000Z</pubTime>
+        
+        <tag>variables</tag>
+         
+        <tag>PEP8</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/server/20170404-server-operation-system/</loc>
+    <lastmod>2017-06-17T02:09:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>目前所用操作系统版本汇总（持续更新）</title>
+        <pubTime>2017-04-04T14:31:54.000Z</pubTime>
+        
+        <tag>Windows</tag>
+         
+        <tag>CentOS</tag>
+         
+        <tag>RHEL</tag>
+         
+        <tag>OEL</tag>
+         
+         
+           
+             
+              <breadCrumb title="server" url="http://www.yulongjun.com/categories/server/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/server/20170408-01-hp-spp/</loc>
+    <lastmod>2017-06-17T01:54:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>Service Pack for ProLiant (SPP) Version 2016.10.0  --  HP服务器软件、驱动、固件汇总ISO（包含几乎所有操作系统和Gen6到9的机型）</title>
+        <pubTime>2017-04-08T08:36:37.000Z</pubTime>
+        
+        <tag>HP SSP</tag>
+         
+        <tag>Service Pack for ProLiant</tag>
+         
+         
+           
+             
+              <breadCrumb title="server" url="http://www.yulongjun.com/categories/server/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170519-05-shutdown-reboot/</loc>
+    <lastmod>2017-06-16T05:54:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>05-关机重启命令</title>
+        <pubTime>2017-05-19T14:00:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>command</tag>
+         
+        <tag>poweroff</tag>
+         
+        <tag>halt</tag>
+         
+        <tag>reboot</tag>
+         
+        <tag>init</tag>
+         
+        <tag>shutdown</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170614-disk-management/</loc>
+    <lastmod>2017-06-16T03:45:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>磁盘分区管理</title>
+        <pubTime>2017-06-14T13:44:32.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170522-02-history/</loc>
+    <lastmod>2017-06-15T09:15:32.000Z</lastmod>
+    <data>
+        <display>
+        <title>02-历史命令用法</title>
+        <pubTime>2017-05-22T10:30:00.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>history</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/software/20170404-04-start-software/</loc>
+    <lastmod>2017-05-27T16:44:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>新的开始</title>
+        <pubTime>2017-04-03T20:15:29.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="software" url="http://www.yulongjun.com/categories/software/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/cloud/20170404-03-start-cloud/</loc>
+    <lastmod>2017-05-27T16:44:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>新的开始</title>
+        <pubTime>2017-04-03T20:15:29.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+</urlset>

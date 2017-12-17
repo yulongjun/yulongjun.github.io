@@ -1,0 +1,1456 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Nginx ACL,Nginx Status,Nginx Log,Nginx Gzip,Nginx SSL,Nginx Rewrite,Nginx Upstream," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="06-Nginx的HTTP相关的杂项模块">
+<meta property="og:url" content="http://www.yulongjun.com/linux/20170823-06-ngx-http-other-modules/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/Nginx_logo.svg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042681401675.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042681508555.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042686684419.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042686761224.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042694008699.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042721093915.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042721383996.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042721222468.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042767219690.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042767486590.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042767723557.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042767839800.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042767368732.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042769199720.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042769348380.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042783534830.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042783667235.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042783865794.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042784116536.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042784835696.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15042785149633.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15043158084593.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15043174234909.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15043205846502.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15043205419834.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15043213666497.jpg">
+<meta property="og:updated_time" content="2017-09-09T08:41:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="06-Nginx的HTTP相关的杂项模块">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/Nginx_logo.svg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/linux/20170823-06-ngx-http-other-modules/"/>
+
+
+
+
+
+  <title> 06-Nginx的HTTP相关的杂项模块 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170823-06-ngx-http-other-modules/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                06-Nginx的HTTP相关的杂项模块
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-23T18:44:51+08:00">
+                2017-08-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/linux/20170823-06-ngx-http-other-modules/" class="leancloud_visitors" data-flag-title="06-Nginx的HTTP相关的杂项模块">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/Nginx_logo.svg" alt=""></p>
+<a id="more"></a>
+<p>主要介绍下面几个模块：</p>
+<h2 id="ngx-http-access-module"><a href="#ngx-http-access-module" class="headerlink" title="ngx_http_access_module"></a>ngx_http_access_module</h2><p><code>http_access_module</code>包含了http的访问权限控制的一个模块，前面一节的<code>limit_except</code>指令里用过，还可以用在http, server, location等地方。</p>
+<p><strong><code>allow</code></strong></p>
+<p><img src="/images/15042681401675.jpg" alt=""></p>
+<p><strong><code>deny</code></strong></p>
+<p><img src="/images/15042681508555.jpg" alt=""></p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location /admin &#123;</div><div class="line">    deny  192.168.1.1;</div><div class="line">    allow 192.168.1.0/24;</div><div class="line">    allow 10.1.1.0/16;</div><div class="line">    allow 2001:0db8::/32;</div><div class="line">    deny  all;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="ngx-http-auth-basic-module"><a href="#ngx-http-auth-basic-module" class="headerlink" title="ngx_http_auth_basic_module"></a>ngx_http_auth_basic_module</h2><p>实现基于用户的访问控制，使用basic机制进行用户认证</p>
+<p><strong><code>auth_basic</code></strong></p>
+<p><img src="/images/15042686684419.jpg" alt=""></p>
+<p><strong><code>auth_basic_user_file</code></strong></p>
+<p><img src="/images/15042686761224.jpg" alt=""></p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">yum install -y http-tools  <span class="comment"># htpasswd工具在这个包里</span></div><div class="line">htpasswd -c -m /etc/nginx/.htpasswd  admin1  <span class="comment"># 之后输入admin1的两次密码</span></div><div class="line">htpasswd -m /etc/nginx/.htpasswd  admin2  <span class="comment"># 之后设置admin2 的密码</span></div></pre></td></tr></table></figure>
+<p>修改nginx的配置文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">location /admin &#123;</div><div class="line">    auth_basic           &quot;Admin Area&quot;;</div><div class="line">    auth_basic_user_file /etc/nginx/.htpasswd;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="ngx-sub-status-module"><a href="#ngx-sub-status-module" class="headerlink" title="ngx_sub_status_module"></a>ngx_sub_status_module</h2><p>用于输出nginx的基本状态信息。</p>
+<p><strong><code>stub_status</code></strong></p>
+<p><img src="/images/15042694008699.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">location</div><div class="line"></div><div class="line">/basic_status &#123;</div><div class="line">    stub_status;</div><div class="line">    allow 172.16.0.0/16;</div><div class="line">    deny all;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Active connections: 291<br>server accepts handled requests<br> 16630948 16630948 31070465<br>Reading: 6 Writing: 179 Waiting: 106 </p>
+</blockquote>
+<ul>
+<li><code>Active connections</code>: 活动状态的连接数</li>
+<li><code>accepts</code>：已经接受的客户端请求的总数</li>
+<li><code>handled</code>：已经处理完成的客户端请求的总数</li>
+<li><code>requests</code>：客户端发来的总的请求数</li>
+<li><code>Reading</code>：正在读取客户端请求报文首部的连接的连接数</li>
+<li><code>Writing</code>：正在向客户端发送响应报文过程中的连接数</li>
+<li><code>Waiting</code>：正在等待客户端发出请求的空闲连接数</li>
+</ul>
+<h2 id="ngx-http-log-module"><a href="#ngx-http-log-module" class="headerlink" title="ngx_http_log_module"></a>ngx_http_log_module</h2><p>指定http访问日志格式和路径的模块。</p>
+<p><strong><code>log_format</code></strong></p>
+<p><img src="/images/15042721093915.jpg" alt=""></p>
+<p>string可以使用nginx核心模块及其它模块内嵌的变量。<br>Nginx内嵌变量：<a href="http://nginx.org/en/docs/varindex.html" target="_blank" rel="external">http://nginx.org/en/docs/varindex.html</a></p>
+<p>我们可以看到<code>/etc/nginx/nginx.conf</code>的默认的format格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</div><div class="line">                      &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</div><div class="line">                      &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</div></pre></td></tr></table></figure>
+<p>具体分析一下：</p>
+<ul>
+<li><code>$remote_addr</code>：指的就是客户端地址。</li>
+<li><code>$remote_user</code>：Basic认证时候的用户名</li>
+<li><code>[$time_local]</code>： 中括号括起来的本地时间(通用的日志格式的那种）</li>
+<li><code>$request</code>：request URI</li>
+<li><code>$status</code>：响应码</li>
+<li><code>body_bytes_sent</code>：返回的body大小</li>
+<li><code>http_referer</code>：跳转链接，从哪个网页跳转过来，可以用来看外链。</li>
+<li><code>http_user_agent</code>：用户浏览器类型</li>
+<li><code>http_x_forwarded_for</code>：简称XFF头，它代表客户端，也就是HTTP的请求端真实的IP，在通过了HTTP 代理或者负载均衡服务器时会添加该项。</li>
+</ul>
+<blockquote>
+<p>httpd的日志格式默认使用的combined模式，combined格式的默认定义为：<br><code>LogFormat &quot;%h %l %u %t \&quot;%r\&quot; %&gt;s %b \&quot;%{Referer}i\&quot; \&quot;%{User-Agent}i\&quot;&quot; combined</code><br>这里写了各种参数代表的意义：<a href="http://blog.csdn.net/hytfly/article/details/11209909" target="_blank" rel="external">http://blog.csdn.net/hytfly/article/details/11209909</a><br>官方详细参数解析：<a href="http://httpd.apache.org/docs/2.4/mod/mod_log_config.html#formats" target="_blank" rel="external">http://httpd.apache.org/docs/2.4/mod/mod_log_config.html#formats</a></p>
+</blockquote>
+<p><strong><code>access_log</code></strong></p>
+<p><img src="/images/15042721383996.jpg" alt=""></p>
+<p>可以在不同的区域自定义访问日志文件路径和文件名，还有日志格式，以及相关的缓冲的配置：</p>
+<ul>
+<li>buffer=size</li>
+<li>flush=time</li>
+</ul>
+<p><strong><code>open_log_file_cache</code></strong></p>
+<p><img src="/images/15042721222468.jpg" alt=""></p>
+<p>缓存各日志文件相关的元数据信息。</p>
+<ul>
+<li>max：缓存的最大文件描述符数量</li>
+<li>min_uses：在inactive指定的时长内访问大于等于此值方 可被当作活动项</li>
+<li>inactive：非活动时长</li>
+<li>valid：验正缓存中各缓存项是否为活动项的时间间隔</li>
+</ul>
+<h2 id="ngx-gzip-module"><a href="#ngx-gzip-module" class="headerlink" title="ngx_gzip_module"></a>ngx_gzip_module</h2><p><strong><code>gzip</code></strong></p>
+<p>是否开启gzip。</p>
+<p><img src="/images/15042767219690.jpg" alt=""></p>
+<p><strong><code>gzip_comp_level</code></strong></p>
+<p>gzip压缩级别。级别1-9。</p>
+<p><img src="/images/15042767486590.jpg" alt=""></p>
+<p><strong><code>gzip disable</code></strong></p>
+<p>禁止IE6之类的浏览器压缩。</p>
+<p><img src="/images/15042767723557.jpg" alt=""></p>
+<p><strong><code>gzip_min_length</code></strong></p>
+<p>不能多大的文件都压缩吧，那样效率很低，这里规定了gzip压缩的最小响应报文大小。</p>
+<p><img src="/images/15042767839800.jpg" alt=""></p>
+<p><strong><code>gzip_buffers</code></strong></p>
+<p>支持实现压缩功能时为其配置的缓冲区数量及每个缓存区的大小。</p>
+<p><img src="/images/15042767368732.jpg" alt=""></p>
+<p><strong><code>gzip_proxied</code></strong></p>
+<p>nginx作为代理服务器接收到从被代理服务器发送的响应报文后，在何种条件下启用压缩功能的。</p>
+<p><img src="/images/15042769199720.jpg" alt=""></p>
+<p><code>off</code>：对代理的请求不启用。<br><code>no-cache, no-store，private</code>：表示从被代理服务器收到的响应报文首部的Cache-Control的值为此三者中任何一个，则启用压缩功能。</p>
+<p><strong><code>gzip_types mime-type</code></strong></p>
+<p>压缩过滤器，仅对此处设定的MIME类型的内容启用压缩功能。</p>
+<p><img src="/images/15042769348380.jpg" alt=""></p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">gzip  on;</div><div class="line">gzip_comp_level 6;</div><div class="line">gzip_min_length 64;</div><div class="line">gzip_proxied any;</div><div class="line">gzip_types text/xml text/css  application/javascript;</div></pre></td></tr></table></figure>
+<h2 id="ngx-http-ssl-module"><a href="#ngx-http-ssl-module" class="headerlink" title="ngx_http_ssl_module"></a>ngx_http_ssl_module</h2><p><strong><code>ssl</code></strong></p>
+<p>开启或关闭ssl。</p>
+<p><img src="/images/15042783534830.jpg" alt=""></p>
+<p><strong><code>ssl_certificate</code></strong></p>
+<p>当前虚拟主机使用PEM格式的证书文件。</p>
+<p><img src="/images/15042783667235.jpg" alt=""></p>
+<p><strong><code>ssl_certificate_key</code></strong></p>
+<p>当前虚拟主机上与其证书匹配的私钥文件。</p>
+<p><img src="/images/15042783865794.jpg" alt=""></p>
+<p><strong><code>ssl_protocols</code></strong></p>
+<p>支持ssl协议版本，默认为1、1.1、1.2，为了安全可以改为1.3，1.2是有安全漏洞的。</p>
+<p><img src="/images/15042784116536.jpg" alt=""></p>
+<p><strong><code>ssl_session_cache</code></strong></p>
+<p>builtin[:size]：使用OpenSSL内建的缓存，此缓存为每worker进程私有。<br>[shared:name:size]：在各worker之间使用一个共享的缓存。</p>
+<p><img src="/images/15042784835696.jpg" alt=""></p>
+<p><strong><code>ssl_session_timeout</code></strong></p>
+<p>客户端一侧的连接可以复用ssl session cache中缓存的ssl参数的有效时长。</p>
+<p><img src="/images/15042785149633.jpg" alt=""></p>
+<p><code>ngx_http_ssl_module</code>参数示例：</p>
+<p>生成自签名证书<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/pki/CA</div><div class="line">openssl genrsa -out  private/cakey.pem 4096</div><div class="line">chmod go= private/cakey.pem</div><div class="line">openssl req -new -x509 -key private/cakey.pem -out  cacert.pem -days 365</div><div class="line">touch index.txt</div><div class="line"><span class="built_in">echo</span> 01&gt; serial</div><div class="line"><span class="built_in">cd</span> /etc/nginx</div><div class="line">mkdir ssl</div><div class="line"><span class="built_in">cd</span> ssl</div><div class="line">(<span class="built_in">umask</span> 077; openssl genrsa -out nginx.key 2048)</div><div class="line">openssl req -new -key nginx.key -out nginx.csr</div><div class="line">openssl ca -in nginx.csr -out nginx.crt</div></pre></td></tr></table></figure></p>
+<p>配置ssl模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">	listen 443 ssl;</div><div class="line">	server_name www.yulongjun.com;</div><div class="line">	root /vhosts/ssl/htdocs;</div><div class="line">	ssl on;</div><div class="line">	ssl_certificate /etc/nginx/ssl/nginx.crt;</div><div class="line">	ssl_certificate_key /etc/nginx/ssl/nginx.key;</div><div class="line">	ssl_session_cache shared:sslcache:20m;</div><div class="line">	ssl_session_timeout 600s;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="ngx-http-rewrite-module（URL重写）"><a href="#ngx-http-rewrite-module（URL重写）" class="headerlink" title="ngx_http_rewrite_module（URL重写）"></a>ngx_http_rewrite_module（URL重写）</h2><p>有下面几种url重写：</p>
+<blockquote>
+<p><a href="http://bbs.yulongjun.com/" target="_blank" rel="external">http://bbs.yulongjun.com/</a> –&gt; <a href="http://www.yulongjun.com/bbs/">http://www.yulongjun.com/bbs/</a><br><a href="http://www.yulongjun.com/">http://www.yulongjun.com/</a> –&gt; <a href="https://www.yulongjun.com/">https://www.yulongjun.com/</a><br><a href="http://www.yulongjun.com/login.php;username=tom">http://www.yulongjun.com/login.php;username=tom</a> –&gt; <a href="http://www.yulongjun.com/tom/">http://www.yulongjun.com/tom/</a></p>
+<p><a href="http://www.yulongjun.io/bbs/" target="_blank" rel="external">http://www.yulongjun.io/bbs/</a> –&gt; <a href="http://bbs.yulongjun.io/" target="_blank" rel="external">http://bbs.yulongjun.io/</a></p>
+</blockquote>
+<p>将用户请求的URI基于regex所描述的模式进行检查，而后完成替换。</p>
+<p><strong><code>rewrite</code></strong></p>
+<p><img src="/images/15043158084593.jpg" alt=""></p>
+<p>将用户请求的URI基于regex所描述的模式进行检查，匹配到时将其替换为replacement指定的新的URI。</p>
+<p>注意：如果在同一级配置块中存在多个rewrite规则，那么会自下而下逐个检查；被某条件规则替换完成后，会重新一轮的替换检查，因此，隐含有循环机制；[flag]所表示的标志位用于控制此循环机制。</p>
+<p>如果replacement是以<a href="http://或https://开头，则替换结果会直接以重定向返回给客户端。" target="_blank" rel="external">http://或https://开头，则替换结果会直接以重定向返回给客户端。</a></p>
+<p><code>[flag]</code>：</p>
+<ul>
+<li><strong>last</strong>：重写完成后停止对当前URI在当前location中后续的其它重写操作，而后对新的URI启动新一轮重写检查；提前重启新一轮循环(类似于continue)； </li>
+<li><strong>break</strong>：重写完成后停止对当前URI在当前location中后续的其它重写操作，而后直接跳转至重写规则配置块之后的其它配置；结束循环；</li>
+<li><strong>redirect</strong>：重写完成后以临时重定向方式(302 Moved </li>
+<li>Temprarily)直接返回重写后生成的新URI给客户端，由客户端重新发起请求；不能以<a href="http://或https://开头；" target="_blank" rel="external">http://或https://开头；</a></li>
+<li><strong>permanent</strong>：重写完成后以永久重定向方式(301 Moved Permanently)直接返回重写后生成的新URI给客户端，由客户端重新发起请求； </li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rewrite /(.*)$ https://www.yulongjun.io/<span class="variable">$1</span>;</div><div class="line">rewrite /bbs</div></pre></td></tr></table></figure>
+<p><strong><code>return</code></strong></p>
+<p><img src="/images/15043174234909.jpg" alt=""></p>
+<p>停止处理，然后返回一个特殊响应码给客户端。还可以指定返回的url页面。</p>
+<p><strong><code>rewrite_log</code></strong></p>
+<p><img src="/images/15043205846502.jpg" alt=""></p>
+<p>是否开启重写日志</p>
+<p><strong><code>if</code></strong></p>
+<p><img src="/images/15043205419834.jpg" alt=""></p>
+<p>引入一个新的配置上下文 ；条件满足时，执行配置块中的配置指令。只支持在server, location。</p>
+<p>condition：</p>
+<ul>
+<li>比较操作符：<ul>
+<li><code>==</code></li>
+<li><code>!=</code></li>
+<li><code>~</code>：模式匹配，区分字符大小写；</li>
+<li><code>~*</code>：模式匹配，不区分字符大小写；</li>
+<li><code>!~</code>：模式不匹配，区分字符大小写；</li>
+<li><code>!~</code>*：模式不匹配，不区分字符大小写；</li>
+</ul>
+</li>
+<li>文件及目录存在性判断：<br><code>-e</code>, <code>!-e</code><br><code>-f</code>, <code>!-f</code><br><code>-d</code>, <code>!-d</code><br><code>-x</code>, <code>!-x</code></li>
+</ul>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">if ($http_user_agent ~ MSIE) &#123;</div><div class="line">    rewrite ^(.*)$ /msie/$1 break;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if ($http_cookie ~* &quot;id=([^;]+)(?:;|$)&quot;) &#123;</div><div class="line">    set $id $1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if ($request_method = POST) &#123;</div><div class="line">    return 405;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if ($slow) &#123;</div><div class="line">    limit_rate 10k;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if ($invalid_referer) &#123;</div><div class="line">    return 403;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong><code>set</code></strong></p>
+<pre><code>![](/images/15043208822285.jpg)
+</code></pre><p>设置用户自定义变量。</p>
+<h2 id="ngx-http-referer-module"><a href="#ngx-http-referer-module" class="headerlink" title="ngx_http_referer_module"></a>ngx_http_referer_module</h2><p>访问有通过地址直接访问，或者从其他网站跳转过来。</p>
+<p>用过滤<code>referer</code>头域的方法可以来防止盗链。</p>
+<p><strong><code>valid_referers</code></strong></p>
+<p>定义referer首部的合法 可用值。</p>
+<p> <img src="/images/15043213666497.jpg" alt=""></p>
+<ul>
+<li><strong>none</strong>：请求报文首部没有referer首部。</li>
+<li><strong>blocked</strong>：请求报文的referer首部没有值。</li>
+<li><p><strong>server_names</strong>：参数，其可以有值作为主机名或主机名模式。 </p>
+<ul>
+<li><strong>arbitrary_string</strong>：直接字符串，但可使用<code>*</code>作通配符。</li>
+<li><strong>regular expression</strong>：被指定的正则表达式模式匹配到的字符串；要使用<code>~</code>打头，例如 <code>~.*\.yulongjun\.com</code>。</li>
+</ul>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">valid_referers none block server_names *.yulongjun.com yulongjun.* ~\.yulongjun\.;</div><div class="line"></div><div class="line">if($invalid_referer) &#123;</div><div class="line">	return http://www.yulongjun.com/invalid.jpg;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">valid_referers none blocked server_names</div><div class="line">               *.example.com example.* www.example.org/galleries/</div><div class="line">               ~\.google\.;</div><div class="line"></div><div class="line">if ($invalid_referer) &#123;</div><div class="line">    return 403;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/linux/20170823-06-ngx-http-other-modules/" title="06-Nginx的HTTP相关的杂项模块">http://www.yulongjun.com/linux/20170823-06-ngx-http-other-modules/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Nginx-ACL/" rel="tag"># Nginx ACL</a>
+          
+            <a href="/tags/Nginx-Status/" rel="tag"># Nginx Status</a>
+          
+            <a href="/tags/Nginx-Log/" rel="tag"># Nginx Log</a>
+          
+            <a href="/tags/Nginx-Gzip/" rel="tag"># Nginx Gzip</a>
+          
+            <a href="/tags/Nginx-SSL/" rel="tag"># Nginx SSL</a>
+          
+            <a href="/tags/Nginx-Rewrite/" rel="tag"># Nginx Rewrite</a>
+          
+            <a href="/tags/Nginx-Upstream/" rel="tag"># Nginx Upstream</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux/20170821-05-ngx_http_core_module/" rel="next" title="05-ngx_http_core_module详解">
+                <i class="fa fa-chevron-left"></i> 05-ngx_http_core_module详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux/20170823-07-ngx_http_proxy_module/" rel="prev" title="07-ngx_http_proxy_module详解">
+                07-ngx_http_proxy_module详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ngx-http-access-module"><span class="nav-number">1.</span> <span class="nav-text">ngx_http_access_module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ngx-http-auth-basic-module"><span class="nav-number">2.</span> <span class="nav-text">ngx_http_auth_basic_module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ngx-sub-status-module"><span class="nav-number">3.</span> <span class="nav-text">ngx_sub_status_module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ngx-http-log-module"><span class="nav-number">4.</span> <span class="nav-text">ngx_http_log_module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ngx-gzip-module"><span class="nav-number">5.</span> <span class="nav-text">ngx_gzip_module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ngx-http-ssl-module"><span class="nav-number">6.</span> <span class="nav-text">ngx_http_ssl_module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ngx-http-rewrite-module（URL重写）"><span class="nav-number">7.</span> <span class="nav-text">ngx_http_rewrite_module（URL重写）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ngx-http-referer-module"><span class="nav-number">8.</span> <span class="nav-text">ngx_http_referer_module</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

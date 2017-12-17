@@ -1,0 +1,1296 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="function,decorators," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="装饰器(Decorators)">
+<meta property="og:url" content="http://www.yulongjun.com/python/20170511-08-decoractors/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/14977062216336.jpg">
+<meta property="og:updated_time" content="2017-06-17T14:54:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="装饰器(Decorators)">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/14977062216336.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/python/20170511-08-decoractors/"/>
+
+
+
+
+
+  <title> 装饰器(Decorators) | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-server">
+          <a href="/categories/server" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+            
+            服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-database">
+          <a href="/categories/database" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cloud">
+          <a href="/categories/cloud" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            Cloud
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-under-the-ops">
+          <a href="/categories/under-the-ops" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
+            
+            《运维之下》转载
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170511-08-decoractors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                装饰器(Decorators)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-11T17:00:00+08:00">
+                2017-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170511-08-decoractors/" class="leancloud_visitors" data-flag-title="装饰器(Decorators)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/14977062216336.jpg" alt=""></p>
+<a id="more"></a>
+<blockquote>
+<p><strong>装饰器是给已有的函数加上一些小装饰（即一些小功能，这些小功能可能好多函数都会用到），但是不会让这个小装饰（小功能）侵入到原有的模块代码中。</strong><br>                           ——引用于CoolShell.cn的文章：<a href="http://coolshell.cn/articles/11265.html" target="_blank" rel="external">《Python修饰器的函数式编程》</a><br>(下面部分内容摘抄自上述文章)</p>
+</blockquote>
+<hr>
+<h2 id="1-不带参数的装饰器"><a href="#1-不带参数的装饰器" class="headerlink" title="1 不带参数的装饰器"></a>1 不带参数的装饰器</h2><p>先看一个没有用到装饰器的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> time</div><div class="line">   ...: </div><div class="line">   ...: <span class="function"><span class="keyword">def</span> <span class="title">sleep</span><span class="params">(n)</span>:</span></div><div class="line">   ...:     time.sleep(n)</div><div class="line">   ...:     </div><div class="line">   ...: start = time.time()</div><div class="line">   ...: sleep(<span class="number">3</span>)</div><div class="line">   ...: print(time.time()-start)</div><div class="line">   ...: </div><div class="line"><span class="number">3.0056068897247314</span></div></pre></td></tr></table></figure>
+<p>上述代码的作用就是算出<code>sleep(3)</code>这个的执行时间。</p>
+<p>我们可以改写代码，使得计算函数执行时间的代码作为一个函数，接收一个函数，然后计算这个函数的执行时间。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">timeit</span><span class="params">(fn, *args, **kwargs)</span>:</span></div><div class="line">    start = time.time()</div><div class="line">    ret = fn(*args,**kwargs)</div><div class="line">    print(time.time()-start)</div><div class="line">    <span class="keyword">return</span> ret</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sleep</span><span class="params">(n)</span>:</span></div><div class="line">    time.sleep(n)</div><div class="line"></div><div class="line">timeit(sleep,<span class="number">3</span>)</div></pre></td></tr></table></figure>
+<p>上面的代码，必须用timeit来传入sleep函数和sleep的参数来运行，我们可不可以提前装饰下要被装饰的函数，然后调用呢？可以的，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">2</span>]: <span class="keyword">import</span> time</div><div class="line">   ...: </div><div class="line">   ...: <span class="function"><span class="keyword">def</span> <span class="title">timeit</span><span class="params">(fn)</span>:</span></div><div class="line">   ...:     <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">   ...:         start = time.time()</div><div class="line">   ...:         ret = fn(*args, **kwargs)</div><div class="line">   ...:         print(time.time()-start)</div><div class="line">   ...:         <span class="keyword">return</span> ret</div><div class="line">   ...:     <span class="keyword">return</span> wrapper</div><div class="line">   ...: </div><div class="line">   ...: <span class="function"><span class="keyword">def</span> <span class="title">sleep</span><span class="params">(n)</span>:</span></div><div class="line">   ...:     time.sleep(n)</div><div class="line">   ...:     </div><div class="line">   ...: sleep = timeit(sleep) <span class="comment">#提前把sleep函数装饰了。</span></div><div class="line">   ...: sleep(<span class="number">3</span>) <span class="comment"># 再调用函数的时候，就是调用被装饰过的sleep函数了。</span></div><div class="line">   ...: </div><div class="line"><span class="number">3.000748872756958</span></div></pre></td></tr></table></figure>
+<p>Python提供了一种装饰器的<strong>语法糖</strong>，可以把这三行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sleep</span><span class="params">(n)</span>:</span></div><div class="line">    time.sleep(n)</div><div class="line"></div><div class="line">sleep = timeit(sleep)</div></pre></td></tr></table></figure>
+<p>改为下面这三行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@timeit</div><div class="line">def sleep(n):</div><div class="line">    time.sleep(n)</div></pre></td></tr></table></figure>
+<p><strong>完整版语法糖版的装饰器示例如下：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">3</span>]: <span class="keyword">import</span> time</div><div class="line">   ...: </div><div class="line">   ...: <span class="function"><span class="keyword">def</span> <span class="title">timeit</span><span class="params">(fn)</span>:</span></div><div class="line">   ...:     <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">   ...:         start = time.time()</div><div class="line">   ...:         ret = fn(*args,**kwargs)</div><div class="line">   ...:         print(time.time()-start)</div><div class="line">   ...:         <span class="keyword">return</span> ret</div><div class="line">   ...:     <span class="keyword">return</span> wrapper</div><div class="line">   ...: </div><div class="line">   ...: @timeit</div><div class="line">   ...: <span class="function"><span class="keyword">def</span> <span class="title">sleep</span><span class="params">(n)</span>:</span></div><div class="line">   ...:     time.sleep(n)</div><div class="line">   ...: </div><div class="line">   ...: sleep(<span class="number">3</span>)</div><div class="line">   ...: </div><div class="line"><span class="number">3.004680871963501</span></div></pre></td></tr></table></figure>
+<p>装饰器的本质是<strong>高阶函数</strong>，接受一个函数作为参数，并且返回一个函数。</p>
+<p>装饰器通常会返回一个封装函数（上述代码中的<code>wrapper</code>），这个封装函数在传入的函数前后做一些事情。</p>
+<p>详解上述代码：</p>
+<p>我们在<code>timeit</code>装饰器里定义了一个封装函数<code>wrapper</code>，这个<code>wrapper</code>函数在我们真正传入的函数<code>fn</code>的前后做了一些操作，计算出了<code>fn</code>运行的时间差，并且把函数返回回去，然后把这个封装函数<code>wrapper</code>返回回去，替换原来的<code>fn</code>。</p>
+<p><code>@timeit</code> 然后定义的函数<code>sleep</code>，意味着<code>sleep = timeit(sleep)</code>，即<code>sleep</code>即为传入的函数，然后经过<code>wrapper</code>的封装，返回回来，替换原来的<code>sleep</code>。</p>
+<hr>
+<h1 id="2-装饰器里的-wraps用法"><a href="#2-装饰器里的-wraps用法" class="headerlink" title="2 装饰器里的@wraps用法"></a>2 装饰器里的@wraps用法</h1><p>我们看这样一个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">3</span>]: <span class="function"><span class="keyword">def</span> <span class="title">timeit</span><span class="params">(fn)</span>:</span></div><div class="line">   ...:     <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">   ...:         start = time.time()</div><div class="line">   ...:         ret = fn(*args, **kwargs)</div><div class="line">   ...:         print(time.time() - start)</div><div class="line">   ...:         <span class="keyword">return</span> ret</div><div class="line">   ...:     <span class="keyword">return</span> wrapper</div><div class="line">   ...: </div><div class="line">   ...: @timeit</div><div class="line">   ...: <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x, y)</span>:</span></div><div class="line">   ...:     <span class="string">'''x + y'''</span></div><div class="line">   ...:     <span class="keyword">return</span> x + y</div><div class="line">   ...: </div><div class="line"></div><div class="line">In [<span class="number">4</span>]: help(add)</div><div class="line"></div><div class="line">Help on function wrapper <span class="keyword">in</span> module __main__:</div><div class="line"></div><div class="line">wrapper(*args, **kwargs)</div><div class="line"></div><div class="line"></div><div class="line">In [<span class="number">5</span>]: add.__name__</div><div class="line">Out[<span class="number">5</span>]: <span class="string">'wrapper'</span></div></pre></td></tr></table></figure>
+<p>我们本意是求<code>add</code>的用法，和<code>add</code>的名字，结果给的不是我们想要的，是因为我们调用add的帮助和名字，实际上调用的是<code>wrapper</code>，所以我们返回的都是<code>wrapper</code>的help和name。</p>
+<p>这里就可以在装饰器<code>timeit</code>里面用<code>@wraps(fn)</code>方法，这个方法在标准库<code>functools</code>里面。这样我们就可以得到想要的结果了，查看帮助是<code>add</code>的帮助,name是<code>add</code>的name：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">6</span>]: <span class="keyword">from</span> functools <span class="keyword">import</span> wraps</div><div class="line">   ...: </div><div class="line">   ...: <span class="function"><span class="keyword">def</span> <span class="title">timeit</span><span class="params">(fn)</span>:</span></div><div class="line">   ...:     @wraps(fn)   <span class="comment"># 下面的函数wrapper就集成了传入的函数的属性。</span></div><div class="line">   ...:     <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">   ...:         start = time.time()</div><div class="line">   ...:         ret = fn(*args, **kwargs)</div><div class="line">   ...:         print(time.time() - start)</div><div class="line">   ...:         <span class="keyword">return</span> ret</div><div class="line">   ...:     <span class="keyword">return</span> wrapper</div><div class="line">   ...: </div><div class="line">   ...: @timeit</div><div class="line">   ...: <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x, y)</span>:</span></div><div class="line">   ...:     <span class="string">'''x + y'''</span></div><div class="line">   ...:     <span class="keyword">return</span> x + y</div><div class="line">   ...: </div><div class="line"></div><div class="line">In [<span class="number">7</span>]: help(add)</div><div class="line"></div><div class="line">Help on function add <span class="keyword">in</span> module __main__:</div><div class="line"></div><div class="line">add(x, y)</div><div class="line">    x + y</div><div class="line">    </div><div class="line">In [<span class="number">8</span>]: add.__name__</div><div class="line">Out[<span class="number">8</span>]: <span class="string">'add'</span></div></pre></td></tr></table></figure>
+<hr>
+<h1 id="3-带参数的装饰器"><a href="#3-带参数的装饰器" class="headerlink" title="3 带参数的装饰器"></a>3 带参数的装饰器</h1><p>一个程序占用的时间分为用户时间（包括sleep等待的时间），和cpu时间（cpu时间不包括sleep等待的时间）。<br>下面是cpu时间的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">n [<span class="number">12</span>]: <span class="keyword">import</span> time</div><div class="line">    ...: </div><div class="line">    ...: <span class="function"><span class="keyword">def</span> <span class="title">sleep</span><span class="params">(n)</span>:</span></div><div class="line">    ...:     time.sleep(<span class="number">3</span>)</div><div class="line">    ...: </div><div class="line">    ...: start = time.clock()</div><div class="line">    ...: sleep(<span class="number">3</span>)</div><div class="line">    ...: time.clock() - start</div><div class="line">    ...: </div><div class="line">Out[<span class="number">12</span>]: <span class="number">0.0009540000000001214</span></div></pre></td></tr></table></figure>
+<p>我们想写一个装饰器，既可以返回用户时间，又可以返回cpu时间，默认返回的是用户时间（可以用一个开关作为参数，来控制返回的是什么时间），这时候我们就用到了带参数的装饰器：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">13</span>]: <span class="keyword">import</span> time</div><div class="line">    ...: </div><div class="line">    ...: <span class="function"><span class="keyword">def</span> <span class="title">timeit</span><span class="params">(cpu_time = False)</span>:</span></div><div class="line">    ...:     <span class="comment"># 根据传入的参数，来决定是用time.clock还是time.time</span></div><div class="line">    ...:     time_func = time.clock <span class="keyword">if</span> cpu_time <span class="keyword">else</span> time.time </div><div class="line">    ...:     <span class="function"><span class="keyword">def</span> <span class="title">dec</span><span class="params">(fn)</span>:</span></div><div class="line">    ...:         @wraps(fn)</div><div class="line">    ...:         <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">    ...:             start = time_func()</div><div class="line">    ...:             ret = fn(*args, **kwargs)</div><div class="line">    ...:             print(time_func() - start)</div><div class="line">    ...:             <span class="keyword">return</span> ret</div><div class="line">    ...:         <span class="keyword">return</span> wrapper</div><div class="line">    ...:     <span class="keyword">return</span> dec</div><div class="line">    ...: </div><div class="line">    ...: <span class="comment"># 下面注释，等同于@timeit()那段</span></div><div class="line">    ...: <span class="comment"># def fun(n):</span></div><div class="line">    ...: <span class="comment">#     time.sleep(n)</span></div><div class="line">    ...: <span class="comment">#     return n</span></div><div class="line">    ...: <span class="comment"># fun = timeit()(fun)</span></div><div class="line">    ...: <span class="comment"># 其实上面这行，用柯里化就非常好理解了。</span></div><div class="line">    ...: </div><div class="line">    ...: @timeit() <span class="comment"># 参数为空，但也是带了参数了，空参数，传入的参数为默认参数，等同于@timeit(cpu_time = False）</span></div><div class="line">    ...: <span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(n)</span>:</span></div><div class="line">    ...:     time.sleep(n)</div><div class="line">    ...:     <span class="keyword">return</span> n</div><div class="line">    ...: </div><div class="line"></div><div class="line">In [<span class="number">14</span>]: fun(<span class="number">3</span>)</div><div class="line"><span class="number">3.0001399517059326</span></div><div class="line">Out[<span class="number">14</span>]: <span class="number">3</span></div></pre></td></tr></table></figure>
+<p>上面是返回用户时间的装饰器。</p>
+<p>如果后面几行像下面这样写，就是输出cpu时间了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">15</span>]: @timeit(cpu_time = <span class="keyword">True</span>) <span class="comment"># 传入cpu_time的参数为True，覆盖掉False默认参数</span></div><div class="line">    ...: <span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(n)</span>:</span></div><div class="line">    ...:     time.sleep(n)</div><div class="line">    ...:     <span class="keyword">return</span> n</div><div class="line">    ...: </div><div class="line"></div><div class="line">In [<span class="number">16</span>]: fun(<span class="number">3</span>)</div><div class="line"><span class="number">0.0007150000000000212</span></div><div class="line">Out[<span class="number">16</span>]: <span class="number">3</span></div></pre></td></tr></table></figure>
+<p>带参数的装饰器本质是一个函数，传入参数，返回一个新的装饰器。</p>
+<p>带参数的装饰器只允许一层，如果像这样<code>@xxx()()</code>多层了，就会报错。</p>
+<p>多个装饰器装饰的时候，采用就近原则，然后一层层装饰，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@a</span></div><div class="line"><span class="meta">@b</span></div><div class="line"><span class="meta">@c</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">pass</span></div><div class="line"><span class="comment"># 上述等效于a(b(c(fn)))</span></div></pre></td></tr></table></figure>
+<hr>
+<h2 id="4-装饰器的应用"><a href="#4-装饰器的应用" class="headerlink" title="4 装饰器的应用"></a>4 装饰器的应用</h2><h3 id="4-1-给函数调用做缓存"><a href="#4-1-给函数调用做缓存" class="headerlink" title="4.1 给函数调用做缓存"></a>4.1 给函数调用做缓存</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">memo</span><span class="params">(fn)</span>:</span></div><div class="line">    cache = &#123;&#125;</div><div class="line">    miss = object()</div><div class="line"> </div><div class="line"><span class="meta">    @wraps(fn)</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args)</span>:</span></div><div class="line">        result = cache.get(args, miss)</div><div class="line">        <span class="keyword">if</span> result <span class="keyword">is</span> miss:</div><div class="line">            result = fn(*args)</div><div class="line">            cache[args] = result</div><div class="line">        <span class="keyword">return</span> result</div><div class="line"> </div><div class="line">    <span class="keyword">return</span> wrapper</div><div class="line"> </div><div class="line"><span class="meta">@memo</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(n)</span>:</span></div><div class="line">    <span class="keyword">if</span> n &lt; <span class="number">2</span>:</div><div class="line">        <span class="keyword">return</span> n</div><div class="line">    <span class="keyword">return</span> fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>)</div></pre></td></tr></table></figure>
+<p>上面这个例子中，是一个斐波拉契数例的递归算法。我们知道，这个递归是相当没有效率的，因为会重复调用。比如：我们要计算fib(5)，于是其分解成fib(4) + fib(3)，而fib(4)分解成fib(3)+fib(2)，fib(3)又分解成fib(2)+fib(1)…… 你可看到，基本上来说，fib(3), fib(2), fib(1)在整个递归过程中被调用了两次。</p>
+<p>而我们用decorator，在调用函数前查询一下缓存，如果没有才调用了，有了就从缓存中返回值。一下子，这个递归从二叉树式的递归成了线性的递归。</p>
+<h3 id="4-2-给函数打日志"><a href="#4-2-给函数打日志" class="headerlink" title="4.2 给函数打日志"></a>4.2 给函数打日志</h3><p>下面这个示例演示了一个logger的decorator，这个decorator输出了函数名，参数，返回值，和运行时间。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">logger</span><span class="params">(fn)</span>:</span></div><div class="line"><span class="meta">    @wraps(fn)</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">        ts = time.time()</div><div class="line">        result = fn(*args, **kwargs)</div><div class="line">        te = time.time()</div><div class="line">        print(<span class="string">"function      = &#123;0&#125;"</span>.format(fn.__name__))</div><div class="line">        print(<span class="string">"    arguments = &#123;0&#125; &#123;1&#125;"</span>.format(args, kwargs))</div><div class="line">        print(<span class="string">"    return    = &#123;0&#125;"</span>.format(result))</div><div class="line">        print(<span class="string">"    time      = %.6f sec"</span> % (te-ts))</div><div class="line">        <span class="keyword">return</span> result</div><div class="line">    <span class="keyword">return</span> wrapper</div><div class="line"> </div><div class="line"><span class="meta">@logger</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">multipy</span><span class="params">(x, y)</span>:</span></div><div class="line">    <span class="keyword">return</span> x * y</div><div class="line"> </div><div class="line"><span class="meta">@logger</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum_num</span><span class="params">(n)</span>:</span></div><div class="line">    s = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(n+<span class="number">1</span>):</div><div class="line">        s += i</div><div class="line">    <span class="keyword">return</span> s</div><div class="line"> </div><div class="line">print(multipy(<span class="number">2</span>, <span class="number">10</span>))</div><div class="line">print(sum_num(<span class="number">100</span>))</div><div class="line">print(sum_num(<span class="number">10000000</span>))</div></pre></td></tr></table></figure>
+<p>上面那个打日志还是有点粗糙，让我们看一个更好一点的（带log level参数的）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> inspect</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_line_number</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> inspect.currentframe().f_back.f_back.f_lineno</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">logger</span><span class="params">(loglevel)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">log_decorator</span><span class="params">(fn)</span>:</span></div><div class="line"><span class="meta">        @wraps(fn)</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">            ts = time.time()</div><div class="line">            result = fn(*args, **kwargs)</div><div class="line">            te = time.time()</div><div class="line">            <span class="keyword">print</span> <span class="string">"function   = "</span> + fn.__name__,</div><div class="line">            <span class="keyword">print</span> <span class="string">"    arguments = &#123;0&#125; &#123;1&#125;"</span>.format(args, kwargs)</div><div class="line">            <span class="keyword">print</span> <span class="string">"    return    = &#123;0&#125;"</span>.format(result)</div><div class="line">            <span class="keyword">print</span> <span class="string">"    time      = %.6f sec"</span> % (te-ts)</div><div class="line">            <span class="keyword">if</span> (loglevel == <span class="string">'debug'</span>):</div><div class="line">                <span class="keyword">print</span> <span class="string">"    called_from_line : "</span> + str(get_line_number())</div><div class="line">            <span class="keyword">return</span> result</div><div class="line">        <span class="keyword">return</span> wrapper</div><div class="line">    <span class="keyword">return</span> log_decorator</div></pre></td></tr></table></figure>
+<p>但是，上面这个带log level参数的有两具不好的地方，<br>1） loglevel不是debug的时候，还是要计算函数调用的时间。<br>2） 不同level的要写在一起，不易读。</p>
+<p>我们再接着改进：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> inspect</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">advance_logger</span><span class="params">(loglevel)</span>:</span></div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_line_number</span><span class="params">()</span>:</span></div><div class="line">        <span class="keyword">return</span> inspect.currentframe().f_back.f_back.f_lineno</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_basic_log</span><span class="params">(fn, result, *args, **kwargs)</span>:</span></div><div class="line">        <span class="keyword">print</span> <span class="string">"function   = "</span> + fn.__name__,</div><div class="line">        <span class="keyword">print</span> <span class="string">"    arguments = &#123;0&#125; &#123;1&#125;"</span>.format(args, kwargs)</div><div class="line">        <span class="keyword">print</span> <span class="string">"    return    = &#123;0&#125;"</span>.format(result)</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">info_log_decorator</span><span class="params">(fn)</span>:</span></div><div class="line"><span class="meta">        @wraps(fn)</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">            result = fn(*args, **kwargs)</div><div class="line">            _basic_log(fn, result, args, kwargs)</div><div class="line">        <span class="keyword">return</span> wrapper</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">debug_log_decorator</span><span class="params">(fn)</span>:</span></div><div class="line"><span class="meta">        @wraps(fn)</span></div><div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwargs)</span>:</span></div><div class="line">            ts = time.time()</div><div class="line">            result = fn(*args, **kwargs)</div><div class="line">            te = time.time()</div><div class="line">            _basic_log(fn, result, args, kwargs)</div><div class="line">            <span class="keyword">print</span> <span class="string">"    time      = %.6f sec"</span> % (te-ts)</div><div class="line">            <span class="keyword">print</span> <span class="string">"    called_from_line : "</span> + str(get_line_number())</div><div class="line">        <span class="keyword">return</span> wrapper</div><div class="line"> </div><div class="line">    <span class="keyword">if</span> loglevel <span class="keyword">is</span> <span class="string">"debug"</span>:</div><div class="line">        <span class="keyword">return</span> debug_log_decorator</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> info_log_decorator</div></pre></td></tr></table></figure>
+<p>你可以看到两点，<br>1）我们分了两个log level，一个是info的，一个是debug的，然后我们在外尾根据不同的参数返回不同的decorator。<br>2）我们把info和debug中的相同的代码抽到了一个叫_basic_log的函数里，DRY原则。</p>
+<blockquote>
+<p>以上例子来自于：<a href="http://coolshell.cn/articles/11265.html" target="_blank" rel="external">http://coolshell.cn/articles/11265.html</a><br>其他装饰器例子参考：<a href="https://wiki.python.org/moin/PythonDecoratorLibrary" target="_blank" rel="external">https://wiki.python.org/moin/PythonDecoratorLibrary</a></p>
+<p>英文不错的也可以参考英文文章，比如这篇<a href="https://qxf2.com/blog/python-decorators/" target="_blank" rel="external">https://qxf2.com/blog/python-decorators/</a>，文章开头图片来自于此文章。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/python/20170511-08-decoractors/" title="装饰器(Decorators)">http://www.yulongjun.com/python/20170511-08-decoractors/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/function/" rel="tag"># function</a>
+          
+            <a href="/tags/decorators/" rel="tag"># decorators</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/python/20170511-07-higher-order-function/" rel="next" title="高阶函数、闭包、偏函数、柯里化、匿名函数">
+                <i class="fa fa-chevron-left"></i> 高阶函数、闭包、偏函数、柯里化、匿名函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/python/20170512-01-define-class/" rel="prev" title="01-类（Class）的定义">
+                01-类（Class）的定义 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-不带参数的装饰器"><span class="nav-number">1.</span> <span class="nav-text">1 不带参数的装饰器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-装饰器里的-wraps用法"><span class="nav-number"></span> <span class="nav-text">2 装饰器里的@wraps用法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-带参数的装饰器"><span class="nav-number"></span> <span class="nav-text">3 带参数的装饰器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-装饰器的应用"><span class="nav-number">1.</span> <span class="nav-text">4 装饰器的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-给函数调用做缓存"><span class="nav-number">1.1.</span> <span class="nav-text">4.1 给函数调用做缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-给函数打日志"><span class="nav-number">1.2.</span> <span class="nav-text">4.2 给函数打日志</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>
