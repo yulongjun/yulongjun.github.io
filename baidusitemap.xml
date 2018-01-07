@@ -4,6 +4,114 @@
 
     
   <url>
+    <loc>http://www.yulongjun.com/cloud/20170922-gitlab/</loc>
+    <lastmod>2018-01-07T12:32:26.679Z</lastmod>
+    <data>
+        <display>
+        <title>CentOS7上简单安装部署GitLab</title>
+        <pubTime>2017-09-22T12:04:31.000Z</pubTime>
+        
+        <tag>GitLab</tag>
+         
+         
+           
+             
+              <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170904-01-keepalived-introduction/</loc>
+    <lastmod>2018-01-07T12:31:44.551Z</lastmod>
+    <data>
+        <display>
+        <title>01-Keepalived介绍</title>
+        <pubTime>2017-09-04T10:30:00.000Z</pubTime>
+        
+        <tag>Keepalived</tag>
+         
+        <tag>VRRP</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170904-04-keepalived-lvs/</loc>
+    <lastmod>2018-01-07T12:31:37.031Z</lastmod>
+    <data>
+        <display>
+        <title>04-单网络双活模式的Keepalived+LVS-DR配置</title>
+        <pubTime>2017-09-04T13:30:00.000Z</pubTime>
+        
+        <tag>VRRP</tag>
+         
+        <tag>Keepalived+LVS</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170904-05-keepalived-nginx/</loc>
+    <lastmod>2018-01-07T12:31:36.219Z</lastmod>
+    <data>
+        <display>
+        <title>05-双网络双活模式的Keepalived+Nginx配置</title>
+        <pubTime>2017-09-04T14:30:00.000Z</pubTime>
+        
+        <tag>VRRP</tag>
+         
+        <tag>Keepalived+Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/cloud/20170922-git/</loc>
+    <lastmod>2018-01-07T12:30:16.365Z</lastmod>
+    <data>
+        <display>
+        <title>Git和GitHub笔记</title>
+        <pubTime>2017-09-22T11:04:31.000Z</pubTime>
+        
+        <tag>Git</tag>
+         
+        <tag>GitHub</tag>
+         
+         
+           
+             
+              <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.yulongjun.com/python/20180107-learning-load-balance/</loc>
     <lastmod>2018-01-07T12:21:01.000Z</lastmod>
     <data>
@@ -56,11 +164,11 @@
         <title>CentOS下Python多版本控制软件的安装：pyenv、pyenv-virtualenv</title>
         <pubTime>2017-05-07T15:33:12.000Z</pubTime>
         
-        <tag>CentOS</tag>
-         
         <tag>pyenv</tag>
          
         <tag>pyenv-virtualenv</tag>
+         
+        <tag>CentOS</tag>
          
          
            
@@ -354,11 +462,11 @@
         <title>04-权限和ACL练习题</title>
         <pubTime>2017-05-27T15:26:33.000Z</pubTime>
         
-        <tag>permission</tag>
-         
         <tag>acl</tag>
          
         <tag>facl</tag>
+         
+        <tag>permission</tag>
          
         <tag>practice</tag>
          
@@ -394,26 +502,6 @@
            
              
               <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/cloud/20170922-gitlab/</loc>
-    <lastmod>2017-10-17T04:59:56.000Z</lastmod>
-    <data>
-        <display>
-        <title>CentOS7上简单安装部署GitLab</title>
-        <pubTime>2017-09-22T12:04:31.000Z</pubTime>
-        
-        <tag>GitLab</tag>
-         
-         
-           
-             
-              <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
           
         </display>
     </data>
@@ -1132,9 +1220,9 @@
         
         <tag>Linux</tag>
          
-        <tag>install</tag>
-         
         <tag>CentOS 6</tag>
+         
+        <tag>install</tag>
          
          
            
@@ -1156,9 +1244,9 @@
         
         <tag>Linux</tag>
          
-        <tag>CentOS 7</tag>
-         
         <tag>install</tag>
+         
+        <tag>CentOS 7</tag>
          
          
            
@@ -1202,11 +1290,11 @@
         <title>03-文本处理练习题</title>
         <pubTime>2017-05-31T15:30:42.000Z</pubTime>
         
-        <tag>RegExp</tag>
-         
         <tag>grep</tag>
          
         <tag>egrep</tag>
+         
+        <tag>RegExp</tag>
          
          
            
@@ -1226,11 +1314,11 @@
         <title>02-正则表达式(RegExp)</title>
         <pubTime>2017-05-31T15:12:09.000Z</pubTime>
         
-        <tag>RegExp</tag>
-         
         <tag>grep</tag>
          
         <tag>egrep</tag>
+         
+        <tag>RegExp</tag>
          
          
            
@@ -1665,28 +1753,6 @@
 
     
   <url>
-    <loc>http://www.yulongjun.com/cloud/20170922-git/</loc>
-    <lastmod>2017-10-04T14:49:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>Git和GitHub笔记</title>
-        <pubTime>2017-09-22T11:04:31.000Z</pubTime>
-        
-        <tag>Git</tag>
-         
-        <tag>GitHub</tag>
-         
-         
-           
-             
-              <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.yulongjun.com/linux/20170404-01-start/</loc>
     <lastmod>2017-10-03T02:41:20.000Z</lastmod>
     <data>
@@ -1834,72 +1900,6 @@
         <pubTime>2017-08-23T13:44:51.000Z</pubTime>
         
         <tag>Nginx FastCGI</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170904-01-keepalived-introduction/</loc>
-    <lastmod>2017-09-09T13:52:55.000Z</lastmod>
-    <data>
-        <display>
-        <title>01-Keepalived介绍</title>
-        <pubTime>2017-09-04T10:30:00.000Z</pubTime>
-        
-        <tag>Keepalived</tag>
-         
-        <tag>VRRP</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170904-05-keepalived-nginx/</loc>
-    <lastmod>2017-09-09T12:32:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>05-双网络双活模式的Keepalived+Nginx配置</title>
-        <pubTime>2017-09-04T14:30:00.000Z</pubTime>
-        
-        <tag>VRRP</tag>
-         
-        <tag>Keepalived+Nginx</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170904-04-keepalived-lvs/</loc>
-    <lastmod>2017-09-09T12:32:09.000Z</lastmod>
-    <data>
-        <display>
-        <title>04-单网络双活模式的Keepalived+LVS-DR配置</title>
-        <pubTime>2017-09-04T13:30:00.000Z</pubTime>
-        
-        <tag>VRRP</tag>
-         
-        <tag>Keepalived+LVS</tag>
          
          
            

@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.yulongjun.com/cloud/20170922-gitlab/</loc>
+    
+    <lastmod>2018-01-07T12:32:26.679Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170904-01-keepalived-introduction/</loc>
+    
+    <lastmod>2018-01-07T12:31:44.551Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170904-04-keepalived-lvs/</loc>
+    
+    <lastmod>2018-01-07T12:31:37.031Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.yulongjun.com/linux/20170904-05-keepalived-nginx/</loc>
+    
+    <lastmod>2018-01-07T12:31:36.219Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.yulongjun.com/cloud/20170922-git/</loc>
+    
+    <lastmod>2018-01-07T12:30:16.365Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.yulongjun.com/python/20180107-learning-load-balance/</loc>
     
     <lastmod>2018-01-07T12:21:01.000Z</lastmod>
@@ -131,13 +166,6 @@
     <loc>http://www.yulongjun.com/linux/20170522-05-inode-link/</loc>
     
     <lastmod>2017-10-18T02:57:55.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/cloud/20170922-gitlab/</loc>
-    
-    <lastmod>2017-10-17T04:59:56.000Z</lastmod>
     
   </url>
   
@@ -541,13 +569,6 @@
   </url>
   
   <url>
-    <loc>http://www.yulongjun.com/cloud/20170922-git/</loc>
-    
-    <lastmod>2017-10-04T14:49:06.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.yulongjun.com/linux/20170404-01-start/</loc>
     
     <lastmod>2017-10-03T02:41:20.000Z</lastmod>
@@ -600,27 +621,6 @@
     <loc>http://www.yulongjun.com/linux/20170823-09-ngx_http_upstream_module/</loc>
     
     <lastmod>2017-09-09T16:16:11.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170904-01-keepalived-introduction/</loc>
-    
-    <lastmod>2017-09-09T13:52:55.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170904-05-keepalived-nginx/</loc>
-    
-    <lastmod>2017-09-09T12:32:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170904-04-keepalived-lvs/</loc>
-    
-    <lastmod>2017-09-09T12:32:09.000Z</lastmod>
     
   </url>
   

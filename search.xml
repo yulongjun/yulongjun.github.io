@@ -1283,9 +1283,9 @@
         <category>linux</category>
       </categories>
       <tags>
-        <tag>RegExp</tag>
         <tag>grep</tag>
         <tag>egrep</tag>
+        <tag>RegExp</tag>
       </tags>
   </entry>
   <entry>
@@ -1296,9 +1296,9 @@
         <category>linux</category>
       </categories>
       <tags>
-        <tag>RegExp</tag>
         <tag>grep</tag>
         <tag>egrep</tag>
+        <tag>RegExp</tag>
       </tags>
   </entry>
   <entry>
@@ -1323,9 +1323,9 @@
         <category>linux</category>
       </categories>
       <tags>
-        <tag>permission</tag>
         <tag>acl</tag>
         <tag>facl</tag>
+        <tag>permission</tag>
         <tag>practice</tag>
       </tags>
   </entry>
@@ -1676,8 +1676,8 @@
       </categories>
       <tags>
         <tag>Linux</tag>
-        <tag>CentOS 7</tag>
         <tag>install</tag>
+        <tag>CentOS 7</tag>
       </tags>
   </entry>
   <entry>
@@ -1689,8 +1689,8 @@
       </categories>
       <tags>
         <tag>Linux</tag>
-        <tag>install</tag>
         <tag>CentOS 6</tag>
+        <tag>install</tag>
       </tags>
   </entry>
   <entry>
@@ -2227,9 +2227,9 @@
         <category>python</category>
       </categories>
       <tags>
-        <tag>CentOS</tag>
         <tag>pyenv</tag>
         <tag>pyenv-virtualenv</tag>
+        <tag>CentOS</tag>
       </tags>
   </entry>
   <entry>
@@ -2272,11 +2272,8 @@
   </entry>
   <entry>
     <title><![CDATA[新的开始]]></title>
-    <url>%2Fcloud%2F20170404-03-start-cloud%2F</url>
+    <url>%2Flinux%2F20170404-01-start%2F</url>
     <content type="text"><![CDATA[全新的开始，敬请期待!]]></content>
-      <categories>
-        <category>cloud</category>
-      </categories>
   </entry>
   <entry>
     <title><![CDATA[新的开始]]></title>
@@ -2288,7 +2285,10 @@
   </entry>
   <entry>
     <title><![CDATA[新的开始]]></title>
-    <url>%2Flinux%2F20170404-01-start%2F</url>
+    <url>%2Fcloud%2F20170404-03-start-cloud%2F</url>
     <content type="text"><![CDATA[全新的开始，敬请期待!]]></content>
+      <categories>
+        <category>cloud</category>
+      </categories>
   </entry>
 </search>
