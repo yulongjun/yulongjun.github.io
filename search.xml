@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[【置顶】Learning Load Balance 目录]]></title>
+    <url>%2Fpython%2F20180107-learning-load-balance%2F</url>
+    <content type="text"><![CDATA[Vagrant由于会用到很多机器做实验，故推荐使用Vagrant来批量创建虚拟机。 ✔Vagrant–快速搭建实验环境利器✔自制的 Vagrant box —— longdream/centos7 LVS ✔LVS原理 ✔LVS/NAT实验 ✔LVS/DR实验 Nginx ✔01-Nginx简介 ✔02-IO模型 ✔03-Nginx的主配置文件 ✔04-Nginx的默认http配置 ✔05-ngx_http_core_module详解 ✔06-Nginx的HTTP相关的杂项模块 ✔07-ngx_http_proxy_module详解 ✔08-ngx_http_fastcgi_module详解 ✔09-ngx_http_upstream_module详解 ✔10-ngx_stream*_module详解 HAProxy ✔01-HAProxy简介 ✔02-HAProxy简单配置和基本用法 ✔03-HAProxy 具体配置参数 ✔04-HAProxy统计页面 未完待续]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>TOC</tag>
+        <tag>Python3</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[【置顶】Learning Linux目录]]></title>
     <url>%2Flinux%2F20171111-learning-linux-toc%2F</url>
-    <content type="text"><![CDATA[这里存放的我的Linux笔记，供自己随时搜索和使用，同时共享给需要的人。系统采用的是CentOS7.3（主要使用，2017.9.18日之后更换为CentOS7.4)和CentOS6.9（少量使用）。每篇文章都可以评论，使用GitHub、微信、QQ、微博等均可登录评论。 ✔：代表已完成。 ✘：代表未完成。 近期调整目录结构，如果跳转链接有问题，请留言给我进行调整。 前言： ✔文章所使用的markdown语法 ✔本文章集合所遵循的开源协议以及开源协议介绍(GPL,LGPL,BSD,MIT,Apache,CC) ✔工欲善其事必先利其器 —— Xmanager Enterprise 5 和 RealVNC 5/6介绍 ✔学会科学上网 —— 用搬瓦工和Shadowsocks搭梯子 第一章 Linux 基础Linux简介 ✔Linux发行版时间线2017年版本 Linux安装 ✔CentOS 6 安装步骤 ✔CentOS 7 安装步骤 Linux基础命令 ✔01-命令基本格式 ✔02-查看命令帮助 ✔03-命令信息相关命令 ✔04-别名的使用方法 ✔05-关机重启命令 ✔06-日期时间相关命令 ✔07-回显命令 ✔08-换行（LF）和回车（CR）详解 ✔09-延伸小技巧screen、script、scriptreplay ✔10-基础命令练习题 Linux文件和目录管理 ✔01-Linux系统层级结构标准 ✔02-历史命令用法 ✔03-bash快捷键 ✔04-Linux文件类型和文件相关命令 ✔05-inode、软硬链接 IO重定向和管道 ✔01-IO重定向 ✔02-管道 ✔03-IO重定向和管道练习题 用户用户组管理 ✔01-什么是用户和组 ✔02-用户和组文件 ✔03-用户和用户组的管理命令 ✔04-用户和组练习题 ✔05-实践：Linux用户、组和密码相关文件被破坏如何恢复系统 权限和ACL访问控制 ✔01-权限 ✔02-特殊权限 ✔03-访问控制列表（ACL） ✔04-权限和ACL练习题 文本处理和正则表达式 ✔01-文本处理工具(cut、sort、tr、grep等) ✔02-正则表达式 ✔03-文本处理练习题 vim用法 ✔01-vim简明教程(附快速记忆方法) rpm、yum、编译安装程序 ✔01-程序包管理工具rpm ✔02-程序包管理工具yum ✔03-打包压缩命令tar、zip、split ✔04-编译安装make Shell基础 ✔01-全局变量和局部变量 ✔02-位置变量和退出码 ✘03-运算 ✔04-条件测试 ✔05-bash配置相关 第一章测试题 ✔第一阶段测试题 第二章 Linux磁盘、网络、进程管理磁盘管理 ✔磁盘分区管理 ✔磁盘阵列（RAID） ✔HPE x86服务器硬RAID做法 ✔逻辑卷管理（LVM） 网络管理 ✔网络模型 ✔CentOS6网络命令 ✔CentOS6网络配置 ✔CentOS7网络配置 ✔网卡绑定bonding 进程管理 ✔进程 ✔kill命令 ✔计划任务at、cron shell进阶 ✔流程 ✔函数 ✔数组和关联数组 ✔字符串处理 ✔sed ▬awk 推荐看《AWK程序设计语言》的中文开源翻译 20170704——练习题 ✔Shell流程练习题 ✔Shell函数练习题 第三章 LFS编译安装Linux启动流程 ✔CentOS5、CentOS6启动流程 ✘CentOS7启动流程 待更新 ✔破坏实验–破坏5的initrd、6和7的initramfs文件，然后恢复 LFS编译安装 ✔Linux From Scratch 8 之一–构建前准备主机系统 ✔Linux From Scratch 8 之二–创建LFS的分区，下载源码包 未完待续 第四章 Linux安全管理SELinux 待更新 OpenSSL ✔CA认证和证书 SSH ✔SSH客户端命令 ✔SSH转发 ✔SSH服务端 Sudo ✔Sudo TCP_Wrapper ✔TCP_Wrapper应用级防火墙 PAM ✔PAM安全认证模块 第五章 Linux自动化安装 ✘Kickstart详解 ✔自制Kickstart光盘 ✔DHCP服务 ✔TFTP服务和PXE功能 ✔Cobbler——无人值守安装多种版本多种配置操作系统 ✔Cobbler——添加网络同步仓库（Reposync用法) 第六章 Linux基础服务日志管理服务✘ DNS服务（bind的使用） ✔01-什么是DNS ✔02-DNS如何工作 ✔03-DNS记录类型 ✔04-bind配置文件 ✔05-bind辅助工具 ✔06-bind主从复制 ✔07-DNS实战配置指南（转载） HTTP服务 ✘HTTP服务简介 ✘httpd2.2 ✘httpd2.4 ✘LAMP搭建 ✔LAMP 一键安装脚本 FTP服务 ✘ NFS服务 ✘ Samba服务 ✘ 防火墙服务 ✔防火墙Netfilter/iptables 第七章 负载均衡和高可用集群服务Vagrant前期实验，用Vmware和Virtualbox手动安装使用就够了，但是后面会用到很多机器做实验，故推荐使用Vagrant。 ✔Vagrant–快速搭建实验环境利器自制的 Vagrant box —— longdream/centos7 LVS ✔LVS原理 ✔LVS/NAT实验 ✔LVS/DR实验 Nginx ✔01-Nginx简介 ✔02-IO模型 ✔03-Nginx的主配置文件 ✔04-Nginx的默认http配置 ✔05-ngx_http_core_module详解 ✔06-Nginx的HTTP相关的杂项模块 ✔07-ngx_http_proxy_module详解 ✔08-ngx_http_fastcgi_module详解 ✔09-ngx_http_upstream_module详解 ✔10-ngx_stream*_module详解 HAProxy ✔01-HAProxy简介 ✔02-HAProxy简单配置和基本用法 ✔03-HAProxy 具体配置参数 ✔04-HAProxy统计页面 未完待续 Tomcat ✔01-Tomcat基础知识 ✔02-Tomcat设置管理页面 ✘Tomcat基本配置 ✘Tomcat高级配置 Keepalived ✔01-Keepalived介绍 ✔02-Keepalived配置 ✔03-Keepalived各种模式配置 ✔04-单网络双活模式的Keepalived+LVS配置 ✔05-双网络双活模式的Keepalived+Nginx配置 第八章 缓存、消息队列Memcached Memcached简介Memcached配置详解✘Tomcat搭配Memcached Varnish ✘Varnish原理 ✘Varnish配置 RabbitMQ**✘ 第九章 数据库SQL基础 ✔01-数据库和SQL简介 ✔02-MariaDB安装 ✔03-SQL语句简单示例 ✔04-SELECT语句 ✔05-INSERT、DELETE、UPDATE语句 MySQL基础 ✘数据管理系统基础 ✘MySQL存储引擎 ✘MySQL事务和隔离级别 ✘MYSQL账号和权限管理 ✘MySQL索引 ✘MySQL日志 ✔ MySQL备份恢复（mysqldump、xtrabackup） ✘MySQL扩展机制概述 ✘MySQL复制实践 ✘MySQL复制及读写分离 ✘MySQL主节点高可用 OracleMongoDBRedis第十章 自动化部署Git、GitHub、GitLab ✔Git和GitHub笔记） JekinsAnsible ✘Ansible简介✘Ansible Roles Puppet ✘ 第十一章 监控Zabbix ✔01-Zabbix Server安装指南） ✔02-Zabbix Agent 安装指南和 Zabbix Server 设置自动发现 ✔03-Zabbix Server设置主机监控 ✔04-Zabbix Web 中文字体显示问题 ✔05-Zabbix trigger（触发器）设置 ✔06-Zabbix Actions(动作）设置 ✘Zabbix SNMP 监控设置 ✘Zabbix JMX 监控设置 ✘Zabbix IPMI 监控设置 ✘Zabbix Proxy 设置 ✘Zabbix自定义监控脚本 Open-FalconElastic Stack第十二章 虚拟化KVMOpenStack✘KVM ✔OpenStack简介 ✔01-OpenStack(Pike)安装实战——环境准备 LXCDockerKubernetes]]></content>
+    <content type="text"><![CDATA[这里存放的我的Linux笔记，供自己随时搜索和使用，同时共享给需要的人。系统采用的是CentOS7.3（主要使用，2017.9.18日之后更换为CentOS7.4)和CentOS6.9（少量使用）。每篇文章都可以评论，使用GitHub、微信、QQ、微博等均可登录评论。 ✔：代表已完成。 ✘：代表未完成。 近期调整目录结构，如果跳转链接有问题，请留言给我进行调整。 前言： ✔文章所使用的markdown语法 ✔本文章集合所遵循的开源协议以及开源协议介绍(GPL,LGPL,BSD,MIT,Apache,CC) ✔工欲善其事必先利其器 —— Xmanager Enterprise 5 和 RealVNC 5/6介绍 ✔学会科学上网 —— 用搬瓦工和Shadowsocks搭梯子 第一章 Linux 基础Linux简介 ✔Linux发行版时间线2017年版本 Linux安装 ✔CentOS 6 安装步骤 ✔CentOS 7 安装步骤 Linux基础命令 ✔01-命令基本格式 ✔02-查看命令帮助 ✔03-命令信息相关命令 ✔04-别名的使用方法 ✔05-关机重启命令 ✔06-日期时间相关命令 ✔07-回显命令 ✔08-换行（LF）和回车（CR）详解 ✔09-延伸小技巧screen、script、scriptreplay ✔10-基础命令练习题 Linux文件和目录管理 ✔01-Linux系统层级结构标准 ✔02-历史命令用法 ✔03-bash快捷键 ✔04-Linux文件类型和文件相关命令 ✔05-inode、软硬链接 IO重定向和管道 ✔01-IO重定向 ✔02-管道 ✔03-IO重定向和管道练习题 用户用户组管理 ✔01-什么是用户和组 ✔02-用户和组文件 ✔03-用户和用户组的管理命令 ✔04-用户和组练习题 ✔05-实践：Linux用户、组和密码相关文件被破坏如何恢复系统 权限和ACL访问控制 ✔01-权限 ✔02-特殊权限 ✔03-访问控制列表（ACL） ✔04-权限和ACL练习题 文本处理和正则表达式 ✔01-文本处理工具(cut、sort、tr、grep等) ✔02-正则表达式 ✔03-文本处理练习题 vim用法 ✔01-vim简明教程(附快速记忆方法) rpm、yum、编译安装程序 ✔01-程序包管理工具rpm ✔02-程序包管理工具yum ✔03-打包压缩命令tar、zip、split ✔04-编译安装make Shell基础 ✔01-全局变量和局部变量 ✔02-位置变量和退出码 ✘03-运算 ✔04-条件测试 ✔05-bash配置相关 第一章测试题 ✔第一阶段测试题 第二章 Linux磁盘、网络、进程管理磁盘管理 ✔磁盘分区管理 ✔磁盘阵列（RAID） ✔HPE x86服务器硬RAID做法 ✔逻辑卷管理（LVM） 网络管理 ✔网络模型 ✔CentOS6网络命令 ✔CentOS6网络配置 ✔CentOS7网络配置 ✔网卡绑定bonding 进程管理 ✔进程 ✔kill命令 ✔计划任务at、cron shell进阶 ✔流程 ✔函数 ✔数组和关联数组 ✔字符串处理 ✔sed ▬awk 推荐看《AWK程序设计语言》的中文开源翻译 20170704——练习题 ✔Shell流程练习题 ✔Shell函数练习题 第三章 LFS编译安装Linux启动流程 ✔CentOS5、CentOS6启动流程 ✘CentOS7启动流程 待更新 ✔破坏实验–破坏5的initrd、6和7的initramfs文件，然后恢复 LFS编译安装 ✔Linux From Scratch 8 之一–构建前准备主机系统 ✔Linux From Scratch 8 之二–创建LFS的分区，下载源码包 未完待续 第四章 Linux安全管理SELinux 待更新 OpenSSL ✔CA认证和证书 SSH ✔SSH客户端命令 ✔SSH转发 ✔SSH服务端 Sudo ✔Sudo TCP_Wrapper ✔TCP_Wrapper应用级防火墙 PAM ✔PAM安全认证模块 第五章 Linux自动化安装 ✘Kickstart详解 ✔自制Kickstart光盘 ✔DHCP服务 ✔TFTP服务和PXE功能 ✔Cobbler——无人值守安装多种版本多种配置操作系统 ✔Cobbler——添加网络同步仓库（Reposync用法) 第六章 Linux基础服务DNS服务（bind的使用） ✔01-什么是DNS ✔02-DNS如何工作 ✔03-DNS记录类型 ✔04-bind配置文件 ✔05-bind辅助工具 ✔06-bind主从复制 ✔07-DNS实战配置指南（转载） 第七章 负载均衡和高可用集群服务Tomcat ✔01-Tomcat基础知识 ✔02-Tomcat设置管理页面 ✘Tomcat基本配置 ✘Tomcat高级配置 Keepalived ✔01-Keepalived介绍 ✔02-Keepalived配置 ✔03-Keepalived各种模式配置 ✔04-单网络双活模式的Keepalived+LVS配置 ✔05-双网络双活模式的Keepalived+Nginx配置 第八章 缓存、消息队列Memcached Memcached简介Memcached配置详解✘Tomcat搭配Memcached Varnish ✘Varnish原理 ✘Varnish配置 RabbitMQ**✘ 第九章 数据库SQL基础 ✔01-数据库和SQL简介 ✔02-MariaDB安装 ✔03-SQL语句简单示例 ✔04-SELECT语句 ✔05-INSERT、DELETE、UPDATE语句 MySQL基础 ✘数据管理系统基础 ✘MySQL存储引擎 ✘MySQL事务和隔离级别 ✘MYSQL账号和权限管理 ✘MySQL索引 ✘MySQL日志 ✔ MySQL备份恢复（mysqldump、xtrabackup） ✘MySQL扩展机制概述 ✘MySQL复制实践 ✘MySQL复制及读写分离 ✘MySQL主节点高可用 OracleMongoDBRedis第十章 自动化部署Git、GitHub、GitLab ✔Git和GitHub笔记） JekinsAnsible ✘Ansible简介✘Ansible Roles Puppet ✘ 第十一章 监控Zabbix ✔01-Zabbix Server安装指南） ✔02-Zabbix Agent 安装指南和 Zabbix Server 设置自动发现 ✔03-Zabbix Server设置主机监控 ✔04-Zabbix Web 中文字体显示问题 ✔05-Zabbix trigger（触发器）设置 ✔06-Zabbix Actions(动作）设置 ✘Zabbix SNMP 监控设置 ✘Zabbix JMX 监控设置 ✘Zabbix IPMI 监控设置 ✘Zabbix Proxy 设置 ✘Zabbix自定义监控脚本 Open-FalconElastic Stack第十二章 虚拟化KVMOpenStack✘KVM ✔OpenStack简介 ✔01-OpenStack(Pike)安装实战——环境准备 LXCDockerKubernetes]]></content>
       <categories>
         <category>linux</category>
       </categories>
@@ -20,8 +32,8 @@
         <category>python</category>
       </categories>
       <tags>
-        <tag>Python3</tag>
         <tag>TOC</tag>
+        <tag>Python3</tag>
       </tags>
   </entry>
   <entry>
@@ -1271,9 +1283,9 @@
         <category>linux</category>
       </categories>
       <tags>
+        <tag>RegExp</tag>
         <tag>grep</tag>
         <tag>egrep</tag>
-        <tag>RegExp</tag>
       </tags>
   </entry>
   <entry>
@@ -1284,9 +1296,9 @@
         <category>linux</category>
       </categories>
       <tags>
+        <tag>RegExp</tag>
         <tag>grep</tag>
         <tag>egrep</tag>
-        <tag>RegExp</tag>
       </tags>
   </entry>
   <entry>
@@ -1297,10 +1309,10 @@
         <category>linux</category>
       </categories>
       <tags>
+        <tag>grep</tag>
         <tag>cut</tag>
         <tag>sort</tag>
         <tag>wc</tag>
-        <tag>grep</tag>
       </tags>
   </entry>
   <entry>
@@ -1370,8 +1382,8 @@
         <category>linux</category>
       </categories>
       <tags>
-        <tag>group</tag>
         <tag>user</tag>
+        <tag>group</tag>
       </tags>
   </entry>
   <entry>
@@ -1382,8 +1394,8 @@
         <category>linux</category>
       </categories>
       <tags>
-        <tag>group</tag>
         <tag>user</tag>
+        <tag>group</tag>
       </tags>
   </entry>
   <entry>
@@ -1394,9 +1406,9 @@
         <category>linux</category>
       </categories>
       <tags>
+        <tag>group</tag>
         <tag>passwd</tag>
         <tag>shadow</tag>
-        <tag>group</tag>
       </tags>
   </entry>
   <entry>
@@ -1407,8 +1419,8 @@
         <category>linux</category>
       </categories>
       <tags>
-        <tag>group</tag>
         <tag>user</tag>
+        <tag>group</tag>
       </tags>
   </entry>
   <entry>

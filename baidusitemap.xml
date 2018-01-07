@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>http://www.yulongjun.com/python/20180107-learning-load-balance/</loc>
+    <lastmod>2018-01-07T10:56:46.521Z</lastmod>
+    <data>
+        <display>
+        <title>【置顶】Learning Load Balance 目录</title>
+        <pubTime>2018-01-07T03:11:11.000Z</pubTime>
+        
+        <tag>TOC</tag>
+         
+        <tag>Python3</tag>
+         
+         
+           
+             
+              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.yulongjun.com/linux/20171111-learning-linux-toc/</loc>
-    <lastmod>2017-12-17T17:34:06.000Z</lastmod>
+    <lastmod>2018-01-07T09:08:55.531Z</lastmod>
     <data>
         <display>
         <title>【置顶】Learning Linux目录</title>
@@ -82,9 +104,9 @@
         <title>【置顶】Learning Python3 目录</title>
         <pubTime>2017-11-11T03:11:11.000Z</pubTime>
         
-        <tag>Python3</tag>
-         
         <tag>TOC</tag>
+         
+        <tag>Python3</tag>
          
          
            
@@ -164,13 +186,13 @@
         <title>01-文本处理工具(cut、sort、tr、grep等)</title>
         <pubTime>2017-05-31T12:58:08.000Z</pubTime>
         
+        <tag>grep</tag>
+         
         <tag>cut</tag>
          
         <tag>sort</tag>
          
         <tag>wc</tag>
-         
-        <tag>grep</tag>
          
          
            
@@ -614,9 +636,9 @@
         <title>01-什么是用户和组</title>
         <pubTime>2017-05-26T10:00:00.000Z</pubTime>
         
-        <tag>group</tag>
-         
         <tag>user</tag>
+         
+        <tag>group</tag>
          
          
            
@@ -636,11 +658,11 @@
         <title>02-用户和组文件</title>
         <pubTime>2017-05-26T10:30:00.000Z</pubTime>
         
+        <tag>group</tag>
+         
         <tag>passwd</tag>
          
         <tag>shadow</tag>
-         
-        <tag>group</tag>
          
          
            
@@ -660,9 +682,9 @@
         <title>03-用户和用户组的管理命令</title>
         <pubTime>2017-05-26T11:00:00.000Z</pubTime>
         
-        <tag>group</tag>
-         
         <tag>user</tag>
+         
+        <tag>group</tag>
          
          
            
@@ -682,9 +704,9 @@
         <title>04-用户和组练习题</title>
         <pubTime>2017-05-26T11:30:00.000Z</pubTime>
         
-        <tag>group</tag>
-         
         <tag>user</tag>
+         
+        <tag>group</tag>
          
          
            
@@ -1180,11 +1202,11 @@
         <title>03-文本处理练习题</title>
         <pubTime>2017-05-31T15:30:42.000Z</pubTime>
         
+        <tag>RegExp</tag>
+         
         <tag>grep</tag>
          
         <tag>egrep</tag>
-         
-        <tag>RegExp</tag>
          
          
            
@@ -1204,11 +1226,11 @@
         <title>02-正则表达式(RegExp)</title>
         <pubTime>2017-05-31T15:12:09.000Z</pubTime>
         
+        <tag>RegExp</tag>
+         
         <tag>grep</tag>
          
         <tag>egrep</tag>
-         
-        <tag>RegExp</tag>
          
          
            
