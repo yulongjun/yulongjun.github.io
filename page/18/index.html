@@ -70,7 +70,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+  
+
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
@@ -255,32 +257,32 @@
         </li>
       
         
-        <li class="menu-item menu-item-server">
-          <a href="/categories/server" rel="section">
+        <li class="menu-item menu-item-lb">
+          <a href="/categories/lb" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-server"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
             
-            服务器
+            负载均衡
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-database">
-          <a href="/categories/database" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
-            
-            数据库
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-cloud">
-          <a href="/categories/cloud" rel="section">
+        <li class="menu-item menu-item-container">
+          <a href="/categories/container" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
             
-            Cloud
+            容器技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-frontend">
+          <a href="/categories/frontend" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            前端技术
           </a>
         </li>
       
@@ -291,16 +293,6 @@
               <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
             
             随笔
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-under-the-ops">
-          <a href="/categories/under-the-ops" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-gears"></i> <br />
-            
-            《运维之下》转载
           </a>
         </li>
       
@@ -387,7 +379,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170518-08-lf-cr/">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170510-05-comprehensions/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="于龙君">
@@ -409,8 +401,8 @@
             
               
                 
-                <a class="post-title-link" href="/linux/20170518-08-lf-cr/" itemprop="url">
-                  08-换行（LF）和回车（CR）详解
+                <a class="post-title-link" href="/python/20170510-05-comprehensions/" itemprop="url">
+                  解析式（Comprehensions)
                 </a>
               
             
@@ -426,1272 +418,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-18T23:20:00+08:00">
-                2017-05-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/linux/20170518-08-lf-cr/" class="leancloud_visitors" data-flag-title="08-换行（LF）和回车（CR）详解">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/images/crlf.gif" alt=""></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/20170518-08-lf-cr/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170517-02-install-centos7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="于龙君">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="于龙君的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/linux/20170517-02-install-centos7/" itemprop="url">
-                  CentOS 7 安装步骤
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-17T19:00:00+08:00">
-                2017-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/linux/20170517-02-install-centos7/" class="leancloud_visitors" data-flag-title="CentOS 7 安装步骤">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/images/14975931251894.png" alt=""></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/20170517-02-install-centos7/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170517-01-install-centos6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="于龙君">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="于龙君的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/linux/20170517-01-install-centos6/" itemprop="url">
-                  CentOS 6 安装步骤
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-17T18:00:00+08:00">
-                2017-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/linux/20170517-01-install-centos6/" class="leancloud_visitors" data-flag-title="CentOS 6 安装步骤">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/images/14975931251894.png" alt=""></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/20170517-01-install-centos6/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170516-01-linux-distribution-timeline/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="于龙君">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="于龙君的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/linux/20170516-01-linux-distribution-timeline/" itemprop="url">
-                  Linux各发行版时间线2017年版本
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T22:00:00+08:00">
-                2017-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/linux/20170516-01-linux-distribution-timeline/" class="leancloud_visitors" data-flag-title="Linux各发行版时间线2017年版本">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/images/gnu-logo.svg" alt="gnu-logo"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/20170516-01-linux-distribution-timeline/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170515-04-shadowsocks/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="于龙君">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="于龙君的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/linux/20170515-04-shadowsocks/" itemprop="url">
-                  学会科学上网——用搬瓦工和Shadowsocks搭梯子
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-15T21:00:00+08:00">
-                2017-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/linux/20170515-04-shadowsocks/" class="leancloud_visitors" data-flag-title="学会科学上网——用搬瓦工和Shadowsocks搭梯子">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/images/14975173093793.jpg" alt=""></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/20170515-04-shadowsocks/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170515-03-xmanager-realvnc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="于龙君">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="于龙君的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/linux/20170515-03-xmanager-realvnc/" itemprop="url">
-                  工欲善其事必先利其器 —— Xmanager Enterprise 5 和 RealVNC 5/6 介绍
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-15T20:00:00+08:00">
-                2017-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/linux/20170515-03-xmanager-realvnc/" class="leancloud_visitors" data-flag-title="工欲善其事必先利其器 —— Xmanager Enterprise 5 和 RealVNC 5/6 介绍">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/images/14975918506028.jpg" alt=""></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/20170515-03-xmanager-realvnc/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170515-02-six-pl/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="于龙君">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="于龙君的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/linux/20170515-02-six-pl/" itemprop="url">
-                  本文章集合所遵循的开源协议以及开源协议介绍(GPL,LGPL,BSD,MIT,Apache,CC)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-15T19:00:00+08:00">
-                2017-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/linux/20170515-02-six-pl/" class="leancloud_visitors" data-flag-title="本文章集合所遵循的开源协议以及开源协议介绍(GPL,LGPL,BSD,MIT,Apache,CC)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/images/license.svg" alt="license.svg"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/20170515-02-six-pl/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/linux/20170515-01-markdown/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="于龙君">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="于龙君的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/linux/20170515-01-markdown/" itemprop="url">
-                  笔记所使用的markdown语法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-15T18:00:00+08:00">
-                2017-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/linux/20170515-01-markdown/" class="leancloud_visitors" data-flag-title="笔记所使用的markdown语法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="/images/14975930524608.jpg" alt=""></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/linux/20170515-01-markdown/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170514-08-heap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="于龙君">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="于龙君的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/python/20170514-08-heap/" itemprop="url">
-                  堆（heap）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-14T15:58:48+08:00">
-                2017-05-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-10T18:33:55+08:00">
+                2017-05-10
               </time>
             
 
@@ -1730,7 +458,7 @@
 
           
           
-             <span id="/python/20170514-08-heap/" class="leancloud_visitors" data-flag-title="堆（heap）">
+             <span id="/python/20170510-05-comprehensions/" class="leancloud_visitors" data-flag-title="解析式（Comprehensions)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1760,10 +488,10 @@
 
       
         
-          <p><img src="/images/14987251924800.jpg" alt=""></p>
+          <p><img src="/images/14976906917650.gif" alt=""><br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/python/20170514-08-heap/#more" rel="contents">
+            <a class="btn" href="/python/20170510-05-comprehensions/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1809,7 +537,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170514-07-tree/">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170510-04-bytes-bytearrays/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="于龙君">
@@ -1831,8 +559,8 @@
             
               
                 
-                <a class="post-title-link" href="/python/20170514-07-tree/" itemprop="url">
-                  07-tree
+                <a class="post-title-link" href="/python/20170510-04-bytes-bytearrays/" itemprop="url">
+                  byte和bytearray
                 </a>
               
             
@@ -1848,8 +576,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-14T15:58:38+08:00">
-                2017-05-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-10T16:33:55+08:00">
+                2017-05-10
               </time>
             
 
@@ -1888,7 +616,7 @@
 
           
           
-             <span id="/python/20170514-07-tree/" class="leancloud_visitors" data-flag-title="07-tree">
+             <span id="/python/20170510-04-bytes-bytearrays/" class="leancloud_visitors" data-flag-title="byte和bytearray">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1918,14 +646,1387 @@
 
       
         
-          <p><img src="/images/14987253185815.png" alt=""></p>
+          <p><img src="/images/14975932094259.jpg" alt=""><br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/python/20170514-07-tree/#more" rel="contents">
+            <a class="btn" href="/python/20170510-04-bytes-bytearrays/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170510-03-dicts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/python/20170510-03-dicts/" itemprop="url">
+                  字典（Dictionarys）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-10T14:33:55+08:00">
+                2017-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170510-03-dicts/" class="leancloud_visitors" data-flag-title="字典（Dictionarys）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="/images/14976898458344.png" alt=""><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/python/20170510-03-dicts/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170510-02-sets/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/python/20170510-02-sets/" itemprop="url">
+                  集合（Sets）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-10T12:33:55+08:00">
+                2017-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170510-02-sets/" class="leancloud_visitors" data-flag-title="集合（Sets）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="/images/14976900867536.jpg" alt=""><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/python/20170510-02-sets/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170510-01-formatting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/python/20170510-01-formatting/" itemprop="url">
+                  格式化（Formatting）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-10T10:33:55+08:00">
+                2017-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170510-01-formatting/" class="leancloud_visitors" data-flag-title="格式化（Formatting）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="/images/14975932094259.jpg" alt=""><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/python/20170510-01-formatting/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170509-06-unpacking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/python/20170509-06-unpacking/" itemprop="url">
+                  解包（Unpacking）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T23:33:55+08:00">
+                2017-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170509-06-unpacking/" class="leancloud_visitors" data-flag-title="解包（Unpacking）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="/images/14977081231001.jpg" alt=""></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/python/20170509-06-unpacking/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170509-05-slice/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/python/20170509-05-slice/" itemprop="url">
+                  切片（Slice）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T22:33:55+08:00">
+                2017-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170509-05-slice/" class="leancloud_visitors" data-flag-title="切片（Slice）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="/images/14977096622136.jpg" alt=""></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/python/20170509-05-slice/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170509-04-strings/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/python/20170509-04-strings/" itemprop="url">
+                  字符串（Strings）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T20:33:55+08:00">
+                2017-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170509-04-strings/" class="leancloud_visitors" data-flag-title="字符串（Strings）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="/images/14977098435146.jpg" alt=""></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/python/20170509-04-strings/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170509-03-tuples/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/python/20170509-03-tuples/" itemprop="url">
+                  元组
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T18:33:55+08:00">
+                2017-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170509-03-tuples/" class="leancloud_visitors" data-flag-title="元组">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/images/14977099158129.png" alt=""></p>
+<p>元组和列表很像，包括索引查询、查找统计元素操作都很类似。但是元组是不可变的，无法改改元素，所以没有增删改操作。</p>
+<hr>
+<h2 id="初始化元组"><a href="#初始化元组" class="headerlink" title="初始化元组"></a>初始化元组</h2><p>元组是不可变的，所以初始化后元组内的元素不可改变。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">t = tuple() <span class="comment"># 初始化一个空元组</span></div><div class="line">t = () 也是初始化一个空元组</div><div class="line">t = (<span class="number">1</span>,) 初始化一个元素的元组</div><div class="line">t = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) <span class="comment"># 初始化三个元素的元组</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="下标-索引查询"><a href="#下标-索引查询" class="headerlink" title="下标/索引查询"></a>下标/索引查询</h2><ul>
+<li><p>元组中的索引，也是从前往后，索引也是从0开始，从后往前，索引是从-1开始。</p>
+</li>
+<li><p>如果索引超出范围，将引发<code>IndexError</code>异常。</p>
+</li>
+<li><p>元组中，是无法更改元素的值的，更改会抛出TypeError的异常。</p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">In [1]: t = (1, 2, 3)</div><div class="line"></div><div class="line">In [2]: t[0]    # 索引0的值</div><div class="line">Out[2]: 1</div><div class="line"></div><div class="line">In [3]: t[1]    # 索引1的值 </div><div class="line">Out[3]: 2</div><div class="line"></div><div class="line">In [4]: t[-1]   # 索引-1，即最后一个的值</div><div class="line">Out[4]: 3</div><div class="line"></div><div class="line">In [5]: t[-2]   # 索引-2，即倒数第二个值</div><div class="line">Out[5]: 2</div><div class="line"></div><div class="line">In [6]: t[3]    # 索引3，超出范围，报错</div><div class="line">---------------------------------------------------------------------------</div><div class="line">IndexError                                Traceback (most recent call last)</div><div class="line">&lt;ipython-input-6-7d5cf04057c5&gt; in &lt;module&gt;()</div><div class="line">----&gt; 1 t[3]</div><div class="line"></div><div class="line">IndexError: tuple index out of range</div><div class="line"></div><div class="line"></div><div class="line">In [7]: t[3] = 5     # 元组无法更改索引的元素，抛出TypeError</div><div class="line">---------------------------------------------------------------------------</div><div class="line">TypeError                                 Traceback (most recent call last)</div><div class="line">&lt;ipython-input-8-241a76bcd075&gt; in &lt;module&gt;()</div><div class="line">----&gt; 1 t[3] = 5</div><div class="line"></div><div class="line">TypeError: 'tuple' object does not support item assignment</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="查找-统计元素"><a href="#查找-统计元素" class="headerlink" title="查找/统计元素"></a>查找/统计元素</h2><h4 id="index"><a href="#index" class="headerlink" title="index"></a><code>index</code></h4><p>查找某值的第一个索引，可以指定索引的开始和结束位置。（包含start，不包含stop）</p>
+<p>如果值没有找到，则抛出ValueError。</p>
+<blockquote>
+<p><strong>index(…)</strong><br>T.index(value, [start, [stop]]) -&gt; integer – return first index of value.<br>Raises ValueError if the value is not present.</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">In [9]: t = tuple('abcdb')</div><div class="line"></div><div class="line">In [10]: t</div><div class="line">Out[10]: ('a', 'b', 'c', 'd', 'b')</div><div class="line"></div><div class="line">In [11]: t.index('b') # 查找'b'第一次出现的索引位置</div><div class="line">Out[11]: 1</div><div class="line"></div><div class="line">In [12]: t.index('b', 2)  # 从索引2开始查找，找到第一次出现'b'的位置</div><div class="line">Out[12]: 4</div><div class="line"></div><div class="line">In [13]: t.index('x') # 没找到'x'</div><div class="line">---------------------------------------------------------------------------</div><div class="line">ValueError                                Traceback (most recent call last)</div><div class="line">&lt;ipython-input-13-616584d1b884&gt; in &lt;module&gt;()</div><div class="line">----&gt; 1 tuple.index('x')</div><div class="line"></div><div class="line">ValueError: 'x' is not in tuple</div><div class="line"></div><div class="line">In [14]: t.index('b', 2, 4)   # 'b'没在2-4索引范围内出现</div><div class="line">---------------------------------------------------------------------------</div><div class="line">ValueError                                Traceback (most recent call last)</div><div class="line">&lt;ipython-input-14-fa3eb33afd79&gt; in &lt;module&gt;()</div><div class="line">----&gt; 1 tuple.index('b', 2, 4)</div><div class="line"></div><div class="line">ValueError: 'b' is not in tuple</div></pre></td></tr></table></figure>
+<h4 id="count"><a href="#count" class="headerlink" title="count"></a><code>count</code></h4><p>计数，返回值出现的次数。</p>
+<blockquote>
+<p><code>count(...)</code><br>T.count(value) -&gt; integer – return number of occurrences of value</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">21</span>]: t</div><div class="line">Out[<span class="number">21</span>]: (<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'b'</span>)</div><div class="line"></div><div class="line">In [<span class="number">22</span>]: t.count(<span class="string">'b'</span>)</div><div class="line">Out[<span class="number">22</span>]: <span class="number">2</span></div></pre></td></tr></table></figure>
+<h4 id="len函数"><a href="#len函数" class="headerlink" title="len函数"></a><code>len</code>函数</h4><p><strong>len函数可以用在列表、元组、字符串、字典、集合等上面，输出容器中元素的个数。</strong></p>
+<blockquote>
+<p><strong>len(obj, /)</strong><br>Return the number of items in a container.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">24</span>]: t</div><div class="line">Out[<span class="number">24</span>]: (<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'b'</span>)</div><div class="line"></div><div class="line">In [<span class="number">25</span>]: len(t)</div><div class="line">Out[<span class="number">25</span>]: <span class="number">5</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/python/20170509-02-lists/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/python/20170509-02-lists/" itemprop="url">
+                  列表（Lists）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T16:33:55+08:00">
+                2017-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/python/20170509-02-lists/" class="leancloud_visitors" data-flag-title="列表（Lists）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="/images/14976896307774.png" alt=""></p>
+<h2 id="初始化列表："><a href="#初始化列表：" class="headerlink" title="初始化列表："></a>初始化列表：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">lst = list() <span class="comment"># 初始化一个空列表</span></div><div class="line">lst = [] <span class="comment"># 也是初始化一个空列表</span></div><div class="line">lst = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="comment"># 初始化三个元素</span></div></pre></td></tr></table></figure>
+<hr>
+<h2 id="下标-索引操作"><a href="#下标-索引操作" class="headerlink" title="下标/索引操作"></a>下标/索引操作</h2><ul>
+<li><p>Python中的索引，从前往后，索引是从0开始，从后往前，索引是从-1开始。</p>
+</li>
+<li><p>如果索引超出范围，将引发<code>IndexError</code>异常。</p>
+</li>
+<li><p>更改列表中元素的值，采用<code>lst[index] = new_value</code>，索引可用正数，也可用负数，但是不能超出范围，否则也会抛出<code>IndexError</code>异常。</p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">In [2]: lst = [1, 2, 3]</div><div class="line"></div><div class="line">In [3]: lst[0]      #索引0的值</div><div class="line">Out[3]: 1</div><div class="line"></div><div class="line">In [4]: lst[1]     # 索引1的值</div><div class="line">Out[4]: 2</div><div class="line"></div><div class="line">In [5]: lst[-1]    # 索引-1，即最后一个的值</div><div class="line">Out[5]: 3</div><div class="line"></div><div class="line">In [6]: lst[-2]    # 索引-2，即倒数第二个值</div><div class="line">Out[6]: 2</div><div class="line"></div><div class="line">In [7]: lst[3]     # 索引3，超出范围，报错</div><div class="line">--------------------------------------------------------------------------</div><div class="line">IndexError                                Traceback (most recent call last)</div><div class="line">&lt;ipython-input-7-298ffefac8cf&gt; in &lt;module&gt;()</div><div class="line">----&gt; 1 lst[3]</div><div class="line"></div><div class="line">IndexError: list index out of range</div><div class="line"></div><div class="line">In [8]: lst[0] = 5 # 把索引为0的元素更改为5</div><div class="line"></div><div class="line">In [9]: lst</div><div class="line">Out[9]: [5, 2, 3]</div><div class="line"></div><div class="line">In [10]: lst[-1] = 10  # 索引为负数也可更改</div><div class="line"></div><div class="line">In [11]: lst</div><div class="line">Out[11]: [5, 2, 10]</div><div class="line"></div><div class="line">In [12]: lst[-4] = 12  # 超出索引范围，报错</div><div class="line">---------------------------------------------------------------------------</div><div class="line">IndexError                                Traceback (most recent call last)</div><div class="line">&lt;ipython-input-12-8f011d505efa&gt; in &lt;module&gt;()</div><div class="line">----&gt; 1 lst[-4] = 12</div><div class="line"></div><div class="line">IndexError: list assignment index out of range</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="给list增加元素"><a href="#给list增加元素" class="headerlink" title="给list增加元素"></a>给list增加元素</h2><h4 id="append"><a href="#append" class="headerlink" title="append"></a><code>append</code></h4><p>在列表最后增加一个对象，返回值为<code>None</code> 。</p>
+<blockquote>
+<p><strong>append(…)</strong><br>L.append(object) -&gt; None – append object to end</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">14</span>]: lst</div><div class="line">Out[<span class="number">14</span>]: [<span class="number">5</span>, <span class="number">2</span>, <span class="number">10</span>]</div><div class="line"></div><div class="line">In [<span class="number">15</span>]: lst.append(<span class="number">12</span>)</div><div class="line"></div><div class="line">In [<span class="number">16</span>]: lst</div><div class="line">Out[<span class="number">16</span>]: [<span class="number">5</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">12</span>]</div></pre></td></tr></table></figure>
+<h4 id="insert"><a href="#insert" class="headerlink" title="insert"></a><code>insert</code></h4><p>在索引之前插入一个对象。</p>
+<p>insert操作索引超出范围是：如果是正索引，等效<code>append</code>，如果是负索引，等效于<code>insert(0,object)</code>。</p>
+<blockquote>
+<p> <strong>insert(…)</strong><br> L.insert(index, object) – insert object before index</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">22</span>]: lst</div><div class="line">Out[<span class="number">22</span>]: [<span class="number">5</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">12</span>]</div><div class="line"></div><div class="line">In [<span class="number">23</span>]: lst.insert(<span class="number">0</span>, <span class="number">7</span>) <span class="comment"># 在索引0之前插入7</span></div><div class="line"></div><div class="line">In [<span class="number">24</span>]: lst</div><div class="line">Out[<span class="number">24</span>]: [<span class="number">7</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">12</span>]</div><div class="line"></div><div class="line">In [<span class="number">25</span>]: lst.insert(<span class="number">3</span>, <span class="number">0</span>) <span class="comment"># 在索引3之前插入0</span></div><div class="line"></div><div class="line"></div><div class="line">In [<span class="number">26</span>]: lst</div><div class="line">Out[<span class="number">26</span>]: [<span class="number">7</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">10</span>, <span class="number">12</span>]</div><div class="line"></div><div class="line">In [<span class="number">27</span>]: lst.insert(<span class="number">7</span>,<span class="number">13</span>) <span class="comment"># 超出范围，索引为正，就在最后面添加</span></div><div class="line"></div><div class="line">In [<span class="number">28</span>]: lst</div><div class="line">Out[<span class="number">28</span>]: [<span class="number">7</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">13</span>]</div><div class="line"></div><div class="line">In [<span class="number">29</span>]: lst.insert(<span class="number">100</span>,<span class="number">76</span>) <span class="comment"># 超出范围，索引为正，就在最后面添加</span></div><div class="line"></div><div class="line">In [<span class="number">30</span>]: lst</div><div class="line">Out[<span class="number">30</span>]: [<span class="number">7</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">76</span>]</div><div class="line"></div><div class="line">In [<span class="number">31</span>]: lst.insert(<span class="number">-100</span>, <span class="number">8</span>) <span class="comment"># 超出范围，索引为负，就在最前面</span></div><div class="line"></div><div class="line">In [<span class="number">32</span>]: lst</div><div class="line">Out[<span class="number">32</span>]: [<span class="number">8</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">76</span>]</div></pre></td></tr></table></figure>
+<h4 id="extend"><a href="#extend" class="headerlink" title="extend"></a><code>extend</code></h4><p>通过添加一个可迭代对象（iterable）中的元素来扩展列表。</p>
+<blockquote>
+<p><strong>extend(…)</strong><br>L.extend(iterable) -&gt; None – extend list by appending elements from the iterable</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">38</span>]: lst1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"></div><div class="line">In [<span class="number">39</span>]: lst2 = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</div><div class="line"></div><div class="line">In [<span class="number">40</span>]: lst1.extend(lst2) <span class="comment"># lst2是一个可迭代对象（iterable），可给lst1做扩展</span></div><div class="line"></div><div class="line">In [<span class="number">41</span>]: lst1</div><div class="line">Out[<span class="number">41</span>]: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</div><div class="line"></div><div class="line">In [<span class="number">43</span>]: tuple1 = (<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>)</div><div class="line"></div><div class="line">In [<span class="number">44</span>]: lst2.extend(tuple1) <span class="comment"># tuple1(元组后面会讲)是一个可迭代对象（iterable，会面会讲），可给lst2做扩展</span></div><div class="line"></div><div class="line">In [<span class="number">45</span>]: lst2</div><div class="line">Out[<span class="number">45</span>]: [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h2><h4 id="pop"><a href="#pop" class="headerlink" title="pop"></a><code>pop</code></h4><p>删除并返回索引所在的元素（默认不填索引是指-1，最后一个）。</p>
+<p>如果index超出索引范围，会抛出<code>IndexError</code>异常。</p>
+<blockquote>
+<p><strong>pop(…)</strong><br>L.pop([index]) -&gt; item – remove and return item at index (default last).<br>Raises IndexError if list is empty or index is out of range.</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">In [47]: lst = [1, 2, 3, 4, 5, 6]</div><div class="line"></div><div class="line">In [48]: lst.pop() # 不填索引，默认删除最后一个</div><div class="line">Out[48]: 6</div><div class="line"></div><div class="line">In [49]: lst</div><div class="line">Out[49]: [1, 2, 3, 4, 5]</div><div class="line"></div><div class="line">In [50]: lst.pop(3) # 删除索引为3的元素</div><div class="line">Out[50]: 4</div><div class="line"></div><div class="line">In [51]: lst</div><div class="line">Out[51]: [1, 2, 3, 5]</div><div class="line"></div><div class="line">In [52]: lst.pop(100) # 超出索引范围，抛出IndexError异常</div><div class="line">---------------------------------------------------------------------------</div><div class="line">IndexError                                Traceback (most recent call last)</div><div class="line">&lt;ipython-input-52-795b88347eea&gt; in &lt;module&gt;()</div><div class="line">----&gt; 1 lst.pop(100)</div><div class="line"></div><div class="line">IndexError: pop index out of range</div><div class="line"></div><div class="line">In [53]: lst.pop(-1) # 删除索引为负数的元素</div><div class="line">Out[53]: 5</div><div class="line"></div><div class="line">In [54]: lst</div><div class="line">Out[54]: [1, 2, 3]</div><div class="line"></div><div class="line">In [55]: lst.pop(-100) # 超过索引范围，抛出IndexError异常</div><div class="line">---------------------------------------------------------------------------</div><div class="line">IndexError                                Traceback (most recent call last)</div><div class="line">&lt;ipython-input-54-d93c61a62a8e&gt; in &lt;module&gt;()</div><div class="line">----&gt; 1 lst.pop(-100)</div><div class="line"></div><div class="line">IndexError: pop index out of range</div></pre></td></tr></table></figure>
+<h4 id="remove"><a href="#remove" class="headerlink" title="remove"></a><code>remove</code></h4><p>删除第一次发现的值。</p>
+<p>如果值不存在则抛出<code>ValueError</code>。</p>
+<blockquote>
+<p> <strong>remove(…)</strong><br>L.remove(value) -&gt; None – remove first occurrence of value.<br>Raises ValueError if the value is not present.</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">In [57]: lst = [1, 2, 3, 1, 2, 3]</div><div class="line"></div><div class="line">In [58]: lst.remove(1) # 删除第一次查找到的1，第二个1没有删除</div><div class="line"></div><div class="line">In [59]: lst</div><div class="line">Out[59]: [2, 3, 1, 2, 3]</div><div class="line"></div><div class="line">In [60]: lst.remove(5) # 没有找到，抛出ValueError</div><div class="line">---------------------------------------------------------------------------</div><div class="line">ValueError                                Traceback (most recent call last)</div><div class="line">&lt;ipython-input-60-29e61bbce0d4&gt; in &lt;module&gt;()</div><div class="line">----&gt; 1 lst.remove(5)</div><div class="line"></div><div class="line">ValueError: list.remove(x): x not in list</div></pre></td></tr></table></figure>
+<h4 id="clear"><a href="#clear" class="headerlink" title="clear"></a><code>clear</code></h4><p>清空列表。</p>
+<blockquote>
+<p><strong>clear(…)</strong><br>L.clear() -&gt; None – remove all items from L</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">1</span>]: lst = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"></div><div class="line">In [<span class="number">2</span>]: lst.clear()</div><div class="line"></div><div class="line">In [<span class="number">3</span>]: lst</div><div class="line">Out[<span class="number">3</span>]: []</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="查找-统计元素"><a href="#查找-统计元素" class="headerlink" title="查找/统计元素"></a>查找/统计元素</h2><h4 id="index"><a href="#index" class="headerlink" title="index"></a><code>index</code></h4><p>查找某值的第一个索引，可以指定索引的开始和结束位置。（包含start，不包含stop）</p>
+<p>如果值没有找到，则抛出ValueError。</p>
+<blockquote>
+<p><strong>index(…)</strong><br>L.index(value, [start, [stop]]) -&gt; integer – return first index of value.<br>Raises ValueError if the value is not present.</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">In [9]: lst = list('abcdb')</div><div class="line"></div><div class="line">In [10]: lst</div><div class="line">Out[10]: ['a', 'b', 'c', 'd', 'b']</div><div class="line"></div><div class="line">In [11]: lst.index('b') # 查找'b'第一次出现的索引位置</div><div class="line">Out[11]: 1</div><div class="line"></div><div class="line">In [12]: lst.index('b', 2)  # 从索引2开始查找，找到第一次出现'b'的位置</div><div class="line">Out[12]: 4</div><div class="line"></div><div class="line">In [13]: lst.index('x') # 没找到'x'</div><div class="line">---------------------------------------------------------------------------</div><div class="line">ValueError                                Traceback (most recent call last)</div><div class="line">&lt;ipython-input-13-616584d1b884&gt; in &lt;module&gt;()</div><div class="line">----&gt; 1 lst.index('x')</div><div class="line"></div><div class="line">ValueError: 'x' is not in list</div><div class="line"></div><div class="line">In [14]: lst.index('b', 2, 4)   # 'b'没在2-4索引范围内出现</div><div class="line">---------------------------------------------------------------------------</div><div class="line">ValueError                                Traceback (most recent call last)</div><div class="line">&lt;ipython-input-14-fa3eb33afd79&gt; in &lt;module&gt;()</div><div class="line">----&gt; 1 lst.index('b', 2, 4)</div><div class="line"></div><div class="line">ValueError: 'b' is not in list</div></pre></td></tr></table></figure>
+<h4 id="count"><a href="#count" class="headerlink" title="count"></a><code>count</code></h4><p>计数，返回值出现的次数。</p>
+<blockquote>
+<p><code>count(...)</code><br>L.count(value) -&gt; integer – return number of occurrences of value</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">21</span>]: lst</div><div class="line">Out[<span class="number">21</span>]: [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'b'</span>]</div><div class="line"></div><div class="line">In [<span class="number">22</span>]: lst.count(<span class="string">'b'</span>)</div><div class="line">Out[<span class="number">22</span>]: <span class="number">2</span></div></pre></td></tr></table></figure>
+<h4 id="len函数"><a href="#len函数" class="headerlink" title="len函数"></a><code>len</code>函数</h4><p>len函数可以用在列表、元组、字符串、字典、集合等上面，输出容器中元素的个数。</p>
+<blockquote>
+<p><strong>len(obj, /)</strong><br>Return the number of items in a container.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">24</span>]: lst</div><div class="line">Out[<span class="number">24</span>]: [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'b'</span>]</div><div class="line"></div><div class="line">In [<span class="number">25</span>]: len(lst)</div><div class="line">Out[<span class="number">25</span>]: <span class="number">5</span></div></pre></td></tr></table></figure>
+<hr>
+<h3 id="修改列表"><a href="#修改列表" class="headerlink" title="修改列表"></a>修改列表</h3><h4 id="sort"><a href="#sort" class="headerlink" title="sort"></a><code>sort</code></h4><p>原地排序，有两个参数，一个是key，表示排序用的函数，默认为None没有。一个是reverse（反向，降序排列），默认是False。</p>
+<blockquote>
+<p><strong>sort(…)</strong><br>L.sort(key=None, reverse=False) -&gt; None – stable sort “IN PLACE”</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">30</span>]: lst = list(<span class="string">"yulongjun"</span>)</div><div class="line"></div><div class="line">In [<span class="number">31</span>]: lst</div><div class="line">Out[<span class="number">31</span>]: [<span class="string">'y'</span>, <span class="string">'u'</span>, <span class="string">'l'</span>, <span class="string">'o'</span>, <span class="string">'n'</span>, <span class="string">'g'</span>, <span class="string">'j'</span>, <span class="string">'u'</span>, <span class="string">'n'</span>]</div><div class="line"></div><div class="line">In [<span class="number">32</span>]: lst.sort()</div><div class="line"></div><div class="line">In [<span class="number">33</span>]: lst</div><div class="line">Out[<span class="number">33</span>]: [<span class="string">'g'</span>, <span class="string">'j'</span>, <span class="string">'l'</span>, <span class="string">'n'</span>, <span class="string">'n'</span>, <span class="string">'o'</span>, <span class="string">'u'</span>, <span class="string">'u'</span>, <span class="string">'y'</span>]</div><div class="line"></div><div class="line">In [<span class="number">34</span>]: lst.sort(reverse=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">In [<span class="number">35</span>]: lst</div><div class="line">Out[<span class="number">35</span>]: [<span class="string">'y'</span>, <span class="string">'u'</span>, <span class="string">'u'</span>, <span class="string">'o'</span>, <span class="string">'n'</span>, <span class="string">'n'</span>, <span class="string">'l'</span>, <span class="string">'j'</span>, <span class="string">'g'</span>]</div></pre></td></tr></table></figure>
+<h4 id="reverse"><a href="#reverse" class="headerlink" title="reverse"></a><code>reverse</code></h4><p>原地反转。</p>
+<blockquote>
+<p><strong>reverse(…)</strong><br>L.reverse() – reverse “IN PLACE”</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">In [<span class="number">37</span>]: lst = [<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>]</div><div class="line"></div><div class="line">In [<span class="number">38</span>]: lst.reverse()</div><div class="line"></div><div class="line">In [<span class="number">39</span>]: lst</div><div class="line">Out[<span class="number">39</span>]: [<span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>]</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="copy"><a href="#copy" class="headerlink" title="copy"></a><code>copy</code></h4><p>采用<code>赋值</code>方法创建新列表，是指向原来的列表的那块内存，当进行更改时候，新老列表一起改变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">In [44]: lst = [1, 2, 3, 4, 5]</div><div class="line"></div><div class="line">In [45]: lst2 = lst</div><div class="line"></div><div class="line">In [46]: lst2.remove(2)</div><div class="line"></div><div class="line">In [47]: lst2</div><div class="line">Out[47]: [1, 3, 4, 5]</div><div class="line"></div><div class="line">In [48]: lst1</div><div class="line">---------------------------------------------------------------------------</div><div class="line">NameError                                 Traceback (most recent call last)</div><div class="line">&lt;ipython-input-48-f3e10dd48749&gt; in &lt;module&gt;()</div><div class="line">----&gt; 1 lst1</div><div class="line"></div><div class="line">NameError: name &apos;lst1&apos; is not defined</div><div class="line"></div><div class="line">In [49]: lst</div><div class="line">Out[49]: [1, 3, 4, 5]</div></pre></td></tr></table></figure>
+<p>采用<code>copy</code>方法，就是复制出一块相同的内存(影子复制)。新旧列表互不影响。</p>
+<blockquote>
+<p><strong>copy(…)</strong><br>L.copy() -&gt; list – a shallow copy of L</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Out[<span class="number">49</span>]: [<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</div><div class="line"></div><div class="line">In [<span class="number">50</span>]: lst</div><div class="line">Out[<span class="number">50</span>]: [<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</div><div class="line"></div><div class="line">In [<span class="number">51</span>]: lst2 = lst.copy()</div><div class="line"></div><div class="line">In [<span class="number">52</span>]: lst2.remove(<span class="number">3</span>)</div><div class="line"></div><div class="line">In [<span class="number">53</span>]: lst2</div><div class="line">Out[<span class="number">53</span>]: [<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>]</div><div class="line"></div><div class="line">In [<span class="number">54</span>]: lst</div><div class="line">Out[<span class="number">54</span>]: [<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</div></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -1962,7 +2063,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/17/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/19/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2007,7 +2108,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/">
-                <span class="site-state-item-count">224</span>
+                <span class="site-state-item-count">192</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2018,7 +2119,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -2029,7 +2130,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">281</span>
+                <span class="site-state-item-count">241</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -2166,6 +2267,9 @@
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Pisces
   </a>
+</div>
+<div>
+  <p>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
 </div>
 
 

@@ -25,24 +25,6 @@
     </url>
 
     
-  <url>
-    <loc>http://www.yulongjun.com/essay/20171101-01-futures-new-tech/</loc>
-    <lastmod>2017-12-03T22:30:43.000Z</lastmod>
-    <data>
-        <display>
-        <title>浅谈目前技术框架下，期货公司可用的新技术</title>
-        <pubTime>2017-11-01T03:33:47.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="essay" url="http://www.yulongjun.com/categories/essay/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
     
   <url>
     <loc>http://www.yulongjun.com/python/20170507-02-pyenv-centos/</loc>
@@ -100,34 +82,14 @@
         <title>【置顶】Learning Python3 目录</title>
         <pubTime>2017-11-11T03:11:11.000Z</pubTime>
         
-        <tag>TOC</tag>
-         
         <tag>Python3</tag>
+         
+        <tag>TOC</tag>
          
          
            
              
               <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-00-under-the-ops-contact/</loc>
-    <lastmod>2017-11-12T15:19:37.000Z</lastmod>
-    <data>
-        <display>
-        <title>【临时置顶】《运维之下（转载）》目录</title>
-        <pubTime>2017-09-23T09:15:26.000Z</pubTime>
-        
-        <tag>Under the Ops</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
           
         </display>
     </data>
@@ -175,28 +137,6 @@
 
     
   <url>
-    <loc>http://www.yulongjun.com/linux/20170930-01-openstack-installation-prepare/</loc>
-    <lastmod>2017-11-01T08:22:17.000Z</lastmod>
-    <data>
-        <display>
-        <title>01-OpenStack(Pike)安装实战——环境准备</title>
-        <pubTime>2017-09-30T11:33:47.000Z</pubTime>
-        
-        <tag>Openstack</tag>
-         
-        <tag>Pike</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.yulongjun.com/python/20170508-03-control/</loc>
     <lastmod>2017-10-31T05:37:35.000Z</lastmod>
     <data>
@@ -224,13 +164,13 @@
         <title>01-文本处理工具(cut、sort、tr、grep等)</title>
         <pubTime>2017-05-31T12:58:08.000Z</pubTime>
         
-        <tag>grep</tag>
-         
         <tag>cut</tag>
          
         <tag>sort</tag>
          
         <tag>wc</tag>
+         
+        <tag>grep</tag>
          
          
            
@@ -1113,26 +1053,6 @@
 
     
   <url>
-    <loc>http://www.yulongjun.com/linux/20170930-00-openstack-introduction/</loc>
-    <lastmod>2017-10-15T06:15:47.000Z</lastmod>
-    <data>
-        <display>
-        <title>OpenStack简介</title>
-        <pubTime>2017-09-30T10:33:47.000Z</pubTime>
-        
-        <tag>OpenStack</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.yulongjun.com/linux/20170605-02-shell-position-variables-and-exit-code/</loc>
     <lastmod>2017-10-14T14:17:39.000Z</lastmod>
     <data>
@@ -1190,9 +1110,9 @@
         
         <tag>Linux</tag>
          
-        <tag>install</tag>
-         
         <tag>CentOS 6</tag>
+         
+        <tag>install</tag>
          
          
            
@@ -1214,9 +1134,9 @@
         
         <tag>Linux</tag>
          
-        <tag>CentOS 7</tag>
-         
         <tag>install</tag>
+         
+        <tag>CentOS 7</tag>
          
          
            
@@ -1260,11 +1180,11 @@
         <title>03-文本处理练习题</title>
         <pubTime>2017-05-31T15:30:42.000Z</pubTime>
         
-        <tag>RegExp</tag>
-         
         <tag>grep</tag>
          
         <tag>egrep</tag>
+         
+        <tag>RegExp</tag>
          
          
            
@@ -1284,11 +1204,11 @@
         <title>02-正则表达式(RegExp)</title>
         <pubTime>2017-05-31T15:12:09.000Z</pubTime>
         
-        <tag>RegExp</tag>
-         
         <tag>grep</tag>
          
         <tag>egrep</tag>
+         
+        <tag>RegExp</tag>
          
          
            
@@ -1488,26 +1408,6 @@
            
              
               <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-17-deploy-system/</loc>
-    <lastmod>2017-10-12T14:39:27.000Z</lastmod>
-    <data>
-        <display>
-        <title>第十七章：部署系统</title>
-        <pubTime>2017-09-23T09:19:57.000Z</pubTime>
-        
-        <tag>Deploy System</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
           
         </display>
     </data>
@@ -1780,524 +1680,6 @@
 
     
   <url>
-    <loc>http://www.yulongjun.com/macos/20170909-create-macos-high-sierra-usbdisk/</loc>
-    <lastmod>2017-09-26T02:59:31.000Z</lastmod>
-    <data>
-        <display>
-        <title>macOS 10.13 U盘安装全过程</title>
-        <pubTime>2017-09-09T02:04:31.000Z</pubTime>
-        
-        <tag>macOS 10.12.6</tag>
-         
-         
-           
-             
-              <breadCrumb title="macos" url="http://www.yulongjun.com/categories/macos/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-02-sorrows-of-ops/</loc>
-    <lastmod>2017-09-23T15:56:16.000Z</lastmod>
-    <data>
-        <display>
-        <title>第二章：运维的烦恼</title>
-        <pubTime>2017-09-23T09:15:42.000Z</pubTime>
-        
-        <tag>Sorrows</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-01-work-of-ops/</loc>
-    <lastmod>2017-09-23T15:56:15.000Z</lastmod>
-    <data>
-        <display>
-        <title>第一章：互联网运维工作</title>
-        <pubTime>2017-09-23T09:15:26.000Z</pubTime>
-        
-        <tag>Ops</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-25-buid-iaas-platform/</loc>
-    <lastmod>2017-09-23T15:30:53.000Z</lastmod>
-    <data>
-        <display>
-        <title>第二十五章：Iaas平台建设</title>
-        <pubTime>2017-09-23T14:15:53.000Z</pubTime>
-        
-        <tag>Iaas</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-09-growth-of-network/</loc>
-    <lastmod>2017-09-23T15:24:47.000Z</lastmod>
-    <data>
-        <display>
-        <title>第九章：网络成长之路</title>
-        <pubTime>2017-09-23T09:17:38.000Z</pubTime>
-        
-        <tag>Network</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-12-domain-and-access/</loc>
-    <lastmod>2017-09-23T15:24:31.000Z</lastmod>
-    <data>
-        <display>
-        <title>第十二章：域名和接入</title>
-        <pubTime>2017-09-23T09:18:27.000Z</pubTime>
-        
-        <tag>Domain</tag>
-         
-        <tag>Access</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-13-website-operation-reliability/</loc>
-    <lastmod>2017-09-23T15:24:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>第十三章：网站可靠性运维</title>
-        <pubTime>2017-09-23T09:18:52.000Z</pubTime>
-        
-        <tag>Reliability</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-14-disaster-management/</loc>
-    <lastmod>2017-09-23T15:24:17.000Z</lastmod>
-    <data>
-        <display>
-        <title>第十四章：灾备管理</title>
-        <pubTime>2017-09-23T09:19:06.000Z</pubTime>
-        
-        <tag>disaster Mannagement</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-15-it-service-management-platform/</loc>
-    <lastmod>2017-09-23T15:24:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>第十五章：服务管理平台</title>
-        <pubTime>2017-09-23T09:19:19.000Z</pubTime>
-        
-        <tag>Service Mannagement Platform</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-16-service-discovery/</loc>
-    <lastmod>2017-09-23T15:24:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>第十六章：服务发现</title>
-        <pubTime>2017-09-23T09:19:37.000Z</pubTime>
-        
-        <tag>Service Discovery</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-18-dynamic-scheduling/</loc>
-    <lastmod>2017-09-23T15:23:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>第十八章：动态调度</title>
-        <pubTime>2017-09-23T09:20:25.000Z</pubTime>
-        
-        <tag>Dynamic Scheduling</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-19-db-automatic-ops-system/</loc>
-    <lastmod>2017-09-23T15:23:53.000Z</lastmod>
-    <data>
-        <display>
-        <title>第十九章：数据库自动运维系统</title>
-        <pubTime>2017-09-23T09:20:38.000Z</pubTime>
-        
-        <tag>Database</tag>
-         
-        <tag>Automatic Ops</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-20-db-backup-and-recovery-system/</loc>
-    <lastmod>2017-09-23T15:23:48.000Z</lastmod>
-    <data>
-        <display>
-        <title>第二十章：数据库备份还原系统</title>
-        <pubTime>2017-09-23T09:20:49.000Z</pubTime>
-        
-        <tag>Database</tag>
-         
-        <tag>Backup</tag>
-         
-        <tag>Recovery</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-21-ops-of-hadoop/</loc>
-    <lastmod>2017-09-23T15:23:44.000Z</lastmod>
-    <data>
-        <display>
-        <title>第二十一章：Hadoop运维</title>
-        <pubTime>2017-09-23T09:21:00.000Z</pubTime>
-        
-        <tag>Hadoop</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-22-selection-of-opensource-monitor-system/</loc>
-    <lastmod>2017-09-23T15:23:35.000Z</lastmod>
-    <data>
-        <display>
-        <title>第二十二章：开源监控系统的选择</title>
-        <pubTime>2017-09-23T09:21:00.000Z</pubTime>
-        
-        <tag>Cacti</tag>
-         
-        <tag>RRDtool</tag>
-         
-        <tag>Collectd</tag>
-         
-        <tag>Nagios</tag>
-         
-        <tag>Zabbix</tag>
-         
-        <tag>OpenTSDB</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-23-monitor-system-of-internet-enterprise-level/</loc>
-    <lastmod>2017-09-23T15:23:30.000Z</lastmod>
-    <data>
-        <display>
-        <title>第二十三章：互联网企业级监控系统实践</title>
-        <pubTime>2017-09-23T13:50:35.000Z</pubTime>
-        
-        <tag>Open-Falcon</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-24-distributed-systems-tracing%20-infrastructure/</loc>
-    <lastmod>2017-09-23T15:23:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>第二十四章：分布式调用跟踪系统</title>
-        <pubTime>2017-09-23T09:21:10.000Z</pubTime>
-        
-        <tag>Distributed systems Tracing Infranstructure</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-08-test-type-selection-of-server-hardware/</loc>
-    <lastmod>2017-09-23T15:23:15.000Z</lastmod>
-    <data>
-        <display>
-        <title>第八章：服务器硬件测试选型</title>
-        <pubTime>2017-09-23T09:17:23.000Z</pubTime>
-        
-        <tag>Hardware</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-07-asset-management/</loc>
-    <lastmod>2017-09-23T15:23:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>第七章：资产管理</title>
-        <pubTime>2017-09-23T09:17:06.000Z</pubTime>
-        
-        <tag>Asset Management</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-06-sys-ops-introduction/</loc>
-    <lastmod>2017-09-23T15:23:03.000Z</lastmod>
-    <data>
-        <display>
-        <title>第六章：系统运维概述</title>
-        <pubTime>2017-09-23T09:16:52.000Z</pubTime>
-        
-        <tag>Sys Ops</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-05-the-future-of-ops/</loc>
-    <lastmod>2017-09-23T15:22:59.000Z</lastmod>
-    <data>
-        <display>
-        <title>第五章：运维的未来</title>
-        <pubTime>2017-09-23T09:16:25.000Z</pubTime>
-        
-        <tag>Future</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-04-source-usage-of-server/</loc>
-    <lastmod>2017-09-23T15:22:47.000Z</lastmod>
-    <data>
-        <display>
-        <title>第四章：服务器资源使用率</title>
-        <pubTime>2017-09-23T09:16:11.000Z</pubTime>
-        
-        <tag>Usage</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-03-platform-of-ops/</loc>
-    <lastmod>2017-09-23T15:22:40.000Z</lastmod>
-    <data>
-        <display>
-        <title>第三章：运维平台</title>
-        <pubTime>2017-09-23T09:15:56.000Z</pubTime>
-        
-        <tag>Platform</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-11-cdn/</loc>
-    <lastmod>2017-09-23T15:22:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>第十一章：从外包到自建，小中企业CDN运维进阶指南</title>
-        <pubTime>2017-09-23T09:18:11.000Z</pubTime>
-        
-        <tag>CDN</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-10-the-construction-of-transmission-network/</loc>
-    <lastmod>2017-09-23T14:31:19.000Z</lastmod>
-    <data>
-        <display>
-        <title>第十章：传输网建设</title>
-        <pubTime>2017-09-23T09:17:52.000Z</pubTime>
-        
-        <tag>Transmission Network</tag>
-         
-         
-           
-             
-              <breadCrumb title="under-the-ops" url="http://www.yulongjun.com/categories/under-the-ops/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.yulongjun.com/python/20170507-03-ide/</loc>
     <lastmod>2017-09-14T14:56:52.000Z</lastmod>
     <data>
@@ -2390,30 +1772,6 @@
         <pubTime>2017-08-21T11:26:51.000Z</pubTime>
         
         <tag>Nginx</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170911-mysql-mysqldump-xtrabackup/</loc>
-    <lastmod>2017-09-12T15:48:57.000Z</lastmod>
-    <data>
-        <display>
-        <title>MySQL备份恢复（mysqldump、xtrabackup）</title>
-        <pubTime>2017-09-11T11:04:31.000Z</pubTime>
-        
-        <tag>mysqldump</tag>
-         
-        <tag>xtrabackup</tag>
-         
-        <tag>innobackupex</tag>
          
          
            
@@ -2577,26 +1935,6 @@
            
              
               <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/macos/20170909-create-macos-usbdisk/</loc>
-    <lastmod>2017-09-09T03:14:40.000Z</lastmod>
-    <data>
-        <display>
-        <title>制作macOS的U盘安装盘</title>
-        <pubTime>2017-09-09T02:04:31.000Z</pubTime>
-        
-        <tag>macOS 10.12.6</tag>
-         
-         
-           
-             
-              <breadCrumb title="macos" url="http://www.yulongjun.com/categories/macos/"/>
           
         </display>
     </data>

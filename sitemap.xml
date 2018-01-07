@@ -9,13 +9,6 @@
   </url>
   
   <url>
-    <loc>http://www.yulongjun.com/essay/20171101-01-futures-new-tech/</loc>
-    
-    <lastmod>2017-12-03T22:30:43.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.yulongjun.com/about/index.html</loc>
     
     <lastmod>2017-12-03T01:49:21.000Z</lastmod>
@@ -44,13 +37,6 @@
   </url>
   
   <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-00-under-the-ops-contact/</loc>
-    
-    <lastmod>2017-11-12T15:19:37.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.yulongjun.com/linux/20170817-01-lvs-introduction/</loc>
     
     <lastmod>2017-11-09T11:57:04.000Z</lastmod>
@@ -61,13 +47,6 @@
     <loc>http://www.yulongjun.com/python/20170508-02-operator/</loc>
     
     <lastmod>2017-11-06T14:04:34.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170930-01-openstack-installation-prepare/</loc>
-    
-    <lastmod>2017-11-01T08:22:17.000Z</lastmod>
     
   </url>
   
@@ -373,13 +352,6 @@
   </url>
   
   <url>
-    <loc>http://www.yulongjun.com/linux/20170930-00-openstack-introduction/</loc>
-    
-    <lastmod>2017-10-15T06:15:47.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.yulongjun.com/linux/20170605-02-shell-position-variables-and-exit-code/</loc>
     
     <lastmod>2017-10-14T14:17:39.000Z</lastmod>
@@ -485,13 +457,6 @@
   </url>
   
   <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-17-deploy-system/</loc>
-    
-    <lastmod>2017-10-12T14:39:27.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.yulongjun.com/linux/20170927-05-zabbix-triggers-config/</loc>
     
     <lastmod>2017-10-10T01:31:03.000Z</lastmod>
@@ -583,181 +548,6 @@
   </url>
   
   <url>
-    <loc>http://www.yulongjun.com/macos/20170909-create-macos-high-sierra-usbdisk/</loc>
-    
-    <lastmod>2017-09-26T02:59:31.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-02-sorrows-of-ops/</loc>
-    
-    <lastmod>2017-09-23T15:56:16.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-01-work-of-ops/</loc>
-    
-    <lastmod>2017-09-23T15:56:15.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-25-buid-iaas-platform/</loc>
-    
-    <lastmod>2017-09-23T15:30:53.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-09-growth-of-network/</loc>
-    
-    <lastmod>2017-09-23T15:24:47.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-12-domain-and-access/</loc>
-    
-    <lastmod>2017-09-23T15:24:31.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-13-website-operation-reliability/</loc>
-    
-    <lastmod>2017-09-23T15:24:21.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-14-disaster-management/</loc>
-    
-    <lastmod>2017-09-23T15:24:17.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-15-it-service-management-platform/</loc>
-    
-    <lastmod>2017-09-23T15:24:13.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-16-service-discovery/</loc>
-    
-    <lastmod>2017-09-23T15:24:08.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-18-dynamic-scheduling/</loc>
-    
-    <lastmod>2017-09-23T15:23:57.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-19-db-automatic-ops-system/</loc>
-    
-    <lastmod>2017-09-23T15:23:53.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-20-db-backup-and-recovery-system/</loc>
-    
-    <lastmod>2017-09-23T15:23:48.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-21-ops-of-hadoop/</loc>
-    
-    <lastmod>2017-09-23T15:23:44.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-22-selection-of-opensource-monitor-system/</loc>
-    
-    <lastmod>2017-09-23T15:23:35.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-23-monitor-system-of-internet-enterprise-level/</loc>
-    
-    <lastmod>2017-09-23T15:23:30.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-24-distributed-systems-tracing%20-infrastructure/</loc>
-    
-    <lastmod>2017-09-23T15:23:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-08-test-type-selection-of-server-hardware/</loc>
-    
-    <lastmod>2017-09-23T15:23:15.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-07-asset-management/</loc>
-    
-    <lastmod>2017-09-23T15:23:07.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-06-sys-ops-introduction/</loc>
-    
-    <lastmod>2017-09-23T15:23:03.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-05-the-future-of-ops/</loc>
-    
-    <lastmod>2017-09-23T15:22:59.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-04-source-usage-of-server/</loc>
-    
-    <lastmod>2017-09-23T15:22:47.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-03-platform-of-ops/</loc>
-    
-    <lastmod>2017-09-23T15:22:40.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-11-cdn/</loc>
-    
-    <lastmod>2017-09-23T15:22:06.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/under-the-ops/20170923-10-the-construction-of-transmission-network/</loc>
-    
-    <lastmod>2017-09-23T14:31:19.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://www.yulongjun.com/python/20170507-03-ide/</loc>
     
     <lastmod>2017-09-14T14:56:52.000Z</lastmod>
@@ -789,13 +579,6 @@
     <loc>http://www.yulongjun.com/linux/20170821-01-nginx-introduction/</loc>
     
     <lastmod>2017-09-12T15:49:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170911-mysql-mysqldump-xtrabackup/</loc>
-    
-    <lastmod>2017-09-12T15:48:57.000Z</lastmod>
     
   </url>
   
@@ -845,13 +628,6 @@
     <loc>http://www.yulongjun.com/linux/20170823-06-ngx-http-other-modules/</loc>
     
     <lastmod>2017-09-09T08:41:59.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yulongjun.com/macos/20170909-create-macos-usbdisk/</loc>
-    
-    <lastmod>2017-09-09T03:14:40.000Z</lastmod>
     
   </url>
   
