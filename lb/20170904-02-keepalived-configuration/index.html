@@ -1,0 +1,1319 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Keepalived,VRRP," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="02-Keepalived配置">
+<meta property="og:url" content="http://www.yulongjun.com/lb/20170904-02-keepalived-configuration/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/15048072195622.jpg">
+<meta property="og:updated_time" content="2018-01-28T08:25:25.029Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="02-Keepalived配置">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/15048072195622.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/lb/20170904-02-keepalived-configuration/"/>
+
+
+
+
+
+  <title> 02-Keepalived配置 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-lb">
+          <a href="/categories/lb" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            负载均衡
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-container">
+          <a href="/categories/container" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            容器技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-frontend">
+          <a href="/categories/frontend" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            前端技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/lb/20170904-02-keepalived-configuration/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                02-Keepalived配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-04T19:30:00+08:00">
+                2017-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/lb/" itemprop="url" rel="index">
+                    <span itemprop="name">lb</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/lb/20170904-02-keepalived-configuration/" class="leancloud_visitors" data-flag-title="02-Keepalived配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/15048072195622.jpg" alt=""></p>
+<a id="more"></a>
+<h2 id="Keepalived-HA-cluster的配置前提"><a href="#Keepalived-HA-cluster的配置前提" class="headerlink" title="Keepalived HA cluster的配置前提"></a>Keepalived HA cluster的配置前提</h2><p>(1) 各节点时间必须同步：可以使用<code>ntp</code>(CentOS6&amp;7)或者<code>chrony</code>(CentOS 7)。<br>(2) 确保iptables及selinux不会成为阻碍。<br>(3) 各节点之间可通过主机名互相通信（对KA并非必须）：建议使用<code>/etc/hosts</code>文件实现(DNS服务如果有问题，还不如hosts文件好用）<br>(4) 确保各节点的用于集群服务的接口支持MULTICAST通信：多播或叫组播，使用D类地址(224-239)。（多播地址最好不要使用默认的，手动修改一下。因为如果好多个集群服务都是用默认的，虽然有认证机制，但是也会互相发送信息，虽然因为认证机制丢弃掉了，但也影响性能，也会产生无用的日志。）</p>
+<p><strong>（1）所有服务器都要做时间服务器同步。</strong></p>
+<p>第一种方法： <strong>ntp</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ntpdate TIME_SERVER_IP</div></pre></td></tr></table></figure>
+<p>TIME_SERVER_IP换成时间服务器IP。</p>
+<p>第二种方法：<strong>chrony</strong></p>
+<p><code>vim /etc/chrony.conf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#server 0.centos.pool.ntp.org iburst</div><div class="line">#server 1.centos.pool.ntp.org iburst</div><div class="line">#server 2.centos.pool.ntp.org iburst</div><div class="line">#server 3.centos.pool.ntp.org iburst</div><div class="line">server TIME_SERVER_IP iburst</div></pre></td></tr></table></figure>
+<p>TIME_SERVER_IP换成时间服务器IP。</p>
+<p><code>systemctl restart chronyd.service</code></p>
+<p><code>chrony sources</code>可以查看同步时间情况。<br>TIME_SERVER_IP换成时间服务器IP。</p>
+<p><strong>（2）iptables、SELinux、/etc/hosts自行设定。</strong></p>
+<p><strong>（3）Keepalived集群的组播地址不采用系统默认的</strong>。</p>
+<p>组播地址定为<code>224.111.111.111</code>。</p>
+<hr>
+<h2 id="Keepalived配置详解"><a href="#Keepalived配置详解" class="headerlink" title="Keepalived配置详解"></a>Keepalived配置详解</h2><p>Keepalived的配置文件：<code>/etc/keepalived/keepalived.conf</code></p>
+<p><code>man keepalived.conf</code>可以查看配置详情解析。</p>
+<p>配置分为三大项配置块：</p>
+<ul>
+<li><strong>Global configuration</strong>，全局配置，包含两个子配置块：<ul>
+<li><strong>全局定义</strong>：<code>global_defs</code>。</li>
+<li><strong>静态地址和路由</strong>：<code>static_ipaddress</code>、<code>static_routes</code></li>
+</ul>
+</li>
+<li><strong>VRRP configuration</strong>，VRRP配置，包含两个子配置块：<ul>
+<li><strong>VRRP同步组</strong>：<code>vrrp_sync_group</code>。</li>
+<li><strong>VRRP实例</strong>：<code>vrrp_instance</code>。</li>
+</ul>
+</li>
+<li><strong>LVS configuration</strong>，LVS配置。如果要用Keepalived+LVS的话，需要使用这段配置，如果是用其他的如Keepalived+Nginx的话，是不需要配置的。LVS的话，包含两个子配置块：<ul>
+<li><strong>虚拟服务器组</strong>： <code>virtual_server_group</code>。可选项,大型LVS集群才会用。</li>
+<li><strong>虚拟服务器</strong>：<code>virtual_server</code>。每个虚拟服务器里面又包含多个真实服务器<code>real_server</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Global-Configuration"><a href="#Global-Configuration" class="headerlink" title="Global Configuration"></a>Global Configuration</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">global_defs &#123;</div><div class="line">   notification_email &#123;</div><div class="line">     root@localhost</div><div class="line">   &#125;</div><div class="line">   notification_email_from ka1@localhost</div><div class="line">   smtp_server 127.0.0.1</div><div class="line">   smtp_connect_timeout 30  # 前面这几段随意配置，一般不会用邮件通知，一般会有监控软件来监控</div><div class="line">   router_id ka1</div><div class="line">   vrrp_mcast_group4 224.111.111.111  # 多播地址段，最好自定义，不要用系统默认的</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="VRRP-Configuration"><a href="#VRRP-Configuration" class="headerlink" title="VRRP Configuration"></a>VRRP Configuration</h3><h4 id="VRRP同步组配置块：vrrp-sync-group"><a href="#VRRP同步组配置块：vrrp-sync-group" class="headerlink" title="VRRP同步组配置块：vrrp_sync_group"></a>VRRP同步组配置块：<code>vrrp_sync_group</code></h4><p>定义一个vrrp同步组，当同步组内的instance挂了一个，组内的所有instance都Failover（故障转移）到另外一个节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">vrrp_sync_group GROUP_NAME &#123;</div><div class="line">    group &#123;</div><div class="line">        INSTANCE_NAME</div><div class="line">        INSTANCE_NAME</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>常见的一个案例是，在有连接外网的地址和内网的地址都有，并且两个VIP做了ip_forward，需要两个VIP同时漂移。如下面例子，External_1为外网的VRRP实例，Internal_2为内网的VRRP实例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">vrrp_sync_group VG_1 &#123;</div><div class="line">    group &#123;</div><div class="line">        External_1</div><div class="line">        Internal_2</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="VRRP实例配置块：vrrp-instance"><a href="#VRRP实例配置块：vrrp-instance" class="headerlink" title="VRRP实例配置块：vrrp_instance"></a>VRRP实例配置块：<code>vrrp_instance</code></h4><p>定义vrrp实例。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">vrrp_instance INSTANCE_NAME &#123;</div><div class="line">    state MASTER|BACKUP  <span class="comment"># 当前节点在此虚拟路由器上的初始状态；只能有一个是MASTER，余下的都应该为BACKUP；</span></div><div class="line">    interface IFACE_NAME  <span class="comment"># 绑定为当前虚拟路由器使用的物理接口；IFACE_NAME是网卡名，如`eth0`</span></div><div class="line">    virtual_router_id VRID  <span class="comment"># 当前虚拟路由器的惟一标识，VRID代表一个数字，范围是0-255；</span></div><div class="line">    priority PRI  <span class="comment"># 当前主机在此虚拟路径器中的优先级；PRI范围是1-254；</span></div><div class="line">    advert_int INT  <span class="comment"># vrrp通告的时间间隔；INT单位为秒，比如`1`，代表通告间隔为1秒</span></div><div class="line">   </div><div class="line">    <span class="comment"># 认证模块，同一个实例的主和备，要用同一个认证方式和密码</span></div><div class="line">    authentication &#123;</div><div class="line">        auth_type AH|PASS   <span class="comment"># 认证方式：PASS为简单字符串密码，推荐使用；AH为IPSEC方式，不推荐使用</span></div><div class="line">        auth_pass &lt;PASSWORD&gt; <span class="comment"># 密码，只有8个字符被使用，写多了会截取前8位</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment"># 虚拟地址，即Floating IP</span></div><div class="line">    virtual_ipaddress &#123;</div><div class="line">        <span class="comment"># 格式为：&lt;IPADDR&gt;/&lt;MASK&gt; brd &lt;IPADDR&gt; dev &lt;STRING&gt; scope &lt;SCOPE&gt; label &lt;LABEL&gt;</span></div><div class="line">        <span class="comment"># 可以简写为单个地址，系统会默认计算掩码和设备，也可以写label别名。</span></div><div class="line">        192.168.200.15</div><div class="line">        <span class="comment"># 192.168.200.16/24</span></div><div class="line">        <span class="comment"># 192.168.200.17/24 dev eth1</span></div><div class="line">        <span class="comment"># 192.168.200.18/24 dev eth2 label eth2:1</span></div><div class="line">						&#125;</div><div class="line">						</div><div class="line">    <span class="comment"># 配置要监控的网络接口，一旦配置中的一个接口出现故障，这个实例就转为FAULT状态</span></div><div class="line">    track_interface &#123;  </div><div class="line">        eth0</div><div class="line">        eth1</div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment"># 抢占模式相关配置</span></div><div class="line">    nopreempt  <span class="comment"># 定义工作模式为非抢占模式</span></div><div class="line">    preempt_delay 300  <span class="comment"># 抢占式模式下，节点上线后触发新选举操作的延迟时长（在没有nopreempt的时候才能使用）</span></div><div class="line">						</div><div class="line">    <span class="comment"># 定义通知脚本</span></div><div class="line">    notify_master &lt;STRING&gt;|&lt;QUOTED-STRING&gt;  <span class="comment"># 当前节点成为主节点时触发的脚本</span></div><div class="line">    notify_backup &lt;STRING&gt;|&lt;QUOTED-STRING&gt;  <span class="comment"># 当前节点转为备节点时触发的脚本</span></div><div class="line">    notify_fault &lt;STRING&gt;|&lt;QUOTED-STRING&gt;   <span class="comment"># 当前节点转为“失败”状态时触发的脚本</span></div><div class="line">    notify &lt;STRING&gt;|&lt;QUOTED-STRING&gt;         <span class="comment"># 通用格式的通知触发机制，一个脚本可完成以上三种状态的转换时的通知</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面为一段通用格式的通知脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"><span class="comment">#</span></div><div class="line">contact=<span class="string">'root@localhost'</span></div><div class="line">                </div><div class="line"><span class="function"><span class="title">notify</span></span>() &#123;</div><div class="line">    <span class="built_in">local</span> mailsubject=<span class="string">"<span class="variable">$(hostname)</span> to be <span class="variable">$1</span>, vip floating"</span></div><div class="line">    <span class="built_in">local</span> mailbody=<span class="string">"<span class="variable">$(date +'%F %T')</span>: vrrp transition, <span class="variable">$(hostname)</span> changed to be <span class="variable">$1</span>"</span></div><div class="line">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$mailbody</span>"</span> | mail <span class="_">-s</span> <span class="string">"<span class="variable">$mailsubject</span>"</span> <span class="variable">$contact</span></div><div class="line">&#125;</div><div class="line">                </div><div class="line"><span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></div><div class="line">master)</div><div class="line">    notify master   </div><div class="line">    ;;</div><div class="line">backup)</div><div class="line">    notify backup   </div><div class="line">    ;;</div><div class="line">fault)</div><div class="line">    notify fault    </div><div class="line">    ;;</div><div class="line">*)</div><div class="line">    <span class="built_in">echo</span> <span class="string">"Usage: <span class="variable">$(basename $0)</span> &#123;master|backup|fault&#125;"</span></div><div class="line">    <span class="built_in">exit</span> 1</div><div class="line">    ;;</div><div class="line"><span class="keyword">esac</span></div></pre></td></tr></table></figure>
+<p>在vrrp_instance配置块里定义通知脚本的方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">notify_master <span class="string">"/etc/keepalived/notify.sh master"</span></div><div class="line">notify_backup <span class="string">"/etc/keepalived/notify.sh backup"</span></div><div class="line">notify_fault <span class="string">"/etc/keepalived/notify.sh fault"</span></div></pre></td></tr></table></figure>
+<h4 id="检测机制"><a href="#检测机制" class="headerlink" title="检测机制"></a>检测机制</h4><p>程序自带的检测示例：</p>
+<p><code>cat /usr/share/doc/keepalived-1.2.13/samples/keepalived.conf.vrrp.localcheck</code></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">vrrp_script chk_sshd &#123;</div><div class="line">       script <span class="string">"killall -0 sshd"</span>        <span class="comment"># cheaper than pidof</span></div><div class="line">       interval 2                      <span class="comment"># check every 2 seconds</span></div><div class="line">       weight -4                       <span class="comment"># default prio: -4 if KO</span></div><div class="line">       fall 2                          <span class="comment"># require 2 failures for KO</span></div><div class="line">       rise 2                          <span class="comment"># require 2 successes for OK</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">vrrp_script chk_http_port &#123;</div><div class="line">       script <span class="string">"&lt;/dev/tcp/127.0.0.1/80"</span> <span class="comment"># connects and exits</span></div><div class="line">       interval 1                      <span class="comment"># check every second</span></div><div class="line">       weight -2                       <span class="comment"># default prio: -2 if connect fails</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># .............</span></div><div class="line"></div><div class="line">vrrp_instance VI_1 &#123;</div><div class="line">    interface eth0</div><div class="line">    state MASTER</div><div class="line">    virtual_router_id 51</div><div class="line">    priority 100</div><div class="line">    virtual_ipaddress &#123;</div><div class="line">        192.168.200.18/25</div><div class="line">    &#125;</div><div class="line">    track_interface &#123;</div><div class="line">       eth1 weight 2   <span class="comment"># prio = +2 if UP</span></div><div class="line">       eth2 weight -2  <span class="comment"># prio = -2 if DOWN</span></div><div class="line">       eth3            <span class="comment"># no weight, fault if down</span></div><div class="line">    &#125;</div><div class="line">    track_script &#123;</div><div class="line">       chk_sshd                <span class="comment"># use default weight from the script</span></div><div class="line">       chk_haproxy weight 2    <span class="comment"># +2 if process is present</span></div><div class="line">       chk_http_port</div><div class="line">       chk_https_port</div><div class="line">       chk_smtp_port</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">track_script &#123;</div><div class="line">       chk_sshd                <span class="comment"># use default weight from the script</span></div><div class="line">       chk_haproxy weight 2    <span class="comment"># +2 if process is present</span></div><div class="line">       <span class="comment"># .........</span></div><div class="line">    &#125;</div><div class="line"><span class="comment"># ...............</span></div></pre></td></tr></table></figure>
+<p>检测分为两个地方：<code>vrrp_script</code>(示例里通过<code>track_script</code>调用定义的<code>vrrp_script</code>)和<code>track_interface</code>：</p>
+<p><strong><code>vrrp_script</code></strong>，<strong>跟踪脚本返回值</strong>：</p>
+<ul>
+<li><code>script &quot;SCRIPT&quot;</code>，这里写检测脚本。返回值是0，不执行后续操作，返回值是1，执行后续操作。<ul>
+<li>例子1：<code>script &quot;killall -0 sshd&quot;</code>。是检测服务是否存在，如果服务存在，返回值是0，无操作；服务不存在，返回值是1，执行后续操作。</li>
+<li>例子2：<code>script &quot;&lt;/dev/tcp/127.0.0.1/80&quot;</code> 检测端口80是否打开，如果端口打开，返回值是0，无操作；端口未打开，返回值是1，执行后续操作。</li>
+</ul>
+</li>
+<li><code>interval 2</code>， 检测间隔为2秒。</li>
+<li><code>weight -4</code>，如果检测返回值为1（失败），则权重-4</li>
+<li><code>weight 2</code>，如果检测返回值为0，则权重+2</li>
+<li><code>fall 2</code>，需要2次失败才认为是失败</li>
+<li><code>rise 2</code>，需要2次成功能认为是成功</li>
+</ul>
+<p><strong><code>track_script</code></strong>，定义调用哪个<code>vrrp_script</code>：</p>
+<ul>
+<li><code>chk_sshd</code>,直接使用脚本里的默认权重。        # use default weight from the script</li>
+<li><code>chk_haproxy weight 2</code>，自定义权重，如果进程存在，则权重+2   # +2 if process is present</li>
+</ul>
+<blockquote>
+<p>有了vrrp_script，我们就可以基于服务层面来做Floating IP了，也就能实现其他服务，如Nginx或HAProxy的高可用。</p>
+</blockquote>
+<p><strong><code>track_interface</code></strong>，<strong>跟踪网卡状态</strong>：</p>
+<ul>
+<li><code>eth1 weight 2</code>，如果是up状态，则权重+2(prio = +2 if UP)。</li>
+<li><code>eth2 weight -2</code>，如果是down状态，则权重-2(prio = -2 if DOWN)。</li>
+<li><code>eth3</code>，没有写权重的话，如果是down状态，则失败(no weight, fault if down)。</li>
+</ul>
+<hr>
+<blockquote>
+<p>下一节我们来具体配置Keepalived的各种模式，包含：</p>
+<ul>
+<li>单网络的<code>Master-Backup</code>主备模式（单主模式）</li>
+<li>单网络的<code>Active-Active</code>双活模式（双主模式）</li>
+<li>双网络（内外网）的<code>Master-Backup</code>主备模式（单主模式）</li>
+<li>双网络（内外网）的<code>Active-Active</code>双活模式（双主模式）</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/lb/20170904-02-keepalived-configuration/" title="02-Keepalived配置">http://www.yulongjun.com/lb/20170904-02-keepalived-configuration/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Keepalived/" rel="tag"># Keepalived</a>
+          
+            <a href="/tags/VRRP/" rel="tag"># VRRP</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/lb/20170904-01-keepalived-introduction/" rel="next" title="01-Keepalived介绍">
+                <i class="fa fa-chevron-left"></i> 01-Keepalived介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/lb/20170904-03-keepalived-models/" rel="prev" title="03-Keepalived各种模式配置">
+                03-Keepalived各种模式配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">193</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">241</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Keepalived-HA-cluster的配置前提"><span class="nav-number">1.</span> <span class="nav-text">Keepalived HA cluster的配置前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Keepalived配置详解"><span class="nav-number">2.</span> <span class="nav-text">Keepalived配置详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Global-Configuration"><span class="nav-number">2.1.</span> <span class="nav-text">Global Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VRRP-Configuration"><span class="nav-number">2.2.</span> <span class="nav-text">VRRP Configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#VRRP同步组配置块：vrrp-sync-group"><span class="nav-number">2.2.1.</span> <span class="nav-text">VRRP同步组配置块：vrrp_sync_group</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VRRP实例配置块：vrrp-instance"><span class="nav-number">2.2.2.</span> <span class="nav-text">VRRP实例配置块：vrrp_instance</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检测机制"><span class="nav-number">2.2.3.</span> <span class="nav-text">检测机制</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

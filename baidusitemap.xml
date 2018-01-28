@@ -4,6 +4,582 @@
 
     
   <url>
+    <loc>http://www.yulongjun.com/lb/20180107-learning-load-balance/</loc>
+    <lastmod>2018-01-28T08:30:08.717Z</lastmod>
+    <data>
+        <display>
+        <title>【置顶】Learning Load Balance 目录</title>
+        <pubTime>2018-01-07T03:11:11.000Z</pubTime>
+        
+        <tag>Python3</tag>
+         
+        <tag>TOC</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/cloud/20170829-vagrant-custom-box/</loc>
+    <lastmod>2018-01-28T08:29:16.651Z</lastmod>
+    <data>
+        <display>
+        <title>自制的 Vagrant box —— longdream/centos7</title>
+        <pubTime>2017-08-28T18:18:57.000Z</pubTime>
+        
+        <tag>Vagrant</tag>
+         
+        <tag>Vagrant Cloud</tag>
+         
+        <tag>Vagrant box</tag>
+         
+        <tag>longdream/centos7</tag>
+         
+         
+           
+             
+              <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170828-04-haproxy-stats/</loc>
+    <lastmod>2018-01-28T08:29:08.307Z</lastmod>
+    <data>
+        <display>
+        <title>04-HAProxy 统计页面</title>
+        <pubTime>2017-08-28T13:44:51.000Z</pubTime>
+        
+        <tag>HAProxy</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170828-03-haproxy-params/</loc>
+    <lastmod>2018-01-28T08:29:03.403Z</lastmod>
+    <data>
+        <display>
+        <title>03-HAProxy 具体配置参数</title>
+        <pubTime>2017-08-28T12:44:51.000Z</pubTime>
+        
+        <tag>HAProxy</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170828-02-haproxy-simple-configuration/</loc>
+    <lastmod>2018-01-28T08:28:56.161Z</lastmod>
+    <data>
+        <display>
+        <title>02-HAProxy简单配置和基本用法</title>
+        <pubTime>2017-08-28T11:44:51.000Z</pubTime>
+        
+        <tag>HAProxy</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170828-01-haproxy-introduction/</loc>
+    <lastmod>2018-01-28T08:28:50.685Z</lastmod>
+    <data>
+        <display>
+        <title>01-HAProxy简介</title>
+        <pubTime>2017-08-28T10:44:51.000Z</pubTime>
+        
+        <tag>HAProxy</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170823-10-ngx_stream_module/</loc>
+    <lastmod>2018-01-28T08:28:46.380Z</lastmod>
+    <data>
+        <display>
+        <title>10-ngx__stream_*_module详解</title>
+        <pubTime>2017-08-23T14:44:51.000Z</pubTime>
+        
+        <tag>Nginx FastCGI</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170823-09-ngx_http_upstream_module/</loc>
+    <lastmod>2018-01-28T08:28:41.829Z</lastmod>
+    <data>
+        <display>
+        <title>09-ngx_http_upstream_module详解</title>
+        <pubTime>2017-08-23T13:44:51.000Z</pubTime>
+        
+        <tag>Nginx FastCGI</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170823-08-ngx_http_fastcgi_module/</loc>
+    <lastmod>2018-01-28T08:28:36.472Z</lastmod>
+    <data>
+        <display>
+        <title>08-ngx_http_fastcgi_module详解</title>
+        <pubTime>2017-08-23T12:44:51.000Z</pubTime>
+        
+        <tag>Nginx FastCGI</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170823-07-ngx_http_proxy_module/</loc>
+    <lastmod>2018-01-28T08:28:31.952Z</lastmod>
+    <data>
+        <display>
+        <title>07-ngx_http_proxy_module详解</title>
+        <pubTime>2017-08-23T11:44:51.000Z</pubTime>
+        
+        <tag>Nginx Reverse Proxy</tag>
+         
+        <tag>Nginx Cache</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170823-06-ngx-http-other-modules/</loc>
+    <lastmod>2018-01-28T08:28:23.632Z</lastmod>
+    <data>
+        <display>
+        <title>06-Nginx的HTTP相关的杂项模块</title>
+        <pubTime>2017-08-23T10:44:51.000Z</pubTime>
+        
+        <tag>Nginx ACL</tag>
+         
+        <tag>Nginx Status</tag>
+         
+        <tag>Nginx Log</tag>
+         
+        <tag>Nginx Gzip</tag>
+         
+        <tag>Nginx SSL</tag>
+         
+        <tag>Nginx Rewrite</tag>
+         
+        <tag>Nginx Upstream</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170821-05-ngx_http_core_module/</loc>
+    <lastmod>2018-01-28T08:28:18.934Z</lastmod>
+    <data>
+        <display>
+        <title>05-ngx_http_core_module详解</title>
+        <pubTime>2017-08-21T15:26:51.000Z</pubTime>
+        
+        <tag>Nginx HTTP</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170821-04-nginx-default-httpd-config/</loc>
+    <lastmod>2018-01-28T08:28:13.106Z</lastmod>
+    <data>
+        <display>
+        <title>04-Nginx的默认http配置选项</title>
+        <pubTime>2017-08-21T14:26:51.000Z</pubTime>
+        
+        <tag>default http config</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170821-03-nginx-global-config/</loc>
+    <lastmod>2018-01-28T08:28:07.501Z</lastmod>
+    <data>
+        <display>
+        <title>03-Nginx主配置文件</title>
+        <pubTime>2017-08-21T13:26:51.000Z</pubTime>
+        
+        <tag>IO model</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170821-02-io-model/</loc>
+    <lastmod>2018-01-28T08:28:03.649Z</lastmod>
+    <data>
+        <display>
+        <title>02-IO模型</title>
+        <pubTime>2017-08-21T12:26:51.000Z</pubTime>
+        
+        <tag>IO model</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170821-01-nginx-introduction/</loc>
+    <lastmod>2018-01-28T08:27:59.739Z</lastmod>
+    <data>
+        <display>
+        <title>01-Nginx简介</title>
+        <pubTime>2017-08-21T11:26:51.000Z</pubTime>
+        
+        <tag>Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170821-00-nginx-content/</loc>
+    <lastmod>2018-01-28T08:27:53.492Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx系列文章</title>
+        <pubTime>2017-08-21T10:26:51.000Z</pubTime>
+        
+        <tag>Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170819-03-lvs-nat/</loc>
+    <lastmod>2018-01-28T08:27:49.129Z</lastmod>
+    <data>
+        <display>
+        <title>LVS/NAT实验</title>
+        <pubTime>2017-08-19T11:26:51.000Z</pubTime>
+        
+        <tag>LVS</tag>
+         
+        <tag>LVS/NAT</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170819-02-lvs-dr/</loc>
+    <lastmod>2018-01-28T08:27:45.149Z</lastmod>
+    <data>
+        <display>
+        <title>LVS/DR实验</title>
+        <pubTime>2017-08-19T10:26:51.000Z</pubTime>
+        
+        <tag>LVS</tag>
+         
+        <tag>LVS/DR</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170817-01-lvs-introduction/</loc>
+    <lastmod>2018-01-28T08:27:41.586Z</lastmod>
+    <data>
+        <display>
+        <title>LVS原理、模式、调度算法</title>
+        <pubTime>2017-08-17T11:26:51.000Z</pubTime>
+        
+        <tag>LVS</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/cloud/20170813-vagrant/</loc>
+    <lastmod>2018-01-28T08:27:14.314Z</lastmod>
+    <data>
+        <display>
+        <title>Vagrant--快速搭建实验环境利器</title>
+        <pubTime>2017-08-13T06:26:51.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170904-00-keepalived-content/</loc>
+    <lastmod>2018-01-28T08:25:35.030Z</lastmod>
+    <data>
+        <display>
+        <title>Keepalived系列文章</title>
+        <pubTime>2017-09-04T09:30:00.000Z</pubTime>
+        
+        <tag>Keepalived</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170904-01-keepalived-introduction/</loc>
+    <lastmod>2018-01-28T08:25:30.350Z</lastmod>
+    <data>
+        <display>
+        <title>01-Keepalived介绍</title>
+        <pubTime>2017-09-04T10:30:00.000Z</pubTime>
+        
+        <tag>Keepalived</tag>
+         
+        <tag>VRRP</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170904-02-keepalived-configuration/</loc>
+    <lastmod>2018-01-28T08:25:25.029Z</lastmod>
+    <data>
+        <display>
+        <title>02-Keepalived配置</title>
+        <pubTime>2017-09-04T11:30:00.000Z</pubTime>
+        
+        <tag>Keepalived</tag>
+         
+        <tag>VRRP</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170904-03-keepalived-models/</loc>
+    <lastmod>2018-01-28T08:25:18.900Z</lastmod>
+    <data>
+        <display>
+        <title>03-Keepalived各种模式配置</title>
+        <pubTime>2017-09-04T12:30:00.000Z</pubTime>
+        
+        <tag>Keepalived</tag>
+         
+        <tag>VRRP</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170904-04-keepalived-lvs/</loc>
+    <lastmod>2018-01-28T08:25:11.217Z</lastmod>
+    <data>
+        <display>
+        <title>04-单网络双活模式的Keepalived+LVS-DR配置</title>
+        <pubTime>2017-09-04T13:30:00.000Z</pubTime>
+        
+        <tag>VRRP</tag>
+         
+        <tag>Keepalived+LVS</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yulongjun.com/lb/20170904-05-keepalived-nginx/</loc>
+    <lastmod>2018-01-28T08:25:05.183Z</lastmod>
+    <data>
+        <display>
+        <title>05-双网络双活模式的Keepalived+Nginx配置</title>
+        <pubTime>2017-09-04T14:30:00.000Z</pubTime>
+        
+        <tag>VRRP</tag>
+         
+        <tag>Keepalived+Nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="lb" url="http://www.yulongjun.com/categories/lb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.yulongjun.com/cloud/20170922-gitlab/</loc>
     <lastmod>2018-01-07T12:32:26.679Z</lastmod>
     <data>
@@ -17,72 +593,6 @@
            
              
               <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170904-01-keepalived-introduction/</loc>
-    <lastmod>2018-01-07T12:31:44.551Z</lastmod>
-    <data>
-        <display>
-        <title>01-Keepalived介绍</title>
-        <pubTime>2017-09-04T10:30:00.000Z</pubTime>
-        
-        <tag>Keepalived</tag>
-         
-        <tag>VRRP</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170904-04-keepalived-lvs/</loc>
-    <lastmod>2018-01-07T12:31:37.031Z</lastmod>
-    <data>
-        <display>
-        <title>04-单网络双活模式的Keepalived+LVS-DR配置</title>
-        <pubTime>2017-09-04T13:30:00.000Z</pubTime>
-        
-        <tag>VRRP</tag>
-         
-        <tag>Keepalived+LVS</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170904-05-keepalived-nginx/</loc>
-    <lastmod>2018-01-07T12:31:36.219Z</lastmod>
-    <data>
-        <display>
-        <title>05-双网络双活模式的Keepalived+Nginx配置</title>
-        <pubTime>2017-09-04T14:30:00.000Z</pubTime>
-        
-        <tag>VRRP</tag>
-         
-        <tag>Keepalived+Nginx</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
           
         </display>
     </data>
@@ -105,28 +615,6 @@
            
              
               <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/python/20180107-learning-load-balance/</loc>
-    <lastmod>2018-01-07T12:21:01.000Z</lastmod>
-    <data>
-        <display>
-        <title>【置顶】Learning Load Balance 目录</title>
-        <pubTime>2018-01-07T03:11:11.000Z</pubTime>
-        
-        <tag>TOC</tag>
-         
-        <tag>Python3</tag>
-         
-         
-           
-             
-              <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
           
         </display>
     </data>
@@ -164,11 +652,11 @@
         <title>CentOS下Python多版本控制软件的安装：pyenv、pyenv-virtualenv</title>
         <pubTime>2017-05-07T15:33:12.000Z</pubTime>
         
+        <tag>CentOS</tag>
+         
         <tag>pyenv</tag>
          
         <tag>pyenv-virtualenv</tag>
-         
-        <tag>CentOS</tag>
          
          
            
@@ -212,34 +700,14 @@
         <title>【置顶】Learning Python3 目录</title>
         <pubTime>2017-11-11T03:11:11.000Z</pubTime>
         
-        <tag>TOC</tag>
-         
         <tag>Python3</tag>
+         
+        <tag>TOC</tag>
          
          
            
              
               <breadCrumb title="python" url="http://www.yulongjun.com/categories/python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170817-01-lvs-introduction/</loc>
-    <lastmod>2017-11-09T11:57:04.000Z</lastmod>
-    <data>
-        <display>
-        <title>LVS原理、模式、调度算法</title>
-        <pubTime>2017-08-17T11:26:51.000Z</pubTime>
-        
-        <tag>LVS</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
           
         </display>
     </data>
@@ -301,28 +769,6 @@
         <tag>sort</tag>
          
         <tag>wc</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170904-02-keepalived-configuration/</loc>
-    <lastmod>2017-10-25T09:25:04.000Z</lastmod>
-    <data>
-        <display>
-        <title>02-Keepalived配置</title>
-        <pubTime>2017-09-04T11:30:00.000Z</pubTime>
-        
-        <tag>Keepalived</tag>
-         
-        <tag>VRRP</tag>
          
          
            
@@ -1143,26 +1589,6 @@
 
     
   <url>
-    <loc>http://www.yulongjun.com/cloud/20170813-vagrant/</loc>
-    <lastmod>2017-10-15T08:13:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Vagrant--快速搭建实验环境利器</title>
-        <pubTime>2017-08-13T06:26:51.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-         
-           
-             
-              <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.yulongjun.com/linux/20170605-02-shell-position-variables-and-exit-code/</loc>
     <lastmod>2017-10-14T14:17:39.000Z</lastmod>
     <data>
@@ -1220,9 +1646,9 @@
         
         <tag>Linux</tag>
          
-        <tag>CentOS 6</tag>
-         
         <tag>install</tag>
+         
+        <tag>CentOS 6</tag>
          
          
            
@@ -1244,9 +1670,9 @@
         
         <tag>Linux</tag>
          
-        <tag>install</tag>
-         
         <tag>CentOS 7</tag>
+         
+        <tag>install</tag>
          
          
            
@@ -1290,11 +1716,11 @@
         <title>03-文本处理练习题</title>
         <pubTime>2017-05-31T15:30:42.000Z</pubTime>
         
+        <tag>RegExp</tag>
+         
         <tag>grep</tag>
          
         <tag>egrep</tag>
-         
-        <tag>RegExp</tag>
          
          
            
@@ -1314,11 +1740,11 @@
         <title>02-正则表达式(RegExp)</title>
         <pubTime>2017-05-31T15:12:09.000Z</pubTime>
         
+        <tag>RegExp</tag>
+         
         <tag>grep</tag>
          
         <tag>egrep</tag>
-         
-        <tag>RegExp</tag>
          
          
            
@@ -1647,112 +2073,6 @@
 
     
   <url>
-    <loc>http://www.yulongjun.com/linux/20170828-02-haproxy-simple-configuration/</loc>
-    <lastmod>2017-10-08T12:27:35.000Z</lastmod>
-    <data>
-        <display>
-        <title>02-HAProxy简单配置和基本用法</title>
-        <pubTime>2017-08-28T11:44:51.000Z</pubTime>
-        
-        <tag>HAProxy</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170828-04-haproxy-stats/</loc>
-    <lastmod>2017-10-08T12:27:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>04-HAProxy 统计页面</title>
-        <pubTime>2017-08-28T13:44:51.000Z</pubTime>
-        
-        <tag>HAProxy</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170828-03-haproxy-params/</loc>
-    <lastmod>2017-10-08T12:14:25.000Z</lastmod>
-    <data>
-        <display>
-        <title>03-HAProxy 具体配置参数</title>
-        <pubTime>2017-08-28T12:44:51.000Z</pubTime>
-        
-        <tag>HAProxy</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170828-01-haproxy-introduction/</loc>
-    <lastmod>2017-10-08T12:11:36.000Z</lastmod>
-    <data>
-        <display>
-        <title>01-HAProxy简介</title>
-        <pubTime>2017-08-28T10:44:51.000Z</pubTime>
-        
-        <tag>HAProxy</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/cloud/20170829-vagrant-custom-box/</loc>
-    <lastmod>2017-10-07T14:56:38.000Z</lastmod>
-    <data>
-        <display>
-        <title>自制的 Vagrant box —— longdream/centos7</title>
-        <pubTime>2017-08-28T18:18:57.000Z</pubTime>
-        
-        <tag>Vagrant</tag>
-         
-        <tag>Vagrant Cloud</tag>
-         
-        <tag>Vagrant box</tag>
-         
-        <tag>longdream/centos7</tag>
-         
-         
-           
-             
-              <breadCrumb title="cloud" url="http://www.yulongjun.com/categories/cloud/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.yulongjun.com/linux/20170404-01-start/</loc>
     <lastmod>2017-10-03T02:41:20.000Z</lastmod>
     <data>
@@ -1811,222 +2131,6 @@
     </url>
 
     
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170904-00-keepalived-content/</loc>
-    <lastmod>2017-09-12T15:50:49.000Z</lastmod>
-    <data>
-        <display>
-        <title>Keepalived系列文章</title>
-        <pubTime>2017-09-04T09:30:00.000Z</pubTime>
-        
-        <tag>Keepalived</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170821-00-nginx-content/</loc>
-    <lastmod>2017-09-12T15:50:18.000Z</lastmod>
-    <data>
-        <display>
-        <title>Nginx系列文章</title>
-        <pubTime>2017-08-21T10:26:51.000Z</pubTime>
-        
-        <tag>Nginx</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170821-01-nginx-introduction/</loc>
-    <lastmod>2017-09-12T15:49:58.000Z</lastmod>
-    <data>
-        <display>
-        <title>01-Nginx简介</title>
-        <pubTime>2017-08-21T11:26:51.000Z</pubTime>
-        
-        <tag>Nginx</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170823-10-ngx_stream_module/</loc>
-    <lastmod>2017-09-11T14:57:11.000Z</lastmod>
-    <data>
-        <display>
-        <title>10-ngx__stream_*_module详解</title>
-        <pubTime>2017-08-23T14:44:51.000Z</pubTime>
-        
-        <tag>Nginx FastCGI</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170823-09-ngx_http_upstream_module/</loc>
-    <lastmod>2017-09-09T16:16:11.000Z</lastmod>
-    <data>
-        <display>
-        <title>09-ngx_http_upstream_module详解</title>
-        <pubTime>2017-08-23T13:44:51.000Z</pubTime>
-        
-        <tag>Nginx FastCGI</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170823-08-ngx_http_fastcgi_module/</loc>
-    <lastmod>2017-09-09T11:49:42.000Z</lastmod>
-    <data>
-        <display>
-        <title>08-ngx_http_fastcgi_module详解</title>
-        <pubTime>2017-08-23T12:44:51.000Z</pubTime>
-        
-        <tag>Nginx FastCGI</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170823-06-ngx-http-other-modules/</loc>
-    <lastmod>2017-09-09T08:41:59.000Z</lastmod>
-    <data>
-        <display>
-        <title>06-Nginx的HTTP相关的杂项模块</title>
-        <pubTime>2017-08-23T10:44:51.000Z</pubTime>
-        
-        <tag>Nginx ACL</tag>
-         
-        <tag>Nginx Status</tag>
-         
-        <tag>Nginx Log</tag>
-         
-        <tag>Nginx Gzip</tag>
-         
-        <tag>Nginx SSL</tag>
-         
-        <tag>Nginx Rewrite</tag>
-         
-        <tag>Nginx Upstream</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170904-03-keepalived-models/</loc>
-    <lastmod>2017-09-09T03:11:33.000Z</lastmod>
-    <data>
-        <display>
-        <title>03-Keepalived各种模式配置</title>
-        <pubTime>2017-09-04T12:30:00.000Z</pubTime>
-        
-        <tag>Keepalived</tag>
-         
-        <tag>VRRP</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170823-07-ngx_http_proxy_module/</loc>
-    <lastmod>2017-09-08T12:31:44.000Z</lastmod>
-    <data>
-        <display>
-        <title>07-ngx_http_proxy_module详解</title>
-        <pubTime>2017-08-23T11:44:51.000Z</pubTime>
-        
-        <tag>Nginx Reverse Proxy</tag>
-         
-        <tag>Nginx Cache</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170821-02-io-model/</loc>
-    <lastmod>2017-09-08T12:00:38.000Z</lastmod>
-    <data>
-        <display>
-        <title>02-IO模型</title>
-        <pubTime>2017-08-21T12:26:51.000Z</pubTime>
-        
-        <tag>IO model</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
     
   <url>
     <loc>http://www.yulongjun.com/linux/20170804-lamp/</loc>
@@ -2037,110 +2141,6 @@
         <pubTime>2017-08-04T07:47:22.000Z</pubTime>
         
         <tag>LAMP</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170821-05-ngx_http_core_module/</loc>
-    <lastmod>2017-09-02T17:05:43.000Z</lastmod>
-    <data>
-        <display>
-        <title>05-ngx_http_core_module详解</title>
-        <pubTime>2017-08-21T15:26:51.000Z</pubTime>
-        
-        <tag>Nginx HTTP</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170821-04-nginx-default-httpd-config/</loc>
-    <lastmod>2017-09-02T16:37:12.000Z</lastmod>
-    <data>
-        <display>
-        <title>04-Nginx的默认http配置选项</title>
-        <pubTime>2017-08-21T14:26:51.000Z</pubTime>
-        
-        <tag>default http config</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170821-03-nginx-global-config/</loc>
-    <lastmod>2017-09-02T16:37:08.000Z</lastmod>
-    <data>
-        <display>
-        <title>03-Nginx主配置文件</title>
-        <pubTime>2017-08-21T13:26:51.000Z</pubTime>
-        
-        <tag>IO model</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170819-03-lvs-nat/</loc>
-    <lastmod>2017-08-20T16:25:26.000Z</lastmod>
-    <data>
-        <display>
-        <title>LVS/NAT实验</title>
-        <pubTime>2017-08-19T11:26:51.000Z</pubTime>
-        
-        <tag>LVS</tag>
-         
-        <tag>LVS/NAT</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux" url="http://www.yulongjun.com/categories/linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yulongjun.com/linux/20170819-02-lvs-dr/</loc>
-    <lastmod>2017-08-20T16:25:24.000Z</lastmod>
-    <data>
-        <display>
-        <title>LVS/DR实验</title>
-        <pubTime>2017-08-19T10:26:51.000Z</pubTime>
-        
-        <tag>LVS</tag>
-         
-        <tag>LVS/DR</tag>
          
          
            

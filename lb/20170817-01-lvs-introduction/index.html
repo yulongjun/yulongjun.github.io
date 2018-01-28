@@ -1,0 +1,1442 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="uA6X_uCQhJlvOqusYftnLIrCAgA25_lWAqRT5YZrnwU" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="LVS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="LVS原理、模式、调度算法">
+<meta property="og:url" content="http://www.yulongjun.com/lb/20170817-01-lvs-introduction/index.html">
+<meta property="og:site_name" content="于龙君的博客">
+<meta property="og:image" content="http://www.yulongjun.com/images/lvs.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15030616224922.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15030594983026.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15030619475143.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15030596373205.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15030601457957.png">
+<meta property="og:image" content="http://www.yulongjun.com/images/15030623128164.jpg">
+<meta property="og:image" content="http://www.yulongjun.com/images/15030625216631.jpg">
+<meta property="og:updated_time" content="2018-01-28T08:27:41.586Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LVS原理、模式、调度算法">
+<meta name="twitter:image" content="http://www.yulongjun.com/images/lvs.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yulongjun.com/lb/20170817-01-lvs-introduction/"/>
+
+
+
+
+
+  <title> LVS原理、模式、调度算法 | 于龙君的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-107783004-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e7d6cfa254b42afe3c433690cfa6b887";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">于龙君的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Stay foolish, stay hungry, and don't be evil.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-linux"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-file-code-o"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-macos">
+          <a href="/categories/macos" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-apple"></i> <br />
+            
+            macOS
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-lb">
+          <a href="/categories/lb" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            负载均衡
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-container">
+          <a href="/categories/container" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-cloud"></i> <br />
+            
+            容器技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-frontend">
+          <a href="/categories/frontend" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            前端技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-essay">
+          <a href="/categories/essay" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-pencil-square"></i> <br />
+            
+            随笔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-donate">
+          <a href="/donate" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-credit-card"></i> <br />
+            
+            赞助
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.yulongjun.com/lb/20170817-01-lvs-introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="于龙君">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="于龙君的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LVS原理、模式、调度算法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T19:26:51+08:00">
+                2017-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/lb/" itemprop="url" rel="index">
+                    <span itemprop="name">lb</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/lb/20170817-01-lvs-introduction/" class="leancloud_visitors" data-flag-title="LVS原理、模式、调度算法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/lvs.jpg" alt=""></p>
+<a id="more"></a>
+<p>我们先来讲一下集群和负载均衡。</p>
+<h2 id="一、集群和负载均衡"><a href="#一、集群和负载均衡" class="headerlink" title="一、集群和负载均衡"></a>一、集群和负载均衡</h2><h3 id="1-scale-up和scale-out"><a href="#1-scale-up和scale-out" class="headerlink" title="1. scale up和scale out"></a>1. scale up和scale out</h3><p>当业务量越来越大的时候，我们就要对系统进行扩展，扩展有两种方式：</p>
+<ul>
+<li>scale up: 纵向扩展，即增强服务器的性能。买买买！但是性能越好的服务器价格成几何倍数增长……</li>
+<li>scale out: 线性扩展，即增加服务器的数量，然后用调度来解决分配资源，这就是集群（Cluster）的由来。</li>
+</ul>
+<h3 id="2-集群和分布式"><a href="#2-集群和分布式" class="headerlink" title="2. 集群和分布式"></a>2. 集群和分布式</h3><p><strong>集群</strong>（Cluster）定义：为解决某个特定问题将多台计算机组合起来形成的单个系统</p>
+<p>Cluster类型：</p>
+<ul>
+<li><strong>LB</strong>：Load Balancing，负载均衡。</li>
+<li><strong>HA</strong>：High Availiablity，高可用。</li>
+<li><strong>HPC</strong>：High-Performance Computing，高性能计算。（www.top500.org）</li>
+</ul>
+<p>与集群相对应的是分布式系统（distributed system）。</p>
+<p>集群和分布式的区别，简单来说就是：</p>
+<ul>
+<li><strong>集群</strong>：同一个业务，部署在多个服务器上。</li>
+<li><strong>分布式</strong>：一个业务分拆多个子业务，部署在不同的服务器上。</li>
+</ul>
+<p><strong>举个例子</strong>大家更能明白：</p>
+<blockquote>
+<p>一个小饭店原来只有一个厨师，切菜洗菜备料炒菜全干。后来客人多了，厨房一个厨师忙不过来，又请了个厨师，两个厨师都能炒一样的菜，这两个厨师的关系是集群。为了让厨师专心炒菜，把菜做到极致，又请了个配菜师负责切菜，备菜，备料，厨师和配菜师的关系是分布式，一个配菜师也忙不过来了，又请了个配菜师，两个配菜师关系是集群链接。<br>–本段文字<a href="https://www.zhihu.com/question/20004877/answer/112124929" target="_blank" rel="external">来源</a>。</p>
+</blockquote>
+<h3 id="3-负载均衡集群"><a href="#3-负载均衡集群" class="headerlink" title="3. 负载均衡集群"></a>3. 负载均衡集群</h3><p>负载均衡集群的实现：</p>
+<ul>
+<li>硬件：<ul>
+<li>F5: BIG-IP</li>
+<li>Citrix: NetScaler</li>
+<li>A10: A10</li>
+</ul>
+</li>
+<li><p>软件：</p>
+<ul>
+<li>LVS</li>
+<li>HAproxy</li>
+<li>Nginx</li>
+<li>ats(apache traffic server)</li>
+<li>perlbal</li>
+</ul>
+<p>软件中，LVS, HAproxy, Nginx用的比较多，重点学习就是这3个。</p>
+<p>我们重点学习头3种：<strong>LVS</strong>, <strong>HAproxy</strong> ,<strong>Nginx</strong></p>
+<p>关于这三种的优缺点可以看这篇文章：<a href="https://yq.aliyun.com/articles/87257" target="_blank" rel="external">Nginx/LVS/HAProxy负载均衡软件的优缺点详解</a></p>
+</li>
+</ul>
+<p>本文主要讲集群中的负载均衡中的一个：lvs（Linux Virtual Server）,LVS基于ISO七层模型中的4层传输层。</p>
+<hr>
+<h2 id="二、LVS基本术语和组成"><a href="#二、LVS基本术语和组成" class="headerlink" title="二、LVS基本术语和组成"></a>二、LVS基本术语和组成</h2><h3 id="1-LVS基本术语"><a href="#1-LVS基本术语" class="headerlink" title="1. LVS基本术语"></a>1. LVS基本术语</h3><p>LVS集群类型中的术语：</p>
+<p><strong>VS</strong>：<code>Virtual Server</code>，<code>Director</code>，<code>Dispatcher</code>(调度器)，<code>Load Balancer</code></p>
+<p><strong>RS</strong>：<code>Real Server</code>(lvs里)， <code>upstream server</code>(nginx里)，<code>backend server</code>(haproxy里)、<code>Replica（副本）</code></p>
+<p><strong>CIP</strong>：<code>Client IP</code> 客户端ip</p>
+<p><strong>VIP</strong>: <code>Virtual server IP</code> VS外网的IP</p>
+<p><strong>DIP</strong>: <code>Director IP</code>  VS内网的IP</p>
+<p><strong>RIP</strong>: <code>Real server IP</code></p>
+<h3 id="2-LVS软件组成"><a href="#2-LVS软件组成" class="headerlink" title="2. LVS软件组成"></a>2. LVS软件组成</h3><p>LVS 由2部分程序组成，包括 <code>ipvs</code> 和 <code>ipvsadm</code>。</p>
+<ol>
+<li><strong><code>ipvs</code></strong>(ip virtual server)：一段代码工作在内核空间，叫ipvs，是真正生效实现调度的代码。</li>
+<li><strong><code>ipvsadm</code></strong>：另外一段是工作在用户空间，叫ipvsadm，负责为ipvs内核框架编写规则，定义谁是集群服务，而谁是后端真实的服务器(Real Server)。</li>
+</ol>
+<hr>
+<h2 id="LVS基本工作原理"><a href="#LVS基本工作原理" class="headerlink" title="LVS基本工作原理"></a>LVS基本工作原理</h2><p><img src="/images/15030616224922.jpg" alt=""></p>
+<ol>
+<li>当用户向<strong>负载均衡调度器</strong>（VS或者叫LB）发起请求，调度器将请求发往至内核空间。</li>
+<li><code>PREROUTING</code>链首先会接收到用户请求，判断目标IP确定是本机IP，将数据包发往<strong>INPUT</strong>链。</li>
+<li><strong>IPVS是工作在INPUT链上的</strong>，当用户请求到达INPUT时，IPVS会将用户请求和自己已定义好的集群服务进行比对，如果用户请求的就是定义的集群服务，那么此时IPVS会强行修改数据包里的目标IP地址及端口，并将新的数据包发往<strong>POSTROUTING</strong>链。</li>
+<li>POSTROUTING链接收数据包后发现目标IP地址刚好是自己的后端服务器，那么此时通过选路，将数据包最终发送给后端的服务器。</li>
+</ol>
+<hr>
+<h2 id="LVS各种模式原理"><a href="#LVS各种模式原理" class="headerlink" title="LVS各种模式原理"></a>LVS各种模式原理</h2><p>lvs集群的类型：</p>
+<p><strong><code>LVS/NAT</code></strong>： NAT模式。修改请求报文的目标IP,多目标IP的DNAT。</p>
+<p><strong><code>LVS/DR</code></strong>：DirectRouting（直接路由）。操纵封装新的MAC地址。</p>
+<p><strong><code>LVS/TUN</code></strong>：Tunneling（隧道）。在原请求IP报文之外新加一个IP首部。</p>
+<p><strong><code>LVS/FULLNAT</code></strong>：Full NAT。修改请求报文的源和目标IP。</p>
+<h3 id="1-LVS-NAT"><a href="#1-LVS-NAT" class="headerlink" title="1. LVS/NAT"></a>1. LVS/NAT</h3><p>LVS/NAT 最基本的LVS策略</p>
+<p>如图: 客户端(Client) -&gt; LB（VS） -&gt; replica1(RS1),replica2(RS2),replica3(RS3)</p>
+<p><img src="/images/15030594983026.png" alt=""></p>
+<p>详细的数据包的流转图：</p>
+<p><img src="/images/15030619475143.jpg" alt=""></p>
+<p>(a). 当用户请求到达Director Server，此时请求的数据报文会先到内核空间的PREROUTING链。 此时报文的源IP为CIP，目标IP为VIP<br>(b). PREROUTING检查发现数据包的目标IP是本机，将数据包送至INPUT链<br>(c). IPVS比对数据包请求的服务是否为集群服务，若是，修改数据包的目标IP地址为后端服务器IP，然后将数据包发至POSTROUTING链。 此时报文的源IP为CIP，目标IP为RIP<br>(d). POSTROUTING链通过选路，将数据包发送给Real Server<br>(e). Real Server比对发现目标为自己的IP，开始构建响应报文发回给Director Server。 此时报文的源IP为RIP，目标IP为CIP<br>(f). Director Server在响应客户端前，此时会将源IP地址修改为自己的VIP地址，然后响应给客户端。 此时报文的源IP为VIP，目标IP为CIP</p>
+<h3 id="2-LVS-DR"><a href="#2-LVS-DR" class="headerlink" title="2. LVS/DR"></a>2. LVS/DR</h3><p>很多时候，相应流是比请求流大的，如下图：</p>
+<p><img src="/images/15030596373205.png" alt=""></p>
+<p>所以有第二种方案，响应流不走LB，这就是<strong>LVS/DR</strong>模式：</p>
+<p><img src="/images/15030601457957.png" alt=""></p>
+<p>详细的数据包的流转图：</p>
+<p><img src="/images/15030623128164.jpg" alt=""></p>
+<p>(a) 当用户请求到达Director Server，此时请求的数据报文会先到内核空间的PREROUTING链。 此时报文的源IP为CIP，目标IP为VIP<br>(b) PREROUTING检查发现数据包的目标IP是本机，将数据包送至INPUT链<br>(c) IPVS比对数据包请求的服务是否为集群服务，若是，将请求报文中的源MAC地址修改为DIP的MAC地址，将目标MAC地址修改RIP的MAC地址，然后将数据包发至POSTROUTING链。 此时的源IP和目的IP均未修改，仅修改了源MAC地址为DIP的MAC地址，目标MAC地址为RIP的MAC地址<br>(d) 由于DS和RS在同一个网络中，所以是通过二层来传输。POSTROUTING链检查目标MAC地址为RIP的MAC地址，那么此时数据包将会发至Real Server。<br>(e) RS发现请求报文的MAC地址是自己的MAC地址，就接收此报文。处理完成之后，将响应报文通过lo接口传送给eth0网卡然后向外发出。 此时的源IP地址为VIP，目标IP为CIP<br>(f) 响应报文最终送达至客户端</p>
+<p><strong>LVS-DR模型的特性</strong></p>
+<ul>
+<li><strong>特点1</strong>：保证前端路由将目标地址为VIP报文统统发给Director Server，而不是RS。</li>
+<li>RS可以使用私有地址；也可以是公网地址，如果使用公网地址，此时可以通过互联网对RIP进行直接访问。</li>
+<li>RS跟Director Server必须在同一个物理网络中。</li>
+<li>所有的请求报文经由Director Server，但响应报文必须不能进过Director Server。</li>
+<li>不支持地址转换，也不支持端口映射。</li>
+<li>RS可以是大多数常见的操作系统。</li>
+<li>RS的网关绝不允许指向DIP(因为我们不允许他经过director)。</li>
+<li>RS上的lo接口配置VIP的IP地址。</li>
+<li>缺陷：RS和DS必须在同一机房中。</li>
+</ul>
+<p><strong>特点1的解决方案：</strong></p>
+<ul>
+<li>在前端路由器做静态地址路由绑定，将对于VIP的地址仅路由到Director Server。</li>
+<li>存在问题：用户未必有路由操作权限，因为有可能是运营商提供的，所以这个方法未必实用。</li>
+<li>arptables：在arp的层次上实现在ARP解析时做防火墙规则，过滤RS响应ARP请求。这是由iptables提供的</li>
+<li>修改RS上内核参数（arp_ignore和arp_announce）将RS上的VIP配置在lo接口的别名上，并限制其不能响应对VIP地址解析请求。</li>
+</ul>
+<h3 id="3-LVS-TUN"><a href="#3-LVS-TUN" class="headerlink" title="3. LVS/TUN"></a>3. LVS/TUN</h3><p>在原有的IP报文外再次封装多一层IP首部，内部IP首部(源地址为CIP，目标IIP为VIP)，外层IP首部(源地址为DIP，目标IP为RIP)</p>
+<p><img src="/images/15030625216631.jpg" alt=""></p>
+<p>(a) 当用户请求到达Director Server，此时请求的数据报文会先到内核空间的PREROUTING链。 此时报文的源IP为CIP，目标IP为VIP 。<br>(b) PREROUTING检查发现数据包的目标IP是本机，将数据包送至INPUT链。<br>(c) IPVS比对数据包请求的服务是否为集群服务，若是，在请求报文的首部再次封装一层IP报文，封装源IP为为DIP，目标IP为RIP。然后发至POSTROUTING链。 此时源IP为DIP，目标IP为RIP 。<br>(d) POSTROUTING链根据最新封装的IP报文，将数据包发至RS（因为在外层封装多了一层IP首部，所以可以理解为此时通过隧道传输）。 此时源IP为DIP，目标IP为RIP。<br>(e) RS接收到报文后发现是自己的IP地址，就将报文接收下来，拆除掉最外层的IP后，会发现里面还有一层IP首部，而且目标是自己的lo接口VIP，那么此时RS开始处理此请求，处理完成之后，通过lo接口送给eth0网卡，然后向外传递。 此时的源IP地址为VIP，目标IP为CIP。<br>(f) 响应报文最终送达至客户端。</p>
+<p><strong>LVS-TUN模型特性</strong></p>
+<ul>
+<li>RIP、VIP、DIP全是公网地址。</li>
+<li>RS的网关不会也不可能指向DIP。</li>
+<li>所有的请求报文经由Director Server，但响应报文必须不能进过Director Server。</li>
+<li>不支持端口映射。</li>
+<li>RS的系统必须支持隧道。</li>
+</ul>
+<h3 id="4-LVS-FULLNAT"><a href="#4-LVS-FULLNAT" class="headerlink" title="4. LVS/FULLNAT"></a>4. LVS/FULLNAT</h3><p>lvs-fullnat：通过同时修改请求报文的源IP地址和目标IP地址进行转发:</p>
+<ul>
+<li>CIP –&gt; DIP</li>
+<li>VIP –&gt; RIP</li>
+</ul>
+<p>(1) VIP是公网地址，RIP和DIP是私网地址，且通常不在同一IP网络；因此，RIP的网关一般不会指向DIP。</p>
+<p>(2) RS收到的请求报文源地址是DIP，因此，只需响应给DIP；但Director还要将其发往Client。</p>
+<p>(3) 请求和响应报文都经由Director。</p>
+<p>(4) 支持端口映射。</p>
+<blockquote>
+<p>注意：此类型kernel默认不支持。</p>
+</blockquote>
+<h3 id="LVS工作模式总结"><a href="#LVS工作模式总结" class="headerlink" title="LVS工作模式总结"></a>LVS工作模式总结</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>VS/NAT</th>
+<th>VS/TUN</th>
+<th>VS/DR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>server</td>
+<td>any</td>
+<td>tunneling</td>
+<td>non-arp device</td>
+</tr>
+<tr>
+<td>server network</td>
+<td>private</td>
+<td>LAN/WAN</td>
+<td>LAN</td>
+</tr>
+<tr>
+<td>server number</td>
+<td>low (10~20)</td>
+<td>high</td>
+<td>high</td>
+</tr>
+<tr>
+<td>server gateway</td>
+<td>load balancer</td>
+<td>own router</td>
+<td>own router</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>LVS/NAT, LVS/FULLNAT：请求和响应报文都经由VS</p>
+<ul>
+<li>LVS/NAT：RIP的网关要指向DIP</li>
+<li>LVS/FULLNAT：RIP和DIP未必在同一IP网络，但要能通信</li>
+</ul>
+</li>
+<li><p>LVS/DR, LVS/TUN：请求报文要经由VS，但响应报文由RS直接发往Client</p>
+<ul>
+<li>LVS/DR：通过封装新的MAC首部实现，通过MAC网络转发</li>
+<li>LVS/TUN：通过在原IP报文之外封装新的IP报文实现转发，支持远距离通信</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>其实企业中最常用的是 DR 实现方式，而 NAT 配置上比较简单和方便，后边实践中会总结 DR 和 NAT 具体使用配置过程。</strong></p>
+</blockquote>
+<hr>
+<h2 id="LVS调度算法"><a href="#LVS调度算法" class="headerlink" title="LVS调度算法"></a>LVS调度算法</h2><p>根据其调度时是否考虑各RS当前的负载状态，分为静态方法和动态方法。</p>
+<p><strong>静态方法</strong>：仅根据算法本身进行调度</p>
+<ol>
+<li><strong>RR</strong>：<code>roundrobin</code>，轮询。</li>
+<li><strong>WRR</strong>：<code>Weighted RR</code>，加权轮询。</li>
+<li><strong>SH</strong>：<code>Source Hashing</code>，实现session sticky，源IP地址hash；将来自于同一个IP地址的请求始终发往第一次挑中的RS，从而实现会话绑定。</li>
+<li><strong>DH</strong>：<code>Destination Hashing</code>；目标地址哈希，将发往同一个目标地址的请求始终转发至第一次挑中的RS，典型使用场景是正向代理缓存场景中的负载均衡，如：宽带运营商。</li>
+</ol>
+<p>动态方法：主要根据每RS当前的负载状态及调度算法进行调度，<code>Overhead=value</code>较小的RS将被调度。</p>
+<ol>
+<li><p><strong>LC</strong>：<code>least connections</code>，最少连接，适用于长连接应用。<code>Overhead=activeconns*256+inactiveconns</code></p>
+</li>
+<li><p><strong>WLC</strong>：<code>Weighted LC</code>，加权最少连接，默认调度方法。<code>Overhead=(activeconns*256+inactiveconns)/weight</code></p>
+</li>
+<li><p><strong>SED</strong>：<code>Shortest Expection Delay</code>,初始连接高权重优先。<code>Overhead=(activeconns+1)*256/weight</code></p>
+</li>
+<li><p><strong>NQ</strong>：<code>Never Queue</code>，第一轮均匀分配，后续SED。</p>
+</li>
+<li><p><strong>LBLC</strong>：<code>Locality-Based LC</code>，动态的DH算法，使用场景： 根据负载状态实现正向代理。</p>
+</li>
+<li><p><strong>LBLCR</strong>：<code>LBLC with Replication</code>，带复制功能的LBLC，解决LBLC负载不均衡问题，从负载重的复制到负载轻的RS。</p>
+</li>
+</ol>
+<p>部分内容转自：<a href="http://www.cnblogs.com/liwei0526vip/p/6370103.html" target="_blank" rel="external">使用LVS实现负载均衡原理及安装配置详解</a><br>图片部分来自：<a href="https://yq.aliyun.com/articles/53735" target="_blank" rel="external">章文嵩博士和他背后的负载均衡帝国</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>ღ ღ ღ 如果觉得文章对您有用，不妨打赏一下ღ ღ ღ</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="于龙君 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="于龙君 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      于龙君
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://www.yulongjun.com/lb/20170817-01-lvs-introduction/" title="LVS原理、模式、调度算法">http://www.yulongjun.com/lb/20170817-01-lvs-introduction/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LVS/" rel="tag"># LVS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/linux/20170815-iptables/" rel="next" title="防火墙Netfilter/iptables">
+                <i class="fa fa-chevron-left"></i> 防火墙Netfilter/iptables
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/lb/20170819-02-lvs-dr/" rel="prev" title="LVS/DR实验">
+                LVS/DR实验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yODAzMy80NjA3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="于龙君" />
+          <p class="site-author-name" itemprop="name">于龙君</p>
+           
+              <p class="site-description motion-element" itemprop="description">Linux, Python, macOS</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">193</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">241</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yu-long-jun" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-quora"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1302333987" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yulongjun" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/__YuLongjun__" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.178linux.com/" title="Linux运维部落" target="_blank">Linux运维部落</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ttlsa.com/" title="运维生存时间" target="_blank">运维生存时间</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.sliverstack.com/" title="李恒的博客" target="_blank">李恒的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.qqlilin.com/" title="李林的博客" target="_blank">李林的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://vinnywang.com/" title="王楠的博客" target="_blank">王楠的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zhaodaxin.com/" title="赵大鑫的博客" target="_blank">赵大鑫的博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://blog.whsir.com/" title="吴昊的博客" target="_blank">吴昊的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、集群和负载均衡"><span class="nav-number">1.</span> <span class="nav-text">一、集群和负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-scale-up和scale-out"><span class="nav-number">1.1.</span> <span class="nav-text">1. scale up和scale out</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-集群和分布式"><span class="nav-number">1.2.</span> <span class="nav-text">2. 集群和分布式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-负载均衡集群"><span class="nav-number">1.3.</span> <span class="nav-text">3. 负载均衡集群</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、LVS基本术语和组成"><span class="nav-number">2.</span> <span class="nav-text">二、LVS基本术语和组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-LVS基本术语"><span class="nav-number">2.1.</span> <span class="nav-text">1. LVS基本术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-LVS软件组成"><span class="nav-number">2.2.</span> <span class="nav-text">2. LVS软件组成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LVS基本工作原理"><span class="nav-number">3.</span> <span class="nav-text">LVS基本工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LVS各种模式原理"><span class="nav-number">4.</span> <span class="nav-text">LVS各种模式原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-LVS-NAT"><span class="nav-number">4.1.</span> <span class="nav-text">1. LVS/NAT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-LVS-DR"><span class="nav-number">4.2.</span> <span class="nav-text">2. LVS/DR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-LVS-TUN"><span class="nav-number">4.3.</span> <span class="nav-text">3. LVS/TUN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-LVS-FULLNAT"><span class="nav-number">4.4.</span> <span class="nav-text">4. LVS/FULLNAT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LVS工作模式总结"><span class="nav-number">4.5.</span> <span class="nav-text">LVS工作模式总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LVS调度算法"><span class="nav-number">5.</span> <span class="nav-text">LVS调度算法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">于龙君</span>
+</div>
+<div>
+  <a href="http://www.miitbeian.gov.cn/">京ICP备17049401号</a>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+  
+  <script type="text/javascript" src="http://cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xL6oGKp3T8SyrCjhb93y6RVx-gzGzoHsz", "HGXc2Np0bSets9V1GCOYz0f4");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>
